@@ -50,7 +50,7 @@ const App = () => {
               </Helmet>
 
               <Switch>
-                <Route exact path="/" component={LoginPage} />
+                <Route exact path="/" component={HomePage} />
                 <Route exact path="/login" component={LoginPage} />
                 <Layout1>
                   <PrivateRoute path="/dashboard" component={HomePage} />
