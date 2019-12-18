@@ -18,6 +18,7 @@ import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import AllPosts from '../AllPosts/Loadable';
 import LoginPage from '../LoginPage/Loadable';
+import RegistrationPage from '../RegisterPage/Loadable';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import { makeSelectUserToken } from './selectors';
@@ -52,6 +53,7 @@ const App = () => {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/register" component={RegistrationPage} />
                 <Layout1>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />

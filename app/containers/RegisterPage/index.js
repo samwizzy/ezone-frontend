@@ -18,6 +18,7 @@ import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import RegistrationForm from './components/RegistrationForm';
 
 export function RegisterPage() {
   useInjectReducer({ key: 'registerPage', reducer });
@@ -29,7 +30,7 @@ export function RegisterPage() {
         <title>RegisterPage</title>
         <meta name="description" content="Description of RegisterPage" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
+      <RegistrationForm />
     </div>
   );
 }
