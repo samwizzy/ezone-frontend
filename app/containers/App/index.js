@@ -41,10 +41,7 @@ const App = () => {
           <CssBaseline />
           <main>
             <div>
-              <Helmet
-                titleTemplate="%s - React.js Boilerplate"
-                defaultTitle="React.js Boilerplate"
-              >
+              <Helmet titleTemplate="%s - Ezone" defaultTitle="Ezone">
                 <meta
                   name="description"
                   content="A React.js Boilerplate application"
@@ -61,8 +58,8 @@ const App = () => {
                 />
                 <Route exact path="/register" component={RegistrationPage} />
                 <Layout1>
-                  <PrivateRoute path="/dashboard" component={HomePage} />
-                  <PrivateRoute path="/posts" component={AllPosts} />
+                  <Route path="/dashboard" component={HomePage} />
+                  <Route path="/posts" component={AllPosts} />
                   {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}
                 </Layout1>
                 <Route path="" component={NotFoundPage} />
