@@ -101,7 +101,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const LoginForm = ({ loginAction }) => {
+const ForgotPasswordForm = ({ loginAction }) => {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
@@ -128,15 +128,6 @@ const LoginForm = ({ loginAction }) => {
             <Box className={classes.avatar}>
               <img src={logo} alt="" />
             </Box>
-            <Typography component="h1" variant="h6">
-              Sign in
-            </Typography>
-            <Typography variant="body2">
-              <span>New User?</span>&nbsp;
-              <Link href="/register" variant="body2">
-                Register
-              </Link>
-            </Typography>
             <form className={classes.form} noValidate>
               <TextField
                 variant="outlined"
@@ -152,36 +143,7 @@ const LoginForm = ({ loginAction }) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                autoFocus
               />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                InputProps={{
-                  className: classes.input,
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              {/* <FormControlLabel
-                className={classes.label}
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot-password" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-              </Grid>
               <Button
                 type="submit"
                 fullWidth
@@ -189,22 +151,8 @@ const LoginForm = ({ loginAction }) => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Rest Password
               </Button>
-              <Typography className={classes.option}>
-                <span>OR</span>
-              </Typography>
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit2}
-              >
-                Sign In With Google+
-              </Button>
-
               <Box mt={5}>
                 <Copyright />
               </Box>
@@ -216,7 +164,7 @@ const LoginForm = ({ loginAction }) => {
   );
 };
 
-LoginForm.propTypes = {
+ForgotPasswordForm.propTypes = {
   loginAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
@@ -238,4 +186,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(LoginForm);
+)(ForgotPasswordForm);

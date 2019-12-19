@@ -19,7 +19,20 @@ import {
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
-import { Avatar, Box, Button, Container, Checkbox, CssBaseline, Grid, Link, Paper, Typography, TextField, FormControlLabel } from '@material-ui/core';
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Checkbox,
+  CssBaseline,
+  Grid,
+  Link,
+  Paper,
+  Typography,
+  TextField,
+  FormControlLabel,
+} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
@@ -49,7 +62,7 @@ const useStyles = makeStyles(theme => ({
     // height: '100vh',
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   image: {
     // backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -68,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     margin: theme.spacing(4),
     border: '1px solid #F1F5F8',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -81,11 +94,11 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   input: {
-    height: 40
+    height: 40,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#1A88E1'
+    backgroundColor: '#1A88E1',
   },
   submit2: {
     margin: theme.spacing(3, 0, 2),
@@ -94,20 +107,20 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#F90000',
       color: theme.palette.common.white,
-    }
+    },
   },
   option: {
-    width: "100%",
+    width: '100%',
     color: theme.palette.grey[600],
-    lineHeight: "0.1",
-    textAlign: "center",
-    margin: "10px 0 20px", 
+    lineHeight: '0.1',
+    textAlign: 'center',
+    margin: '10px 0 20px',
     borderBottom: `1px solid ${theme.palette.grey[500]}`,
     '& span': {
-      background: "#fff", 
-      padding: "0 10px",
-    }
-  }
+      background: '#fff',
+      padding: '0 10px',
+    },
+  },
 }));
 
 export function HomePage() {
@@ -125,7 +138,7 @@ export function HomePage() {
           content="A React.js Boilerplate application homepage"
         />
       </Helmet>
-      <Container style={{padding: '50px'}}>
+      <Container style={{ padding: '50px' }}>
         <Grid container component={Paper} className={classes.root}>
           <Grid item xs={false} sm={4} md={8} className={classes.image} />
           <Grid item xs={12} sm={8} md={4}>
@@ -138,7 +151,9 @@ export function HomePage() {
               </Typography>
               <Typography variant="body2">
                 <span>New User?</span>&nbsp;
-                <Link href="/register" variant="body2">Register</Link>
+                <Link href="/register" variant="body2">
+                  Register
+                </Link>
               </Typography>
               <form className={classes.form} noValidate>
                 <TextField
@@ -151,10 +166,10 @@ export function HomePage() {
                   name="email"
                   autoComplete="email"
                   InputProps={{
-                    className: classes.input
+                    className: classes.input,
                   }}
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   autoFocus
                 />
@@ -169,10 +184,10 @@ export function HomePage() {
                   id="password"
                   autoComplete="current-password"
                   InputProps={{
-                    className: classes.input
+                    className: classes.input,
                   }}
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                 />
                 <FormControlLabel

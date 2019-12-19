@@ -57,7 +57,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     borderRadius: theme.spacing(5),
     padding: theme.spacing(2),
-    margin: theme.spacing(4),
     border: '1px solid #F1F5F8',
     backgroundColor: '#FFFFFF',
   },
@@ -101,7 +100,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const LoginForm = ({ loginAction }) => {
+const RegistrationForm = ({ loginAction }) => {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
@@ -129,15 +128,60 @@ const LoginForm = ({ loginAction }) => {
               <img src={logo} alt="" />
             </Box>
             <Typography component="h1" variant="h6">
-              Sign in
+              Register
             </Typography>
             <Typography variant="body2">
-              <span>New User?</span>&nbsp;
-              <Link href="/register" variant="body2">
-                Register
+              <span>Existing User?</span>&nbsp;
+              <Link href="/login" variant="body2">
+                Sign In
               </Link>
             </Typography>
             <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="companyName"
+                label="Company Name"
+                name="companyName"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -152,7 +196,21 @@ const LoginForm = ({ loginAction }) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="phoneNumber"
+                label="Phone Number"
+                name="phoneNumber"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               <TextField
                 variant="outlined"
@@ -170,18 +228,26 @@ const LoginForm = ({ loginAction }) => {
                   shrink: true,
                 }}
               />
-              {/* <FormControlLabel
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="country"
+                label="Country"
+                id="country"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <FormControlLabel
                 className={classes.label}
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot-password" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-              </Grid>
+                label="I agree to the Terms of Service and Privacy Policy"
+              />
               <Button
                 type="submit"
                 fullWidth
@@ -189,22 +255,8 @@ const LoginForm = ({ loginAction }) => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Sign Up
               </Button>
-              <Typography className={classes.option}>
-                <span>OR</span>
-              </Typography>
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit2}
-              >
-                Sign In With Google+
-              </Button>
-
               <Box mt={5}>
                 <Copyright />
               </Box>
@@ -216,7 +268,7 @@ const LoginForm = ({ loginAction }) => {
   );
 };
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
   loginAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
@@ -238,4 +290,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(LoginForm);
+)(RegistrationForm);
