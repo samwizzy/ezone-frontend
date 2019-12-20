@@ -20,6 +20,7 @@ import AllPosts from '../AllPosts/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
+import OrgPage from '../OrgPage/Loadable';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import { makeSelectUserToken } from './selectors';
@@ -59,6 +60,7 @@ const App = () => {
                 <Route exact path="/register" component={RegistrationPage} />
                 <Layout1>
                   <Route path="/dashboard" component={HomePage} />
+                  <Route path="/organization" component={OrgPage} />
                   <Route path="/posts" component={AllPosts} />
                   {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}
                 </Layout1>
