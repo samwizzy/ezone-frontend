@@ -22,6 +22,7 @@ import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
+import Layout3 from '../../components/layouts/layout3/Layout3';
 import { makeSelectUserToken } from './selectors';
 import PrivateRoute from './PrivateRoute';
 import { AppContext } from '../context/AppContext';
@@ -60,11 +61,11 @@ const App = () => {
                   component={ForgotPasswordForm}
                 />
                 <Route exact path="/register" component={RegistrationPage} />
-                <Layout1>
+                <Layout3>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}
-                </Layout1>
+                </Layout3>
                 <Route path="" component={NotFoundPage} />
               </Switch>
             </div>

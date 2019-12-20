@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-      zIndex: 1,
+      zIndex: 1
     },
   },
   menuButton: {
