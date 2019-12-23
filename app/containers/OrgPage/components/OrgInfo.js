@@ -1,6 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import {
+  makeStyles,
   List,
   ListItem,
   ListItemIcon,
@@ -10,7 +11,10 @@ import {
   Paper,
   Button,
 } from '@material-ui/core';
-import FolderIcon from '@material-ui/icons/Folder';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import * as Actions from '../actions';
 
 import download6 from '../../../images/download(6).svg';
 import user from '../../../images/user.svg';
@@ -72,19 +76,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
-
-export default function TabsPage() {
+const OrgInfo = props => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
 
+  const { openEditColorDialog, openEditCompanyDialog } = props;
   return (
     <React.Fragment>
       <Paper className={classes.root}>
@@ -94,7 +89,9 @@ export default function TabsPage() {
         </Typography>
         <Typography component="p">Telecommunications</Typography>
 
-        <p className={classes.edit}>Edit Logo and Color</p>
+        <Typography className={classes.edit} onClick={openEditColorDialog}>
+          <u>Edit Logo and Color</u>
+        </Typography>
       </Paper>
 
       <div className={classes.orgContainer}>
@@ -111,6 +108,7 @@ export default function TabsPage() {
                 variant="contained"
                 color="primary"
                 className={classes.editButton}
+                onClick={openEditCompanyDialog}
               >
                 Edit
               </Button>
@@ -180,4 +178,30 @@ export default function TabsPage() {
       </div>
     </React.Fragment>
   );
+};
+
+OrgInfo.propTypes = {
+  openEditColorDialog: PropTypes.func,
+  openEditCompanyDialog: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  // loginPage: makeSelectLoginPage(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
+    openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+  };
 }
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(OrgInfo);

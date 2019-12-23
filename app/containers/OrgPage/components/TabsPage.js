@@ -1,18 +1,8 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
   Typography,
   Box,
-  Grid,
-  Link,
-  Paper,
-  Container,
   makeStyles,
   AppBar,
   Tabs,
@@ -22,8 +12,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
-import logo from '../../../images/logo.svg';
-import banner from '../../../images/banner.svg';
 import OrgInfo from './OrgInfo';
 
 const useStyles = makeStyles(theme => ({

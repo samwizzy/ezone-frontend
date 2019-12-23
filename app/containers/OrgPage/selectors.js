@@ -18,8 +18,38 @@ const selectOrgPageDomain = state => state.orgPage || initialState;
 const makeSelectOrgPage = () =>
   createSelector(
     selectOrgPageDomain,
-    substate => substate,
+    subState => subState,
+  );
+
+const makeSelectLoading = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.loading,
+  );
+
+const makeSelectError = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.error,
+  );
+
+const makeSelectEditColorDialog = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.colorDialog,
+  );
+
+const makeSelectEditCompanyDialog = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.companyDialog,
   );
 
 export default makeSelectOrgPage;
-export { selectOrgPageDomain };
+export {
+  selectOrgPageDomain,
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectEditColorDialog,
+  makeSelectEditCompanyDialog,
+};

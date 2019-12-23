@@ -8,7 +8,6 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -17,9 +16,9 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectOrgPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import TabsPage from './components/TabsPage';
-import ListD from './components/ListD';
+import ColorDialog from './components/ColorDialog';
+import CompanyDialog from './components/CompanyDialog';
 
 export function OrgPage() {
   useInjectReducer({ key: 'orgPage', reducer });
@@ -32,6 +31,8 @@ export function OrgPage() {
         <meta name="description" content="Description of OrgPage" />
       </Helmet>
       <TabsPage />
+      <ColorDialog />
+      <CompanyDialog />
     </div>
   );
 }
