@@ -45,6 +45,30 @@ const makeSelectEditCompanyDialog = () =>
     subState => subState.companyDialog,
   );
 
+const makeSelectBranchDialog = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.branchDialog,
+  );
+
+const makeSelectDepartmentDialog = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.departmentDialog,
+  );
+
+// const makeSelectNewBranchDialog = () =>
+//   createSelector(
+//     selectOrgPageDomain,
+//     subState => subState.branchDialog,
+//   );
+
+// const makeSelectEditBranchDialog = () =>
+//   createSelector(
+//     selectOrgPageDomain,
+//     subState => subState.branchDialog,
+//   );
+
 export default makeSelectOrgPage;
 export {
   selectOrgPageDomain,
@@ -52,4 +76,8 @@ export {
   makeSelectError,
   makeSelectEditColorDialog,
   makeSelectEditCompanyDialog,
+  makeSelectBranchDialog,
+  makeSelectDepartmentDialog,
+  // makeSelectNewBranchDialog,
+  // makeSelectEditBranchDialog,
 };

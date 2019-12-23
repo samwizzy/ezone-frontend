@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
 import OrgInfo from './OrgInfo';
+import OrgLocation from './OrgLocation';
+import OrgDepartment from './OrgDepartment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,10 +72,10 @@ function TabsPage() {
         <OrgInfo />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <OrgLocation />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <OrgDepartment />
       </TabPanel>
     </div>
   );

@@ -19,6 +19,8 @@ import saga from './saga';
 import TabsPage from './components/TabsPage';
 import ColorDialog from './components/ColorDialog';
 import CompanyDialog from './components/CompanyDialog';
+import BranchDialog from './components/BranchDialog';
+import DepartmentDialog from './components/DepartmentDialog';
 
 export function OrgPage() {
   useInjectReducer({ key: 'orgPage', reducer });
@@ -33,6 +35,8 @@ export function OrgPage() {
       <TabsPage />
       <ColorDialog />
       <CompanyDialog />
+      <BranchDialog />
+      <DepartmentDialog />
     </div>
   );
 }
