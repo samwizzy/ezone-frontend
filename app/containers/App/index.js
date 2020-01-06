@@ -20,6 +20,7 @@ import AllPosts from '../AllPosts/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
+import OrgPage from '../OrgPage/Loadable';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import Layout3 from '../../components/layouts/layout3/Layout3';
@@ -42,10 +43,7 @@ const App = () => {
           <CssBaseline />
           <main>
             <div>
-              <Helmet
-                titleTemplate="%s - React.js Boilerplate"
-                defaultTitle="React.js Boilerplate"
-              >
+              <Helmet titleTemplate="%s - Ezone" defaultTitle="Ezone">
                 <meta
                   name="description"
                   content="A React.js Boilerplate application"

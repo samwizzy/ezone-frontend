@@ -1,21 +1,37 @@
 Arguments: 
+<<<<<<< HEAD
   C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @material-ui/pickers
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Java\jdk-9.0.1\bin;C:\Program Files\Git\cmd;C:\Program Files\Sublime Text 3;C:\ProgramData\ComposerSetup\bin;C:\Users\user\AppData\Local\Programs\Python\Python36;C:\Program Files\nodejs;C:\Users\user\AppData\Local\atom\app-1.28.0\resources\app\apm\bin;C:\Users\user\AppData\Local\atom;C:\Program Files (x86)\Brackets\command;C:\Program Files\Microsoft VS Code\bin;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\wamp\bin\php\php7.2.14\;C:\Program Files\nodejs\;C:\Ruby25-x64\bin;C:\Users\user\AppData\Roaming\Composer\vendor\bin;C:\Program Files\nodejs;C:\Users\user\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\Users\user\AppData\Local\Yarn\bin;C:\Users\user\AppData\Roaming\npm
+=======
+  /home/teslim/.nvm/versions/node/v11.7.0/bin/node /usr/share/yarn/bin/yarn.js install
+
+PATH: 
+  /home/teslim/teslim/project/bin:/usr/local/go/bin:/home/teslim/.nvm/versions/node/v11.7.0/bin:~/.config/composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/teslim/.dotnet/tools:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/teslim/phalcon-devtools:/home/teslim/Android/Sdk/tools:/home/teslim/Android/Sdk/platform-tools
+>>>>>>> 59f777e91815ae0cd0a7f22799411ef3fd873999
 
 Yarn version: 
-  1.16.0
+  1.12.3
 
 Node version: 
+<<<<<<< HEAD
   12.14.0
+=======
+  11.7.0
+>>>>>>> 59f777e91815ae0cd0a7f22799411ef3fd873999
 
 Platform: 
-  win32 x64
+  linux x64
 
 Trace: 
+<<<<<<< HEAD
   Error: connect ETIMEDOUT 104.16.16.35:443
       at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1129:14)
+=======
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:57:26)
+>>>>>>> 59f777e91815ae0cd0a7f22799411ef3fd873999
 
 npm manifest: 
   {

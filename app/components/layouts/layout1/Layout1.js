@@ -160,7 +160,7 @@ const Layout1 = props => {
 
   const navigation = [
     { id: 1, name: 'dashboard', link: '/dashboard' },
-    { id: 2, name: 'post', link: '/posts' },
+    { id: 2, name: 'Organization', link: '/organization' },
     // { id: 3, name: 'Admins', link: '/admins' },
   ];
 

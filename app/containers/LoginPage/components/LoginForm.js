@@ -189,7 +189,10 @@ const LoginForm = ({ loginAction }) => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                <Link href="/dashboard" variant="body2">
+                  Sign In
+                </Link>
+                {/* Sign In */}
               </Button>
               <Typography className={classes.option}>
                 <span>OR</span>
