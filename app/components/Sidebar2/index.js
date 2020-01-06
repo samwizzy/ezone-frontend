@@ -21,17 +21,17 @@ import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import Group from '@material-ui/icons/Group';
 import BusinessCenter from '@material-ui/icons/BusinessCenter';
-import TabMenu from '../TabMenu'
-import SideBanner from '../../images/sidebanner.svg'
+import TabMenu from '../TabMenu';
+import SideBanner from '../../images/sidebanner.svg';
 
 const drawerWidth = 240;
 
 const links = [
   'Dashboard',
-  'Organization', 
-  'Applications', 
-  'Employees', 
-  'Groups'
+  'Organization',
+  'Applications',
+  'Employees',
+  'Groups',
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: 36,
-    color: theme.palette.common.black
+    color: theme.palette.common.black,
   },
   hide: {
     display: 'none',
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
-    marginTop: '80px'
+    marginTop: '80px',
   },
   drawerOpen: {
     width: drawerWidth,
@@ -113,7 +113,7 @@ export default function MiniDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -129,17 +129,23 @@ export default function MiniDrawer(props) {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
         <List>
           {links.map((text, index) => {
-            switch(text){
+            switch (text) {
               case 'Dashboard':
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemIcon>
+                      <Dashboard />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
@@ -147,7 +153,9 @@ export default function MiniDrawer(props) {
               case 'Organization':
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><BusinessCenter /></ListItemIcon>
+                    <ListItemIcon>
+                      <BusinessCenter />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
@@ -155,7 +163,9 @@ export default function MiniDrawer(props) {
               case 'Employees':
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><Person /></ListItemIcon>
+                    <ListItemIcon>
+                      <Person />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
@@ -163,7 +173,9 @@ export default function MiniDrawer(props) {
               case 'Applications':
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><Apps /></ListItemIcon>
+                    <ListItemIcon>
+                      <Apps />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
@@ -171,7 +183,9 @@ export default function MiniDrawer(props) {
               case 'Groups':
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><Group /></ListItemIcon>
+                    <ListItemIcon>
+                      <Group />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
@@ -179,10 +193,12 @@ export default function MiniDrawer(props) {
               default:
                 return (
                   <ListItem button key={index}>
-                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemIcon>
+                      <Dashboard />
+                    </ListItemIcon>
                     <ListItemText primary={text.name} />
                   </ListItem>
-                )
+                );
             }
           })}
         </List>
