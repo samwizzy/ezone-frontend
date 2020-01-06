@@ -53,7 +53,7 @@ const App = () => {
               </Helmet>
 
               <Switch>
-                <Route exact path="/" component={HomePage} />
+                
                 <Route exact path="/login" component={LoginPage} />
                 <Route
                   exact
@@ -65,6 +65,7 @@ const App = () => {
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}
+                  <Route exact path="/" component={HomePage} />
                 </Layout3>
                 <Route path="" component={NotFoundPage} />
               </Switch>

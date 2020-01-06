@@ -20,11 +20,23 @@ import {
 import Mail from '@material-ui/icons/Mail';
 import Menu from '@material-ui/icons/Menu';
 import Home from '@material-ui/icons/Home';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import ExitToApp from '@material-ui/icons/ExitToApp';
+import Apps from '@material-ui/icons/Apps';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Person from '@material-ui/icons/Person';
+import Group from '@material-ui/icons/Group';
+import BusinessCenter from '@material-ui/icons/BusinessCenter';
 import Banner from './banner.jpg';
+import SideBanner from '../../images/side-banner.png';
 import Logo from '../../images/logo.svg';
 import OctivierLogo from '../../images/octivier-logo.svg';
+
+const links = [
+  'Dashboard',
+  'Organization', 
+  'Applications', 
+  'Employees', 
+  'Groups'
+];
 
 const styles = theme => ({
   banner: {
@@ -68,7 +80,11 @@ const styles = theme => ({
   },
   list: {
     width: 250,
-    marginTop: '80px'
+    height: '100%',
+    marginTop: '80px',
+    backgroundImage: `url(${SideBanner})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'top center',
   },
   fullList: {
     width: 'auto',
@@ -78,11 +94,17 @@ const styles = theme => ({
   },
   link: {
     marginRight: theme.spacing(6),
-    // color: '#FFFFFF',
+    color: theme.palette.common.white,
     cursor: 'pointer',
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
+  li: {
+    color: theme.palette.common.white,
     '&:hover': {
       textDecoration: 'none',
     },
@@ -176,34 +198,67 @@ function Header(props) {
       onKeyDown={toggleDrawer(open, false)}
     >
       <List>
-        {['Home', 'About Us', 'Our Offerings', 'Wealth Management'].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Home /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ),
+        {links.map(
+          (text, index) => {
+            switch(text){
+              case 'Dashboard':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Organization':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><BusinessCenter /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Employees':
+                return (
+                  <ListItem button key={index} className={classes.link}>
+                    <ListItemIcon><Person /></ListItemIcon>
+                    <ListItemText primary={text} className={classes.li} />
+                  </ListItem>
+                );
+                break;
+              case 'Applications':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Apps /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Groups':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Group /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              default:
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text.name} />
+                  </ListItem>
+                )
+            }
+          }
         )}
       </List>
       <Divider />
-      <List>
-        {['Login', 'Sign Up'].map(text => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {text === 'Sign Up' ? <PersonAdd /> : <ExitToApp />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="absolute" color="inherit" className={classes.appBar}>
+      <AppBar position="fixed" color="inherit" className={classes.appBar}>
         <Toolbar>
           <IconButton
             onClick={toggleDrawer('open', true)}
@@ -218,7 +273,7 @@ function Header(props) {
           <Grid
             justify="space-between" // Add it here :)
             container 
-            spacing={24}
+            spacing={10}
           >
             <Grid item style={{display:'flex', alignItems:'center'}}>
               <Typography type="title" color="inherit">

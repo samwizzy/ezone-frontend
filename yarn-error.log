@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:60:26)
+  Error: connect ETIMEDOUT 104.16.16.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1129:14)
 
 npm manifest: 
   {
