@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
 import OrgPage from '../OrgPage/Loadable';
+import EmployeePage from '../EmployeePage/Loadable';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import Layout3 from '../../components/layouts/layout3/Layout3';
@@ -58,12 +59,13 @@ const App = () => {
                   component={ForgotPasswordForm}
                 />
                 <Route exact path="/register" component={RegistrationPage} />
-                <Layout3>
+                <Layout1>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   <Route path="/organization" component={OrgPage} />
+                  <Route path="/employee" component={EmployeePage} />
                   <Route exact path="/" component={HomePage} />
-                </Layout3>
+                </Layout1>
                 <Route path="" component={NotFoundPage} />
               </Switch>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { withRouter } from 'react-router';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -25,6 +26,12 @@ import TabMenu from '../TabMenu';
 import SideBanner from '../../images/sidebanner.svg';
 
 const drawerWidth = 240;
+
+const navigation = [
+  { id: 1, name: 'Dashboard', link: '/dashboard' },
+  { id: 2, name: 'Organization', link: '/organization' },
+  { id: 3, name: 'Employee', link: '/employee' },
+];
 
 const links = [
   'Dashboard',
@@ -97,7 +104,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MiniDrawer(props) {
+const MiniDrawer = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -108,6 +115,10 @@ export default function MiniDrawer(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleClick = link => {
+    props.history.push(link);
   };
 
   return (
@@ -138,68 +149,20 @@ export default function MiniDrawer(props) {
         </div>
         <Divider />
         <List>
-          {links.map((text, index) => {
-            switch (text) {
-              case 'Dashboard':
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <Dashboard />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
-              case 'Organization':
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <BusinessCenter />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
-              case 'Employees':
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <Person />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
-              case 'Applications':
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <Apps />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
-              case 'Groups':
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <Group />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
-              default:
-                return (
-                  <ListItem button key={index}>
-                    <ListItemIcon>
-                      <Dashboard />
-                    </ListItemIcon>
-                    <ListItemText primary={text.name} />
-                  </ListItem>
-                );
-            }
+          {navigation.map(text => {
+            <ListItem
+            button
+            key={text.id}
+            onClick={() => handleClick(text.link)}
+          >
+              <ListItemIcon>
+                <Dashboard />
+              </ListItemIcon>
+              <ListItemText
+                primary={text.name}
+                onClick={() => handleClick(text.link)}
+              />
+            </ListItem>
           })}
         </List>
         <Divider />
@@ -210,4 +173,6 @@ export default function MiniDrawer(props) {
       </main>
     </div>
   );
-}
+};
+
+export default withRouter(MiniDrawer);
