@@ -1,6 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  ThemeProvider,
+} from '@material-ui/core/styles';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import Sidebar from '../../Sidebar';
