@@ -59,7 +59,9 @@ const App = () => {
                   component={ForgotPasswordForm}
                 />
                 <Route exact path="/register" component={RegistrationPage} />
+                
                 <Layout3>
+                  <Route exact path="/organization" component={OrgPage} />
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}

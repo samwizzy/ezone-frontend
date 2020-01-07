@@ -17,9 +17,7 @@ import {
   Link,
   Box,
 } from '@material-ui/core';
-import Mail from '@material-ui/icons/Mail';
 import Menu from '@material-ui/icons/Menu';
-import Home from '@material-ui/icons/Home';
 import Apps from '@material-ui/icons/Apps';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
@@ -49,7 +47,7 @@ const styles = theme => ({
   },
   appBar: {
     boxShadow: theme.shadows[0],
-    zIndex: 9999
+    zIndex: 9999,
   },
   text: {
     fontSize: 50,
@@ -245,7 +243,7 @@ function Header(props) {
                 return (
                   <ListItem button key={index}>
                     <ListItemIcon><Dashboard /></ListItemIcon>
-                    <ListItemText primary={text.name} />
+                    <ListItemText primary={text} />
                   </ListItem>
                 )
             }
@@ -258,8 +256,8 @@ function Header(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed" color="inherit" className={classes.appBar}>
-        <Toolbar>
+      <AppBar position="relative" color="inherit" className={classes.appBar}>
+        <Toolbar variant="dense">
           <IconButton
             onClick={toggleDrawer('open', true)}
             edge="start"
@@ -272,8 +270,7 @@ function Header(props) {
           
           <Grid
             justify="space-between" // Add it here :)
-            container 
-            spacing={10}
+            container
           >
             <Grid item style={{display:'flex', alignItems:'center'}}>
               <Typography type="title" color="inherit">

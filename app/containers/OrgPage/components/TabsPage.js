@@ -7,6 +7,7 @@ import {
   AppBar,
   Tabs,
   Tab,
+  Toolbar
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -15,12 +16,32 @@ import * as Actions from '../../App/actions';
 import OrgInfo from './OrgInfo';
 import OrgLocation from './OrgLocation';
 import OrgDepartment from './OrgDepartment';
+import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    padding: '10px 25px',
+    borderRadius: '20px 20px 0 0',
+    '&:hover': {
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.primary.main
+    }
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
 }));
 
 function TabPanel(props) {
@@ -57,17 +78,25 @@ function TabsPage() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-        >
-          <Tab label="Organization Info" {...a11yProps(0)} />
-          <Tab label="Location" {...a11yProps(1)} />
-          <Tab label="Department" {...a11yProps(2)} />
-        </Tabs>
+      <AppBar position="static" color='secondary'>
+        <Toolbar variant="dense" className={classes.toolbar}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            indicatorColor="primary"
+            centered
+          >
+            <Tab label="Organization Info" {...a11yProps(0)} />
+            <Tab label="Location" {...a11yProps(1)} />
+            <Tab label="Department" {...a11yProps(2)} />
+          </Tabs>
+
+          <UserMenu />
+
+        </Toolbar>
       </AppBar>
+
       <TabPanel value={value} index={0}>
         <OrgInfo />
       </TabPanel>

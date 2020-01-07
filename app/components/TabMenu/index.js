@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
     backgroundColor: '#1A88E1',
-    marginTop: theme.spacing(1)
   },
   toolbar:{ 
     paddingTop: theme.spacing(0),

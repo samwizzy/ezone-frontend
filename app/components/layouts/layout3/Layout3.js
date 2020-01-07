@@ -4,7 +4,6 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import Header from '../../Header';
 import Footer from '../../Footer';
 import Sidebar from '../../Sidebar';
-import Sidebar2 from '../../Sidebar2';
 import theme from './../themeConfig'
 
 const styles = theme => ({
@@ -21,10 +20,10 @@ class Layout3 extends React.Component {
         <React.Fragment>
           <ThemeProvider theme={theme}>
             <Header />
-            <Sidebar2
+            <Sidebar
               content={this.props.children}
             />
-            {this.props.children}
+            {/* {this.props.children} */}
           </ThemeProvider>
         </React.Fragment>
     );

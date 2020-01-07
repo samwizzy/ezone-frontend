@@ -2,10 +2,13 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
+  Avatar,
+  Link,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListItemAvatar,
   Grid,
   Typography,
   Paper,
@@ -25,55 +28,22 @@ import web from '../../../images/web.svg';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(5, 5, 5, 20),
+    display: 'flex',
+    padding: theme.spacing(3),
     marginBottom: theme.spacing(4),
   },
-  image: {
-    position: 'absolute',
-    width: '100px',
-    height: '100px',
-    left: '150px',
-    top: '180px',
-    border: '1px solid #C4C4C4',
-    borderRadius: '155px',
-    padding: '25px',
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
   },
-  edit: {
-    position: 'absolute',
-    height: '100px',
-    left: '1280px',
-    top: '180px',
-    color: '#1A88E1',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '13px',
-    lineHeight: '16px',
-    // border: '2px solid #1A88E1',
-    [theme.breakpoints.down('md')]: {
-      position: 'absolute',
-      height: '100px',
-      left: '265px',
-      top: '150px',
-      color: '#1A88E1',
-    },
-  },
-  orgContainer: {
-    padding: theme.spacing(0, 5, 0, 5),
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
+  paper: {
+    padding: theme.spacing(2),
   },
   editButton: {
-    width: '117px',
-    height: '40px',
-    background: '#1A88E1',
-    borderRadius: '10px',
-    align: 'right',
-  },
-  listFormat: {
-    marginBottom: '10px',
-    marginTop: '10px',
-  },
+    padding: theme.spacing(1, 4),
+    background: theme.palette.primary.main,
+    borderRadius: '8px'
+  }
 }));
 
 const OrgInfo = props => {
@@ -83,21 +53,56 @@ const OrgInfo = props => {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <img alt="" src={download6} className={classes.image} />
-        <Typography variant="h5" component="h3">
-          Octiver Communications
-        </Typography>
-        <Typography component="p">Telecommunications</Typography>
-
-        <Typography className={classes.edit} onClick={openEditColorDialog}>
-          <u>Edit Logo and Color</u>
-        </Typography>
+        <Grid
+          justify="space-between"
+          container
+        >
+          <Grid item>
+            <List className={classes.list}>
+              <ListItem alignItems="flex-start" style={{display: 'flex', alignItems: 'center'}}>
+                <ListItemAvatar>
+                  <Avatar alt="Company Logo" src={download6} className={classes.avatar} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={<Typography variant='h6'>Octiver Communications</Typography>}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}
+                        color="textPrimary"
+                      >
+                        Telecommunications
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+            </List>
+          </Grid>
+          <Grid item>
+            <List component='nav' className={classes.list}>
+              <ListItem onClick={openEditColorDialog} alignItems="flex-start">
+                <ListItemText
+                  primary={
+                    <Link href="#" variant="body2">
+                      Edit Logo and Color
+                    </Link>
+                  }
+                />
+              </ListItem>
+            </List>
+          </Grid>
+        </Grid>
       </Paper>
 
-      <div className={classes.orgContainer}>
+      <Paper className={classes.paper} variant='outlined'>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={12} sm={12}>
-            <Typography component="p">Company Information</Typography>
+          <Grid item xs={12} md={6} sm={6}>
+            <Typography variant='h6'>Company Information</Typography>
+          </Grid>
+          <Grid item xs={12} md={6} sm={6}>
             <Grid
               container
               alignItems="flex-start"
@@ -115,67 +120,63 @@ const OrgInfo = props => {
             </Grid>
           </Grid>
           <Grid item xs={12} md={6} sm={3}>
-            <div className={classes.demo}>
-              <List>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={user} />
-                  </ListItemIcon>
-                  <ListItemText primary="Joy Essien" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={msg} />
-                  </ListItemIcon>
-                  <ListItemText primary="joy.essien@octiver.ng" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={phone2} />
-                  </ListItemIcon>
-                  <ListItemText primary="+234 097 637 7383" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={phone} />
-                  </ListItemIcon>
-                  <ListItemText primary="+234 097 637 7383" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={web} />
-                  </ListItemIcon>
-                  <ListItemText primary="www.octivercommunications .org" />
-                </ListItem>
-              </List>
-            </div>
+            <List>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={user} />
+                </ListItemIcon>
+                <ListItemText primary="Joy Essien" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={msg} />
+                </ListItemIcon>
+                <ListItemText primary="joy.essien@octiver.ng" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={phone2} />
+                </ListItemIcon>
+                <ListItemText primary="+234 097 637 7383" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={phone} />
+                </ListItemIcon>
+                <ListItemText primary="+234 097 637 7383" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={web} />
+                </ListItemIcon>
+                <ListItemText primary="www.octivercommunications .org" />
+              </ListItem>
+            </List>
           </Grid>
           <Grid item xs={12} md={6} sm={3}>
-            <div className={classes.demo}>
-              <List>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={web} />
-                  </ListItemIcon>
-                  <ListItemText primary="Mandilas House, Marina Lagos Nigeria" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={web} />
-                  </ListItemIcon>
-                  <ListItemText primary="GMT" />
-                </ListItem>
-                <ListItem className={classes.listFormat}>
-                  <ListItemIcon>
-                    <img alt="" src={web} />
-                  </ListItemIcon>
-                  <ListItemText primary="English" />
-                </ListItem>
-              </List>
-            </div>
+            <List>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={web} />
+                </ListItemIcon>
+                <ListItemText primary="Mandilas House, Marina Lagos Nigeria" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={web} />
+                </ListItemIcon>
+                <ListItemText primary="GMT" />
+              </ListItem>
+              <ListItem className={classes.listFormat}>
+                <ListItemIcon>
+                  <img alt="" src={web} />
+                </ListItemIcon>
+                <ListItemText primary="English" />
+              </ListItem>
+            </List>
           </Grid>
         </Grid>
-      </div>
+      </Paper>
     </React.Fragment>
   );
 };
