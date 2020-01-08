@@ -26,28 +26,36 @@ import * as Actions from '../actions';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    // padding: theme.spacing(3),
   },
   avatar: {
     width: theme.spacing(12),
     height: theme.spacing(12),
   },
   paper: {
-    padding: theme.spacing(2),
+    display: 'flex',
+    padding: theme.spacing(3),
+    borderRadius: '10px',
+    backgroundColor: '#F8F8F8'
   },
   button: {
     padding: theme.spacing(1, 4),
     background: theme.palette.primary.main,
     borderRadius: '8px'
   },
+  grid: {
+    padding: theme.spacing(3),
+    border: '1px solid #dcdcdc'
+  },
   textField: {
+    width: theme.spacing(50),
     padding: theme.spacing(0),
     borderRadius: '20px'
   },
   box: {
     margin: theme.spacing(1),
-    width: theme.spacing(16),
-    height: theme.spacing(16),
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+    borderRadius: '10px',
   }
 }));
 
@@ -57,30 +65,29 @@ const TopSection = props => {
   const { openEditColorDialog, openEditCompanyDialog } = props;
   return (
     <React.Fragment>
-        <Container className={classes.root}>
-
-
-          <Grid
-            justify="space-between"
-            container
-            spacing={3}
-          >
-
-            <Grid item sm={12} xs={12} spacing={10} style={{border: '1px solid'}}>
+        <Container>
+          <Grid container className={classes.grid}>
+            <Grid item sm={12} xs={12}>
               <TextField
                 className={classes.textField}
                 id="outlined-search" 
-                label="Search"
+                label="Search Apps"
                 type="search" 
                 variant="outlined" 
                 size="small"
               />
             </Grid>
+          </Grid>
 
 
+          <Grid
+            justify="space-between"
+            container
+            className={classes.grid}
+          >
 
-            <Grid item xs={12} sm={8} spacing={3} style={{border: '1px solid'}}>
-              <Grid container justify="space-between">
+            <Grid item xs={12} sm={8} spacing={3} style={{border: '1px dotted #f8f8f8'}}>
+              <Grid container justify="space-between" className={classes.grid}>
                 <Grid item sm={6}>
                   <Typography variant="h6" component="h3">My Apps</Typography>
                 </Grid>
@@ -94,16 +101,16 @@ const TopSection = props => {
                     Request App Access
                   </Button>
                 </Grid>
-
-                <Grid item sm={12} xs={12} spacing={10}>
-                  <div className={classes.root}>
+              </Grid>  
+              <Grid container justify="space-between">
+                <Grid item sm={12} xs={12}>
+                  <Paper className={classes.paper} elevation={2}>
                     <Paper className={classes.box} />
                     <Paper className={classes.box} />
                     <Paper className={classes.box} />
                     <Paper className={classes.box} />
-                  </div>
+                  </Paper>
                 </Grid>
-
               </Grid>
             </Grid>
 
