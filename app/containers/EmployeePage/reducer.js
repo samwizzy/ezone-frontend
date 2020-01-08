@@ -69,7 +69,7 @@ const employeePageReducer = (state = initialState, action) =>
           employeeDialog: {
             type: 'edit',
             props: {
-              open: true,
+              open: false,
             },
             data: action.payload,
           },

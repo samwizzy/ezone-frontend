@@ -103,7 +103,7 @@ const EmployeeDialog = props => {
   const {
     employeeDialog,
     closeNewEmployeeDialogAction,
-    closeEditCompanyDialog,
+    closeEditEmployeeDialogAction,
     dispatchUpdatePostAction,
   } = props;
 
@@ -137,7 +137,7 @@ const EmployeeDialog = props => {
     // eslint-disable-next-line no-unused-expressions
     employeeDialog.type === 'new'
       ? closeNewEmployeeDialogAction()
-      : closeEditCompanyDialog();
+      : closeEditEmployeeDialogAction();
   };
 
   return (
@@ -584,7 +584,7 @@ const EmployeeDialog = props => {
 EmployeeDialog.propTypes = {
   dispatchNewPostAction: PropTypes.func,
   closeNewEmployeeDialogAction: PropTypes.func,
-  closeEditCompanyDialog: PropTypes.func,
+  closeEditEmployeeDialogAction: PropTypes.func,
   employeeDialog: PropTypes.object,
 };
 
@@ -597,7 +597,7 @@ function mapDispatchToProps(dispatch) {
     dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeNewEmployeeDialogAction: () =>
       dispatch(Actions.closeNewEmployeeDialog()),
-    closeEditCompanyDialog: () => dispatch(Actions.closeEditCompanyDialog()),
+    closeEditEmployeeDialogAction: () => dispatch(Actions.closeEditEmployeeDialog()),
     dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
