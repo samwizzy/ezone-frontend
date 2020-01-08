@@ -11,14 +11,16 @@ import {
   Box,
   Grid,
   Link,
+  Paper,
   Container,
   makeStyles,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
+import logo from '../../../images/logo.svg';
+import banner from '../../../images/banner.svg';
 
 function Copyright() {
   return (
@@ -34,27 +36,68 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
+  root: {
+    // height: '100vh',
+    backgroundColor: theme.palette.grey[50],
+    borderRadius: theme.spacing(5),
+    overflow: 'hidden',
+  },
+  image: {
+    // backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: `url(${banner})`,
+    backgroundRepeat: 'no-repeat',
+    // backgroundColor:
+    //   theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    borderRadius: theme.spacing(5),
+    padding: theme.spacing(2),
+    margin: theme.spacing(4),
+    border: '1px solid #F1F5F8',
+    backgroundColor: '#FFFFFF',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  input: {
+    height: 40,
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#1A88E1',
+  },
+  submit2: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: theme.palette.common.white,
+    color: '#F90000',
+    '&:hover': {
+      backgroundColor: '#F90000',
+      color: theme.palette.common.white,
+    },
+  },
+  option: {
+    width: '100%',
+    color: theme.palette.grey[600],
+    lineHeight: '0.1',
+    textAlign: 'center',
+    margin: '10px 0 20px',
+    borderBottom: `1px solid ${theme.palette.grey[500]}`,
+    '& span': {
+      background: '#fff',
+      padding: '0 10px',
+    },
   },
 }));
 
@@ -77,76 +120,101 @@ const LoginForm = ({ loginAction }) => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        {/* <form className={classes.form} noValidate> */}
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          value={values.email}
-          autoComplete="email"
-          autoFocus
-          onChange={handleChange('email')}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          value={values.password}
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          onChange={handleChange('password')}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={() => {
-            loginAction(values);
-          }}
-          disabled={!canBeSubmitted}
-        >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="#" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
+    <Container style={{ padding: '50px' }}>
+      <Grid container component={Paper} className={classes.root}>
+        <Grid item xs={false} sm={4} md={8} className={classes.image} />
+        <Grid item xs={12} sm={8} md={4}>
+          <div className={classes.paper}>
+            <Box className={classes.avatar}>
+              <img src={logo} alt="" />
+            </Box>
+            <Typography component="h1" variant="h6">
+              Sign in
+            </Typography>
+            <Typography variant="body2">
+              <span>New User?</span>&nbsp;
+              <Link href="/register" variant="body2">
+                Register
+              </Link>
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              {/* <FormControlLabel
+                className={classes.label}
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/forgot-password" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                <Link href="/dashboard" variant="body2">
+                  Sign In
+                </Link>
+                {/* Sign In */}
+              </Button>
+              <Typography className={classes.option}>
+                <span>OR</span>
+              </Typography>
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit2}
+              >
+                Sign In With Google+
+              </Button>
+
+              <Box mt={5}>
+                <Copyright />
+              </Box>
+            </form>
+          </div>
         </Grid>
-        {/* </form> */}
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
+      </Grid>
     </Container>
   );
 };
