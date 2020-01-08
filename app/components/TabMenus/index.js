@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    // backgroundColor: theme.palette.primary.main,
   },
 });
 
@@ -21,16 +22,16 @@ export default function CenteredTabs() {
   return (
     <Paper className={classes.root} square>
       <Tabs
+        style={{border: '1px solid red'}}
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
-        centered
+        // centered
       >
         <Tab label="Organizational info" />
         <Tab label="Location" />
         <Tab label="Department" />
-        <Tab>Hello</Tab>
       </Tabs>
     </Paper>
   );

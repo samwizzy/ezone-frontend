@@ -12,13 +12,33 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import EmployeeList from './EmployeeList';
+import * as Actions from '../../App/actions';
+import OrgInfo from './OrgInfo';
+import OrgLocation from './OrgLocation';
+import OrgDepartment from './OrgDepartment';
+import TopSection from './TopSection';
+import Autorenew from '@material-ui/icons/Autorenew'
 import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    padding: '10px 25px',
+    borderRadius: '20px 20px 0 0',
+    '&:hover': {
+      backgroundColor: theme.palette.common.white,
+      color: theme.palette.primary.main
+    }
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
   },
   toolbar: {
     display: 'flex',
@@ -60,26 +80,34 @@ function TabsPage() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color='secondary'>
         <Toolbar variant="dense" className={classes.toolbar}>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
+            indicatorColor="primary"
+            centered
           >
-            <Tab label="Employee" {...a11yProps(0)} />
-            <Tab label="Role Management" {...a11yProps(0)} />
+            <Tab label="" icon={<Autorenew />} wrapped={true} {...a11yProps(0)} />
+            <Tab label="Project" {...a11yProps(1)} />
+            <Tab label="Chats" {...a11yProps(2)} />
+            <Tab label="Tasks" {...a11yProps(2)} />
           </Tabs>
 
           <UserMenu />
 
         </Toolbar>
       </AppBar>
+
       <TabPanel value={value} index={0}>
-        <EmployeeList />
+        <OrgInfo />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <EmployeeList />
+        <TopSection />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <OrgDepartment />
       </TabPanel>
     </div>
   );
@@ -91,10 +119,14 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  // loginPage: makeSelectLoginPage(),
+});
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    loginAction: evt => dispatch(Actions.loginAction(evt)),
+  };
 }
 
 const withConnect = connect(
