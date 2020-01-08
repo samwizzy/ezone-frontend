@@ -9,6 +9,8 @@ import {
   CLOSE_NEW_EMPLOYEE_DIALOG,
   OPEN_EDIT_EMPLOYEE_DIALOG,
   CLOSE_EDIT_EMPLOYEE_DIALOG,
+  OPEN_VIEW_EMPLOYEE_DIALOG,
+  CLOSE_VIEW_EMPLOYEE_DIALOG,
 } from './constants';
 
 export const initialState = {
@@ -68,6 +70,30 @@ const employeePageReducer = (state = initialState, action) =>
           ...state,
           employeeDialog: {
             type: 'edit',
+            props: {
+              open: false,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case OPEN_VIEW_EMPLOYEE_DIALOG: {
+        return {
+          ...state,
+          employeeDialog: {
+            type: 'view',
+            props: {
+              open: true,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case CLOSE_VIEW_EMPLOYEE_DIALOG: {
+        return {
+          ...state,
+          employeeDialog: {
+            type: 'view',
             props: {
               open: false,
             },

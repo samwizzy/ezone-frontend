@@ -87,6 +87,7 @@ const EmployeeList = props => {
     loading,
     openNewEmployeeDialogAction,
     openEditEmployeeDialogAction,
+    openViewEmployeeDialogAction,
   } = props;
 
   const datas = [
@@ -310,7 +311,9 @@ const EmployeeList = props => {
                 <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
                   Edit
                 </MenuItem>
-                <MenuItem onClick={handleClose}>View Details</MenuItem>
+                <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
+                  View Details
+                </MenuItem>
                 <MenuItem onClick={handleClose}>Deactivate</MenuItem>
               </Menu>
             </div>
@@ -349,6 +352,7 @@ EmployeeList.propTypes = {
   loading: PropTypes.bool,
   openNewEmployeeDialogAction: PropTypes.func,
   openEditEmployeeDialogAction: PropTypes.func,
+  openViewEmployeeDialogAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -361,6 +365,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(Actions.openNewEmployeeDialog()),
     openEditEmployeeDialogAction: evt =>
       dispatch(Actions.openEditEmployeeDialog(evt)),
+    openViewEmployeeDialogAction: evt =>
+      dispatch(Actions.openViewEmployeeDialog(evt)),
   };
 }
 
