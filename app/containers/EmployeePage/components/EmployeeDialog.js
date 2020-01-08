@@ -640,7 +640,7 @@ const EmployeeDialog = props => {
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                       <div>
-                        <Button variant="contained">Default</Button>
+                        <Button variant="contained">Assign App</Button>
                         <Grid container spacing={3}>
                           <Grid item xs={3}>
                             <Card className={classes.card}>
