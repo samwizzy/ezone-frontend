@@ -573,7 +573,6 @@ const EmployeeDialog = props => {
                             fullWidth
                           />
                         </div>
-                        
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
                   </div>
