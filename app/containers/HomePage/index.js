@@ -133,105 +133,11 @@ export function HomePage() {
       <CssBaseline />
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
+        <meta name="description" content="ezone application homepage" />
       </Helmet>
       <Container style={{ padding: '50px' }}>
         <Grid container component={Paper} className={classes.root}>
-          <Grid item xs={false} sm={4} md={8} className={classes.image} />
-          <Grid item xs={12} sm={8} md={4}>
-            <div className={classes.paper}>
-              <Box className={classes.avatar}>
-                <img src={logo} />
-              </Box>
-              <Typography component="h1" variant="h6">
-                Sign in
-              </Typography>
-              <Typography variant="body2">
-                <span>New User?</span>&nbsp;
-                <Link href="/register" variant="body2">
-                  Register
-                </Link>
-              </Typography>
-              <form className={classes.form} noValidate>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormControlLabel
-                  className={classes.label}
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign In
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                </Grid>
-
-                <Typography className={classes.option}>
-                  <span>OR</span>
-                </Typography>
-
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  className={classes.submit2}
-                >
-                  Sign In With Google+
-                </Button>
-
-                <Box mt={5}>
-                  <Copyright />
-                </Box>
-              </form>
-            </div>
-          </Grid>
+          welcome to homepage
         </Grid>
       </Container>
     </React.Fragment>

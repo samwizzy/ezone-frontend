@@ -67,7 +67,7 @@ const App = () => {
                   <Route path="/organization" component={OrgPage} />
                   <Route path="/employee" component={EmployeePage} />
                   <Route path="/utility" component={UtilityPage} />
-                  <Route exact path="/" component={HomePage} />
+                  <Route exact path="/" component={LoginPage} />
                 </Layout3>
                 <Route path="" component={NotFoundPage} />
               </Switch>
