@@ -100,15 +100,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#1A88E1',
   },
-  submit2: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.common.white,
-    color: '#F90000',
-    '&:hover': {
-      backgroundColor: '#F90000',
-      color: theme.palette.common.white,
-    },
-  },
   option: {
     width: '100%',
     color: theme.palette.grey[600],
@@ -211,20 +202,6 @@ export function HomePage() {
                     </Link>
                   </Grid>
                 </Grid>
-
-                <Typography className={classes.option}>
-                  <span>OR</span>
-                </Typography>
-
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  className={classes.submit2}
-                >
-                  Sign In With Google+
-                </Button>
 
                 <Box mt={5}>
                   <Copyright />

@@ -62,7 +62,6 @@ const App = () => {
                 <Route exact path="/register" component={RegistrationPage} />
                 
                 <Layout3>
-                  <Route exact path="/organization" component={OrgPage} />
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   <Route path="/organization" component={OrgPage} />
