@@ -153,7 +153,7 @@ const OrgLocation = props => {
 
 OrgLocation.propTypes = {
   loading: PropTypes.bool,
-  openEditBranchDialogAction: PropTypes.func,
+  // openEditBranchDialogAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -162,7 +162,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    openEditBranchDialogAction: () => dispatch(Actions.openEditBranchDialog()),
+    // openEditBranchDialogAction: () => dispatch(Actions.openEditBranchDialog()),
   };
 }
 

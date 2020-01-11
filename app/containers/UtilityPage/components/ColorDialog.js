@@ -45,8 +45,8 @@ const ColorDialog = props => {
   const {
     colorDialog,
     closeEditColorDialog,
-    dispatchNewPostAction,
-    dispatchUpdatePostAction,
+    // dispatchNewPostAction,
+    // dispatchUpdatePostAction,
   } = props;
   const classes = useStyles();
 
@@ -125,7 +125,7 @@ const ColorDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  dispatchUpdatePostAction(values);
+                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -149,9 +149,9 @@ const ColorDialog = props => {
 };
 
 ColorDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
-  closeNewPostDialog: PropTypes.func,
-  closeEditColorDialog: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
+  // closeNewPostDialog: PropTypes.func,
+  // closeEditColorDialog: PropTypes.func,
   colorDialog: PropTypes.object,
 };
 
@@ -161,10 +161,10 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
+    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
     closeEditColorDialog: () => dispatch(Actions.closeEditColorDialog()),
-    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }

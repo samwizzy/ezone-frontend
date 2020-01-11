@@ -363,7 +363,7 @@ const BranchDialog = props => {
 };
 
 BranchDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
   closeNewBranchDialogAction: PropTypes.func,
   closeEditBranchDialogAction: PropTypes.func,
   branchDialog: PropTypes.object,

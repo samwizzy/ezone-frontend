@@ -103,7 +103,7 @@ const CompanyDialog = props => {
   const {
     companyDialog,
     closeEditCompanyDialog,
-    dispatchUpdatePostAction,
+    // dispatchUpdatePostAction,
   } = props;
 
   const classes = useStyles();
@@ -436,7 +436,7 @@ const CompanyDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  dispatchUpdatePostAction(values);
+                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -460,8 +460,8 @@ const CompanyDialog = props => {
 };
 
 CompanyDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
-  closeNewPostDialog: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
+  // closeNewPostDialog: PropTypes.func,
   closeEditCompanyDialog: PropTypes.func,
   companyDialog: PropTypes.object,
 };
@@ -472,9 +472,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
+    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeEditCompanyDialog: () => dispatch(Actions.closeEditCompanyDialog()),
-    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }
