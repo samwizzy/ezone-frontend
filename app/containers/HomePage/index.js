@@ -100,15 +100,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#1A88E1',
   },
-  submit2: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.common.white,
-    color: '#F90000',
-    '&:hover': {
-      backgroundColor: '#F90000',
-      color: theme.palette.common.white,
-    },
-  },
   option: {
     width: '100%',
     color: theme.palette.grey[600],

@@ -18,6 +18,8 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import classNames from 'classnames'
+import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import * as Actions from '../../App/actions';
 import logo from '../../../images/logo.svg';
 import banner from '../../../images/banner.svg';
@@ -26,8 +28,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://optisoft.ng/">
+        OptiSoft
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -37,19 +39,24 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // height: '100vh',
+    display: 'flex',
+    padding: '50px', 
+    height: '100vh'
+  },
+  grid: {
+    height: '100%',
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   image: {
-    // backgroundImage: 'url(https://source.unsplash.com/random)',
+    width: '50%',
+    height: '100vh', 
     backgroundImage: `url(${banner})`,
     backgroundRepeat: 'no-repeat',
-    // backgroundColor:
-    //   theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    position: 'absolute'
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -76,29 +83,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#1A88E1',
-  },
-  submit2: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.common.white,
-    color: '#F90000',
-    '&:hover': {
-      backgroundColor: '#F90000',
-      color: theme.palette.common.white,
-    },
-  },
-  option: {
-    width: '100%',
-    color: theme.palette.grey[600],
-    lineHeight: '0.1',
-    textAlign: 'center',
-    margin: '10px 0 20px',
-    borderBottom: `1px solid ${theme.palette.grey[500]}`,
-    '& span': {
-      background: '#fff',
-      padding: '0 10px',
-    },
-  },
+    backgroundColor: theme.palette.primary.main,
+    color: '#fff'
+  }
 }));
 
 const LoginForm = ({ loginAction }) => {
@@ -120,102 +107,90 @@ const LoginForm = ({ loginAction }) => {
   };
 
   return (
-    <Container style={{ padding: '50px' }}>
-      <Grid container component={Paper} className={classes.root}>
-        <Grid item xs={false} sm={4} md={8} className={classes.image} />
-        <Grid item xs={12} sm={8} md={4}>
-          <div className={classes.paper}>
-            <Box className={classes.avatar}>
-              <img src={logo} alt="" />
-            </Box>
-            <Typography component="h1" variant="h6">
-              Sign in
-            </Typography>
-            <Typography variant="body2">
-              <span>New User?</span>&nbsp;
-              <Link href="/register" variant="body2">
-                Register
-              </Link>
-            </Typography>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                InputProps={{
-                  className: classes.input,
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                InputProps={{
-                  className: classes.input,
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              {/* <FormControlLabel
-                className={classes.label}
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot-password" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                <Link href="/dashboard" variant="body2">
-                  Sign In
-                </Link>
-                {/* Sign In */}
-              </Button>
-              <Typography className={classes.option}>
-                <span>OR</span>
-              </Typography>
+    <div>
+      <div className={classes.image}></div>
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit2}
-              >
-                Sign In With Google+
-              </Button>
-
-              <Box mt={5}>
-                <Copyright />
+      <div className={classes.root}>
+        <Grid container component={Paper} className={classes.grid}>
+          <Grid item xs={false} sm={4} md={8} />
+          <Grid item xs={12} sm={8} md={4}>
+            <div className={classes.paper}>
+              <Box className={classes.avatar}>
+                <img src={logo} alt="" />
               </Box>
-            </form>
-          </div>
+              <Typography component="h1" variant="h6">
+                Sign in
+              </Typography>
+              <Typography variant="body2">
+                <span>New User?</span>&nbsp;
+                <Link href="/register" variant="body2">
+                  Register
+                </Link>
+              </Typography>
+              <form className={classes.form} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  autoFocus
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  InputProps={{
+                    className: classes.input,
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                {/* <FormControlLabel
+                  className={classes.label}
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                /> */}
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="/forgot-password" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Sign In
+                </Button>
+
+                <Box mt={5}>
+                  <Copyright />
+                </Box>
+              </form>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

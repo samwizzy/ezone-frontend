@@ -22,6 +22,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../actions';
+import AppIcon1 from '../../../images/app-2.svg';
+// import Calendar from './Calendar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,6 +58,10 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(20),
     height: theme.spacing(20),
     borderRadius: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
   }
 }));
 
@@ -104,11 +110,19 @@ const TopSection = props => {
               </Grid>  
               <Grid container justify="space-between">
                 <Grid item sm={12} xs={12}>
-                  <Paper className={classes.paper} elevation={2}>
-                    <Paper className={classes.box} />
-                    <Paper className={classes.box} />
-                    <Paper className={classes.box} />
-                    <Paper className={classes.box} />
+                  <Paper className={classes.paper} elevation={1}>
+                    <Paper className={classes.box}>
+                      <img src={AppIcon1} />
+                    </Paper>
+                    <Paper className={classes.box}>
+                      <img src={AppIcon1} />
+                    </Paper>
+                    <Paper className={classes.box}>
+                      <img src={AppIcon1} />
+                    </Paper>
+                    <Paper className={classes.box}>
+                      <img src={AppIcon1} />
+                    </Paper>
                   </Paper>
                 </Grid>
               </Grid>
@@ -116,8 +130,8 @@ const TopSection = props => {
 
             <Grid item xs={12} sm={4} spacing={3}>
               {/* Calendar goes here */}
+              {/* <Calendar /> */}
             </Grid>
-
 
           </Grid>
         </Container>

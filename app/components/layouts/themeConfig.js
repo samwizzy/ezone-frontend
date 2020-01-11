@@ -10,13 +10,13 @@ const themesConfig = {
     palette: {
       type: 'light',
       primary: {
-        light: '#1A88E1',
-        main: lightBlue[600],
+        light: lightBlue[600],
+        main: '#1A88E1',
         dark: lightBlue[700],
       },
       secondary: {
-        light: '#FCED00',
-        main: lightBlue[600],
+        light: lightBlue[600],
+        main: '#FCED00',
         dark: lightBlue[700],
       },
       error: red,
