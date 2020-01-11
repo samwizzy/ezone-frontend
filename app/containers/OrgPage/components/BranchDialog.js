@@ -375,11 +375,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
+    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeNewBranchDialogAction: () => dispatch(Actions.closeNewBranchDialog()),
     closeEditBranchDialogAction: () =>
       dispatch(Actions.closeEditBranchDialog()),
-    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }

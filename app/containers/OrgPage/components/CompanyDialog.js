@@ -103,7 +103,7 @@ const CompanyDialog = props => {
   const {
     companyDialog,
     closeEditCompanyDialog,
-    dispatchUpdatePostAction,
+    // dispatchUpdatePostAction,
   } = props;
 
   const classes = useStyles();
@@ -472,9 +472,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
+    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeEditCompanyDialog: () => dispatch(Actions.closeEditCompanyDialog()),
-    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }
