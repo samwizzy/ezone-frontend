@@ -60,7 +60,6 @@ const App = () => {
                   component={ForgotPasswordForm}
                 />
                 <Route exact path="/register" component={RegistrationPage} />
-
                 <Layout3>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
