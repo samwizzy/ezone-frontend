@@ -42,8 +42,8 @@ const useStyles = makeStyles(theme => ({
   editButton: {
     padding: theme.spacing(1, 4),
     background: theme.palette.primary.main,
-    borderRadius: '8px'
-  }
+    borderRadius: '8px',
+  },
 }));
 
 const OrgInfo = props => {
@@ -53,18 +53,24 @@ const OrgInfo = props => {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Grid
-          justify="space-between"
-          container
-        >
+        <Grid justify="space-between" container>
           <Grid item>
             <List className={classes.list}>
-              <ListItem alignItems="flex-start" style={{display: 'flex', alignItems: 'center'}}>
+              <ListItem
+                alignItems="flex-start"
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
                 <ListItemAvatar>
-                  <Avatar alt="Company Logo" src={download6} className={classes.avatar} />
+                  <Avatar
+                    alt="Company Logo"
+                    src={download6}
+                    className={classes.avatar}
+                  />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={<Typography variant='h6'>Octiver Communications</Typography>}
+                  primary={
+                    <Typography variant="h6">Octiver Communications</Typography>
+                  }
                   secondary={
                     <React.Fragment>
                       <Typography
@@ -82,7 +88,7 @@ const OrgInfo = props => {
             </List>
           </Grid>
           <Grid item>
-            <List component='nav' className={classes.list}>
+            <List component="nav" className={classes.list}>
               <ListItem onClick={openEditColorDialog} alignItems="flex-start">
                 <ListItemText
                   primary={
@@ -97,10 +103,10 @@ const OrgInfo = props => {
         </Grid>
       </Paper>
 
-      <Paper className={classes.paper} variant='outlined'>
+      <Paper className={classes.paper} variant="outlined">
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={6}>
-            <Typography variant='h6'>Company Information</Typography>
+            <Typography variant="h6">Company Information</Typography>
           </Grid>
           <Grid item xs={12} md={6} sm={6}>
             <Grid

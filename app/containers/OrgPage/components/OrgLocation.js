@@ -1,18 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import {
-  makeStyles,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Grid,
-  Typography,
-  Paper,
-  Button,
-  FormControlLabel,
-  Icon,
-} from '@material-ui/core';
+import { makeStyles, List, FormControlLabel, Icon } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
