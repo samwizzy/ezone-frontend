@@ -382,7 +382,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(Actions.closeNewDepartmentDialog()),
     closeEditDepartmentDialogAction: () =>
       dispatch(Actions.closeEditDepartmentDialog()),
-    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }
