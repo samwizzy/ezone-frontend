@@ -112,8 +112,8 @@ const RegistrationForm = ({ loginAction }) => {
 
       <div className={classes.root}>
         <Grid container component={Paper} className={classes.grid}>
-          <Grid item xs={false} sm={4} md={8} />
-          <Grid item xs={12} sm={8} md={4}>
+          <Grid item xs={false} sm={4} md={7} />
+          <Grid item xs={12} sm={8} md={5}>
             <div className={classes.paper}>
               <Box className={classes.avatar}>
                 <img src={logo} alt="" />

@@ -8,36 +8,31 @@
 
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import useStyles from './useStyles';
 
-import A from './A';
-import StyledButton from './StyledButton';
-import Wrapper from './Wrapper';
+function CustomButton(props) {
+    const classes = useStyles();
 
-function Button(props) {
-  // Render an anchor tag
-  let button = (
-    <A href={props.href} onClick={props.onClick}>
-      {Children.toArray(props.children)}
-    </A>
-  );
-
-  // If the Button has a handleRoute prop, we want to render a button
-  if (props.handleRoute) {
-    button = (
-      <StyledButton onClick={props.handleRoute}>
+    const button = (
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+      >
         {Children.toArray(props.children)}
-      </StyledButton>
+      </Button>
     );
-  }
 
-  return <Wrapper>{button}</Wrapper>;
+    return <React.Fragment>{button}</React.Fragment>;
 }
 
-Button.propTypes = {
+CustomButton.propTypes = {
   handleRoute: PropTypes.func,
   href: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 
-export default Button;
+export default CustomButton;

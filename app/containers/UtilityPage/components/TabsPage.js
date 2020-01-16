@@ -1,8 +1,10 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
+  IconButton,
   Typography,
-  Box,
+  Box, 
+  Link,
   makeStyles,
   AppBar,
   Tabs,
@@ -13,11 +15,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
-import OrgInfo from './OrgInfo';
-import OrgLocation from './OrgLocation';
-import OrgDepartment from './OrgDepartment';
-import TopSection from './TopSection';
+import HomeTab from './HomeTab';
+import ChatTab from './ChatTab';
 import Autorenew from '@material-ui/icons/Autorenew'
+import DeleteIcon from '@material-ui/icons/Delete';
 import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +43,10 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '& > div': {
+      display: 'flex'
+    }
   }
 }));
 
@@ -82,18 +86,24 @@ function TabsPage() {
     <div className={classes.root}>
       <AppBar position="static" color='secondary'>
         <Toolbar variant="dense" className={classes.toolbar}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-            indicatorColor="primary"
-            centered
-          >
-            <Tab label="" icon={<Autorenew />} wrapped={true} {...a11yProps(0)} />
-            <Tab label="Project" {...a11yProps(1)} />
-            <Tab label="Chats" {...a11yProps(2)} />
-            <Tab label="Tasks" {...a11yProps(2)} />
-          </Tabs>
+
+          <div>
+            <IconButton aria-label="delete">
+              <Autorenew />
+            </IconButton>
+
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+              indicatorColor="primary"
+              centered
+            >
+              <Tab label="Project" {...a11yProps(1)} />
+              <Tab label="Chats" {...a11yProps(2)} />
+              <Tab label="Tasks" {...a11yProps(2)} />
+            </Tabs>
+          </div>
 
           <UserMenu />
 
@@ -101,13 +111,13 @@ function TabsPage() {
       </AppBar>
 
       <TabPanel value={value} index={0}>
-        <OrgInfo />
+        <HomeTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TopSection />
+        <ChatTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OrgDepartment />
+        <HomeTab />
       </TabPanel>
     </div>
   );
