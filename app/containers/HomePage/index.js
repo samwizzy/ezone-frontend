@@ -23,15 +23,13 @@ import {
   Avatar,
   Box,
   Button,
-  Container,
   Checkbox,
   CssBaseline,
   Grid,
   Link,
   Paper,
   Typography,
-  TextField,
-  FormControlLabel,
+  TextField
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { loadRepos } from '../App/actions';
@@ -40,22 +38,9 @@ import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import logo from '../../images/logo.svg';
-import banner from '../../images/banner.svg';
+
 
 const key = 'home';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Ezone
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,55 +48,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
     overflow: 'hidden',
-  },
-  image: {
-    // backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundImage: `url(${banner})`,
-    backgroundRepeat: 'no-repeat',
-    // backgroundColor:
-    //   theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: theme.spacing(5),
-    padding: theme.spacing(2),
-    margin: theme.spacing(4),
-    border: '1px solid #F1F5F8',
-    backgroundColor: '#FFFFFF',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  input: {
-    height: 40,
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#1A88E1',
-  },
-  option: {
-    width: '100%',
-    color: theme.palette.grey[600],
-    lineHeight: '0.1',
-    textAlign: 'center',
-    margin: '10px 0 20px',
-    borderBottom: `1px solid ${theme.palette.grey[500]}`,
-    '& span': {
-      background: '#fff',
-      padding: '0 10px',
-    },
-  },
+  }
 }));
 
 export function HomePage() {
@@ -126,11 +63,18 @@ export function HomePage() {
         <title>Home Page</title>
         <meta name="description" content="ezone application homepage" />
       </Helmet>
-      <Container style={{ padding: '50px' }}>
-        <Grid container component={Paper} className={classes.root}>
-          welcome to homepage
+      <div>
+
+        <Grid container style={{padding: '20px'}}>
+          <Grid item xs={12} md={9}>
+            <Typography variant='h4'>EZONE</Typography>
+            <Typography variant='h6'>Welcome Page</Typography>
+            <Typography variant='body2'>Enterprise Resource Planning</Typography>
+          </Grid>
+          <Grid item xs={12} md={4}></Grid>
         </Grid>
-      </Container>
+
+      </div>
     </React.Fragment>
   );
 }

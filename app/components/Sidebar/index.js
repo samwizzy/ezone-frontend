@@ -140,18 +140,15 @@ export default function MiniDrawer(props) {
             switch(text){
               case 'Dashboard':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/">
                     <ListItemIcon><Dashboard /></ListItemIcon>
-                    <ListItemText primary={
-                      <Link href='#' color='inherit'>{text}</Link>
-                    } 
-                    />
+                    <ListItemText primary={text} />
                   </ListItem>
                 );
                 break;
               case 'Organization':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/organization">
                     <ListItemIcon><BusinessCenter /></ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
@@ -159,7 +156,7 @@ export default function MiniDrawer(props) {
                 break;
               case 'Employees':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/employee">
                     <ListItemIcon><Person /></ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
@@ -167,7 +164,7 @@ export default function MiniDrawer(props) {
                 break;
               case 'Applications':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/utility">
                     <ListItemIcon><Apps /></ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
@@ -175,7 +172,7 @@ export default function MiniDrawer(props) {
                 break;
               case 'Groups':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/groups">
                     <ListItemIcon><Group /></ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>

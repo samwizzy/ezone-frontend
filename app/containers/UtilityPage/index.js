@@ -17,10 +17,6 @@ import makeSelectUtilityPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import TabsPage from './components/TabsPage';
-import ColorDialog from './components/ColorDialog';
-import CompanyDialog from './components/CompanyDialog';
-import BranchDialog from './components/BranchDialog';
-import DepartmentDialog from './components/DepartmentDialog';
 
 export function UtilityPage() {
   useInjectReducer({ key: 'utilityPage', reducer });
@@ -33,10 +29,6 @@ export function UtilityPage() {
         <meta name="description" content="Utility Page" />
       </Helmet>
       <TabsPage />
-      {/* <ColorDialog />
-      <CompanyDialog />
-      <BranchDialog />
-      <DepartmentDialog /> */}
     </div>
   );
 }
