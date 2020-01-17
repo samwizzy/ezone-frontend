@@ -17,7 +17,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectEmailConfig from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+import EmailHome from './components/EmailHome';
 
 export function EmailConfig() {
   useInjectReducer({ key: 'emailConfig', reducer });
@@ -29,7 +29,7 @@ export function EmailConfig() {
         <title>EmailConfig</title>
         <meta name="description" content="Description of EmailConfig" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
+      <EmailHome />
     </div>
   );
 }
