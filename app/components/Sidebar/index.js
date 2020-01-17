@@ -142,10 +142,7 @@ export default function MiniDrawer(props) {
                 return (
                   <ListItem button key={index} component="a" href="/">
                     <ListItemIcon><Dashboard /></ListItemIcon>
-                    <ListItemText primary={
-                      <Link href='#' color='inherit'>{text}</Link>
-                    } 
-                    />
+                    <ListItemText primary={text} />
                   </ListItem>
                 );
                 break;

@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import {
   makeStyles,
   Box,
-  Container,
+  AppBar,
   Grid,
+  Icon,
+  IconButton,
+  Tabs, 
+  Tab,
   Typography,
   Paper,
   Button,
@@ -13,9 +17,10 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Add from '@material-ui/icons/Add'
 import * as Actions from '../actions';
 import ChatIcon from '../../../images/chatIcon.svg';
-import ChatBox from './ChatBox';
+// import ChatBox from './ChatBox';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,12 +56,51 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(4),
     padding: theme.spacing(1, 10),
     borderRadius: '50px',
+  },
+  input: {
+    height: 40,
   }
 }));
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const ChatTab = props => {
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const { openEditColorDialog, openEditCompanyDialog } = props;
   return (
@@ -89,10 +133,56 @@ const ChatTab = props => {
             alignItems='center'
             container
           >
-            <Grid item xs={4}>
-              <Typography variant='subtitle1'>Paragraph</Typography>
+            <Grid item xs={5}>
+              <Paper square>
+                <Grid container justify='center' alignItems='center' style={{border: '1px solid'}}>
+                  <Grid item xs={9} style={{border: '1px solid green'}}>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      // label="Email Address"
+                      name="email"
+                      InputProps={{
+                        className: classes.input,
+                      }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={3} style={{border: '1px solid red'}}>
+                    <IconButton><Add /></IconButton>
+                  </Grid>
+                </Grid>
+
+                <Tabs
+                  variant="fullWidth"
+                  value={value}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  onChange={handleChange}
+                  aria-label="disabled tabs example"
+                >
+                  <Tab label="Active" />
+                  <Tab label="Disabled" disabled />
+                  <Tab label="Active" />
+                </Tabs>
+              </Paper>
+              <TabPanel value={value} index={0}>
+                Item One
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                Item Two
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                Item Three
+              </TabPanel>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               
             </Grid>
           </Grid>
@@ -104,7 +194,7 @@ const ChatTab = props => {
 
 ChatTab.propTypes = {
   openEditColorDialog: PropTypes.func,
-  openEditCompanyDialog: PropTypes.func,
+  openEditCompanyDialog: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({

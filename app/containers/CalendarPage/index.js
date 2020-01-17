@@ -20,30 +20,14 @@ import {
   makeSelectError,
 } from 'containers/App/selectors';
 import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Checkbox,
-  CssBaseline,
-  Grid,
-  Link,
-  Paper,
-  Typography,
-  TextField,
-  FormControlLabel,
+  CssBaseline
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import logo from '../../images/logo.svg';
-import banner from '../../images/banner.svg';
-import CustomButton from '../../components/Button';
 import Calendar from './../UtilityPage/components/Calendar';
-
 
 const key = 'home';
 
@@ -73,16 +57,6 @@ export function HomePage() {
       </Helmet>
       <div>
         <Calendar />
-
-        {/* <Grid container style={{padding: '20px'}}>
-          <Grid item xs={12} md={9}>
-            <Typography variant='h4'>EZONE</Typography>
-            <Typography variant='h6'>Welcome Page</Typography>
-            <Typography variant='body2'>Enterprise Resource Planning</Typography>
-          </Grid>
-          <Grid item xs={12} md={4}></Grid>
-        </Grid> */}
-
       </div>
     </React.Fragment>
   );

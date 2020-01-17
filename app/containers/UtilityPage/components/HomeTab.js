@@ -100,7 +100,7 @@ const TopSection = props => {
                 <Grid item sm={6}>
                   <Typography variant="h6" component="h3">My Apps</Typography>
                 </Grid>
-                <Grid item sm={6} justify="flex-end" style={{textAlign: 'right'}}>
+                <Grid item sm={6} style={{textAlign: 'right'}}>
                   <Button
                     type="button"
                     variant="contained"
@@ -136,7 +136,7 @@ const TopSection = props => {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <Calendar />
+              {/* <Calendar /> */}
               <ChatBox />
             </Grid>
 
