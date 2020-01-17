@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, { useState, useRef, memo } from 'react';
+import JoditEditor from 'jodit-react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
@@ -41,6 +42,16 @@ const useStyles = makeStyles(theme => ({
 const EmailTemplate = props => {
   const classes = useStyles();
 
+  const editor = useRef(null);
+  const [content, setContent] = useState('');
+
+  const config = {
+    readonly: false, // all options from https://xdsoft.net/jodit/doc/
+  };
+
+  console.log(content, 'content');
+  console.log(config, 'config');
+
   const {} = props;
   return (
     <React.Fragment>
@@ -80,15 +91,15 @@ const EmailTemplate = props => {
           </Button>
           <Card className={classes.card} variant="outlined">
             <CardContent>
-              <ListItem alignItems="flex-start">
-                <ListItemText secondary="Email Templates" />
-              </ListItem>
-              <Divider component="hr" />
-              <List>
-                <ListItem alignItems="flex-start">
-                  <ListItemText primary="Choose Template" />
-                </ListItem>
-              </List>
+              <JoditEditor
+                ref={editor}
+                value={content}
+                config={config}
+                tabIndex={1} // tabIndex of textarea
+                onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                onChange={console.log}
+                // onChange={newContent => {}}
+              />
             </CardContent>
           </Card>
         </Grid>
