@@ -144,6 +144,8 @@ const ChatTab = props => {
                       fullWidth
                       id="email"
                       // label="Email Address"
+                      placeholder="Placeholder"
+                      multiline
                       name="email"
                       InputProps={{
                         className: classes.input,
