@@ -54,11 +54,11 @@ const currencies = [
   },
 ];
 
-const DepartmentDialog = props => {
+const BranchDialog = props => {
   const {
-    departmentDialog,
-    closeNewDepartmentDialogAction,
-    closeEditDepartmentDialogAction,
+    branchDialog,
+    closeNewBranchDialogAction,
+    closeEditBranchDialogAction,
   } = props;
 
   const classes = useStyles();
@@ -81,23 +81,23 @@ const DepartmentDialog = props => {
 
   // useEffect(() => {
   //   setValues({
-  //     ...departmentDialog.data,
+  //     ...branchDialog.data,
   //   });
   // }, []);
-  // }, [departmentDialog.data]);
+  // }, [branchDialog.data]);
 
   const closeComposeDialog = () => {
     // eslint-disable-next-line no-unused-expressions
-    departmentDialog.type === 'new'
-      ? closeNewDepartmentDialogAction()
-      : closeEditDepartmentDialogAction();
+    branchDialog.type === 'new'
+      ? closeNewBranchDialogAction()
+      : closeEditBranchDialogAction();
   };
 
   return (
     <div>
-      {departmentDialog && (
+      {branchDialog && (
         <Dialog
-          {...departmentDialog.props}
+          {...branchDialog.props}
           onClose={closeComposeDialog}
           aria-labelledby="form-dialog-title"
           fullWidth
@@ -106,14 +106,12 @@ const DepartmentDialog = props => {
           <AppBar position="static" elevation={1}>
             <Toolbar>
               <Typography variant="h6">
-                {departmentDialog.type === 'new'
-                  ? 'New Department'
-                  : 'Edit Department'}
+                {branchDialog.type === 'new' ? 'New Branch' : 'Edit Branch'}
               </Typography>
             </Toolbar>
           </AppBar>
           <DialogContent>
-            {departmentDialog.type === 'new' ? (
+            {branchDialog.type === 'new' ? (
               <div>
                 <TextField
                   id="standard-title"
@@ -317,7 +315,7 @@ const DepartmentDialog = props => {
               </div>
             )}
           </DialogContent>
-          {departmentDialog.type === 'new' ? (
+          {branchDialog.type === 'new' ? (
             <DialogActions>
               <Button
                 onClick={() => {
@@ -364,24 +362,23 @@ const DepartmentDialog = props => {
   );
 };
 
-DepartmentDialog.propTypes = {
+BranchDialog.propTypes = {
   dispatchNewPostAction: PropTypes.func,
-  closeNewDepartmentDialogAction: PropTypes.func,
-  closeEditDepartmentDialogAction: PropTypes.func,
-  departmentDialog: PropTypes.object,
+  closeNewBranchDialogAction: PropTypes.func,
+  closeEditBranchDialogAction: PropTypes.func,
+  branchDialog: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  departmentDialog: Selectors.makeSelectDepartmentDialog(),
+  branchDialog: Selectors.makeSelectBranchDialog(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
-    closeNewDepartmentDialogAction: () =>
-      dispatch(Actions.closeNewDepartmentDialog()),
-    closeEditDepartmentDialogAction: () =>
-      dispatch(Actions.closeEditDepartmentDialog()),
+    closeNewBranchDialogAction: () => dispatch(Actions.closeNewBranchDialog()),
+    closeEditBranchDialogAction: () =>
+      dispatch(Actions.closeEditBranchDialog()),
     // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
@@ -395,4 +392,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(DepartmentDialog);
+)(BranchDialog);

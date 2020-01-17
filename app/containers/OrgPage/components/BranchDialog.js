@@ -363,7 +363,7 @@ const BranchDialog = props => {
 };
 
 BranchDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
   closeNewBranchDialogAction: PropTypes.func,
   closeEditBranchDialogAction: PropTypes.func,
   branchDialog: PropTypes.object,
@@ -375,11 +375,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
+    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeNewBranchDialogAction: () => dispatch(Actions.closeNewBranchDialog()),
     closeEditBranchDialogAction: () =>
       dispatch(Actions.closeEditBranchDialog()),
-    dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
     dispatch,
   };
 }

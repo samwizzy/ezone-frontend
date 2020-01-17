@@ -13,36 +13,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
-import OrgInfo from './OrgInfo';
-import OrgLocation from './OrgLocation';
-import OrgDepartment from './OrgDepartment';
 import UserMenu from '../../../components/layouts/shared-components/UserMenu';
+import EmailConfigs from './EmailConfigs';
+import SMSConfigs from './SMSConfigs';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    padding: '10px 25px',
-    borderRadius: '20px 20px 0 0',
-    '&:hover': {
-      backgroundColor: theme.palette.common.white,
-      color: theme.palette.primary.main,
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-}));
+const useStyles = makeStyles(theme => ({}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -87,9 +62,8 @@ function TabsPage() {
             indicatorColor="primary"
             centered
           >
-            <Tab label="Organization Info" {...a11yProps(0)} />
-            <Tab label="Location" {...a11yProps(1)} />
-            <Tab label="Department" {...a11yProps(2)} />
+            <Tab label="Email Configuration" {...a11yProps(0)} />
+            <Tab label="SMS Configuration" {...a11yProps(1)} />
           </Tabs>
 
           <UserMenu />
@@ -97,13 +71,10 @@ function TabsPage() {
       </AppBar>
 
       <TabPanel value={value} index={0}>
-        <OrgInfo />
+        <EmailConfigs />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrgLocation />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <OrgDepartment />
+        <SMSConfigs />
       </TabPanel>
     </div>
   );

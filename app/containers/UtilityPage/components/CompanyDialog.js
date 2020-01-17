@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import {
   withStyles,
   TextField,
@@ -436,7 +435,7 @@ const CompanyDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  dispatchUpdatePostAction(values);
+                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -460,8 +459,8 @@ const CompanyDialog = props => {
 };
 
 CompanyDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
-  closeNewPostDialog: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
+  // closeNewPostDialog: PropTypes.func,
   closeEditCompanyDialog: PropTypes.func,
   companyDialog: PropTypes.object,
 };

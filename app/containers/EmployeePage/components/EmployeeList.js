@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import {
   makeStyles,
   List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Grid,
-  Typography,
-  Paper,
-  Button,
   FormControlLabel,
   Icon,
+  Button,
+  Menu,
+  MenuItem,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { compose } from 'redux';
@@ -77,8 +73,52 @@ const useStyles = makeStyles(theme => ({
 
 const EmployeeList = props => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const { loading, openNewEmployeeDialogAction } = props;
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const {
+    loading,
+    openNewEmployeeDialogAction,
+    openEditEmployeeDialogAction,
+    openViewEmployeeDialogAction,
+  } = props;
+
+  const datas = [
+    {
+      id: '1',
+      name: 'Joe James',
+      company: 'Test Corp',
+      city: 'Yonkers',
+      state: 'NY',
+    },
+    {
+      id: '2',
+      name: 'John Walsh',
+      company: 'Test Corp',
+      city: 'Hartford',
+      state: 'CT',
+    },
+    {
+      id: '3',
+      name: 'Bob Herm',
+      company: 'Test Corp',
+      city: 'Tampa',
+      state: 'FL',
+    },
+    {
+      name: 'James Houston',
+      company: 'Test Corp',
+      city: 'Dallas',
+      state: 'TX',
+    },
+  ];
 
   const columns = [
     {
@@ -100,32 +140,32 @@ const EmployeeList = props => {
       },
     },
     {
-      name: 'title',
-      label: 'Branch Name',
+      name: 'name',
+      label: 'Name',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'content',
-      label: 'Country',
+      name: 'company',
+      label: 'Branch',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'desc',
-      label: 'State',
+      name: 'city',
+      label: 'Department',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'id',
-      label: 'Address',
+      name: 'state',
+      label: 'Role',
       options: {
         filter: true,
         sort: false,
@@ -158,7 +198,7 @@ const EmployeeList = props => {
     },
     {
       name: 'desc',
-      label: 'Users',
+      label: 'Apps',
       options: {
         filter: true,
         sort: false,
@@ -166,7 +206,7 @@ const EmployeeList = props => {
     },
     {
       name: 'id',
-      label: 'Action',
+      label: 'Groups',
       options: {
         filter: true,
         sort: false,
@@ -189,6 +229,98 @@ const EmployeeList = props => {
         // },
       },
     },
+    {
+      name: 'id',
+      label: 'Last Login',
+      options: {
+        filter: true,
+        sort: false,
+        // customBodyRender: value => {
+        //   const Post = getAllPosts.find(post => value === post.id);
+
+        //   if (value === '') {
+        //     return '';
+        //   }
+        //   return (
+        //     <FormControlLabel
+        //       label="Delete"
+        //       control={<Icon>delete</Icon>}
+        //       onClick={evt => {
+        //         evt.stopPropagation();
+        //         dispatchDeletePostAction(Post);
+        //       }}
+        //     />
+        //   );
+        // },
+      },
+    },
+    {
+      name: 'id',
+      label: 'Status',
+      options: {
+        filter: true,
+        sort: false,
+        // customBodyRender: value => {
+        //   const Post = getAllPosts.find(post => value === post.id);
+
+        //   if (value === '') {
+        //     return '';
+        //   }
+        //   return (
+        //     <FormControlLabel
+        //       label="Delete"
+        //       control={<Icon>delete</Icon>}
+        //       onClick={evt => {
+        //         evt.stopPropagation();
+        //         dispatchDeletePostAction(Post);
+        //       }}
+        //     />
+        //   );
+        // },
+      },
+    },
+    {
+      name: 'id',
+      label: '',
+      options: {
+        filter: true,
+        sort: false,
+        customBodyRender: value => {
+          const Post = datas.find(post => value === post.id);
+          if (value === '') {
+            return '';
+          }
+          return (
+            <div>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                Options
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Assign Role</MenuItem>
+                <MenuItem onClick={handleClose}>Assign Apps</MenuItem>
+                <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
+                  Edit
+                </MenuItem>
+                <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
+                  View Details
+                </MenuItem>
+                <MenuItem onClick={handleClose}>Deactivate</MenuItem>
+              </Menu>
+            </div>
+          );
+        },
+      },
+    },
   ];
 
   const options = {
@@ -208,7 +340,7 @@ const EmployeeList = props => {
     <React.Fragment>
       <MUIDataTable
         title="All Employees"
-        data={[]}
+        data={datas}
         columns={columns}
         options={options}
       />
@@ -218,7 +350,9 @@ const EmployeeList = props => {
 
 EmployeeList.propTypes = {
   loading: PropTypes.bool,
-  openEditEmployeeDialog: PropTypes.func,
+  openNewEmployeeDialogAction: PropTypes.func,
+  openEditEmployeeDialogAction: PropTypes.func,
+  openViewEmployeeDialogAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -229,8 +363,10 @@ function mapDispatchToProps(dispatch) {
   return {
     openNewEmployeeDialogAction: () =>
       dispatch(Actions.openNewEmployeeDialog()),
-    openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
-    openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    openEditEmployeeDialogAction: evt =>
+      dispatch(Actions.openEditEmployeeDialog(evt)),
+    openViewEmployeeDialogAction: evt =>
+      dispatch(Actions.openViewEmployeeDialog(evt)),
   };
 }
 

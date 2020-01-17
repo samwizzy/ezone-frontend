@@ -4,7 +4,6 @@ import {
   put,
   select,
   takeLatest,
-  actionChannel,
 } from 'redux-saga/effects';
 import {
   GET_ALL_POSTS,

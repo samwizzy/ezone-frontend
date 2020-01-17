@@ -125,7 +125,7 @@ const ColorDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  dispatchUpdatePostAction(values);
+                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -149,9 +149,9 @@ const ColorDialog = props => {
 };
 
 ColorDialog.propTypes = {
-  dispatchNewPostAction: PropTypes.func,
-  closeNewPostDialog: PropTypes.func,
-  closeEditColorDialog: PropTypes.func,
+  // dispatchNewPostAction: PropTypes.func,
+  // closeNewPostDialog: PropTypes.func,
+  // closeEditColorDialog: PropTypes.func,
   colorDialog: PropTypes.object,
 };
 

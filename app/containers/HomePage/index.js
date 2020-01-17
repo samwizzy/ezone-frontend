@@ -23,15 +23,13 @@ import {
   Avatar,
   Box,
   Button,
-  Container,
   Checkbox,
   CssBaseline,
   Grid,
   Link,
   Paper,
   Typography,
-  TextField,
-  FormControlLabel,
+  TextField
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { loadRepos } from '../App/actions';
@@ -40,9 +38,6 @@ import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import logo from '../../images/logo.svg';
-import banner from '../../images/banner.svg';
-import CustomButton from '../../components/Button';
-import Calendar from './../UtilityPage/components/Calendar';
 
 
 const key = 'home';
@@ -66,22 +61,18 @@ export function HomePage() {
       <CssBaseline />
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
+        <meta name="description" content="ezone application homepage" />
       </Helmet>
       <div>
-        <Calendar />
 
-        {/* <Grid container style={{padding: '20px'}}>
+        <Grid container style={{padding: '20px'}}>
           <Grid item xs={12} md={9}>
             <Typography variant='h4'>EZONE</Typography>
             <Typography variant='h6'>Welcome Page</Typography>
             <Typography variant='body2'>Enterprise Resource Planning</Typography>
           </Grid>
           <Grid item xs={12} md={4}></Grid>
-        </Grid> */}
+        </Grid>
 
       </div>
     </React.Fragment>
