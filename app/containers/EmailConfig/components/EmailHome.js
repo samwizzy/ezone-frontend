@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -9,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../actions';
 import * as Selectors from '../selectors';
@@ -39,13 +41,20 @@ const useStyles = makeStyles(theme => ({
 const EmailHome = props => {
   const classes = useStyles();
 
-  const {} = props;
+  const { history } = props;
 
+  const handleClick = link => {
+    history.push(link);
+  };
   return (
     <React.Fragment>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={4}>
-          <Card className={classes.card} variant="outlined">
+          <Card
+            className={classes.card}
+            variant="outlined"
+            onClick={() => handleClick('/email/configuration')}
+          >
             <CardContent>
               <img alt="" src={envelope} className={classes.cardIcon} />
               <Typography
@@ -59,7 +68,11 @@ const EmailHome = props => {
           </Card>
         </Grid>
         <Grid item xs={12} md={8} lg={4}>
-          <Card className={classes.card} variant="outlined">
+          <Card
+            className={classes.card}
+            variant="outlined"
+            onClick={() => handleClick('/email')}
+          >
             <CardContent>
               <img alt="" src={directory} className={classes.cardIcon} />
               <Typography
@@ -73,7 +86,11 @@ const EmailHome = props => {
           </Card>
         </Grid>
         <Grid item xs={12} md={8} lg={4}>
-          <Card className={classes.card} variant="outlined">
+          <Card
+            className={classes.card}
+            variant="outlined"
+            onClick={() => handleClick('/email/template')}
+          >
             <CardContent>
               <img alt="" src={mail} className={classes.cardIcon} />
               <Typography
@@ -105,6 +122,7 @@ const withConnect = connect(
 );
 
 export default compose(
+  withRouter,
   withConnect,
   memo,
 )(EmailHome);

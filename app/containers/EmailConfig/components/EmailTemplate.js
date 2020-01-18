@@ -1,4 +1,6 @@
 import React, { useState, useRef, memo } from 'react';
+// import 'jodit';
+// import 'jodit/build/jodit.min.css';
 import JoditEditor from 'jodit-react';
 import PropTypes from 'prop-types';
 import {
@@ -39,18 +41,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const config = {
+  readonly: false, // all options from https://xdsoft.net/jodit/doc/
+  minHeight: 500,
+};
+
 const EmailTemplate = props => {
   const classes = useStyles();
 
   const editor = useRef(null);
   const [content, setContent] = useState('');
-
-  const config = {
-    readonly: false, // all options from https://xdsoft.net/jodit/doc/
-  };
-
-  console.log(content, 'content');
-  console.log(config, 'config');
 
   const {} = props;
   return (
@@ -96,10 +96,8 @@ const EmailTemplate = props => {
                 value={content}
                 config={config}
                 tabIndex={1} // tabIndex of textarea
-                onBlur={console.log}
-                // onChange={console.log}
-                // onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                // onChange={newContent => {}}
+                onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                // onChange={newContent => setContent(newContent)}
               />
             </CardContent>
           </Card>

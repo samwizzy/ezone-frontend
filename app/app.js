@@ -20,8 +20,6 @@ import 'sanitize.css/sanitize.css';
 // Import root app
 import App from './containers/App';
 
-import 'jodit';
-import 'jodit/build/jodit.min.css';
 // Import Language Provider
 import LanguageProvider from './containers/LanguageProvider';
 
