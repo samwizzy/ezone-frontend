@@ -1,165 +1,199 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
+import Link from '@material-ui/core/Link';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import Home from '@material-ui/icons/Home';
-import Business from '@material-ui/icons/Business';
-import ExitToApp from '@material-ui/icons/ExitToApp';
-import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-import BarChart from '@material-ui/icons/BarChart';
-import Portrait from '@material-ui/icons/Portrait';
-import RoomService from '@material-ui/icons/RoomService';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Apps from '@material-ui/icons/Apps';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Person from '@material-ui/icons/Person';
+import Group from '@material-ui/icons/Group';
+import BusinessCenter from '@material-ui/icons/BusinessCenter';
+import TabMenu from '../TabMenu'
+import TabMenus from '../TabMenus'
+
 
 const drawerWidth = 240;
 
+const links = [
+  'Dashboard',
+  'Organization', 
+  'Applications', 
+  'Employees', 
+  'Groups'
+];
+
 const useStyles = makeStyles(theme => ({
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-      zIndex: 1,
-    },
+  root: {
+    display: 'flex',
+    color: console.log(theme, 'theme')
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 36,
+    color: theme.palette.common.black
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    marginTop: '80px'
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      display: 'none',
+      width: theme.spacing(7) + 1,
     },
   },
-  icon: {
-    color: theme.palette.grey[200],
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: '#344655',
-    color: theme.palette.common.white,
-    paddingTop: theme.spacing(2),
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
   },
 }));
 
-function ResponsiveDrawer(props) {
-  const { container } = props;
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  function handleDrawerToggle() {
-    setMobileOpen(!mobileOpen);
-  }
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon className={classes.icon}>
-            <Home />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon className={classes.icon}>
-            <BarChart />
-          </ListItemIcon>
-          <ListItemText primary="Portfolio" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon className={classes.icon}>
-            <AddCircleOutline />
-          </ListItemIcon>
-          <ListItemText primary="Create a Goal" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon className={classes.icon}>
-            <RoomService />
-          </ListItemIcon>
-          <ListItemText primary="Help" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon className={classes.icon}>
-            <Portrait />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        {['Bank', 'Log out'].map((link, index) => (
-          <ListItem button key={index}>
-            <ListItemIcon className={classes.icon}>
-              {index % 2 === 0 ? <Business /> : <ExitToApp />}
-            </ListItemIcon>
-            <ListItemText primary={link} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <React.Fragment>
-      <nav className={classes.drawer} aria-label="sidebar menu">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-    </React.Fragment>
+    <div className={classes.root}>
+      <CssBaseline />
+      
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {links.map((text, index) => {
+            switch(text){
+              case 'Dashboard':
+                return (
+                  <ListItem button key={index} component="a" href="/">
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Organization':
+                return (
+                  <ListItem button key={index} component="a" href="/organization">
+                    <ListItemIcon><BusinessCenter /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Employees':
+                return (
+                  <ListItem button key={index} component="a" href="/employee">
+                    <ListItemIcon><Person /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Applications':
+                return (
+                  <ListItem button key={index} component="a" href="/utility">
+                    <ListItemIcon><Apps /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Groups':
+                return (
+                  <ListItem button key={index} component="a" href="/groups">
+                    <ListItemIcon><Group /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              default:
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text.name} />
+                  </ListItem>
+                )
+            }
+          })}
+        </List>
+        <Divider />
+      </Drawer>
+      <main className={classes.content}>
+        {/* <div className={classes.toolbar} /> */}
+        { props.content }
+      </main>
+    </div>
   );
 }
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  container: PropTypes.instanceOf(
-    typeof Element === 'undefined' ? Object : Element,
-  ),
-};
-
-export default ResponsiveDrawer;
