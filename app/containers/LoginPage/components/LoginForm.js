@@ -99,7 +99,7 @@ const LoginForm = props => {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -108,8 +108,8 @@ const LoginForm = props => {
   };
 
   const canBeSubmitted = () => {
-    const { email, password } = values;
-    return email !== '' && password !== '';
+    const { username, password } = values;
+    return username !== '' && password !== '';
   };
 
   return (
@@ -139,9 +139,9 @@ const LoginForm = props => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                id="username"
                 label="Email Address"
-                name="email"
+                name="username"
                 InputProps={{
                   className: classes.input,
                 }}
@@ -149,7 +149,7 @@ const LoginForm = props => {
                   shrink: true,
                 }}
                 autoFocus
-                onChange={handleChange('email')}
+                onChange={handleChange('username')}
               />
               <TextField
                 variant="outlined"
