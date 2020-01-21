@@ -4,17 +4,13 @@ import * as Constants from './constants';
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import { BaseUrl } from '../../components/BaseUrl/index';
-<<<<<<< HEAD
 import * as EndPoints from '../../components/EndPoints';
-=======
-import * as EndPoints from '../../components/Endpoints';
->>>>>>> f8bd2301693d3f866ef784d88f4c17e51d2b58ff
 
 export function* signup() {
   const signupReqData = yield select(Selectors.makeSelectSignupReqData());
 
   const requestURL = `${BaseUrl}${EndPoints.RegistrationUrl}`;
-  try {
+  try { 
     const signupRes = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify(signupReqData),
@@ -22,8 +18,8 @@ export function* signup() {
         'Content-Type': 'application/json',
       },
     });
-
     yield put(Actions.signupSuccessRequest(signupRes));
+
   } catch (err) {
     yield put(Actions.signupErrorRequest(err));
   }
