@@ -16,7 +16,7 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../../App/actions';
+import * as Actions from '../actions';
 import logo from '../../../images/logo.svg';
 import banner from '../../../images/banner.svg';
 
@@ -36,23 +36,23 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    padding: '30px', 
-    height: '100vh'
+    padding: '30px',
+    height: '100vh',
   },
   grid: {
     height: '100%',
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   image: {
     width: '50%',
-    height: '100vh', 
+    height: '100vh',
     backgroundImage: `url(${banner})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    position: 'absolute'
+    position: 'absolute',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -76,23 +76,29 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     height: 40,
-    margin: 0
+    margin: 0,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: theme.palette.primary.main,
-    color: '#fff'
+    color: '#fff',
   },
   label: {
-    fontSize: 10
-  }
+    fontSize: 10,
+  },
 }));
 
-const RegistrationForm = ({ loginAction }) => {
+const RegistrationForm = props => {
+  const { signupAction } = props;
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
+    companyName: '',
+    country: '',
     email: '',
+    firstname: '',
+    lastname: '',
+    phoneNumber: '',
     password: '',
   });
 
@@ -101,14 +107,16 @@ const RegistrationForm = ({ loginAction }) => {
   };
 
   const canBeSubmitted = () => {
-    const { email, password } = values;
-    return !email.length && !password.length;
-    // return email !== null && password !== null;
+    const { companyName, country, email, password } = values;
+    return (
+      companyName !== '' && country !== '' && email !== '' && password !== ''
+      // companyName !== null && country !== null && email !== null && password !== null
+    );
   };
 
   return (
     <div>
-      <div className={classes.image}></div>
+      <div className={classes.image} />
 
       <div className={classes.root}>
         <Grid container component={Paper} className={classes.grid}>
@@ -127,135 +135,97 @@ const RegistrationForm = ({ loginAction }) => {
                   Sign In
                 </Link>
               </Typography>
-              <form className={classes.form} noValidate>
-                {/* <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  name="firstName"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                /> */}
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="companyName"
-                  label="Company Name"
-                  name="companyName"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                {/* <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="phoneNumber"
-                  label="Phone Number"
-                  name="phoneNumber"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                /> */}
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="country"
-                  label="Country"
-                  id="country"
-                  InputProps={{
-                    className: classes.input,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <FormControlLabel
-                  className={classes.label}
-                  control={<Checkbox value="remember" color="primary" />}
-                  label={
-                    <Typography variant="body2">
-                      I agree to the <Link href="#">Terms of Service</Link> and <Link href="#">Privacy Policy</Link>
-                    </Typography>
-                  }
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign Up
-                </Button>
-                <Box mt={2}>
-                  <Copyright />
-                </Box>
-              </form>
+              {/* <form className={classes.form} noValidate> */}
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="companyName"
+                label="Company Name"
+                name="companyName"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange('companyName')}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange('email')}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange('password')}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="country"
+                label="Country"
+                id="country"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange('country')}
+              />
+              <FormControlLabel
+                className={classes.label}
+                control={<Checkbox value="remember" color="primary" />}
+                label={
+                  <Typography variant="body2">
+                    I agree to the <Link href="#">Terms of Service</Link> and{' '}
+                    <Link href="#">Privacy Policy</Link>
+                  </Typography>
+                }
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={!canBeSubmitted()}
+                onClick={() => signupAction(values)}
+              >
+                Sign Up
+              </Button>
+              <Box mt={2}>
+                <Copyright />
+              </Box>
+              {/* </form> */}
             </div>
           </Grid>
         </Grid>
@@ -265,16 +235,14 @@ const RegistrationForm = ({ loginAction }) => {
 };
 
 RegistrationForm.propTypes = {
-  loginAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  signupAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
-const mapStateToProps = createStructuredSelector({
-  // loginPage: makeSelectLoginPage(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginAction: evt => dispatch(Actions.loginAction(evt)),
+    signupAction: evt => dispatch(Actions.signupRequest(evt)),
   };
 }
 
