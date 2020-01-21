@@ -31,7 +31,13 @@ const makeSelectSignupReqData = () =>
 const makeSelectSignupResData = () =>
   createSelector(
     selectRegistrationPageDomain,
-    substate => substate.signupReqData,
+    substate => substate.signupResData,
+  );
+
+const makeSelectLoading = () =>
+  createSelector(
+    selectRegistrationPageDomain,
+    substate => substate.loading,
   );
 
 export default makeSelectRegistrationPage;
@@ -39,4 +45,5 @@ export {
   selectRegistrationPageDomain,
   makeSelectSignupReqData,
   makeSelectSignupResData,
+  makeSelectLoading,
 };

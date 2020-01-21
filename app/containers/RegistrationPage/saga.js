@@ -8,24 +8,18 @@ import { BaseUrl } from '../../components/BaseUrl/index';
 export function* signup() {
   const signupReqData = yield select(Selectors.makeSelectSignupReqData());
 
-  console.log(signupReqData, 'signupReqData');
   const requestURL = `${BaseUrl}/authserv/api/v1/register`;
-  console.log(requestURL, 'requestURL');
   try {
     const signupRes = yield call(request, requestURL, {
       method: 'POST',
-      body: signupReqData,
-      // body: JSON.stringify(signupReqData),
-      // headers: {
-      //   Accept: 'application/json',
-      //   // 'Content-Type': 'application/json',
-      // },
+      body: JSON.stringify(signupReqData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
-    console.log(signupRes, 'signupRes');
     yield put(Actions.signupSuccessRequest(signupRes));
   } catch (err) {
-    console.log(err, 'err signupRes');
     yield put(Actions.signupErrorRequest(err));
   }
 }
