@@ -8,26 +8,19 @@ import * as EndPoints from '../../components/EndPoints/index';
 
 export function* signup() {
   const signupReqData = yield select(Selectors.makeSelectSignupReqData());
-  console.log(signupReqData, 'signupReqData');
 
   const requestURL = `${BaseUrl}${EndPoints.RegistrationUrl}`;
-  console.log(requestURL, 'requestURL');
-
   try {
     const signupRes = yield call(request, requestURL, {
       method: 'POST',
-      // body: signupReqData,
       body: JSON.stringify(signupReqData),
       headers: {
-        // Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     });
 
-    console.log(signupRes, 'signupRes');
     yield put(Actions.signupSuccessRequest(signupRes));
   } catch (err) {
-    console.log(err, 'err signupRes');
     yield put(Actions.signupErrorRequest(err));
   }
 }

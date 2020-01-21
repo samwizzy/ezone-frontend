@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -17,8 +18,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../actions';
+import * as Selectors from '../selectors';
 import logo from '../../../images/logo.svg';
 import banner from '../../../images/banner.svg';
+import LoadingIndicator from '../../../components/LoadingIndicator';
 
 function Copyright() {
   return (
@@ -89,7 +92,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RegistrationForm = props => {
-  const { signupAction } = props;
+  const { loading, signupResData, signupAction } = props;
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
@@ -113,6 +116,12 @@ const RegistrationForm = props => {
       // companyName !== null && country !== null && email !== null && password !== null
     );
   };
+
+  console.log(signupResData, 'signupResData');
+
+  if (signupResData.success === true) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>
@@ -211,17 +220,21 @@ const RegistrationForm = props => {
                   </Typography>
                 }
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                disabled={!canBeSubmitted()}
-                onClick={() => signupAction(values)}
-              >
-                Sign Up
-              </Button>
+              {!loading ? (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={!canBeSubmitted()}
+                  onClick={() => signupAction(values)}
+                >
+                  Sign Up
+                </Button>
+              ) : (
+                <LoadingIndicator />
+              )}
               <Box mt={2}>
                 <Copyright />
               </Box>
@@ -236,9 +249,14 @@ const RegistrationForm = props => {
 
 RegistrationForm.propTypes = {
   signupAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  loading: PropTypes.bool,
+  signupResData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  loading: Selectors.makeSelectLoading(),
+  signupResData: Selectors.makeSelectSignupResData(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
