@@ -4,7 +4,11 @@ import * as Constants from './constants';
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import { BaseUrl } from '../../components/BaseUrl/index';
+<<<<<<< HEAD
 import * as EndPoints from '../../components/EndPoints';
+=======
+import * as EndPoints from '../../components/Endpoints';
+>>>>>>> f8bd2301693d3f866ef784d88f4c17e51d2b58ff
 
 export function* signup() {
   const signupReqData = yield select(Selectors.makeSelectSignupReqData());
