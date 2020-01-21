@@ -4,10 +4,25 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import * as Constants from './constants';
 
-export function defaultAction() {
+export function signupRequest(data) {
   return {
-    type: DEFAULT_ACTION,
+    type: Constants.SIGNUP_REQUEST,
+    payload: data,
+  };
+}
+
+export function signupSuccessRequest(data) {
+  return {
+    type: Constants.SIGNUP_SUCCESS_REQUEST,
+    payload: data,
+  };
+}
+
+export function signupErrorRequest(data) {
+  return {
+    type: Constants.SIGNUP_ERROR_REQUEST,
+    payload: data,
   };
 }
