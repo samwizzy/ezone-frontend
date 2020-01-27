@@ -1,12 +1,14 @@
 /*
  *
- * OrgPage reducer
+ * UtilityPage reducer
  *
  */
 import produce from 'immer';
 import {
-  OPEN_EDIT_COLOR_DIALOG,
-  CLOSE_EDIT_COLOR_DIALOG,
+  OPEN_FILE_UPLOAD_DIALOG,
+  CLOSE_FILE_UPLOAD_DIALOG,
+  OPEN_SHARE_FILE_DIALOG,
+  CLOSE_SHARE_FILE_DIALOG,
   OPEN_EDIT_COMPANY_DIALOG,
   CLOSE_EDIT_COMPANY_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
@@ -22,7 +24,15 @@ import {
 export const initialState = {
   loading: false,
   error: false,
-  colorDialog: {
+  data: [{id: 1, name: 'Samuel', format: 'PDF', size: '12mb', modified_by: 'Christian', date_uploaded: '3rd, Jul 2019'}],
+  fileDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null
+  },
+  shareFileDialog: {
     type: 'new',
     props: {
       open: false,
@@ -56,11 +66,35 @@ export const initialState = {
 const utilityPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case OPEN_EDIT_COLOR_DIALOG: {
+      case OPEN_FILE_UPLOAD_DIALOG: {
         return {
           ...state,
-          colorDialog: {
-            type: 'edit',
+          fileDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: action.payload
+          },
+        };
+      }
+      case CLOSE_FILE_UPLOAD_DIALOG: {
+        return {
+          ...state,
+          fileDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case OPEN_SHARE_FILE_DIALOG: {
+        return {
+          ...state,
+          shareFileDialog: {
+            type: 'new',
             props: {
               open: true,
             },
@@ -68,11 +102,11 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_COLOR_DIALOG: {
+      case CLOSE_SHARE_FILE_DIALOG: {
         return {
           ...state,
-          colorDialog: {
-            type: 'edit',
+          shareFileDialog: {
+            type: 'new',
             props: {
               open: false,
             },

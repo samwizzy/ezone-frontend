@@ -97,6 +97,7 @@
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "material-ui-dropzone": "^2.4.7",
     "jodit-react": "^1.0.37",
     "minimist": "1.2.0",
     "moment": "^2.24.0",
