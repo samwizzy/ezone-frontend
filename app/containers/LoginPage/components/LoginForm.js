@@ -11,21 +11,31 @@ import {
   Box,
   Grid,
   Link,
+  Paper,
   Container,
   makeStyles,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../../App/actions';
+import * as Selectors from '../selectors';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+import classNames from 'classnames';
+import {
+  darken,
+  fade,
+  lighten,
+} from '@material-ui/core/styles/colorManipulator';
+import * as Actions from '../actions';
+import logo from '../../../images/logo.svg';
+import banner from '../../../images/banner.svg';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://optisoft.ng/">
+        OptiSoft
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,35 +44,62 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
+  root: {
+    display: 'flex',
+    padding: '50px',
+    height: '100vh',
+  },
+  grid: {
+    height: '100%',
+    backgroundColor: theme.palette.grey[50],
+    borderRadius: theme.spacing(5),
+    overflow: 'hidden',
+  },
+  image: {
+    width: '50%',
+    height: '100vh',
+    backgroundImage: `url(${banner})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'absolute',
   },
   paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    borderRadius: theme.spacing(5),
+    padding: theme.spacing(2),
+    margin: theme.spacing(4),
+    border: '1px solid #F1F5F8',
+    backgroundColor: '#FFFFFF',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  input: {
+    height: 40,
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: theme.palette.primary.main,
+    color: '#fff',
   },
 }));
 
-const LoginForm = ({ loginAction }) => {
+const LoginForm = props => {
+  const {loginAction, loading} = props;
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -71,92 +108,112 @@ const LoginForm = ({ loginAction }) => {
   };
 
   const canBeSubmitted = () => {
-    const { email, password } = values;
-    return !email.length && !password.length;
-    // return email !== null && password !== null;
+    const { username, password } = values;
+    return username !== '' && password !== '';
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        {/* <form className={classes.form} noValidate> */}
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          value={values.email}
-          autoComplete="email"
-          autoFocus
-          onChange={handleChange('email')}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          value={values.password}
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          onChange={handleChange('password')}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={() => {
-            loginAction(values);
-          }}
-          disabled={!canBeSubmitted}
-        >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="#" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
+    <div>
+      <div className={classes.image} />
+
+      <div className={classes.root}>
+        <Grid container component={Paper} className={classes.grid}>
+          <Grid item xs={false} sm={4} md={7} />
+          <Grid item xs={12} sm={8} md={5} style={{ border: '1px soid red' }}>
+            <div className={classes.paper}>
+              <Box className={classes.avatar}>
+                <img src={logo} alt="" />
+              </Box>
+              <Typography component="h1" variant="h6">
+                Sign in
+              </Typography>
+              <Typography variant="body2">
+                <span>New User?</span>&nbsp;
+                <Link href="/register" variant="body2">
+                  Register
+                </Link>
+              </Typography>
+              {/* <form className={classes.form} noValidate> */}
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Email Address"
+                name="username"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                autoFocus
+                onChange={handleChange('username')}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                InputProps={{
+                  className: classes.input,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleChange('password')}
+              />
+              {/* <FormControlLabel
+                  className={classes.label}
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                /> */}
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/forgot-password" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+              </Grid>
+              {!loading ? (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={!canBeSubmitted()}
+                  onClick={() => loginAction(values)}
+                >
+                  Sign In
+                </Button>
+              ) : (
+                <LoadingIndicator />
+              )}
+              <Box mt={5}>
+                <Copyright />
+              </Box>
+              {/* </form> */}
+            </div>
           </Grid>
         </Grid>
-        {/* </form> */}
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+    </div>
   );
 };
 
 LoginForm.propTypes = {
   loginAction: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  // loginPage: makeSelectLoginPage(),
+  loading: Selectors.makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -29,7 +29,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-
 import Footer from '../../Footer';
 import { useAuth } from '../../../containers/context/AppContext';
 
@@ -159,9 +158,9 @@ const Layout1 = props => {
   }
 
   const navigation = [
-    { id: 1, name: 'dashboard', link: '/dashboard' },
-    { id: 2, name: 'post', link: '/posts' },
-    // { id: 3, name: 'Admins', link: '/admins' },
+    { id: 1, name: 'Dashboard', link: '/dashboard' },
+    { id: 2, name: 'Organization', link: '/organization' },
+    { id: 3, name: 'Employee', link: '/employee' },
   ];
 
   const menuId = 'primary-search-account-menu';
@@ -310,14 +309,15 @@ const Layout1 = props => {
         <Divider />
         <List>
           {navigation.map(text => (
-            <ListItem button key={text.id}>
+            <ListItem
+              button
+              key={text.id}
+              onClick={() => handleClick(text.link)}
+            >
               <ListItemIcon>
-                <InboxIcon onClick={() => handleClick(text.link)} />
+                <InboxIcon />
               </ListItemIcon>
-              <ListItemText
-                primary={text.name}
-                onClick={() => handleClick(text.link)}
-              />
+              <ListItemText primary={text.name} />
             </ListItem>
           ))}
         </List>

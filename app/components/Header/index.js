@@ -17,12 +17,24 @@ import {
   Link,
   Box,
 } from '@material-ui/core';
-import Mail from '@material-ui/icons/Mail';
 import Menu from '@material-ui/icons/Menu';
-import Home from '@material-ui/icons/Home';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import ExitToApp from '@material-ui/icons/ExitToApp';
+import Apps from '@material-ui/icons/Apps';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Person from '@material-ui/icons/Person';
+import Group from '@material-ui/icons/Group';
+import BusinessCenter from '@material-ui/icons/BusinessCenter';
 import Banner from './banner.jpg';
+import SideBanner from '../../images/side-banner.png';
+import Logo from '../../images/logo.svg';
+import OctivierLogo from '../../images/octivier-logo.svg';
+
+const links = [
+  'Dashboard',
+  'Organization', 
+  'Applications', 
+  'Employees', 
+  'Groups'
+];
 
 const styles = theme => ({
   banner: {
@@ -34,16 +46,8 @@ const styles = theme => ({
     overflow: 'hidden',
   },
   appBar: {
-    backgroundColor: 'transparent',
     boxShadow: theme.shadows[0],
-    marginTop: theme.spacing(2),
-  },
-  captionBox: {
-    color: theme.palette.common.white,
-    position: 'absolute',
-    bottom: 100,
-    left: 75,
-    // border: console.log(theme),
+    zIndex: 9999,
   },
   text: {
     fontSize: 50,
@@ -74,6 +78,11 @@ const styles = theme => ({
   },
   list: {
     width: 250,
+    height: '100%',
+    marginTop: '80px',
+    backgroundImage: `url(${SideBanner})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'top center',
   },
   fullList: {
     width: 'auto',
@@ -83,7 +92,7 @@ const styles = theme => ({
   },
   link: {
     marginRight: theme.spacing(6),
-    color: '#FFFFFF',
+    color: theme.palette.common.white,
     cursor: 'pointer',
     [theme.breakpoints.down('md')]: {
       display: 'none',
@@ -92,18 +101,23 @@ const styles = theme => ({
       textDecoration: 'none',
     },
   },
+  li: {
+    color: theme.palette.common.white,
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
     display: 'none',
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
     [theme.breakpoints.down('md')]: {
       display: 'flex',
     },
   },
   logo: {
-    display: 'none',
     color: '#1F70C1',
-    fontSize: 36,
+    maxHeight: '30px',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -182,35 +196,68 @@ function Header(props) {
       onKeyDown={toggleDrawer(open, false)}
     >
       <List>
-        {['Home', 'About Us', 'Our Offerings', 'Wealth Management'].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Home /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ),
+        {links.map(
+          (text, index) => {
+            switch(text){
+              case 'Dashboard':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Organization':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><BusinessCenter /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Employees':
+                return (
+                  <ListItem button key={index} className={classes.link}>
+                    <ListItemIcon><Person /></ListItemIcon>
+                    <ListItemText primary={text} className={classes.li} />
+                  </ListItem>
+                );
+                break;
+              case 'Applications':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Apps /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              case 'Groups':
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Group /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;
+              default:
+                return (
+                  <ListItem button key={index}>
+                    <ListItemIcon><Dashboard /></ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                )
+            }
+          }
         )}
       </List>
       <Divider />
-      <List>
-        {['Login', 'Sign Up'].map(text => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {text === 'Sign Up' ? <PersonAdd /> : <ExitToApp />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="absolute" color="inherit" className={classes.appBar}>
-        <Toolbar>
+      <AppBar position="relative" color="inherit" className={classes.appBar}>
+        <Toolbar variant="dense">
           <IconButton
             onClick={toggleDrawer('open', true)}
             edge="start"
@@ -220,73 +267,30 @@ function Header(props) {
           >
             <Menu />
           </IconButton>
+          
+          <Grid
+            justify="space-between" // Add it here :)
+            container
+          >
+            <Grid item style={{display:'flex', alignItems:'center'}}>
+              <Typography type="title" color="inherit">
+                <Link href='#'>
+                  <img src={Logo} className={classes.logo} />
+                </Link>
+              </Typography>
+            </Grid>
 
-          <Typography className={classes.logo} variant="h6" noWrap>
-            Blue
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              Home
-            </Link>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              About Us
-            </Link>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              Our Offerings
-            </Link>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              Wealth Management
-            </Link>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              Login
-            </Link>
-            <Link
-              className={classes.link}
-              // component="a"
-              variant="body2"
-              onClick={() => {
-                alert("I'm a button.");
-              }}
-            >
-              Sign Up
-            </Link>
-          </div>
+            <Grid item>
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <img src={OctivierLogo} />
+                    </ListItemIcon>
+                    <ListItemText primary={'Octiver Communications'} />
+                  </ListItem>
+                </List>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
 
@@ -297,35 +301,6 @@ function Header(props) {
       >
         {sideList('open')}
       </SwipeableDrawer>
-
-      <Box component="div" className={classes.banner}>
-        <Grid item xs={12} sm={6} md={6} className={classes.captionBox}>
-          <Typography
-            variant="subtitle1"
-            component="h2"
-            className={classes.text}
-          >
-            {' '}
-            Invest With Purpose{' '}
-          </Typography>
-          <Typography
-            variant="caption"
-            component="h5"
-            className={classes.strapline}
-          >
-            {' '}
-            A platform that supports your life and goals,
-            <br /> and makes you money while doing it.{' '}
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-          >
-            Get Started
-          </Button>
-        </Grid>
-      </Box>
     </div>
   );
 }

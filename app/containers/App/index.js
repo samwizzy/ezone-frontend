@@ -18,9 +18,18 @@ import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import AllPosts from '../AllPosts/Loadable';
 import LoginPage from '../LoginPage/Loadable';
-import RegistrationPage from '../RegisterPage/Loadable';
+import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
+import RegistrationPage from '../RegistrationPage/Loadable';
+import OrgPage from '../OrgPage/Loadable';
+import EmployeePage from '../EmployeePage/Loadable';
+import UtilityPage from '../UtilityPage/Loadable';
+import EmailConfig from '../EmailConfig/Loadable';
+import EmailConfigs from '../EmailConfig/components/TabsPage';
+import EmailTemplate from '../EmailConfig/components/EmailTemplate';
+import EmailPasswordTemplate from '../EmailConfig/components/EmailPasswordTemplate';
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
+import Layout3 from '../../components/layouts/layout3/Layout3';
 import { makeSelectUserToken } from './selectors';
 import PrivateRoute from './PrivateRoute';
 import { AppContext } from '../context/AppContext';
@@ -40,10 +49,7 @@ const App = () => {
           <CssBaseline />
           <main>
             <div>
-              <Helmet
-                titleTemplate="%s - React.js Boilerplate"
-                defaultTitle="React.js Boilerplate"
-              >
+              <Helmet titleTemplate="%s - Ezone" defaultTitle="Ezone">
                 <meta
                   name="description"
                   content="A React.js Boilerplate application"
@@ -51,14 +57,28 @@ const App = () => {
               </Helmet>
 
               <Switch>
-                <Route exact path="/" component={HomePage} />
                 <Route exact path="/login" component={LoginPage} />
+                <Route
+                  exact
+                  path="/forgot-password"
+                  component={ForgotPasswordForm}
+                />
                 <Route exact path="/register" component={RegistrationPage} />
-                <Layout1>
+                <Layout3>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
-                  {/* <PrivateRoute path="/admins" component={AdminsPage} /> */}
-                </Layout1>
+                  <Route path="/organization" component={OrgPage} />
+                  <Route path="/employee" component={EmployeePage} />
+                  <Route path="/utility" component={UtilityPage} />
+                  <Route exact path="/email" component={EmailConfig} />
+                  <Route path="/email/configuration" component={EmailConfigs} />
+                  <Route path="/email/template" component={EmailTemplate} />
+                  <Route
+                    path="/email/password/template"
+                    component={EmailPasswordTemplate}
+                  />
+                  <Route exact path="/" component={HomePage} />
+                </Layout3>
                 <Route path="" component={NotFoundPage} />
               </Switch>
             </div>
