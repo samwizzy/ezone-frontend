@@ -14,8 +14,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
 import OrgInfo from './OrgInfo';
-import OrgLocation from './OrgLocation';
-import OrgDepartment from './OrgDepartment';
 import UserMenu from '../../../components/layouts/shared-components/UserMenu';
 
 const useStyles = makeStyles(theme => ({
@@ -87,9 +85,7 @@ function TabsPage() {
             indicatorColor="primary"
             centered
           >
-            <Tab label="Organization Info" {...a11yProps(0)} />
-            <Tab label="Location" {...a11yProps(1)} />
-            <Tab label="Department" {...a11yProps(2)} />
+            <Tab label="Octiver Info" {...a11yProps(0)} />
           </Tabs>
 
           <UserMenu />
@@ -98,12 +94,6 @@ function TabsPage() {
 
       <TabPanel value={value} index={0}>
         <OrgInfo />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <OrgLocation />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <OrgDepartment />
       </TabPanel>
     </div>
   );

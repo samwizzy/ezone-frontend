@@ -1,12 +1,14 @@
 /*
  *
- * OrgPage actions
+ * Utility actions
  *
  */
 
 import {
-  OPEN_EDIT_COLOR_DIALOG,
-  CLOSE_EDIT_COLOR_DIALOG,
+  OPEN_FILE_UPLOAD_DIALOG,
+  CLOSE_FILE_UPLOAD_DIALOG,
+  OPEN_SHARE_FILE_DIALOG,
+  CLOSE_SHARE_FILE_DIALOG,
   OPEN_EDIT_COMPANY_DIALOG,
   CLOSE_EDIT_COMPANY_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
@@ -19,16 +21,29 @@ import {
   CLOSE_EDIT_DEPARTMENT_DIALOG,
 } from './constants';
 
-export function openEditColorDialog(data) {
+export function openFileUploadDialog(data) {
   return {
-    type: OPEN_EDIT_COLOR_DIALOG,
-    payload: data,
+    type: OPEN_FILE_UPLOAD_DIALOG,
+    payload: data
   };
 }
 
-export function closeEditColorDialog() {
+export function closeFileUploadDialog() {
   return {
-    type: CLOSE_EDIT_COLOR_DIALOG,
+    type: CLOSE_FILE_UPLOAD_DIALOG
+  };
+}
+
+export function openShareFileDialog(data) {
+  return {
+    type: OPEN_SHARE_FILE_DIALOG,
+    payload: data
+  };
+}
+
+export function closeSharedFileDialog() {
+  return {
+    type: CLOSE_SHARE_FILE_DIALOG,
   };
 }
 
