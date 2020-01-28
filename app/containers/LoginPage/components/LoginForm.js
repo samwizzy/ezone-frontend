@@ -18,14 +18,14 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Selectors from '../selectors';
-import LoadingIndicator from '../../../components/LoadingIndicator';
 import classNames from 'classnames';
 import {
   darken,
   fade,
   lighten,
 } from '@material-ui/core/styles/colorManipulator';
+import * as Selectors from '../selectors';
+import LoadingIndicator from '../../../components/LoadingIndicator';
 import * as Actions from '../actions';
 import logo from '../../../images/logo.svg';
 import banner from '../../../images/banner.svg';
@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LoginForm = props => {
-  const {loginAction, loading} = props;
+  const { loginAction, loading } = props;
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
