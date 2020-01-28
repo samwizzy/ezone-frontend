@@ -7,6 +7,7 @@
 import * as Constants from './constants';
 
 export function loginAction(data) {
+  console.log(data, 'data');
   return {
     type: Constants.LOGIN,
     payload: data,

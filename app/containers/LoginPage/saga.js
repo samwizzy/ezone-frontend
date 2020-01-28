@@ -9,12 +9,18 @@ import * as Endpoints from '../../components/Endpoints';
 
 export function* login() {
   const loginDetails = yield select(makeSelectLoginDetails());
+
+  const { username, password } = loginDetails;
+  const newData = { username, password, grant_type: 'password' };
   const requestURL = `${BaseUrl}${Endpoints.Login}`;
 
+  console.log(newData, 'newData');
+  console.log(requestURL, 'requestURL');
   try {
     const loginResponse = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify(loginDetails),
+      // body: JSON.stringify(loginDetails),
+      body: JSON.stringify(newData),
       headers: new Headers({
         Authorization: `Basic ${btoa('web-client:password')}`,
         'Content-Type': 'application/x-www-form-urlencoded',
