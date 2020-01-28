@@ -51,10 +51,10 @@ const makeSelectSharedFileDialog = () =>
     subState => subState.shareFileDialog,
   );
 
-const makeSelectEditCompanyDialog = () =>
+const makeSelectNewTaskDialog = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.companyDialog,
+    subState => subState.taskDialog,
   );
 
 const makeSelectBranchDialog = () =>
@@ -77,7 +77,7 @@ export {
   makeSelectFileUploadDialog,
   makeSelectSharedFileDialog,
   makeSelectError,
-  makeSelectEditCompanyDialog,
+  makeSelectNewTaskDialog,
   makeSelectBranchDialog,
   makeSelectDepartmentDialog
 };

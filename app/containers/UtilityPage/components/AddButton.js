@@ -35,7 +35,7 @@ export function AddTask(props) {
 }
 
 export function AddFile(props) {
-  const { openNewBranchDialogAction } = props;
+  const { openFileDialog } = props;
   const classes = useStyles()
 
   return (
@@ -44,7 +44,7 @@ export function AddFile(props) {
         <Button
           size="small"
           className={classes.iconButton}
-          onClick={openNewBranchDialogAction}
+          onClick={openFileDialog}
         >
           <Add className={classes.deleteIcon} /> Upload File
         </Button>

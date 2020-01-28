@@ -14,6 +14,8 @@ import * as Actions from '../actions';
 import * as Selectors from './../selectors';
 import FileUploadDialog from './components/FileUploadDialog'
 import ShareFileDialog from './components/ShareFileDialog'
+import AddTaskDialog from './components/AddTaskDialog'
+import AddSignature from './components/AddSignature'
 
 const ITEM_HEIGHT = 48;
 
@@ -21,6 +23,13 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     textAlign: 'center'
+  },
+  sideMenu: {
+    width: '100%',
+    // backgroundColor: theme.palette.background.paper,
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: 300,
   },
   button: {
     borderRadius: '20px',
@@ -60,7 +69,7 @@ const NoFileList = props => {
 
 const FilesList = props => {
   const classes = useStyles();
-  const { loading, data, openFileUploadDialog, openShareFileDialog } = props
+  const { loading, data, openFileUploadDialog, openShareFileDialog, openNewTaskDialog } = props
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -127,7 +136,7 @@ const FilesList = props => {
         filter: true,
         sort: false,
         customBodyRender: id => {
-          const options = ['View', 'Signature', 'Download', 'Shared', 'Add Task', 'Delete']
+          const options = ['View', 'Signature', 'Download', 'Share', 'Add Task', 'Delete']
           return (
             <div>
               <IconButton
@@ -152,7 +161,7 @@ const FilesList = props => {
                 }}
               >
                 {options.map(option => (
-                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={openShareFileDialog}>
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={openNewTaskDialog}>
                     {option}
                   </MenuItem>
                 ))}
@@ -175,28 +184,31 @@ const FilesList = props => {
     return <List component={LoadingIndicator} />;
   }
 
-  if(!data){
-    return <NoFileList />
+  if(data){
+    // return <NoFileList /> 
+    return <AddSignature /> 
   }
 
   return (
     <React.Fragment>
       <Grid container justify='center'>
         <Grid item xs={2} md={2}>
-          <List component="nav" aria-label="secondary mailbox folders">
-            <ListItem button>
-              <ListItemText primary="All" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Favorite" />
-            </ListItem>
-            <ListItemLink href="#simple-list">
-              <ListItemText primary="Shared" />
-            </ListItemLink>
-            <ListItem button>
-              <ListItemText primary="Trash" />
-            </ListItem>
-          </List>
+          <div className={classes.sideMenu}>
+            <List component="nav" aria-label="secondary mailbox folders">
+              <ListItem button>
+                <ListItemText primary="All" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Favorite" />
+              </ListItem>
+              <ListItemLink href="#simple-list">
+                <ListItemText primary="Shared" />
+              </ListItemLink>
+              <ListItem button>
+                <ListItemText primary="Trash" />
+              </ListItem>
+            </List>
+          </div>
         </Grid>
         <Grid item xs={10} md={10}>
           <MUIDataTable
@@ -209,7 +221,9 @@ const FilesList = props => {
       </Grid>
 
       <FileUploadDialog />
-      {/* <ShareFileDialog /> */}
+      <ShareFileDialog />
+      <AddTaskDialog />
+
     </React.Fragment>
   );
 };
@@ -218,6 +232,7 @@ FilesList.propTypes = {
   loading: PropTypes.bool,
   openFileUploadDialog: PropTypes.func,
   openShareFileDialog: PropTypes.func,
+  openNewTaskDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -229,6 +244,7 @@ function mapDispatchToProps(dispatch) {
   return {
     openFileUploadDialog: ev => dispatch(Actions.openFileUploadDialog(ev)),
     openShareFileDialog: ev => dispatch(Actions.openShareFileDialog(ev)),
+    openNewTaskDialog: ev => dispatch(Actions.openNewTaskDialog(ev)),
   };
 }
 

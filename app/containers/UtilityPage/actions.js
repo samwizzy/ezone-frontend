@@ -9,8 +9,8 @@ import {
   CLOSE_FILE_UPLOAD_DIALOG,
   OPEN_SHARE_FILE_DIALOG,
   CLOSE_SHARE_FILE_DIALOG,
-  OPEN_EDIT_COMPANY_DIALOG,
-  CLOSE_EDIT_COMPANY_DIALOG,
+  OPEN_NEW_TASK_DIALOG,
+  CLOSE_NEW_TASK_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
   CLOSE_NEW_BRANCH_DIALOG,
   OPEN_EDIT_BRANCH_DIALOG,
@@ -47,16 +47,16 @@ export function closeSharedFileDialog() {
   };
 }
 
-export function openEditCompanyDialog(data) {
+export function openNewTaskDialog(data) {
   return {
-    type: OPEN_EDIT_COMPANY_DIALOG,
+    type: OPEN_NEW_TASK_DIALOG,
     payload: data,
   };
 }
 
-export function closeEditCompanyDialog() {
+export function closeNewTaskDialog() {
   return {
-    type: CLOSE_EDIT_COMPANY_DIALOG,
+    type: CLOSE_NEW_TASK_DIALOG,
   };
 }
 

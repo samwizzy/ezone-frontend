@@ -9,8 +9,8 @@ import {
   CLOSE_FILE_UPLOAD_DIALOG,
   OPEN_SHARE_FILE_DIALOG,
   CLOSE_SHARE_FILE_DIALOG,
-  OPEN_EDIT_COMPANY_DIALOG,
-  CLOSE_EDIT_COMPANY_DIALOG,
+  OPEN_NEW_TASK_DIALOG,
+  CLOSE_NEW_TASK_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
   CLOSE_NEW_BRANCH_DIALOG,
   OPEN_EDIT_BRANCH_DIALOG,
@@ -39,7 +39,7 @@ export const initialState = {
     },
     data: null,
   },
-  companyDialog: {
+  taskDialog: {
     type: 'new',
     props: {
       open: false,
@@ -114,11 +114,11 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_EDIT_COMPANY_DIALOG: {
+      case OPEN_NEW_TASK_DIALOG: {
         return {
           ...state,
-          companyDialog: {
-            type: 'edit',
+          taskDialog: {
+            type: 'new',
             props: {
               open: true,
             },
@@ -126,11 +126,11 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_COMPANY_DIALOG: {
+      case CLOSE_NEW_TASK_DIALOG: {
         return {
           ...state,
-          companyDialog: {
-            type: 'edit',
+          taskDialog: {
+            type: 'new',
             props: {
               open: false,
             },

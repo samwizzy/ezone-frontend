@@ -33,9 +33,9 @@ function FileUploadDialog(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title"></DialogTitle>
+        {/* <DialogTitle id="alert-dialog-slide-title"></DialogTitle> */}
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText id="alert-dialog-slide-description" style={{display: 'flex'}}>
             <DropZone />
           </DialogContentText>
         </DialogContent>
