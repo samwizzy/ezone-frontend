@@ -16,9 +16,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../App/actions';
 import HomeTab from './HomeTab';
-import ChatTab from './ChatTab';
+import ChatTab from './../ChatApp/ChatTab';
+import TasksList from './../TasksApp/TasksList';
+import FilesList from './../FilesApp/FilesList';
 import Autorenew from '@material-ui/icons/Autorenew'
-import DeleteIcon from '@material-ui/icons/Delete';
 import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
 const useStyles = makeStyles(theme => ({
@@ -102,6 +103,7 @@ function TabsPage() {
               <Tab label="Project" {...a11yProps(1)} />
               <Tab label="Chats" {...a11yProps(2)} />
               <Tab label="Tasks" {...a11yProps(2)} />
+              <Tab label="File" {...a11yProps(2)} />
             </Tabs>
           </div>
 
@@ -117,7 +119,10 @@ function TabsPage() {
         <ChatTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <HomeTab />
+        <TasksList />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <FilesList />
       </TabPanel>
     </div>
   );
