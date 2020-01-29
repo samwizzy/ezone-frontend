@@ -21,6 +21,7 @@ import ColorDialog from './components/ColorDialog';
 import CompanyDialog from './components/CompanyDialog';
 import BranchDialog from './components/BranchDialog';
 import DepartmentDialog from './components/DepartmentDialog';
+// import PartyDialog from './components/PartyDialog';
 
 export function OrgPage() {
   useInjectReducer({ key: 'orgPage', reducer });
@@ -33,6 +34,7 @@ export function OrgPage() {
         <meta name="description" content="Description of OrgPage" />
       </Helmet>
       <TabsPage />
+      {/* <PartyDialog /> */}
       <ColorDialog />
       <CompanyDialog />
       <BranchDialog />
