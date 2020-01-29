@@ -57,17 +57,11 @@ const makeSelectDepartmentDialog = () =>
     subState => subState.departmentDialog,
   );
 
-// const makeSelectNewBranchDialog = () =>
-//   createSelector(
-//     selectOrgPageDomain,
-//     subState => subState.branchDialog,
-//   );
-
-// const makeSelectEditBranchDialog = () =>
-//   createSelector(
-//     selectOrgPageDomain,
-//     subState => subState.branchDialog,
-//   );
+const makeSelectPartyDialog = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.partyDialog,
+  );
 
 export default makeSelectOrgPage;
 export {
@@ -78,6 +72,5 @@ export {
   makeSelectEditCompanyDialog,
   makeSelectBranchDialog,
   makeSelectDepartmentDialog,
-  // makeSelectNewBranchDialog,
-  // makeSelectEditBranchDialog,
+  makeSelectPartyDialog,
 };

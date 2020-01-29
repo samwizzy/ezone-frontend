@@ -22,6 +22,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import LoadingIndicator from '../../../components/LoadingIndicator';
+import PartyDialog from './PartyDialog';
 import * as Actions from '../actions';
 import * as Selectors from '../selectors';
 
@@ -52,7 +53,9 @@ const CompanyStructure = props => {
     console.log(`item ${index} clicked`);
   };
 
-  const { loading } = props;
+  const { openNewPartyAction, loading } = props;
+
+  console.log(openNewPartyAction, 'openNewPartyAction');
 
   function createData(title, description) {
     return { title, description };
@@ -74,6 +77,7 @@ const CompanyStructure = props => {
         variant="contained"
         color="primary"
         className={classes.partyButton}
+        onClick={() => openNewPartyAction()}
       >
         > Add Party
       </Button>
@@ -162,13 +166,14 @@ const CompanyStructure = props => {
           </Paper>
         </Grid>
       </Grid>
+      <PartyDialog />
     </React.Fragment>
   );
 };
 
 CompanyStructure.propTypes = {
   loading: PropTypes.bool,
-  //   opeEditDepartmentDialogAction: PropTypes.func,
+  openNewPartyAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -177,7 +182,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    // opeEditDepartmentDialogAction: () => dispatch(Actions.opeEditDepartmentDialog()),
+    openNewPartyAction: () => dispatch(Actions.openNewPartyDialog()),
   };
 }
 

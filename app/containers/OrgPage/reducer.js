@@ -4,20 +4,7 @@
  *
  */
 import produce from 'immer';
-import {
-  OPEN_EDIT_COLOR_DIALOG,
-  CLOSE_EDIT_COLOR_DIALOG,
-  OPEN_EDIT_COMPANY_DIALOG,
-  CLOSE_EDIT_COMPANY_DIALOG,
-  OPEN_NEW_BRANCH_DIALOG,
-  CLOSE_NEW_BRANCH_DIALOG,
-  OPEN_EDIT_BRANCH_DIALOG,
-  CLOSE_EDIT_BRANCH_DIALOG,
-  OPEN_NEW_DEPARTMENT_DIALOG,
-  CLOSE_NEW_DEPARTMENT_DIALOG,
-  OPEN_EDIT_DEPARTMENT_DIALOG,
-  CLOSE_EDIT_DEPARTMENT_DIALOG,
-} from './constants';
+import * as Constants from './constants';
 
 export const initialState = {
   loading: false,
@@ -50,13 +37,20 @@ export const initialState = {
     },
     data: null,
   },
+  partyDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const orgPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case OPEN_EDIT_COLOR_DIALOG: {
+      case Constants.OPEN_EDIT_COLOR_DIALOG: {
         return {
           ...state,
           colorDialog: {
@@ -68,7 +62,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_COLOR_DIALOG: {
+      case Constants.CLOSE_EDIT_COLOR_DIALOG: {
         return {
           ...state,
           colorDialog: {
@@ -80,7 +74,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_EDIT_COMPANY_DIALOG: {
+      case Constants.OPEN_EDIT_COMPANY_DIALOG: {
         return {
           ...state,
           companyDialog: {
@@ -92,7 +86,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_COMPANY_DIALOG: {
+      case Constants.CLOSE_EDIT_COMPANY_DIALOG: {
         return {
           ...state,
           companyDialog: {
@@ -104,7 +98,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_NEW_BRANCH_DIALOG: {
+      case Constants.OPEN_NEW_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -116,7 +110,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_NEW_BRANCH_DIALOG: {
+      case Constants.CLOSE_NEW_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -128,7 +122,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_EDIT_BRANCH_DIALOG: {
+      case Constants.OPEN_EDIT_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -140,7 +134,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_BRANCH_DIALOG: {
+      case Constants.CLOSE_EDIT_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -152,7 +146,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_NEW_DEPARTMENT_DIALOG: {
+      case Constants.OPEN_NEW_DEPARTMENT_DIALOG: {
         return {
           ...state,
           departmentDialog: {
@@ -164,7 +158,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_NEW_DEPARTMENT_DIALOG: {
+      case Constants.CLOSE_NEW_DEPARTMENT_DIALOG: {
         return {
           ...state,
           departmentDialog: {
@@ -176,7 +170,7 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_EDIT_DEPARTMENT_DIALOG: {
+      case Constants.OPEN_EDIT_DEPARTMENT_DIALOG: {
         return {
           ...state,
           departmentDialog: {
@@ -188,11 +182,35 @@ const orgPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_DEPARTMENT_DIALOG: {
+      case Constants.CLOSE_EDIT_DEPARTMENT_DIALOG: {
         return {
           ...state,
           departmentDialog: {
             type: 'edit',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.OPEN_NEW_PARTY_DIALOG: {
+        return {
+          ...state,
+          partyDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_NEW_PARTY_DIALOG: {
+        return {
+          ...state,
+          partyDialog: {
+            type: 'new',
             props: {
               open: false,
             },
