@@ -124,7 +124,7 @@ const OrgInfo = props => {
                   variant="contained"
                   color="inherit"
                   className={classNames(classes.button, classes.editButton)}
-                  onClick={() => history.push('/company-structure')}
+                  onClick={() => history.push('/organization/company/structure')}
                 >
                   Company Structure
                 </Button>
