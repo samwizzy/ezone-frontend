@@ -13,6 +13,12 @@ export const CLOSE_SHARE_FILE_DIALOG = 'app/UtilityPage/CLOSE_SHARE_FILE_DIALOG'
 export const OPEN_NEW_TASK_DIALOG = 'app/UtilityPage/OPEN_NEW_TASK_DIALOG';
 export const CLOSE_NEW_TASK_DIALOG = 'app/UtilityPage/CLOSE_NEW_TASK_DIALOG';
 
+export const OPEN_NEW_FILE_DIALOG = 'app/UtilityPage/OPEN_NEW_TASK_DIALOG';
+export const CLOSE_NEW_FILE_DIALOG = 'app/UtilityPage/CLOSE_NEW_TASK_DIALOG';
+
+export const OPEN_TASK_PREVIEW_DIALOG = 'app/UtilityPage/OPEN_TASK_PREVIEW_DIALOG';
+export const CLOSE_TASK_PREVIEW_DIALOG = 'app/UtilityPage/CLOSE_TASK_PREVIEW_DIALOG';
+
 export const OPEN_NEW_BRANCH_DIALOG = 'app/UtilityPage/OPEN_NEW_BRANCH_DIALOG';
 export const CLOSE_NEW_BRANCH_DIALOG = 'app/UtilityPage/CLOSE_NEW_BRANCH_DIALOG';
 export const OPEN_EDIT_BRANCH_DIALOG = 'app/UtilityPage/OPEN_EDIT_BRANCH_DIALOG';

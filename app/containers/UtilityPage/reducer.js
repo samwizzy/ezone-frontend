@@ -11,6 +11,10 @@ import {
   CLOSE_SHARE_FILE_DIALOG,
   OPEN_NEW_TASK_DIALOG,
   CLOSE_NEW_TASK_DIALOG,
+  OPEN_NEW_FILE_DIALOG,
+  CLOSE_NEW_FILE_DIALOG,
+  OPEN_TASK_PREVIEW_DIALOG,
+  CLOSE_TASK_PREVIEW_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
   CLOSE_NEW_BRANCH_DIALOG,
   OPEN_EDIT_BRANCH_DIALOG,
@@ -25,7 +29,15 @@ export const initialState = {
   loading: false,
   error: false,
   data: [{id: 1, name: 'Samuel', format: 'PDF', size: '12mb', modified_by: 'Christian', date_uploaded: '3rd, Jul 2019'}],
+  data1: [{id: 1, name: 'Invoicing', description: 'Lorem ipsum flora iregi', assignedTo: 'Christian, Tina..', dateAssigned: '3rd, Jul 19', dueDate: '3rd, Jul 2019', status: 'expired'}],
   fileDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null
+  },
+  fileUploadDialog: {
     type: 'new',
     props: {
       open: false,
@@ -40,6 +52,13 @@ export const initialState = {
     data: null,
   },
   taskDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null,
+  },
+  previewTaskDialog: {
     type: 'new',
     props: {
       open: false,
@@ -69,7 +88,7 @@ const utilityPageReducer = (state = initialState, action) =>
       case OPEN_FILE_UPLOAD_DIALOG: {
         return {
           ...state,
-          fileDialog: {
+          fileUploadDialog: {
             type: 'new',
             props: {
               open: true,
@@ -81,7 +100,7 @@ const utilityPageReducer = (state = initialState, action) =>
       case CLOSE_FILE_UPLOAD_DIALOG: {
         return {
           ...state,
-          fileDialog: {
+          fileUploadDialog: {
             type: 'new',
             props: {
               open: false,
@@ -130,6 +149,54 @@ const utilityPageReducer = (state = initialState, action) =>
         return {
           ...state,
           taskDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case OPEN_TASK_PREVIEW_DIALOG: {
+        return {
+          ...state,
+          previewTaskDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case CLOSE_TASK_PREVIEW_DIALOG: {
+        return {
+          ...state,
+          previewTaskDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case OPEN_NEW_FILE_DIALOG: {
+        return {
+          ...state,
+          fileDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case CLOSE_NEW_FILE_DIALOG: {
+        return {
+          ...state,
+          fileDialog: {
             type: 'new',
             props: {
               open: false,

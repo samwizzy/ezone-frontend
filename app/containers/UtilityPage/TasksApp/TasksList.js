@@ -7,25 +7,25 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import LoadingIndicator from '../../../components/LoadingIndicator';
-import MoreVertRounded from '@material-ui/icons/MoreVertRounded'
+import Lens from '@material-ui/icons/Lens'
 import tasksIcon from '../../../images/tasksIcon.svg'
 import {AddTask} from './../components/AddButton';
 import * as Actions from '../actions';
 import * as Selectors from '../selectors';
-
-const ITEM_HEIGHT = 48;
+import AddTaskDialog from './components/AddTaskDialog'
+import TaskPreviewDialog from './components/TaskPreviewDialog'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: console.log(theme, "Theme")
   },
   button: {
     borderRadius: '20px',
     margin: theme.spacing(5, 0),
     padding: theme.spacing(1, 15),
   }
-
 }));
 
 function ListItemLink(props) {
@@ -56,18 +56,7 @@ const NoTaskList = props => {
 
 const TasksList = props => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const { loading, data, opeEditDepartmentDialogAction } = props;
+  const { loading, data, openNewTaskDialog } = props;
 
   const columns = [
     {
@@ -78,84 +67,45 @@ const TasksList = props => {
       },
     },
     {
-      name: 'format',
-      label: 'Format',
+      name: 'description',
+      label: 'Description',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'size',
-      label: 'Size',
+      name: 'assignTo',
+      label: 'Assign To',
       options: {
         filter: true,
         sort: false
       },
     },
     {
-      name: 'owner',
-      label: 'Owner',
+      name: 'dateAssigned',
+      label: 'Date Assign',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'modified_by',
-      label: 'Modified By',
+      name: 'dueDate',
+      label: 'Due Date',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'date_uploaded',
-      label: 'Date Uploaded',
+      name: 'status',
+      label: 'Status',
       options: {
         filter: true,
         sort: false,
-      },
-    },
-    {
-      name: 'id',
-      label: ' ',
-      options: {
-        filter: true,
-        sort: false,
-        customBodyRender: id => {
-          const options = ['View', 'Signature', 'Download', 'Shared', 'Add Task', 'Delete']
-          return (
-            <div>
-              <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreVertRounded />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: 200,
-                  },
-                }}
-              >
-                {options.map(option => (
-                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </div>
-          )
+        customBodyRender: value => {
+          return <Button><Icon color='error'>lens</Icon> {value} </Button>
         }
       },
     }
@@ -165,7 +115,7 @@ const TasksList = props => {
     filterType: 'checkbox',
     responsive: 'scrollMaxHeight',
     selectableRows: 'none',
-    customToolbar: () => <AddTask />,
+    customToolbar: () => <AddTask openNewTaskDialog={openNewTaskDialog} />,
   };
 
   if (loading) {
@@ -185,13 +135,13 @@ const TasksList = props => {
               <ListItemText primary="All" />
             </ListItem>
             <ListItem button>
-              <ListItemText primary="Favorite" />
+              <ListItemText primary="Ongoing" />
             </ListItem>
             <ListItemLink href="#simple-list">
-              <ListItemText primary="Shared" />
+              <ListItemText primary="Due" />
             </ListItemLink>
             <ListItem button>
-              <ListItemText primary="Trash" />
+              <ListItemText primary="Expired" />
             </ListItem>
           </List>
         </Grid>
@@ -204,23 +154,26 @@ const TasksList = props => {
           />
         </Grid>
       </Grid>
+
+      <AddTaskDialog />
+      <TaskPreviewDialog />
     </React.Fragment>
   );
 };
 
 TasksList.propTypes = {
   loading: PropTypes.bool,
-  opeEditDepartmentDialogAction: PropTypes.func,
+  openNewTaskDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: Selectors.makeSelectLoading(),
-  data: Selectors.makeSelectData(),
+  data: Selectors.makeSelectTaskData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    opeEditDepartmentDialogAction: () => dispatch(Actions.opeEditDepartmentDialog()),
+    openNewTaskDialog: () => dispatch(Actions.openNewTaskDialog()),
   };
 }
 

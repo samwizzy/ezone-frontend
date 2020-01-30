@@ -11,6 +11,10 @@ import {
   CLOSE_SHARE_FILE_DIALOG,
   OPEN_NEW_TASK_DIALOG,
   CLOSE_NEW_TASK_DIALOG,
+  OPEN_NEW_FILE_DIALOG,
+  CLOSE_NEW_FILE_DIALOG,
+  OPEN_TASK_PREVIEW_DIALOG,
+  CLOSE_TASK_PREVIEW_DIALOG,
   OPEN_NEW_BRANCH_DIALOG,
   CLOSE_NEW_BRANCH_DIALOG,
   OPEN_EDIT_BRANCH_DIALOG,
@@ -57,6 +61,32 @@ export function openNewTaskDialog(data) {
 export function closeNewTaskDialog() {
   return {
     type: CLOSE_NEW_TASK_DIALOG,
+  };
+}
+
+export function openNewFileDialog(data) {
+  return {
+    type: OPEN_NEW_FILE_DIALOG,
+    payload: data,
+  };
+}
+
+export function closeNewFileDialog() {
+  return {
+    type: CLOSE_NEW_FILE_DIALOG,
+  };
+}
+
+export function openTaskPreviewDialog(data) {
+  return {
+    type: OPEN_TASK_PREVIEW_DIALOG,
+    payload: data,
+  };
+}
+
+export function closeTaskPreviewDialog() {
+  return {
+    type: CLOSE_TASK_PREVIEW_DIALOG,
   };
 }
 

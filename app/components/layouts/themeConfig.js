@@ -23,7 +23,10 @@ const themesConfig = {
       error: red,
     },
     status: {
-      danger: 'orange',
+      danger: '#FF2700',
+      due: '#FCD81C',
+      ongoing: '#1EE11A',
+      completed: '#C2C2C2',
     },
   },
   sunset: {

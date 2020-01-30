@@ -14,8 +14,9 @@ import * as Actions from '../actions';
 import * as Selectors from './../selectors';
 import FileUploadDialog from './components/FileUploadDialog'
 import ShareFileDialog from './components/ShareFileDialog'
-import AddTaskDialog from './components/AddTaskDialog'
+import AddFileDialog from './components/AddFileDialog'
 import AddSignature from './components/AddSignature'
+import DocWidget from './components/DocWidget'
 
 const ITEM_HEIGHT = 48;
 
@@ -184,9 +185,10 @@ const FilesList = props => {
     return <List component={LoadingIndicator} />;
   }
 
-  if(data){
+  if(!data){
     // return <NoFileList /> 
-    return <AddSignature /> 
+    // return <AddSignature /> 
+    return <DocWidget /> 
   }
 
   return (
@@ -222,7 +224,7 @@ const FilesList = props => {
 
       <FileUploadDialog />
       <ShareFileDialog />
-      <AddTaskDialog />
+      <AddFileDialog />
 
     </React.Fragment>
   );

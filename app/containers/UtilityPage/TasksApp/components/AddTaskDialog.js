@@ -33,12 +33,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddTaskDialog(props) {
   const classes = useStyles();
-  const { closeNewTaskDialog, data } = props;
+  const { openTaskPreviewDialog, closeNewTaskDialog, data } = props;
   const [form, setForm] = React.useState({task: '', description: '', startTime: new Date(), endTime: new Date(), emails: []});
 
   const handleChange = () => {}
   const handleDateChange = date => {
     setForm({form: {...form, startTime: date}})
+  }
+
+  const handleSubmit = event => {
+    closeNewTaskDialog()
+    openTaskPreviewDialog()
   }
 
   console.log(data, 'checking task...')
@@ -136,6 +141,19 @@ function AddTaskDialog(props) {
                 value={form.email}
               />
             </Grid>
+
+            <Grid item xs={12}>
+              <Button
+                variant="outlined"
+                component="label"
+              >
+                Upload File
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                />
+              </Button>
+            </Grid>
           </Grid>
           </form>
         </DialogContent>
@@ -143,7 +161,7 @@ function AddTaskDialog(props) {
           <Button onClick={closeNewTaskDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={closeNewTaskDialog} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Done
           </Button>
         </DialogActions>
@@ -155,7 +173,8 @@ function AddTaskDialog(props) {
 
 AddTaskDialog.propTypes = {
   openNewTaskDialog: PropTypes.func,
-  closeNewTaskDialog: PropTypes.func
+  openTaskPreviewDialog: PropTypes.func,
+  closeNewTaskDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -165,6 +184,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     openNewTaskDialog: ev => dispatch(Actions.openNewTaskDialog(ev)),
+    openTaskPreviewDialog: ev => dispatch(Actions.openTaskPreviewDialog(ev)),
     closeNewTaskDialog: () => dispatch(Actions.closeNewTaskDialog()),
     dispatch,
   };
