@@ -18,9 +18,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../actions';
 import classNames from 'classnames';
 import EditOutlined from '@material-ui/icons/EditOutlined'
+import * as Actions from '../actions';
 import download6 from '../../../images/download(6).svg';
 import user from '../../../images/user.svg';
 import msg from '../../../images/msg.svg';
@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.common.white,
     padding: theme.spacing(3),
     marginBottom: theme.spacing(4),
-    backgroundImage: 'linear-gradient(111.61deg, #1A88E1 38.84%, #3F0A96 101.73%)'
+    backgroundImage:
+      'linear-gradient(111.61deg, #1A88E1 38.84%, #3F0A96 101.73%)',
   },
   avatar: {
     width: theme.spacing(12),
@@ -54,16 +55,16 @@ const useStyles = makeStyles(theme => ({
     },
   },
   editButton: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   inline: {
-    color: theme.palette.common.white
-  }
+    color: theme.palette.common.white,
+  },
 }));
 
 const OrgInfo = props => {
   const classes = useStyles();
-  const { history } = props
+  const { history } = props;
 
   const { openEditColorDialog, openEditCompanyDialog } = props;
   return (
@@ -74,7 +75,7 @@ const OrgInfo = props => {
             <List className={classes.list}>
               <ListItem
                 alignItems="flex-start"
-                style={{ display: 'flex', alignItems: 'center'}}
+                style={{ display: 'flex', alignItems: 'center' }}
               >
                 <ListItemAvatar>
                   <Avatar
@@ -85,7 +86,9 @@ const OrgInfo = props => {
                 </ListItemAvatar>
                 <ListItemText
                   primary={
-                    <Typography variant="h6" color='default'>Octiver Communications</Typography>
+                    <Typography variant="h6" color="default">
+                      Octiver Communications
+                    </Typography>
                   }
                   secondary={
                     <React.Fragment>
@@ -104,9 +107,13 @@ const OrgInfo = props => {
             </List>
           </Grid>
           <Grid item xs={6}>
-            <Grid container alignContent='space-between' style={{height: '100%', textAlign: 'right'}}>
+            <Grid
+              container
+              alignContent="space-between"
+              style={{ height: '100%', textAlign: 'right' }}
+            >
               <Grid item xs={12}>
-                <Link href="#" variant="body2" color='inherit'>
+                <Link href="#" variant="body2" color="inherit">
                   Edit Logo and Color <EditOutlined />
                 </Link>
               </Grid>
@@ -124,7 +131,7 @@ const OrgInfo = props => {
                   variant="contained"
                   color="inherit"
                   className={classNames(classes.button, classes.editButton)}
-                  onClick={() => history.push('/company-structure')}
+                  onClick={() => history.push('/organization/company/structure')}
                 >
                   Company Structure
                 </Button>
@@ -286,7 +293,9 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default withRouter(compose(
-  withConnect,
-  memo,
-)(OrgInfo));
+export default withRouter(
+  compose(
+    withConnect,
+    memo,
+  )(OrgInfo),
+);

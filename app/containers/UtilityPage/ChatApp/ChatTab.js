@@ -16,21 +16,21 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  Tabs, 
+  Tabs,
   Tab,
   Toolbar,
   Typography,
   Paper,
   Button,
-  TextField
+  TextField,
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Add from '@material-ui/icons/Add'
+import Add from '@material-ui/icons/Add';
 import SettingsVoice from '@material-ui/icons/SettingsVoice';
 import Send from '@material-ui/icons/Send';
-import VideoCam from '@material-ui/icons/VideoCam';
+// import VideoCam from '@material-ui/icons/VideoCam';
 import Phone from '@material-ui/icons/Phone';
 import * as Actions from '../actions';
 import ChatIcon from '../../../images/chatIcon.svg';
@@ -48,23 +48,23 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     padding: theme.spacing(3),
     borderRadius: '10px',
-    backgroundColor: '#F8F8F8'
+    backgroundColor: '#F8F8F8',
   },
   button: {
     padding: theme.spacing(1, 4),
     background: theme.palette.primary.main,
-    borderRadius: '8px'
+    borderRadius: '8px',
   },
   grid: {
     height: '100vh',
     padding: theme.spacing(3),
     border: '1px solid #dcdcdc',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   textField: {
     width: theme.spacing(50),
     padding: theme.spacing(0),
-    borderRadius: '20px'
+    borderRadius: '20px',
   },
   button: {
     margin: theme.spacing(4),
@@ -147,36 +147,44 @@ const ChatTab = props => {
   const { openEditColorDialog, openEditCompanyDialog } = props;
   return (
     <React.Fragment>
-        <div>
-        { !status === false?
-        <Grid
-          justify="center"
-          alignItems='center'
-          container
-          className={classes.grid}
-        >
-          <Grid item style={{border: '1px solid #dcdcdc', padding: '10px'}}>
-            <Box my={2}>
-              <img src={ChatIcon} title='ChatIcon' />
-            </Box>
-            <Typography variant='subtitle1' component='h1'>You currently have no chat</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Start New Chat
-            </Button>
+      <div>
+        {!status === false ? (
+          <Grid
+            justify="center"
+            alignItems="center"
+            container
+            className={classes.grid}
+          >
+            <Grid item style={{ border: '1px solid #dcdcdc', padding: '10px' }}>
+              <Box my={2}>
+                <img src={ChatIcon} title="ChatIcon" />
+              </Box>
+              <Typography variant="subtitle1" component="h1">
+                You currently have no chat
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Start New Chat
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-        :
-        <Grid
-          justify="center"
-          container
-        >
-          <Grid item xs={12} md={5} style={{border: '1px solid #dcdcdc'}}>
-            <Paper square>
-                <div item xs={12} style={{border: '1px solid green', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        ) : (
+          <Grid justify="center" container>
+            <Grid item xs={12} md={5} style={{ border: '1px solid #dcdcdc' }}>
+              <Paper square>
+                <div
+                  item
+                  xs={12}
+                  style={{
+                    border: '1px solid green',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -194,189 +202,217 @@ const ChatTab = props => {
                       shrink: true,
                     }}
                   />
-                  <IconButton><Add /></IconButton>
+                  <IconButton>
+                    <Add />
+                  </IconButton>
                 </div>
 
-              <Tabs
-                variant="fullWidth"
-                value={value}
-                indicatorColor="primary"
-                textColor="primary"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
-              >
-                <Tab label="Active" />
-                <Tab label="Group" />
-                <Tab label="Archive" />
-              </Tabs>
-            </Paper>
-            <TabPanel value={value} index={0}>
-              
-            <List className={classes.list}>
-              <ListItem alignItems="flex-start" component={Paper}>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Christian"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        Is the work done?
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              {/* <Divider variant="inset" component="li" /> */}
-              <ListItem alignItems="flex-start" component={Paper}>
-                <ListItemAvatar>
-                  <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Christian"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        Is the work done?
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              {/* <Divider variant="inset" component="li" /> */}
-              <ListItem alignItems="flex-start" component={Paper}>
-                <ListItemAvatar>
-                  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Christian"
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        Is the work done?
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-            </List>
+                <Tabs
+                  variant="fullWidth"
+                  value={value}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  onChange={handleChange}
+                  aria-label="disabled tabs example"
+                >
+                  <Tab label="Active" />
+                  <Tab label="Group" />
+                  <Tab label="Archive" />
+                </Tabs>
+              </Paper>
+              <TabPanel value={value} index={0}>
+                <List className={classes.list}>
+                  <ListItem alignItems="flex-start" component={Paper}>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Christian"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes.inline}
+                            color="textPrimary"
+                          >
+                            Is the work done?
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  {/* <Divider variant="inset" component="li" /> */}
+                  <ListItem alignItems="flex-start" component={Paper}>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Travis Howard"
+                        src="/static/images/avatar/2.jpg"
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Christian"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes.inline}
+                            color="textPrimary"
+                          >
+                            Is the work done?
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  {/* <Divider variant="inset" component="li" /> */}
+                  <ListItem alignItems="flex-start" component={Paper}>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Cindy Baker"
+                        src="/static/images/avatar/3.jpg"
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Christian"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes.inline}
+                            color="textPrimary"
+                          >
+                            Is the work done?
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                Item Two
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                Item Three
+              </TabPanel>
+            </Grid>
+            <Grid item xs={12} md={7} component={Paper}>
+              <Grid container justify="center">
+                <Grid item xs={12}>
+                  <div className={classes.appBar}>
+                    <AppBar position="relative" color="inherit">
+                      <Toolbar>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src="/static/images/avatar/1.jpg"
+                        />
+                        <IconButton
+                          edge="start"
+                          className={classes.menuButton}
+                          color="inherit"
+                          aria-label="menu"
+                        >
+                          {/* <MenuIcon /> */}
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                          Christian
+                        </Typography>
 
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              Item Three
-            </TabPanel>
-          </Grid>
-          <Grid item xs={12} md={7} component={Paper}> 
-            <Grid container justify='center'>
-              <Grid item xs={12}>
-                <div className={classes.appBar}>
-                  <AppBar position="relative" color='inherit'>
+                        <div>
+                          <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                          >
+                            {/* <VideoCam /> */}
+                          </IconButton>
+                          <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                          >
+                            <Phone />
+                          </IconButton>
+                        </div>
+                      </Toolbar>
+                    </AppBar>
+                  </div>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    backgroundColor: '#dcdcdc',
+                    minHeight: '200px',
+                    maxHeight: '728px',
+                  }}
+                >
+                  <Paper style={{}} />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <AppBar
+                    position="relative"
+                    color="inherit"
+                    style={{ position: 'bottom: 0' }}
+                  >
                     <Toolbar>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        {/* <MenuIcon /> */}
-                      </IconButton>
-                      <Typography variant="h6" className={classes.title}>
-                        Christian
-                      </Typography>
+                      <TextField
+                        id="filled-full-width"
+                        label="Message"
+                        style={{ margin: 8 }}
+                        placeholder="Hi, how you doing?"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        variant="filled"
+                      />
 
-                      <div>
-                        <IconButton
-                          aria-label="account of current user"
-                          aria-controls="menu-appbar"
-                          aria-haspopup="true"
-                          onClick={handleMenu}
-                          color="inherit"
-                        >
-                          <VideoCam />
-                        </IconButton>
-                        <IconButton
-                          aria-label="account of current user"
-                          aria-controls="menu-appbar"
-                          aria-haspopup="true"
-                          onClick={handleMenu}
-                          color="inherit"
-                        >
-                          <Phone />
-                        </IconButton>
-                      </div>
+                      <div className={classes.grow} />
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color="inherit"
+                      >
+                        <SettingsVoice />
+                      </IconButton>
+
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color="inherit"
+                      >
+                        <Send />
+                      </IconButton>
                     </Toolbar>
                   </AppBar>
-                </div>
-              </Grid>
-              
-              <Grid item xs={12} style={{backgroundColor: '#dcdcdc', minHeight: '200px', maxHeight: '728px'}}>
-                  <Paper style={{}} />
-              </Grid>
-              
-              <Grid item xs={12}>
-                <AppBar position="relative" color="inherit" style={{position: 'bottom: 0'}}>
-                  <Toolbar>
-                    <TextField
-                      id="filled-full-width"
-                      label="Message"
-                      style={{ margin: 8 }}
-                      placeholder="Hi, how you doing?"
-                      fullWidth
-                      margin="normal"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      variant="filled"
-                    />
-                    
-                    <div className={classes.grow} />
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      color="inherit"
-                    >
-                      <SettingsVoice />
-                    </IconButton>
-                    
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      color="inherit"
-                    >
-                      <Send />
-                    </IconButton>
-                  </Toolbar>
-                </AppBar>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        }
-        </div>
+        )}
+      </div>
     </React.Fragment>
   );
 };
 
 ChatTab.propTypes = {
   openEditColorDialog: PropTypes.func,
-  openEditCompanyDialog: PropTypes.func
+  openEditCompanyDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

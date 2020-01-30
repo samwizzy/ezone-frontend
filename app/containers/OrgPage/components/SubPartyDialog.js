@@ -54,16 +54,13 @@ const currencies = [
   },
 ];
 
-const BranchDialog = props => {
+const SubPartyDialog = props => {
   const {
-    partyDialog,
-    branchDialog,
-    closeNewBranchDialogAction,
+    subPartyDialog,
+    closeNewPartyDialogAction,
     closeEditBranchDialogAction,
   } = props;
 
-  console.log(partyDialog, 'partyDialog');
-  console.log(branchDialog, 'branchDialog');
   const classes = useStyles();
   const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
@@ -84,23 +81,23 @@ const BranchDialog = props => {
 
   // useEffect(() => {
   //   setValues({
-  //     ...branchDialog.data,
+  //     ...subPartyDialog.data,
   //   });
   // }, []);
-  // }, [branchDialog.data]);
+  // }, [subPartyDialog.data]);
 
   const closeComposeDialog = () => {
     // eslint-disable-next-line no-unused-expressions
-    branchDialog.type === 'new'
-      ? closeNewBranchDialogAction()
+    subPartyDialog.type === 'new'
+      ? closeNewPartyDialogAction()
       : closeEditBranchDialogAction();
   };
 
   return (
     <div>
-      {branchDialog && (
+      {subPartyDialog && (
         <Dialog
-          {...branchDialog.props}
+          {...subPartyDialog.props}
           onClose={closeComposeDialog}
           aria-labelledby="form-dialog-title"
           fullWidth
@@ -109,12 +106,12 @@ const BranchDialog = props => {
           <AppBar position="static" elevation={1}>
             <Toolbar>
               <Typography variant="h6">
-                {branchDialog.type === 'new' ? 'New Branch' : 'Edit Branch'}
+                {subPartyDialog.type === 'new' ? 'New Party' : 'Edit Party'}
               </Typography>
             </Toolbar>
           </AppBar>
           <DialogContent>
-            {branchDialog.type === 'new' ? (
+            {subPartyDialog.type === 'new' ? (
               <div>
                 <TextField
                   id="standard-title"
@@ -318,7 +315,7 @@ const BranchDialog = props => {
               </div>
             )}
           </DialogContent>
-          {branchDialog.type === 'new' ? (
+          {subPartyDialog.type === 'new' ? (
             <DialogActions>
               <Button
                 onClick={() => {
@@ -365,23 +362,21 @@ const BranchDialog = props => {
   );
 };
 
-BranchDialog.propTypes = {
+SubPartyDialog.propTypes = {
   // dispatchNewPostAction: PropTypes.func,
-  closeNewBranchDialogAction: PropTypes.func,
+  closeNewPartyDialogAction: PropTypes.func,
   closeEditBranchDialogAction: PropTypes.func,
-  branchDialog: PropTypes.object,
-  partyDialog: PropTypes.object,
+  subPartyDialog: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  branchDialog: Selectors.makeSelectBranchDialog(),
-  partyDialog: Selectors.makeSelectPartyDialog(),
+  subPartyDialog: Selectors.makeSelectSubPartyDialog(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
-    closeNewBranchDialogAction: () => dispatch(Actions.closeNewBranchDialog()),
+    closeNewPartyDialogAction: () => dispatch(Actions.closeNewPartyDialog()),
     closeEditBranchDialogAction: () =>
       dispatch(Actions.closeEditBranchDialog()),
     // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
@@ -397,4 +392,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(BranchDialog);
+)(SubPartyDialog);
