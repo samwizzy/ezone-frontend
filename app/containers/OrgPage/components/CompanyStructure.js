@@ -23,6 +23,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import LoadingIndicator from '../../../components/LoadingIndicator';
 import PartyDialog from './PartyDialog';
+import SubPartyDialog from './SubPartyDialog';
 import * as Actions from '../actions';
 import * as Selectors from '../selectors';
 
@@ -53,9 +54,9 @@ const CompanyStructure = props => {
     console.log(`item ${index} clicked`);
   };
 
-  const { openNewPartyAction, loading } = props;
+  const { openNewPartyAction, openNewSubPartyAction, loading } = props;
 
-  console.log(openNewPartyAction, 'openNewPartyAction');
+  console.log(openNewSubPartyAction, 'openNewSubPartyAction');
 
   function createData(title, description) {
     return { title, description };
@@ -149,17 +150,17 @@ const CompanyStructure = props => {
               <Divider />
               <ListItem>
                 <Typography className={classes.root}>
-                  <Link href="#">Add Group</Link>
+                  <Link>Add Group</Link>
+                </Typography>
+              </ListItem>
+              <ListItem>
+                <Typography>
+                  <Link onClick={() => openNewSubPartyAction()}>Add Sub-Group</Link>
                 </Typography>
               </ListItem>
               <ListItem>
                 <Typography className={classes.root}>
-                  <Link href="#">Add Sub-Group</Link>
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <Typography className={classes.root}>
-                  <Link href="#">Add Role</Link>
+                  <Link>Add Role</Link>
                 </Typography>
               </ListItem>
             </List>
@@ -167,6 +168,7 @@ const CompanyStructure = props => {
         </Grid>
       </Grid>
       <PartyDialog />
+      <SubPartyDialog />
     </React.Fragment>
   );
 };
@@ -174,6 +176,7 @@ const CompanyStructure = props => {
 CompanyStructure.propTypes = {
   loading: PropTypes.bool,
   openNewPartyAction: PropTypes.func,
+  openNewSubPartyAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -183,6 +186,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     openNewPartyAction: () => dispatch(Actions.openNewPartyDialog()),
+    openNewSubPartyAction: () => dispatch(Actions.openNewSubGroupDialog()),
   };
 }
 

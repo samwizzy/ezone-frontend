@@ -93,3 +93,17 @@ export function closeNewPartyDialog() {
     type: Constants.CLOSE_NEW_PARTY_DIALOG,
   };
 }
+
+export function openNewSubGroupDialog() {
+  console.log('openSubGroupDialog');
+  return {
+    type: Constants.OPEN_NEW_SUB_PARTY_DIALOG,
+  };
+}
+
+export function closeNewSubGroupDialog() {
+  console.log('closeSubGroupDialog');
+  return {
+    type: Constants.CLOSE_NEW_SUB_PARTY_DIALOG,
+  };
+}
