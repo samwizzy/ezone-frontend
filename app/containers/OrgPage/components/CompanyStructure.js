@@ -55,8 +55,6 @@ const CompanyStructure = props => {
 
   const { openNewPartyAction, loading } = props;
 
-  console.log(openNewPartyAction, 'openNewPartyAction');
-
   function createData(title, description) {
     return { title, description };
   }
