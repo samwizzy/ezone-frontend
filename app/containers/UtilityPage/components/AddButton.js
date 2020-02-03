@@ -16,7 +16,7 @@ const useStyles = (theme => ({
 
 
 export function AddTask(props) {
-  const { openFileDialog } = props;
+  const { openNewTaskDialog } = props;
   const classes = useStyles()
 
   return (
@@ -25,7 +25,7 @@ export function AddTask(props) {
         <Button
           size="small"
           className={classes.iconButton}
-          onClick={openFileDialog}
+          onClick={openNewTaskDialog}
         >
           <Add className={classes.deleteIcon} /> Add Task
         </Button>
@@ -35,7 +35,7 @@ export function AddTask(props) {
 }
 
 export function AddFile(props) {
-  const { openNewBranchDialogAction } = props;
+  const { openFileDialog } = props;
   const classes = useStyles()
 
   return (
@@ -44,7 +44,7 @@ export function AddFile(props) {
         <Button
           size="small"
           className={classes.iconButton}
-          onClick={openNewBranchDialogAction}
+          onClick={openFileDialog}
         >
           <Add className={classes.deleteIcon} /> Upload File
         </Button>

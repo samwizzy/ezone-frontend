@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide, Typography, TextField } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
+import QuestionMark from '../../../../images/questionMarkIcon.svg'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,6 +15,10 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1, 0)
     },
   },
+  icon: {
+    width: '70px', 
+    height: '70px', 
+  }
 }));
 
 
@@ -41,41 +46,20 @@ function SharedFileDialog(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">Share File</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title"><img src={QuestionMark} className={classes.icon} /></DialogTitle>
         <Divider />
         <DialogContent>
-          {/* <DialogContentText id="alert-dialog-slide-description"></DialogContentText> */}
-          <form className={classes.root}>
-            <TextField
-              label="Enter email address or usernames"
-              id="outlined-size-small"
-              fullWidth
-              defaultValue="Small"
-              variant="outlined"
-              size="small"
-              value={form.email}
-            />
-
-            <TextField
-              id="outlined-multiline-static"
-              label="Add comment"
-              multiline
-              fullWidth
-              rows="4"
-              rowsMax="4"
-              value={form.comment}
-              onChange={handleChange}
-              defaultValue="Default Value"
-              variant="outlined"
-            />
-          </form>
+          <DialogContentText id="alert-dialog-slide-description">
+            Are you sure you want to move "Document Name" to Trash?
+          </DialogContentText>
+          
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={closeSharedFileDialog} color="primary">
             Cancel
           </Button>
           <Button variant="outlined" onClick={closeSharedFileDialog} color="primary">
-            Share
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
