@@ -1,25 +1,22 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
-  IconButton,
   Typography,
-  Box, 
+  Box,
   makeStyles,
   AppBar,
   Tabs,
   Tab,
-  Toolbar
+  Toolbar,
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../../App/actions';
-import HomeTab from './HomeTab';
-import ChatTab from './../ChatApp/ChatTab';
-import TasksList from './../TasksApp/TasksList';
-import FilesList from './../FilesApp/FilesList';
-import Autorenew from '@material-ui/icons/Autorenew'
-import UserMenu from '../../../components/layouts/shared-components/UserMenu'
+import * as Actions from '../../actions';
+import CompanyStructure from './CompanyStructure';
+import UserMenu from '../../../../components/layouts/shared-components/UserMenu';
+import PartyDialog from './PartyDialog'
+import SubPartyDialog from './SubPartyDialog'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,8 +29,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '20px 20px 0 0',
     '&:hover': {
       backgroundColor: theme.palette.common.white,
-      color: theme.palette.primary.main
-    }
+      color: theme.palette.primary.main,
+    },
   },
   sectionDesktop: {
     display: 'none',
@@ -44,10 +41,7 @@ const useStyles = makeStyles(theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
-    '& > div': {
-      display: 'flex'
-    }
-  }
+  },
 }));
 
 function TabPanel(props) {
@@ -84,45 +78,28 @@ function TabsPage() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color='secondary'>
+      <AppBar position="static" color="secondary">
         <Toolbar variant="dense" className={classes.toolbar}>
-
-          <div>
-            <IconButton aria-label="delete">
-              <Autorenew />
-            </IconButton>
-
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-              indicatorColor="primary"
-              centered
-            >
-              <Tab label="Project" {...a11yProps(1)} />
-              <Tab label="Chats" {...a11yProps(2)} />
-              <Tab label="Tasks" {...a11yProps(2)} />
-              <Tab label="File" {...a11yProps(2)} />
-            </Tabs>
-          </div>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            indicatorColor="primary"
+            centered
+          >
+            <Tab label="Organization Info" {...a11yProps(0)} />
+          </Tabs>
 
           <UserMenu />
-
         </Toolbar>
       </AppBar>
 
       <TabPanel value={value} index={0}>
-        <HomeTab />
+        <CompanyStructure />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ChatTab />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <TasksList />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <FilesList />
-      </TabPanel>
+
+      <PartyDialog />
+      <SubPartyDialog />
     </div>
   );
 }

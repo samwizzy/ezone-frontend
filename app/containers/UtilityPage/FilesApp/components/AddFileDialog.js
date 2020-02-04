@@ -159,7 +159,7 @@ AddFileDialog.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: Selectors.makeSelectNewTaskDialog()
+  data: Selectors.makeSelectNewFileDialog()
 });
 
 function mapDispatchToProps(dispatch) {

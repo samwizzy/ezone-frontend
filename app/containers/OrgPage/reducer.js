@@ -42,14 +42,14 @@ export const initialState = {
     props: {
       open: false,
     },
-    data: null,
+    data: null
   },
   subPartyDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null,
+    data: null
   },
 };
 
@@ -202,6 +202,7 @@ const orgPageReducer = (state = initialState, action) =>
         };
       }
       case Constants.OPEN_NEW_PARTY_DIALOG: {
+        console.log("I have just hit the reducer for new party dialog")
         return {
           ...state,
           partyDialog: {
@@ -209,7 +210,7 @@ const orgPageReducer = (state = initialState, action) =>
             props: {
               open: true,
             },
-            data: null,
+            data: null
           },
         };
       }

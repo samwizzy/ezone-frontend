@@ -83,6 +83,7 @@ export function closeEditDepartmentDialog() {
 }
 
 export function openNewPartyDialog() {
+  console.log("I have just clicked on the party dialog action")
   return {
     type: Constants.OPEN_NEW_PARTY_DIALOG,
   };

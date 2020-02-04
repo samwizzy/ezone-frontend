@@ -21,7 +21,8 @@ import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
 import OrgPage from '../OrgPage/Loadable';
-import CompanyStructure from '../OrgPage/components/CompanyStructure';
+// import CompanyStructure from '../OrgPage/companyStructure';
+import CompanyStructure from '../CompanyStructurePage/Loadable';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
@@ -69,8 +70,7 @@ const App = () => {
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
                   <Route exact path="/organization" component={OrgPage} />
-                  <Route
-                    path="/organization/company/structure"
+                  <Route exact path="/organization/company/structure"
                     component={CompanyStructure}
                   />
                   <Route path="/employee" component={EmployeePage} />

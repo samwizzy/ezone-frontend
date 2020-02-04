@@ -1,6 +1,6 @@
 /**
  *
- * OrgPage
+ * CompanyStructurePage
  *
  */
 
@@ -17,36 +17,33 @@ import makeSelectOrgPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import TabsPage from './components/TabsPage';
-import ColorDialog from './components/ColorDialog';
-import CompanyDialog from './components/CompanyDialog';
-import BranchDialog from './components/BranchDialog';
-import DepartmentDialog from './components/DepartmentDialog';
+import PartyDialog from './components/PartyDialog';
+import SubPartyDialog from './components/SubPartyDialog';
 
-export function OrgPage() {
-  useInjectReducer({ key: 'orgPage', reducer });
-  useInjectSaga({ key: 'orgPage', saga });
+export function CompanyStructurePage() {
+  useInjectReducer({ key: 'companyStructurePage', reducer });
+  useInjectSaga({ key: 'companyStructurePage', saga });
 
   return (
     <div>
       <Helmet>
-        <title>OrgPage</title>
-        <meta name="description" content="Description of OrgPage" />
+        <title>Company Structure Page</title>
+        <meta name="description" content="Description of CompanyStructurePage" />
       </Helmet>
       <TabsPage />
-      <ColorDialog />
-      <CompanyDialog />
-      <BranchDialog />
-      <DepartmentDialog />
+
+      <PartyDialog />
+      <SubPartyDialog />
     </div>
   );
 }
 
-OrgPage.propTypes = {
+CompanyStructurePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  orgPage: makeSelectOrgPage(),
+  companyStructurePage: makeSelectOrgPage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -63,4 +60,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(OrgPage);
+)(CompanyStructurePage);

@@ -1,20 +1,21 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect } from 'react'; // eslint-disable-next-line no-unused-expressions
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import {
   TextField,
   makeStyles,
   Button,
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogActions,
   AppBar,
   Toolbar,
   Typography,
   MenuItem,
+  Slide
 } from '@material-ui/core';
 import * as Selectors from '../selectors';
 import * as Actions from '../actions';
@@ -54,12 +55,12 @@ const currencies = [
   },
 ];
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const PartyDialog = props => {
-  const {
-    partyDialog,
-    closeNewPartyDialogAction,
-    closeEditBranchDialogAction,
-  } = props;
+  const { partyDialog, closeNewPartyDialog, closeEditBranchDialog } = props;
 
   const classes = useStyles();
   const [currency, setCurrency] = React.useState('EUR');
@@ -69,28 +70,23 @@ const PartyDialog = props => {
     assistantHead: '',
     email: '',
     numberOfEmployees: '',
-    address: '',
+    address: ''
   });
+
+  console.log(partyDialog, "Pary dialog...")
 
   const handleSelectChange = event => {
     setCurrency(event.target.value);
   };
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  // useEffect(() => {
-  //   setValues({
-  //     ...partyDialog.data,
-  //   });
-  // }, []);
-  // }, [partyDialog.data]);
-
   const closeComposeDialog = () => {
-    // eslint-disable-next-line no-unused-expressions
     partyDialog.type === 'new'
-      ? closeNewPartyDialogAction()
-      : closeEditBranchDialogAction();
+      ? closeNewPartyDialog()
+      : closeEditBranchDialog();
   };
 
   return (
@@ -98,18 +94,15 @@ const PartyDialog = props => {
       {partyDialog && (
         <Dialog
           {...partyDialog.props}
-          onClose={closeComposeDialog}
+          TransitionComponent={Transition}
+          onClose={closeNewPartyDialog}
+          keepMounted
           aria-labelledby="form-dialog-title"
-          fullWidth
-          maxWidth="sm"
         >
-          <AppBar position="static" elevation={1}>
-            <Toolbar>
-              <Typography variant="h6">
-                {partyDialog.type === 'new' ? 'New Party' : 'Edit Party'}
-              </Typography>
-            </Toolbar>
-          </AppBar>
+          <DialogTitle id="alert-dialog-slide-title">
+            {partyDialog.type === 'new' ? 'New Party' : 'Edit Party'}
+          </DialogTitle>
+
           <DialogContent>
             {partyDialog.type === 'new' ? (
               <div>
@@ -319,7 +312,6 @@ const PartyDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -328,7 +320,7 @@ const PartyDialog = props => {
                 Save
               </Button>
               <Button
-                onClick={() => closeComposeDialog()}
+                onClick={() => closeNewPartyDialog()}
                 color="primary"
                 variant="contained"
               >
@@ -339,7 +331,6 @@ const PartyDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  // dispatchUpdatePostAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -348,7 +339,7 @@ const PartyDialog = props => {
                 Update
               </Button>
               <Button
-                onClick={() => closeComposeDialog()}
+                onClick={() => closeNewPartyDialog()}
                 color="primary"
                 variant="contained"
               >
@@ -363,9 +354,8 @@ const PartyDialog = props => {
 };
 
 PartyDialog.propTypes = {
-  // dispatchNewPostAction: PropTypes.func,
-  closeNewPartyDialogAction: PropTypes.func,
-  closeEditBranchDialogAction: PropTypes.func,
+  closeNewPartyDialog: PropTypes.func,
+  closeEditBranchDialog: PropTypes.func,
   partyDialog: PropTypes.object,
 };
 
@@ -375,12 +365,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
-    closeNewPartyDialogAction: () => dispatch(Actions.closeNewPartyDialog()),
-    closeEditBranchDialogAction: () =>
-      dispatch(Actions.closeEditBranchDialog()),
-    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
-    dispatch,
+    closeNewPartyDialog: () => dispatch(Actions.closeNewPartyDialog()),
+    closeEditBranchDialog: () => dispatch(Actions.closeEditBranchDialog())
   };
 }
 

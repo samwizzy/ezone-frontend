@@ -16,8 +16,8 @@ import {
   Typography,
   MenuItem,
 } from '@material-ui/core';
-import * as Selectors from '../selectors';
-import * as Actions from '../actions';
+import * as Selectors from '../../selectors';
+import * as Actions from '../../actions';
 
 const useStyles = makeStyles(theme => ({
   container: {

@@ -11,8 +11,8 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from './node_modules/utils/injectSaga';
+import { useInjectReducer } from './node_modules/utils/injectReducer';
 import makeSelectOrgPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
