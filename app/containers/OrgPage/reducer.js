@@ -227,7 +227,6 @@ const orgPageReducer = (state = initialState, action) =>
         };
       }
       case Constants.OPEN_NEW_SUB_PARTY_DIALOG: {
-        console.log('come to reducer')
         return {
           ...state,
           subPartyDialog: {
