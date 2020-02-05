@@ -21,13 +21,13 @@ import { createStructuredSelector } from 'reselect';
 import Add from '@material-ui/icons/Add';
 import SettingsVoice from '@material-ui/icons/SettingsVoice';
 import Send from '@material-ui/icons/Send';
-import VideoCam from '@material-ui/icons/VideoCam';
+// import VideoCam from '@material-ui/icons/VideoCam';
 import Phone from '@material-ui/icons/Phone';
 import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
 import ChatIcon from '../../../images/chatIcon.svg';
 // import ChatBox from './ChatBox';
-import UserChat from './components/UserChat'
+import UserChat from './components/UserChat';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -246,7 +246,7 @@ const ChatTab = props => {
                             onClick={handleMenu}
                             color="inherit"
                           >
-                            <VideoCam />
+                            {/* <VideoCam /> */}
                           </IconButton>
                           <IconButton
                             aria-label="account of current user"
