@@ -66,14 +66,13 @@ const App = () => {
                   component={ForgotPasswordForm}
                 />
                 <Route exact path="/register" component={RegistrationPage} />
+                
                 <Layout3>
                   <PrivateRoute path="/dashboard" component={HomePage} />
                   <PrivateRoute path="/posts" component={AllPosts} />
-                  <Route exact path="/organization" component={OrgPage} />
-                  <Route exact path="/organization/company/structure"
-                    component={CompanyStructure}
-                  />
                   <Route path="/employee" component={EmployeePage} />
+                  <Route exact path="/organization" component={OrgPage} />
+                  <Route exact path="/organization/company/structure" component={CompanyStructure} />
                   <Route path="/utility" component={UtilityPage} />
                   <Route exact path="/email" component={EmailConfig} />
                   <Route path="/email/configuration" component={EmailConfigs} />

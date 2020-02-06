@@ -23,6 +23,13 @@ export const initialState = {
     },
     data: null
   },
+  roleDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -30,7 +37,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
       case Constants.OPEN_NEW_PARTY_DIALOG: {
-        console.log("I have just hit the reducer for new party dialog")
         return {
           ...state,
           partyDialog: {
@@ -55,7 +61,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.OPEN_NEW_SUB_PARTY_DIALOG: {
-        console.log('come to reducer')
         return {
           ...state,
           subPartyDialog: {
@@ -71,6 +76,30 @@ const companyStructurePageReducer = (state = initialState, action) =>
         return {
           ...state,
           subPartyDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.OPEN_NEW_ROLE_DIALOG: {
+        return {
+          ...state,
+          roleDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_NEW_ROLE_DIALOG: {
+        return {
+          ...state,
+          roleDialog: {
             type: 'new',
             props: {
               open: false,
