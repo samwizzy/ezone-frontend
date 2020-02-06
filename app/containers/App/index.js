@@ -32,63 +32,66 @@ import EmailPasswordTemplate from '../EmailConfig/components/EmailPasswordTempla
 import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import Layout3 from '../../components/layouts/layout3/Layout3';
-import { makeSelectUserToken } from './selectors';
-import PrivateRoute from './PrivateRoute';
-import { AppContext } from '../context/AppContext';
+// import { makeSelectUserToken } from './selectors';
+// import PrivateRoute from './PrivateRoute';
+// import { AppContext } from '../context/AppContext';
 
 const App = () => {
-  const [authTokens, setAuthTokens] = useState();
+  // const [authTokens, setAuthTokens] = useState();
 
-  const setTokens = data => {
-    // localStorage.setItem('tokens', JSON.stringify(data));
-    setAuthTokens(data);
-  };
+  // const setTokens = data => {
+  //   // localStorage.setItem('tokens', JSON.stringify(data));
+  //   setAuthTokens(data);
+  // };
 
   return (
     <div>
-      <AppContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-        <React.Fragment>
-          <CssBaseline />
-          <main>
-            <div>
-              <Helmet titleTemplate="%s - Ezone" defaultTitle="Ezone">
-                <meta
-                  name="description"
-                  content="A React.js Boilerplate application"
-                />
-              </Helmet>
+      {/* <AppContext.Provider value={{ authTokens, setAuthTokens: setTokens }}> */}
+      <React.Fragment>
+        <CssBaseline />
+        <main>
+          <div>
+            <Helmet titleTemplate="%s - Ezone" defaultTitle="Ezone">
+              <meta
+                name="description"
+                content="A React.js Boilerplate application"
+              />
+            </Helmet>
 
-              <Switch>
-                <Route exact path="/login" component={LoginPage} />
+            <Switch>
+              <Route exact path="/login" component={LoginPage} />
+              <Route
+                exact
+                path="/forgot-password"
+                component={ForgotPasswordForm}
+              />
+              <Route exact path="/register" component={RegistrationPage} />
+              <Layout3>
+                {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
+                {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
+                <Route exact path="/organization" component={OrgPage} />
                 <Route
                   exact
-                  path="/forgot-password"
-                  component={ForgotPasswordForm}
+                  path="/organization/company/structure"
+                  component={CompanyStructure}
                 />
-                <Route exact path="/register" component={RegistrationPage} />
-                
-                <Layout3>
-                  <PrivateRoute path="/dashboard" component={HomePage} />
-                  <PrivateRoute path="/posts" component={AllPosts} />
-                  <Route path="/employee" component={EmployeePage} />
-                  <Route exact path="/organization" component={OrgPage} />
-                  <Route exact path="/organization/company/structure" component={CompanyStructure} />
-                  <Route path="/utility" component={UtilityPage} />
-                  <Route exact path="/email" component={EmailConfig} />
-                  <Route path="/email/configuration" component={EmailConfigs} />
-                  <Route path="/email/template" component={EmailTemplate} />
-                  <Route
-                    path="/email/password/template"
-                    component={EmailPasswordTemplate}
-                  />
-                  <Route exact path="/" component={HomePage} />
-                </Layout3>
-                <Route path="" component={NotFoundPage} />
-              </Switch>
-            </div>
-          </main>
-        </React.Fragment>
-      </AppContext.Provider>
+                <Route path="/employee" component={EmployeePage} />
+                <Route path="/utility" component={UtilityPage} />
+                <Route exact path="/email" component={EmailConfig} />
+                <Route path="/email/configuration" component={EmailConfigs} />
+                <Route path="/email/template" component={EmailTemplate} />
+                <Route
+                  path="/email/password/template"
+                  component={EmailPasswordTemplate}
+                />
+                <Route exact path="/" component={HomePage} />
+              </Layout3>
+              <Route path="" component={NotFoundPage} />
+            </Switch>
+          </div>
+        </main>
+      </React.Fragment>
+      {/* </AppContext.Provider> */}
     </div>
   );
 };

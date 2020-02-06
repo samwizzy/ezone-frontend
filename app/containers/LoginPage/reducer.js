@@ -18,6 +18,7 @@ const loginPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
       case Constants.LOGIN: {
+        console.log(action.payload, 'reducer payload');
         return {
           loading: true,
           error: false,

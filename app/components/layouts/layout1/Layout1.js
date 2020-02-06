@@ -30,7 +30,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import Footer from '../../Footer';
-import { useAuth } from '../../../containers/context/AppContext';
+// import { useAuth } from '../../../containers/context/AppContext';
 
 const drawerWidth = 240;
 
@@ -150,12 +150,12 @@ const Layout1 = props => {
     props.history.push(link);
   };
 
-  const { setAuthTokens } = useAuth();
+  // const { setAuthTokens } = useAuth();
 
-  function logOut() {
-    localStorage.removeItem('tokens');
-    setAuthTokens();
-  }
+  // function logOut() {
+  //   localStorage.removeItem('tokens');
+  //   setAuthTokens();
+  // }
 
   const navigation = [
     { id: 1, name: 'Dashboard', link: '/dashboard' },
