@@ -46,8 +46,7 @@ const styles = theme => ({
     overflow: 'hidden',
   },
   appBar: {
-    boxShadow: theme.shadows[0],
-    zIndex: 9999,
+    boxShadow: theme.shadows[0]
   },
   text: {
     fontSize: 50,

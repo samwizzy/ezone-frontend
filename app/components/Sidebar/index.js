@@ -21,6 +21,8 @@ import Apps from '@material-ui/icons/Apps';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import Group from '@material-ui/icons/Group';
+import Settings from '@material-ui/icons/Settings';
+import Security from '@material-ui/icons/Security';
 import BusinessCenter from '@material-ui/icons/BusinessCenter';
 import TabMenu from '../TabMenu';
 import TabMenus from '../TabMenus';
@@ -32,14 +34,14 @@ const links = [
   'Organization',
   'Applications',
   'Employees',
-  'Settings',
   'Groups',
+  'Security',
+  'Settings'
 ];
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    color: console.log(theme, 'theme'),
+    display: 'flex'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -68,6 +70,7 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     whiteSpace: 'nowrap',
     marginTop: '80px',
+    zIndex: 1099
   },
   drawerOpen: {
     width: drawerWidth,
@@ -92,7 +95,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
+    // ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
@@ -186,16 +189,6 @@ export default function MiniDrawer(props) {
                     <ListItemText primary={text} />
                   </ListItem>
                 );
-              case 'Settings':
-                return (
-                  <ListItem button key={index} component="a" href="/email">
-                    <ListItemIcon>
-                      <Apps />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
               case 'Groups':
                 return (
                   <ListItem button key={index} component="a" href="/groups">
@@ -206,22 +199,35 @@ export default function MiniDrawer(props) {
                   </ListItem>
                 );
                 break;
-              default:
+              case 'Security':
                 return (
-                  <ListItem button key={index}>
+                  <ListItem button key={index} component="a" href="/email">
                     <ListItemIcon>
-                      <Dashboard />
+                      <Security />
                     </ListItemIcon>
-                    <ListItemText primary={text.name} />
+                    <ListItemText primary={text} />
                   </ListItem>
                 );
+                break;
+              case 'Settings':
+                return (
+                  <ListItem button key={index} component="a" href="/email">
+                    <ListItemIcon>
+                      <Settings />
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+                break;  
+              default:
+                return null
             }
           })}
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        {/* <div className={classes.toolbar} /> */}
+        <div className={classes.toolbar} />
         {props.content}
       </main>
     </div>

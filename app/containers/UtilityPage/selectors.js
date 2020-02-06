@@ -33,10 +33,16 @@ const makeSelectData = () =>
     subState => subState.data,
   );
 
+const makeSelectTaskData = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.data1,
+  );
+
 const makeSelectFileUploadDialog = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.fileDialog,
+    subState => subState.fileUploadDialog,
   );
 
 const makeSelectError = () =>
@@ -45,16 +51,28 @@ const makeSelectError = () =>
     subState => subState.error,
   );
 
-const makeSelectSharedFileDialog = () =>
+const makeSelectShareFileDialog = () =>
   createSelector(
     selectUtilityPageDomain,
     subState => subState.shareFileDialog,
   );
 
-const makeSelectEditCompanyDialog = () =>
+const makeSelectNewFileDialog = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.companyDialog,
+    subState => subState.fileDialog,
+  );
+
+const makeSelectNewTaskDialog = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.taskDialog,
+  );
+
+const makeSelectPreviewTaskDialog = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.previewTaskDialog,
   );
 
 const makeSelectBranchDialog = () =>
@@ -74,10 +92,13 @@ export {
   selectUtilityPageDomain,
   makeSelectLoading,
   makeSelectData,
+  makeSelectTaskData,
   makeSelectFileUploadDialog,
-  makeSelectSharedFileDialog,
+  makeSelectNewTaskDialog,
+  makeSelectPreviewTaskDialog,
+  makeSelectShareFileDialog,
   makeSelectError,
-  makeSelectEditCompanyDialog,
+  makeSelectNewFileDialog,
   makeSelectBranchDialog,
   makeSelectDepartmentDialog
 };

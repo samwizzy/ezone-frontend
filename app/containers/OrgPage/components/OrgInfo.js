@@ -86,7 +86,7 @@ const OrgInfo = props => {
                 </ListItemAvatar>
                 <ListItemText
                   primary={
-                    <Typography variant="h6" color="default">
+                    <Typography variant="h6" color="inherit">
                       Octiver Communications
                     </Typography>
                   }

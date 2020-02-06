@@ -5,40 +5,35 @@ import {
   Avatar,
   AppBar,
   Box,
-  Divider,
   Grid,
-  Fab,
-  Icon,
   IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Menu,
-  MenuItem,
   Tabs,
   Tab,
   Toolbar,
   Typography,
   Paper,
   Button,
-  TextField,
+  TextField
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import classNames from 'classnames'
 import Add from '@material-ui/icons/Add';
 import SettingsVoice from '@material-ui/icons/SettingsVoice';
 import Send from '@material-ui/icons/Send';
-// import VideoCam from '@material-ui/icons/VideoCam';
+import VideocamSharp from '@material-ui/icons/VideocamSharp';
 import Phone from '@material-ui/icons/Phone';
+import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
 import ChatIcon from '../../../images/chatIcon.svg';
 // import ChatBox from './ChatBox';
+import UserChat from './components/UserChat'
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    color: console.log(theme, "Theme")
   },
   avatar: {
     width: theme.spacing(12),
@@ -74,14 +69,6 @@ const useStyles = makeStyles(theme => ({
   input: {
     height: 40,
   },
-  list: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
   appBar: {
     flexGrow: 1,
   },
@@ -90,10 +77,29 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    marginLeft: theme.spacing(1)
   },
   grow: {
     flexGrow: 1,
   },
+  tabs: {
+    '& .MuiTab-root': {
+      [theme.breakpoints.up('sm')]: {
+        minWidth: 'inherit'
+      },
+    }
+  },
+  chatPane: {
+    display: 'flex',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(1, 8),
+    borderRadius: '0 8px 8px 8px',
+    whiteSpace: 'pre-wrap',
+    color: theme.palette.common.white
+  } 
 }));
 
 function TabPanel(props) {
@@ -127,6 +133,7 @@ function a11yProps(index) {
 }
 
 const ChatTab = props => {
+  // const { } = props;
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
 
@@ -144,7 +151,14 @@ const ChatTab = props => {
     setValue(newValue);
   };
 
-  const { openEditColorDialog, openEditCompanyDialog } = props;
+  const isFirstMessageOfGroup = (item, i) => {
+    return (i === 0 || (this.props.chat.dialog[i - 1] && this.props.chat.dialog[i - 1].who !== item.who));
+  };
+
+  const isLastMessageOfGroup = (item, i) => {
+    return (i === this.props.chat.dialog.length - 1 || (this.props.chat.dialog[i + 1] && this.props.chat.dialog[i + 1].who !== item.who));
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -173,16 +187,15 @@ const ChatTab = props => {
           </Grid>
         ) : (
           <Grid justify="center" container>
-            <Grid item xs={12} md={5} style={{ border: '1px solid #dcdcdc' }}>
+            <Grid item xs={12} md={4} style={{ backgroundColor: '#efefef' }}>
               <Paper square>
                 <div
-                  item
-                  xs={12}
                   style={{
-                    border: '1px solid green',
+                    border: '1px solid #efefef',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    padding: '3px 7px'
                   }}
                 >
                   <TextField
@@ -214,95 +227,24 @@ const ChatTab = props => {
                   textColor="primary"
                   onChange={handleChange}
                   aria-label="disabled tabs example"
+                  className={classes.tabs}
                 >
-                  <Tab label="Active" />
-                  <Tab label="Group" />
-                  <Tab label="Archive" />
+                  <Tab label="Active" {...a11yProps(1)} />
+                  <Tab label="Group" {...a11yProps(1)} />
+                  <Tab label="Archive" {...a11yProps(1)} />
                 </Tabs>
               </Paper>
               <TabPanel value={value} index={0}>
-                <List className={classes.list}>
-                  <ListItem alignItems="flex-start" component={Paper}>
-                    <ListItemAvatar>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Christian"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
-                          >
-                            Is the work done?
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  {/* <Divider variant="inset" component="li" /> */}
-                  <ListItem alignItems="flex-start" component={Paper}>
-                    <ListItemAvatar>
-                      <Avatar
-                        alt="Travis Howard"
-                        src="/static/images/avatar/2.jpg"
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Christian"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
-                          >
-                            Is the work done?
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  {/* <Divider variant="inset" component="li" /> */}
-                  <ListItem alignItems="flex-start" component={Paper}>
-                    <ListItemAvatar>
-                      <Avatar
-                        alt="Cindy Baker"
-                        src="/static/images/avatar/3.jpg"
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Christian"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
-                          >
-                            Is the work done?
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                </List>
+                <UserChat />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                Item Two
+                <UserChat />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                Item Three
+                <UserChat />
               </TabPanel>
             </Grid>
-            <Grid item xs={12} md={7} component={Paper}>
+            <Grid item xs={12} md={8} component={Paper}>
               <Grid container justify="center">
                 <Grid item xs={12}>
                   <div className={classes.appBar}>
@@ -312,14 +254,6 @@ const ChatTab = props => {
                           alt="Remy Sharp"
                           src="/static/images/avatar/1.jpg"
                         />
-                        <IconButton
-                          edge="start"
-                          className={classes.menuButton}
-                          color="inherit"
-                          aria-label="menu"
-                        >
-                          {/* <MenuIcon /> */}
-                        </IconButton>
                         <Typography variant="h6" className={classes.title}>
                           Christian
                         </Typography>
@@ -332,7 +266,7 @@ const ChatTab = props => {
                             onClick={handleMenu}
                             color="inherit"
                           >
-                            {/* <VideoCam /> */}
+                            <VideocamSharp />
                           </IconButton>
                           <IconButton
                             aria-label="account of current user"
@@ -352,12 +286,24 @@ const ChatTab = props => {
                   item
                   xs={12}
                   style={{
-                    backgroundColor: '#dcdcdc',
+                    backgroundColor: '#efefef',
+                    padding: '10px', 
                     minHeight: '200px',
-                    maxHeight: '728px',
+                    height: '728px',
+                    overflow: 'auto',
+                    border: '1px solid #ccc'
                   }}
                 >
-                  <Paper style={{}} />
+                  <div className={classNames(
+                    {'me': 'item.id' === 'user.id'},
+                    {'contact': 'item.id' !== 'user.id'},
+                    // {'first-of-group': this.isFirstMessageOfGroup('item', 'i')},
+                    // {'last-of-group': this.isLastMessageOfGroup('item', 'i')},
+                  )} 
+                  style={{border: '1px solid red', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 0'}}
+                  >
+                    <Paper className={classes.chatPane}>Hi brother</Paper>
+                  </div>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -367,17 +313,26 @@ const ChatTab = props => {
                     style={{ position: 'bottom: 0' }}
                   >
                     <Toolbar>
+                      <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color="inherit"
+                      >
+                        <AttachFile />
+                      </IconButton>
                       <TextField
                         id="filled-full-width"
                         label="Message"
                         style={{ margin: 8 }}
                         placeholder="Hi, how you doing?"
                         fullWidth
+                        size="small"
                         margin="normal"
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        variant="filled"
+                        variant="outlined"
                       />
 
                       <div className={classes.grow} />
@@ -411,8 +366,7 @@ const ChatTab = props => {
 };
 
 ChatTab.propTypes = {
-  openEditColorDialog: PropTypes.func,
-  openEditCompanyDialog: PropTypes.func,
+  // openEditCompanyDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -421,8 +375,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
-    openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    // openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
   };
 }
 

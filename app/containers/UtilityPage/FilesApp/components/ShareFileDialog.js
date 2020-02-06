@@ -1,25 +1,33 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles'
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Slide, Typography, TextField } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
-import { Typography } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1, 0)
+    },
+  },
+}));
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function SharedFileDialog(props) {
-  const { closeSharedFileDialog, data } = props
+  const classes = useStyles()
+  const { closeShareFileDialog, data } = props
+  const [form, setForm] = React.useState({email: '', comment: ''})
+
+  const handleChange = () => {}
 
   console.log(data, 'checking shared...')
 
@@ -29,22 +37,45 @@ function SharedFileDialog(props) {
         {...data.props}
         TransitionComponent={Transition}
         keepMounted
-        onClose={closeSharedFileDialog}
+        onClose={closeShareFileDialog}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title"></DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">Share File</DialogTitle>
+        <Divider />
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <Typography variant='h4'>Hello world</Typography>
-          </DialogContentText>
+          {/* <DialogContentText id="alert-dialog-slide-description"></DialogContentText> */}
+          <form className={classes.root}>
+            <TextField
+              label="Enter email address or usernames"
+              id="outlined-size-small"
+              fullWidth
+              defaultValue="Small"
+              variant="outlined"
+              size="small"
+              value={form.email}
+            />
+
+            <TextField
+              id="outlined-multiline-static"
+              label="Add comment"
+              multiline
+              fullWidth
+              rows="4"
+              rowsMax="4"
+              value={form.comment}
+              onChange={handleChange}
+              defaultValue="Default Value"
+              variant="outlined"
+            />
+          </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeSharedFileDialog} color="primary">
+          <Button variant="outlined" onClick={closeShareFileDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={closeSharedFileDialog} color="primary">
-            Upload
+          <Button variant="outlined" onClick={closeShareFileDialog} color="primary">
+            Share
           </Button>
         </DialogActions>
       </Dialog>
@@ -54,18 +85,18 @@ function SharedFileDialog(props) {
 
 
 SharedFileDialog.propTypes = {
-  openSharedFileDialog: PropTypes.func,
-  closeSharedFileDialog: PropTypes.func,
+  openShareFileDialog: PropTypes.func,
+  closeShareFileDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: Selectors.makeSelectSharedFileDialog()
+  data: Selectors.makeSelectShareFileDialog()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    openSharedFileDialog: ev => dispatch(Actions.openSharedFileDialog(ev)),
-    closeSharedFileDialog: () => dispatch(Actions.closeSharedFileDialog()),
+    openShareFileDialog: ev => dispatch(Actions.openShareFileDialog(ev)),
+    closeShareFileDialog: () => dispatch(Actions.closeShareFileDialog()),
     dispatch,
   };
 }

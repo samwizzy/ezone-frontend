@@ -12,7 +12,7 @@ export function* login() {
 
   const { username, password } = loginDetails;
   const newData = { username, password, grant_type: 'password' };
-  const requestURL = `${BaseUrl}${Endpoints.Login}`;
+  const requestURL = `${BaseUrl}${Endpoints.LoginUrl}`;
 
   console.log(newData, 'newData');
   console.log(requestURL, 'requestURL');

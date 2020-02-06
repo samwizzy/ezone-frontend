@@ -56,8 +56,6 @@ const CompanyStructure = props => {
 
   const { openNewPartyAction, openNewSubPartyAction, loading } = props;
 
-  console.log(openNewSubPartyAction, 'openNewSubPartyAction');
-
   function createData(title, description) {
     return { title, description };
   }
@@ -154,8 +152,8 @@ const CompanyStructure = props => {
                 </Typography>
               </ListItem>
               <ListItem>
-                <Typography>
-                  <Link onClick={() => openNewSubPartyAction()}>Add Sub-Group</Link>
+                <Typography onClick={() => openNewSubPartyAction()}>
+                  <Link>Add Sub-Group</Link>
                 </Typography>
               </ListItem>
               <ListItem>
