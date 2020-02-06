@@ -45,7 +45,7 @@ export function openShareFileDialog(data) {
   };
 }
 
-export function closeSharedFileDialog() {
+export function closeShareFileDialog() {
   return {
     type: CLOSE_SHARE_FILE_DIALOG,
   };

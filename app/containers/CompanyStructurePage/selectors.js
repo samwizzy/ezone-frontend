@@ -45,6 +45,12 @@ const makeSelectSubPartyDialog = () =>
     subState => subState.subPartyDialog,
   );
 
+const makeSelectRoleDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.roleDialog,
+  );
+
 export default makeSelectCompanyStructurePage;
 export {
   selectCompanyStructurePageDomain,
@@ -52,4 +58,5 @@ export {
   makeSelectError,
   makeSelectPartyDialog,
   makeSelectSubPartyDialog,
+  makeSelectRoleDialog
 };

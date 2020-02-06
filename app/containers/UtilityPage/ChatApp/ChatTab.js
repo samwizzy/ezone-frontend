@@ -18,10 +18,11 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import classNames from 'classnames'
 import Add from '@material-ui/icons/Add';
 import SettingsVoice from '@material-ui/icons/SettingsVoice';
 import Send from '@material-ui/icons/Send';
-import VideoCam from '@material-ui/icons/VideoCam';
+import VideocamSharp from '@material-ui/icons/VideocamSharp';
 import Phone from '@material-ui/icons/Phone';
 import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
@@ -32,6 +33,7 @@ import UserChat from './components/UserChat'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    color: console.log(theme, "Theme")
   },
   avatar: {
     width: theme.spacing(12),
@@ -86,7 +88,18 @@ const useStyles = makeStyles(theme => ({
         minWidth: 'inherit'
       },
     }
-  }
+  },
+  chatPane: {
+    display: 'flex',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(1, 8),
+    borderRadius: '0 8px 8px 8px',
+    whiteSpace: 'pre-wrap',
+    color: theme.palette.common.white
+  } 
 }));
 
 function TabPanel(props) {
@@ -120,6 +133,7 @@ function a11yProps(index) {
 }
 
 const ChatTab = props => {
+  // const { } = props;
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
 
@@ -137,7 +151,14 @@ const ChatTab = props => {
     setValue(newValue);
   };
 
-  const { openEditColorDialog, openEditCompanyDialog } = props;
+  const isFirstMessageOfGroup = (item, i) => {
+    return (i === 0 || (this.props.chat.dialog[i - 1] && this.props.chat.dialog[i - 1].who !== item.who));
+  };
+
+  const isLastMessageOfGroup = (item, i) => {
+    return (i === this.props.chat.dialog.length - 1 || (this.props.chat.dialog[i + 1] && this.props.chat.dialog[i + 1].who !== item.who));
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -169,13 +190,12 @@ const ChatTab = props => {
             <Grid item xs={12} md={4} style={{ backgroundColor: '#efefef' }}>
               <Paper square>
                 <div
-                  item
-                  xs={12}
                   style={{
                     border: '1px solid #efefef',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    padding: '3px 7px'
                   }}
                 >
                   <TextField
@@ -246,7 +266,7 @@ const ChatTab = props => {
                             onClick={handleMenu}
                             color="inherit"
                           >
-                            <VideoCam />
+                            <VideocamSharp />
                           </IconButton>
                           <IconButton
                             aria-label="account of current user"
@@ -274,7 +294,16 @@ const ChatTab = props => {
                     border: '1px solid #ccc'
                   }}
                 >
-                  <Paper style={{display: 'inline-block', padding: '8px 20px', borderRadius: '0 8px 8px 8px'}}>Hi brother</Paper>
+                  <div className={classNames(
+                    {'me': 'item.id' === 'user.id'},
+                    {'contact': 'item.id' !== 'user.id'},
+                    // {'first-of-group': this.isFirstMessageOfGroup('item', 'i')},
+                    // {'last-of-group': this.isLastMessageOfGroup('item', 'i')},
+                  )} 
+                  style={{border: '1px solid red', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 0'}}
+                  >
+                    <Paper className={classes.chatPane}>Hi brother</Paper>
+                  </div>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -337,8 +366,7 @@ const ChatTab = props => {
 };
 
 ChatTab.propTypes = {
-  openEditColorDialog: PropTypes.func,
-  openEditCompanyDialog: PropTypes.func,
+  // openEditCompanyDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -347,8 +375,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
-    openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    // openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
   };
 }
 
