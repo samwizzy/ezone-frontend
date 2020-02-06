@@ -21,14 +21,14 @@ const makeSelectError = () =>
     globalState => globalState.error,
   );
 
-const makeSelectLoginDetails = () =>
-  createSelector(
-    selectGlobal,
-    subState => subState.loginDetails,
-  );
+// const makeSelectLoginDetails = () =>
+//   createSelector(
+//     selectGlobal,
+//     subState => subState.loginDetails,
+//   );
 
-const tok = localStorage.getItem('token');
-console.log(tok, 'toktoktoktok');
+// const tok = localStorage.getItem('token');
+// console.log(tok, 'toktoktoktok');
 
 const makeSelectUserToken = () =>
   createSelector(
@@ -56,7 +56,7 @@ const makeSelectLocation = () =>
 
 export {
   selectGlobal,
-  makeSelectLoginDetails,
+  // makeSelectLoginDetails,
   makeSelectUserToken,
   makeSelectCurrentUser,
   makeSelectLoading,

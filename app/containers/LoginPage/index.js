@@ -19,21 +19,21 @@ import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './components/LoginForm';
 
-import { useAuth } from '../context/AppContext';
+// import { useAuth } from '../context/AppContext';
 import { makeSelectUserToken } from '../App/selectors';
 
-export function LoginPage({ tokens }) {
+export function LoginPage() {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
   // const [isLoggedIn, setLoggedIn] = useState(false);
 
-  const { setAuthTokens } = useAuth();
+  // const { setAuthTokens } = useAuth();
 
-  if (tokens) {
-    setAuthTokens(tokens);
-    return <Redirect to="/dashboard" />;
-  }
+  // if (tokens) {
+  //   setAuthTokens(tokens);
+  //   return <Redirect to="/dashboard" />;
+  // }
 
   return (
     <div>
