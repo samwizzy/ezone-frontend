@@ -7,8 +7,6 @@ import { initialState } from './reducer';
 
 const selectLoginPageDomain = state => state.loginPage || initialState;
 
-console.log(selectLoginPageDomain, 'selectLoginPageDomain');
-
 /**
  * Other specific selectors
  */

@@ -1,4 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
+import qs from 'query-string';
 import request from '../../utils/request';
 
 import { BaseUrl } from '../../components/BaseUrl';
@@ -17,11 +18,12 @@ export function* login() {
   const newData = { username, password, grant_type: 'password' };
   const requestURL = `${BaseUrl}${Endpoints.LoginUrl}`;
 
-  console.log(newData, 'newData');
+  const decode = decodeURIComponent(qs.stringify(newData));
+
   try {
     const loginResponse = yield call(request, requestURL, {
       method: 'POST',
-      body: JSON.stringify(newData),
+      body: decode,
       headers: new Headers({
         Authorization: `Basic ${btoa('web-client:password')}`,
         'Content-Type': 'application/x-www-form-urlencoded',
