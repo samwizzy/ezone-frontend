@@ -30,5 +30,6 @@ export const CLOSE_NEW_PARTY_DIALOG = 'app/OrgPage/CLOSE_NEW_PARTY_DIALOG';
 export const OPEN_EDIT_PARTY_DIALOG = 'app/OrgPage/OPEN_EDIT_PARTY_DIALOG';
 export const CLOSE_EDIT_PARTY_DIALOG = 'app/OrgPage/CLOSE_EDIT_PARTY_DIALOG';
 
+// Add new sub group
 export const OPEN_NEW_SUB_PARTY_DIALOG = 'app/OrgPage/OPEN_NEW_SUB_PARTY_DIALOG';
 export const CLOSE_NEW_SUB_PARTY_DIALOG = 'app/OrgPage/CLOSE_NEW_SUB_PARTY_DIALOG';

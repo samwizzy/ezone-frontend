@@ -72,6 +72,8 @@ const PartyDialog = props => {
     address: '',
   });
 
+  console.log(partyDialog, "partyDialog")
+
   const handleSelectChange = event => {
     setCurrency(event.target.value);
   };
