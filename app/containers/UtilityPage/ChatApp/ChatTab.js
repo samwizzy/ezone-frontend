@@ -6,6 +6,7 @@ import {
   AppBar,
   Box,
   Grid,
+  Icon,
   IconButton,
   Tabs,
   Tab,
@@ -21,14 +22,15 @@ import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames'
 import Add from '@material-ui/icons/Add';
 import SettingsVoice from '@material-ui/icons/SettingsVoice';
-import Send from '@material-ui/icons/Send';
 import VideocamSharp from '@material-ui/icons/VideocamSharp';
 import Phone from '@material-ui/icons/Phone';
 import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
-import ChatIcon from '../../../images/chatIcon.svg';
 // import ChatBox from './ChatBox';
-import UserChat from './components/UserChat'
+import UserChat from './components/UserChat' 
+import NoAvailableChats from './components/NoAvailableChats' 
+import ChatHeader from './components/ChatHeader' 
+import ChatFooter from './components/ChatFooter' 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,9 +59,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   textField: {
-    width: theme.spacing(50),
-    padding: theme.spacing(0),
-    borderRadius: '20px',
+    width: '100%'
   },
   button: {
     margin: theme.spacing(4),
@@ -67,7 +67,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '50px',
   },
   input: {
-    height: 40,
+    // height: 40,
+    borderRadius: theme.shape.borderRadius * 5
   },
   appBar: {
     flexGrow: 1,
@@ -99,7 +100,15 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0 8px 8px 8px',
     whiteSpace: 'pre-wrap',
     color: theme.palette.common.white
-  } 
+  },
+  msgBody: {
+    position: 'relative',
+    backgroundColor: '#efefef',
+    minHeight: '200px',
+    height: '728px',
+    overflow: 'auto',
+    border: '1px solid red'
+  }
 }));
 
 function TabPanel(props) {
@@ -163,35 +172,14 @@ const ChatTab = props => {
     <React.Fragment>
       <div>
         {!status === false ? (
-          <Grid
-            justify="center"
-            alignItems="center"
-            container
-            className={classes.grid}
-          >
-            <Grid item style={{ border: '1px solid #dcdcdc', padding: '10px' }}>
-              <Box my={2}>
-                <img src={ChatIcon} title="ChatIcon" />
-              </Box>
-              <Typography variant="subtitle1" component="h1">
-                You currently have no chat
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Start New Chat
-              </Button>
-            </Grid>
-          </Grid>
+          <NoAvailableChats />
         ) : (
           <Grid justify="center" container>
             <Grid item xs={12} md={4} style={{ backgroundColor: '#efefef' }}>
               <Paper square>
                 <div
                   style={{
-                    border: '1px solid #efefef',
+                    // border: '1px solid #efefef',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -206,8 +194,8 @@ const ChatTab = props => {
                     id="chat"
                     label="Search Chat"
                     placeholder="Is the work done?"
-                    multiline
                     name="chat"
+                    size="small"
                     InputProps={{
                       className: classes.input,
                     }}
@@ -247,114 +235,23 @@ const ChatTab = props => {
             <Grid item xs={12} md={8} component={Paper}>
               <Grid container justify="center">
                 <Grid item xs={12}>
-                  <div className={classes.appBar}>
-                    <AppBar position="relative" color="inherit">
-                      <Toolbar>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src="/static/images/avatar/1.jpg"
-                        />
-                        <Typography variant="h6" className={classes.title}>
-                          Christian
-                        </Typography>
-
-                        <div>
-                          <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                          >
-                            <VideocamSharp />
-                          </IconButton>
-                          <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                          >
-                            <Phone />
-                          </IconButton>
-                        </div>
-                      </Toolbar>
-                    </AppBar>
-                  </div>
+                  <ChatHeader />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  style={{
-                    backgroundColor: '#efefef',
-                    padding: '10px', 
-                    minHeight: '200px',
-                    height: '728px',
-                    overflow: 'auto',
-                    border: '1px solid #ccc'
-                  }}
-                >
+                <Grid item xs={12}>
+                  <div className={classes.msgBody}>
                   <div className={classNames(
                     {'me': 'item.id' === 'user.id'},
                     {'contact': 'item.id' !== 'user.id'},
                     // {'first-of-group': this.isFirstMessageOfGroup('item', 'i')},
                     // {'last-of-group': this.isLastMessageOfGroup('item', 'i')},
                   )} 
-                  style={{border: '1px solid red', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 0'}}
+                  style={{border: '1px solid red', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 20px'}}
                   >
                     <Paper className={classes.chatPane}>Hi brother</Paper>
                   </div>
-                </Grid>
 
-                <Grid item xs={12}>
-                  <AppBar
-                    position="relative"
-                    color="inherit"
-                    style={{ position: 'bottom: 0' }}
-                  >
-                    <Toolbar>
-                      <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        color="inherit"
-                      >
-                        <AttachFile />
-                      </IconButton>
-                      <TextField
-                        id="filled-full-width"
-                        label="Message"
-                        style={{ margin: 8 }}
-                        placeholder="Hi, how you doing?"
-                        fullWidth
-                        size="small"
-                        margin="normal"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        variant="outlined"
-                      />
-
-                      <div className={classes.grow} />
-                      <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        color="inherit"
-                      >
-                        <SettingsVoice />
-                      </IconButton>
-
-                      <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        color="inherit"
-                      >
-                        <Send />
-                      </IconButton>
-                    </Toolbar>
-                  </AppBar>
+                    <ChatFooter />
+                  </div>
                 </Grid>
               </Grid>
             </Grid>
