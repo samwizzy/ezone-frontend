@@ -27,14 +27,10 @@ import Phone from '@material-ui/icons/Phone';
 import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
 // import ChatBox from './ChatBox';
-<<<<<<< HEAD
 import UserChat from './components/UserChat' 
 import NoAvailableChats from './components/NoAvailableChats' 
 import ChatHeader from './components/ChatHeader' 
-import ChatFooter from './components/ChatFooter' 
-=======
-import UserChat from './components/UserChat';
->>>>>>> 653523dc34e58ed211f0e2ee68e1563c6a0529fc
+import ChatFooter from './components/ChatFooter'
 
 const useStyles = makeStyles(theme => ({
   root: {
