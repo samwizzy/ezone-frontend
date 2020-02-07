@@ -63,7 +63,7 @@ const CompanyStructure = props => {
   const rows = [
     createData(
       'Description',
-      "Lorem Ipsum copy in various charsets and languages for layouts. ... The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
+      "Lorem Ipsum copy in various charsets and languages....ßßß The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
     ),
     createData('Head', 'Christian Okeme'),
     createData('Assistant', 'Tina Umeh'),
@@ -78,7 +78,7 @@ const CompanyStructure = props => {
         className={classes.partyButton}
         onClick={() => openNewPartyAction()}
       >
-        > Add Party
+        > Add P
       </Button>
       <Grid container>
         <Grid item xs={2} md={2}>
@@ -99,14 +99,14 @@ const CompanyStructure = props => {
                 selected={selectedIndex === 0}
                 onClick={event => handleListItemClick(event, 0)}
               >
-                <ListItemText primary="Trash" />
+              <ListItemText primary="Trash" />
               </ListItem>
               <ListItem
                 button
                 selected={selectedIndex === 1}
                 onClick={event => handleListItemClick(event, 1)}
               >
-                <ListItemText primary="Spam" />
+              <ListItemText primary="Spam" />
               </ListItem>
             </List>
           </Paper>
