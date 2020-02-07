@@ -172,7 +172,7 @@ export default function MiniDrawer(props) {
                 break;
               case 'Employees':
                 return (
-                  <ListItem button key={index} component="a" href="/employee">
+                  <ListItem button key={index} component="a" href="employee">
                     <ListItemIcon>
                       <Person />
                     </ListItemIcon>
@@ -182,26 +182,16 @@ export default function MiniDrawer(props) {
                 break;
               case 'Applications':
                 return (
-                  <ListItem button key={index} component="a" href="/utility">
+                  <ListItem button key={index} component="a" href="utility">
                     <ListItemIcon>
                       <Apps />
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 );
-              case 'Groups':
-                return (
-                  <ListItem button key={index} component="a" href="/groups">
-                    <ListItemIcon>
-                      <Group />
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                );
-                break;
               case 'Security':
                 return (
-                  <ListItem button key={index} component="a" href="/email">
+                  <ListItem button key={index} component="a" href="groups">
                     <ListItemIcon>
                       <Security />
                     </ListItemIcon>
