@@ -39,10 +39,31 @@ const makeSelectLoginDetails = () =>
     subState => subState.loginDetails,
   );
 
+const makeSelectAccessToken = () =>
+  createSelector(
+    selectLoginPageDomain,
+    subState => subState.accessToken,
+  );
+
+const makeSelectSaveToken = () =>
+  createSelector(
+    selectLoginPageDomain,
+    subState => subState.saveToken,
+  );
+
+const makeSelectGetSaveToken = () =>
+  createSelector(
+    selectLoginPageDomain,
+    subState => subState.getSaveToken,
+  );
+
 export default makeSelectLoginPage;
 export {
   selectLoginPageDomain,
   makeSelectLoading,
   makeSelectError,
   makeSelectLoginDetails,
+  makeSelectAccessToken,
+  makeSelectSaveToken,
+  makeSelectGetSaveToken,
 };

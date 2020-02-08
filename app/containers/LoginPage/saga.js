@@ -33,8 +33,35 @@ export function* login() {
     console.log(loginResponse, 'loginResponse');
 
     yield put(Actions.loginSuccessAction(loginResponse));
+
+    yield put(Actions.saveToken(loginResponse));
+    // if login is success get user profile with access token
+    yield put(Actions.getUserProfileAction(loginResponse.access_token));
   } catch (err) {
     console.log(err, 'err');
+    yield put(Actions.loginErrorAction(err));
+  }
+}
+
+export function* userProfile() {
+  const accessToken = yield select(Selectors.makeSelectAccessToken());
+
+  const requestURL = `${BaseUrl}${Endpoints.UserProfileUrl}`;
+
+  try {
+    const userProfileResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }),
+    });
+
+    console.log(userProfileResponse, 'loginResponse profile');
+
+    yield put(Actions.loginSuccessAction(userProfileResponse));
+  } catch (err) {
+    console.log(err, 'err user profile');
     yield put(Actions.loginErrorAction(err));
   }
 }
@@ -42,4 +69,5 @@ export function* login() {
 // Individual exports for testing
 export default function* loginPageSaga() {
   yield takeLatest(Constants.LOGIN, login);
+  yield takeLatest(Constants.GET_USER_PROFILE, userProfile);
 }

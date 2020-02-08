@@ -11,6 +11,9 @@ export const initialState = {
   error: false,
   user: {},
   loginDetails: {},
+  accessToken: {},
+  saveToken: {},
+  getSaveToken: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -18,7 +21,6 @@ const loginPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
       case Constants.LOGIN: {
-        console.log(action.payload, 'reducer payload');
         return {
           loading: true,
           error: false,
@@ -36,6 +38,27 @@ const loginPageReducer = (state = initialState, action) =>
         return {
           loading: false,
           error: true,
+        };
+      }
+      case Constants.SAVE_TOKEN: {
+        localStorage.setItem('access_token', action.payload.access_token);
+        localStorage.setItem('refresh_token', action.payload.refresh_token);
+        return {
+          saveToken: action.payload,
+        };
+      }
+      case Constants.GET_SAVE_TOKEN: {
+        // localStorage.getItem('access_token');
+        // localStorage.setItem('refresh_token', action.payload.refresh_token);
+        return {
+          getSaveToken: action.payload,
+        };
+      }
+      case Constants.GET_USER_PROFILE: {
+        return {
+          loading: false,
+          error: true,
+          accessToken: action.payload,
         };
       }
     }

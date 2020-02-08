@@ -36,6 +36,8 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 // import PrivateRoute from './PrivateRoute';
 // import { AppContext } from '../context/AppContext';
 
+import { makeSelectGetSaveToken } from '../LoginPage/selectors';
+
 const App = () => {
   // const [authTokens, setAuthTokens] = useState();
 
@@ -43,6 +45,8 @@ const App = () => {
   //   // localStorage.setItem('tokens', JSON.stringify(data));
   //   setAuthTokens(data);
   // };
+
+  console.log(makeSelectGetSaveToken(), 'makeSelectGetSaveToken');
 
   return (
     <div>
