@@ -51,7 +51,7 @@ const makeSelectError = () =>
     subState => subState.error,
   );
 
-const makeSelectSharedFileDialog = () =>
+const makeSelectShareFileDialog = () =>
   createSelector(
     selectUtilityPageDomain,
     subState => subState.shareFileDialog,
@@ -96,7 +96,7 @@ export {
   makeSelectFileUploadDialog,
   makeSelectNewTaskDialog,
   makeSelectPreviewTaskDialog,
-  makeSelectSharedFileDialog,
+  makeSelectShareFileDialog,
   makeSelectError,
   makeSelectNewFileDialog,
   makeSelectBranchDialog,

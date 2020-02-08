@@ -26,12 +26,12 @@ import * as Actions from '../actions';
 import * as Selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({
-  partyButton: {
-    float: 'right',
-  },
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+  },
+  partyButton: {
+    float: 'right',
   },
   table: {
     minWidth: 650,
@@ -62,11 +62,11 @@ const CompanyStructure = props => {
   const [selectedIndex, setSelectedIndex] = React.useState();
 
   const handleListItemClick = (event, index) => {
-    // setSelectedIndex(index);
+    setSelectedIndex(index);
     console.log(`item ${index} clicked`);
   };
 
-  const { openNewPartyAction, openNewSubPartyAction, loading } = props;
+  const { openNewPartyAction, openNewSubPartyAction, openNewRoleDialog, loading } = props;
 
   console.log(openNewSubPartyAction, 'openNewSubPartyAction');
 
@@ -75,9 +75,9 @@ const CompanyStructure = props => {
   }
 
   const actions = [
-    {title: 'Group', link: 'Add Group', action: openNewSubPartyAction()},
-    {title: 'Sub-Group', link: 'Add Sub-Group', action: openNewSubPartyAction()},
-    {title: 'Role', link: 'Add Role', action: openNewSubPartyAction()},
+    {title: 'Group', link: 'Add Group', action: openNewPartyAction},
+    {title: 'Sub-Group', link: 'Add Sub-Group', action: openNewSubPartyAction},
+    {title: 'Role', link: 'Add Role', action: openNewRoleDialog},
   ];
 
   const rows = [
@@ -189,7 +189,7 @@ const CompanyStructure = props => {
                         <div>{row.title}</div>
                       </TableCell>
                       <TableCell width="75%">
-                        <Link component="a" variant="body2" onClick={openNewSubPartyAction}>{row.link}</Link>
+                        <Link component="a" variant="body2" onClick={() => row.action()}>{row.link}</Link>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -207,6 +207,7 @@ CompanyStructure.propTypes = {
   loading: PropTypes.bool,
   openNewPartyAction: PropTypes.func,
   openNewSubPartyAction: PropTypes.func,
+  openNewRoleDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -217,6 +218,7 @@ function mapDispatchToProps(dispatch) {
   return {
     openNewPartyAction: () => dispatch(Actions.openNewPartyDialog()),
     openNewSubPartyAction: () => dispatch(Actions.openNewSubGroupDialog()),
+    openNewRoleDialog: () => dispatch(Actions.openNewRoleDialog()),
   };
 }
 
