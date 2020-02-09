@@ -6,9 +6,9 @@ import { BaseUrl } from '../../components/BaseUrl';
 // import { makeSelectLoginDetails } from '../App/selectors';
 // import * as Actions from '../App/actions';
 // import { LOGIN } from '../App/constants';
-import * as Selectors from './selectors';
-import * as Actions from './actions';
-import * as Constants from './constants';
+import * as Selectors from '../App/selectors';
+import * as Actions from '../App/actions';
+import * as Constants from '../App/constants';
 import * as Endpoints from '../../components/Endpoints';
 
 export function* login() {

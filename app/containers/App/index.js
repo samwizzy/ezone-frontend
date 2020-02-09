@@ -36,7 +36,7 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 // import PrivateRoute from './PrivateRoute';
 // import { AppContext } from '../context/AppContext';
 
-import { makeSelectGetSaveToken } from '../LoginPage/selectors';
+// import { makeSelectGetSaveToken } from './selectors';
 
 const App = () => {
   // const [authTokens, setAuthTokens] = useState();
@@ -46,7 +46,7 @@ const App = () => {
   //   setAuthTokens(data);
   // };
 
-  console.log(makeSelectGetSaveToken(), 'makeSelectGetSaveToken');
+  // console.log(makeSelectGetSaveToken(), 'makeSelectGetSaveToken');
 
   return (
     <div>
@@ -64,6 +64,7 @@ const App = () => {
 
             <Switch>
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/" component={LoginPage} />
               <Route
                 exact
                 path="/forgot-password"
@@ -88,7 +89,7 @@ const App = () => {
                   path="/email/password/template"
                   component={EmailPasswordTemplate}
                 />
-                <Route exact path="/" component={HomePage} />
+                <Route exact path="/dashboard" component={HomePage} />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>

@@ -21,11 +21,29 @@ const makeSelectError = () =>
     globalState => globalState.error,
   );
 
-// const makeSelectLoginDetails = () =>
-//   createSelector(
-//     selectGlobal,
-//     subState => subState.loginDetails,
-//   );
+const makeSelectLoginDetails = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.loginDetails,
+  );
+
+const makeSelectAccessToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.accessToken,
+  );
+
+const makeSelectSaveToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.saveToken,
+  );
+
+const makeSelectGetSaveToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.getSaveToken,
+  );
 
 // const tok = localStorage.getItem('token');
 // console.log(tok, 'toktoktoktok');
@@ -63,4 +81,10 @@ export {
   makeSelectError,
   // makeSelectRepos,
   makeSelectLocation,
+
+
+  makeSelectLoginDetails,
+  makeSelectAccessToken,
+  makeSelectSaveToken,
+  makeSelectGetSaveToken,
 };
