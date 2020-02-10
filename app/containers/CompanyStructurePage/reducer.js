@@ -30,6 +30,7 @@ export const initialState = {
     },
     data: null
   },
+  
 };
 
 /* eslint-disable default-case, no-param-reassign */

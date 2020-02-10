@@ -83,7 +83,7 @@ const CompanyStructure = props => {
   const rows = [
     createData(
       'Description',
-      "Lorem Ipsum copy in various charsets and languages for layouts. ... The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
+      "Lorem Ipsum copy in various charsets and languages for layouts... The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
     ),
     createData('Head', 'Christian Okeme'),
     createData('Assistant', 'Tina Umeh'),

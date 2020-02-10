@@ -78,7 +78,7 @@ const CompanyStructure = props => {
         className={classes.partyButton}
         onClick={() => openNewPartyAction()}
       >
-        > Add P
+        > Add Party
       </Button>
       <Grid container>
         <Grid item xs={2} md={2}>
