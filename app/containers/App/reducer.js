@@ -1,12 +1,30 @@
 import produce from 'immer';
 import * as Constants from './constants';
 
+// let userActive = JSON.parse(localStorage.getItem('user'));
+
+let userActive;
+if (!JSON.parse(localStorage.getItem('user'))) {
+  userActive = false;
+} else {
+  userActive = JSON.parse(localStorage.getItem('user'));
+}
+
+let userToken;
+if (!localStorage.getItem('access_token')) {
+  userToken = false;
+} else {
+  userToken = localStorage.getItem('access_token');
+}
+
 export const initialState = {
   loading: false,
   error: false,
-  user: {},
+  // user: userActive,
+  user: userActive,
   loginDetails: {},
-  accessToken: false,
+  // accessToken: false,
+  accessToken: userToken,
   saveToken: false,
   getSaveToken: {},
 };
@@ -26,7 +44,7 @@ const appReducer = (state = initialState, action) =>
         return {
           loading: false,
           error: false,
-          user: action.payload,
+          // user: action.payload,
         };
       }
       case Constants.LOGIN_ERROR: {
@@ -35,27 +53,28 @@ const appReducer = (state = initialState, action) =>
           error: true,
         };
       }
-      case Constants.SAVE_TOKEN: {
+      case Constants.GET_USER_PROFILE: {
         localStorage.setItem('access_token', action.payload.access_token);
         localStorage.setItem('refresh_token', action.payload.refresh_token);
         return {
-          saveToken: action.payload,
+          loading: true,
+          error: false,
+          accessToken: localStorage.getItem('access_token'),
         };
       }
-      case Constants.GET_SAVE_TOKEN: {
-        const a = localStorage.getItem('access_token');
-        const r = localStorage.getItem('refresh_token');
-        console.log(a, 'aaa');
-        console.log(r, 'rrr');
-        return {
-          getSaveToken: action.payload,
-        };
-      }
-      case Constants.GET_USER_PROFILE: {
+      case Constants.GET_USER_PROFILE_SUCCESS: {
+        localStorage.setItem('user', JSON.stringify(action.payload));
         return {
           loading: false,
-          error: true,
-          accessToken: action.payload,
+          error: false,
+          user: JSON.parse(localStorage.getItem('user')),
+          accessToken: localStorage.getItem('access_token'),
+        };
+      }
+      case Constants.GET_USER_PROFILE_ERROR: {
+        return {
+          loading: false,
+          error: action.payload,
         };
       }
     }

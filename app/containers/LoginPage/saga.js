@@ -32,11 +32,11 @@ export function* login() {
 
     console.log(loginResponse, 'loginResponse');
 
-    yield put(Actions.loginSuccessAction(loginResponse));
+    // yield put(Actions.loginSuccessAction(loginResponse));
+    // yield put(Actions.saveToken(loginResponse.access_token));
 
-    yield put(Actions.saveToken(loginResponse.access_token));
     // if login is success get user profile with access token
-    yield put(Actions.getUserProfileAction(loginResponse.access_token));
+    yield put(Actions.getUserProfileAction(loginResponse));
   } catch (err) {
     console.log(err, 'err');
     yield put(Actions.loginErrorAction(err));
@@ -59,10 +59,12 @@ export function* userProfile() {
 
     console.log(userProfileResponse, 'loginResponse profile');
 
-    yield put(Actions.loginSuccessAction(userProfileResponse));
+    // yield put(Actions.loginSuccessAction(userProfileResponse));
+
+    yield put(Actions.getUserProfileSuccessAction(userProfileResponse));
   } catch (err) {
     console.log(err, 'err user profile');
-    yield put(Actions.loginErrorAction(err));
+    yield put(Actions.getUserProfileErrorAction(err));
   }
 }
 

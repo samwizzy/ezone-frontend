@@ -32,7 +32,7 @@ import {
   TextField
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { loadRepos } from '../App/actions';
+import * as Selectors from '../App/selectors';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
@@ -51,11 +51,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export function HomePage() {
+export function HomePage(props) {
   const classes = useStyles();
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
+  const { user, token } = props;
+
+  console.log(user, 'user from home');
+  console.log(token, 'token from home');
   return (
     <React.Fragment>
       <CssBaseline />
@@ -81,24 +85,17 @@ export function HomePage() {
 
 HomePage.propTypes = {
   // loading: PropTypes.bool,
-  // error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  user: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  token: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 const mapStateToProps = createStructuredSelector({
-  // repos: makeSelectRepos(),
-  // username: makeSelectUsername(),
-  // loading: makeSelectLoading(),
-  // error: makeSelectError(),
+  user: Selectors.makeSelectCurrentUser(),
+  token: Selectors.makeSelectAccessToken(),
 });
 
 export function mapDispatchToProps(dispatch) {
-  return {
-    // onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    // onSubmitForm: evt => {
-    //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-    //   dispatch(loadRepos());
-    // },
-  };
+  return {};
 }
 
 const withConnect = connect(

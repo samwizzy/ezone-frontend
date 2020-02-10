@@ -33,58 +33,24 @@ const makeSelectAccessToken = () =>
     globalState => globalState.accessToken,
   );
 
-const makeSelectSaveToken = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.saveToken,
-  );
-
-const makeSelectGetSaveToken = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.getSaveToken,
-  );
-
-// const tok = localStorage.getItem('token');
-// console.log(tok, 'toktoktoktok');
-
-const makeSelectUserToken = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.tokens,
-  );
-
 const makeSelectCurrentUser = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.userData.user,
+    globalState => globalState.user,
   );
 
-// const makeSelectRepos = () =>
+// const makeSelectLocation = () =>
 //   createSelector(
-//     selectGlobal,
-//     globalState => globalState.userData.repositories,
+//     selectRouter,
+//     routerState => routerState.location,
 //   );
-
-const makeSelectLocation = () =>
-  createSelector(
-    selectRouter,
-    routerState => routerState.location,
-  );
 
 export {
   selectGlobal,
-  // makeSelectLoginDetails,
-  makeSelectUserToken,
   makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
-  // makeSelectRepos,
-  makeSelectLocation,
-
-
+  // makeSelectLocation,
   makeSelectLoginDetails,
   makeSelectAccessToken,
-  makeSelectSaveToken,
-  makeSelectGetSaveToken,
 };
