@@ -6,8 +6,8 @@ export const initialState = {
   error: false,
   user: {},
   loginDetails: {},
-  accessToken: {},
-  saveToken: {},
+  accessToken: false,
+  saveToken: false,
   getSaveToken: {},
 };
 

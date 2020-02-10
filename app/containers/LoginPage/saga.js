@@ -34,7 +34,7 @@ export function* login() {
 
     yield put(Actions.loginSuccessAction(loginResponse));
 
-    yield put(Actions.saveToken(loginResponse));
+    yield put(Actions.saveToken(loginResponse.access_token));
     // if login is success get user profile with access token
     yield put(Actions.getUserProfileAction(loginResponse.access_token));
   } catch (err) {

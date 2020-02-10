@@ -33,7 +33,7 @@ import Layout1 from '../../components/layouts/layout1/Layout1';
 import Layout2 from '../../components/layouts/layout2/Layout2';
 import Layout3 from '../../components/layouts/layout3/Layout3';
 // import { makeSelectUserToken } from './selectors';
-// import PrivateRoute from './PrivateRoute';
+import PrivateRoute from '../AuthProvider/PrivateRoute';
 // import { AppContext } from '../context/AppContext';
 
 // import { makeSelectGetSaveToken } from './selectors';
@@ -89,7 +89,7 @@ const App = () => {
                   path="/email/password/template"
                   component={EmailPasswordTemplate}
                 />
-                <Route exact path="/dashboard" component={HomePage} />
+                <PrivateRoute exact path="/dashboard" component={HomePage} />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>

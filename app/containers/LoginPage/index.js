@@ -20,9 +20,9 @@ import saga from './saga';
 import LoginForm from './components/LoginForm';
 
 // import { useAuth } from '../context/AppContext';
-import { makeSelectUserToken } from '../App/selectors';
+import { makeSelectUserToken, makeSelectSaveToken } from '../App/selectors';
 
-export function LoginPage() {
+export function LoginPage({tokens}) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
@@ -30,10 +30,11 @@ export function LoginPage() {
 
   // const { setAuthTokens } = useAuth();
 
-  // if (tokens) {
-  //   setAuthTokens(tokens);
-  //   return <Redirect to="/dashboard" />;
-  // }
+  console.log(tokens, 'tokens');
+
+  if (tokens) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div>
@@ -52,7 +53,7 @@ LoginPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
-  tokens: makeSelectUserToken(),
+  tokens: makeSelectSaveToken(),
 });
 
 function mapDispatchToProps(dispatch) {
