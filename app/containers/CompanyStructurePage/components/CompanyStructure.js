@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
@@ -57,16 +57,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CompanyStructure = props => {
+
+  const { getPartyGroup, openNewPartyAction, openNewSubPartyAction, openNewRoleDialog, loading } = props;
+
   const classes = useStyles();
 
   const [selectedIndex, setSelectedIndex] = React.useState();
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    getPartyGroup();
+  }, []);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     console.log(`item ${index} clicked`);
   };
+  
 
-  const { openNewPartyAction, openNewSubPartyAction, openNewRoleDialog, loading } = props;
 
   console.log(openNewSubPartyAction, 'openNewSubPartyAction');
 
@@ -83,7 +91,7 @@ const CompanyStructure = props => {
   const rows = [
     createData(
       'Description',
-      "Lorem Ipsum copy in various charsets and languages for layouts. ... The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
+      "Lorem Ipsum copy in various charsets and languages for layouts... The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
     ),
     createData('Head', 'Christian Okeme'),
     createData('Assistant', 'Tina Umeh'),
@@ -219,6 +227,7 @@ function mapDispatchToProps(dispatch) {
     openNewPartyAction: () => dispatch(Actions.openNewPartyDialog()),
     openNewSubPartyAction: () => dispatch(Actions.openNewSubGroupDialog()),
     openNewRoleDialog: () => dispatch(Actions.openNewRoleDialog()),
+    getPartyGroup: () => dispatch(Actions.getPartyGroupAction()),
   };
 }
 

@@ -15,3 +15,13 @@ export const CLOSE_NEW_ROLE_DIALOG = 'app/CompanyStructurePage/CLOSE_NEW_ROLE_DI
 
 export const OPEN_NEW_SUB_PARTY_DIALOG = 'app/CompanyStructurePage/OPEN_NEW_SUB_PARTY_DIALOG';
 export const CLOSE_NEW_SUB_PARTY_DIALOG = 'app/CompanyStructurePage/CLOSE_NEW_SUB_PARTY_DIALOG';
+
+
+export const CREATE_NEW_PARTY = 'app/CompanyStructurePage/CREATE_NEW_PARTY';
+export const CREATE_NEW_SUB_PARTY = 'app/CompanyStructurePage/CREATE_NEW_SUB_PARTY';
+export const CREATE_NEW_GROUP = 'app/CompanyStructurePage/CREATE_NEW_GROUP';
+export const CREATE_NEW_ROLE = 'app/CompanyStructurePage/CREATE_NEW_ROLE';
+
+export const GET_PARTY_GROUP = 'app/CompanyStructurePage/GET_PARTY_GROUP';
+export const GET_PARTY_GROUP_SUCCESS = 'app/CompanyStructurePage/GET_PARTY_GROUP_SUCCESS';
+export const GET_PARTY_GROUP_ERROR = 'app/CompanyStructurePage/GET_PARTY_GROUP_ERROR';
