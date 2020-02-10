@@ -14,24 +14,21 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import LoginForm from './components/LoginForm';
 
-import { useAuth } from '../context/AppContext';
-import { makeSelectUserToken } from '../App/selectors';
+// import { useAuth } from '../context/AppContext';
+import * as Selectors from '../App/selectors';
 
-export function LoginPage({ tokens }) {
+export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-
-  const { setAuthTokens } = useAuth();
+  const { tokens } = props;
+  console.log(tokens, 'tokens');
 
   if (tokens) {
-    setAuthTokens(tokens);
     return <Redirect to="/dashboard" />;
   }
 
@@ -51,8 +48,7 @@ LoginPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginPage: makeSelectLoginPage(),
-  tokens: makeSelectUserToken(),
+  tokens: Selectors.makeSelectAccessToken(),
 });
 
 function mapDispatchToProps(dispatch) {
