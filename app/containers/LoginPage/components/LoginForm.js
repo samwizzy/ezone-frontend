@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     borderRadius: theme.spacing(5),
@@ -119,7 +119,7 @@ const LoginForm = props => {
       <div className={classes.root}>
         <Grid container component={Paper} className={classes.grid}>
           <Grid item xs={false} sm={4} md={7} />
-          <Grid item xs={12} sm={8} md={5} style={{ border: '1px soid red' }}>
+          <Grid item xs={12} sm={8} md={5} style={{display: 'flex'}}>
             <div className={classes.paper}>
               <Box className={classes.avatar}>
                 <img src={logo} alt="" />

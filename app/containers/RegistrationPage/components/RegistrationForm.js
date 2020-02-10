@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     padding: '30px',
     height: '100vh',
-    overflow: 'auto',
+    overflow: 'auto'
   },
   grid: {
     height: '100vh',
