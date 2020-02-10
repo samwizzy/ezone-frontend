@@ -5,6 +5,7 @@
  */
 
 import * as Constants from './constants';
+import { func } from 'prop-types';
 
 export function openNewPartyDialog() {
   return {
@@ -41,3 +42,27 @@ export function closeNewRoleDialog() {
     type: Constants.CLOSE_NEW_ROLE_DIALOG,
   };
 }
+
+
+export function getPartyGroupAction() {
+  console.log('trigger actions');
+  return {
+    type: Constants.GET_PARTY_GROUP,
+  };
+}
+
+export function getPartyGroupSuccessAction(data) {
+  return {
+    type: Constants.GET_PARTY_GROUP_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getPartyGroupErrorAction(data) {
+  return {
+    type: Constants.GET_PARTY_GROUP_ERROR,
+    payload: data,
+  };
+}
+
+
