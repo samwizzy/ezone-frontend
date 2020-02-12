@@ -147,7 +147,7 @@ export default function MiniDrawer(props) {
             switch (text) {
               case 'Dashboard':
                 return (
-                  <ListItem button key={index} component="a" href="/">
+                  <ListItem button key={index} component="a" href="/dashboard">
                     <ListItemIcon>
                       <Dashboard />
                     </ListItemIcon>

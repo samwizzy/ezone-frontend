@@ -24,9 +24,9 @@ import {
   fade,
   lighten,
 } from '@material-ui/core/styles/colorManipulator';
-import * as Selectors from '../selectors';
+import * as Selectors from '../../App/selectors';
 import LoadingIndicator from '../../../components/LoadingIndicator';
-import * as Actions from '../actions';
+import * as Actions from '../../App/actions';
 import logo from '../../../images/logo.svg';
 import banner from '../../../images/banner.svg';
 

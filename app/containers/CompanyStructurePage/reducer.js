@@ -7,6 +7,7 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  partyGroupData: false,
   loading: false,
   error: false,
   partyDialog: {
@@ -29,7 +30,10 @@ export const initialState = {
       open: false,
     },
     data: null
-  }
+  },
+  party: [
+    {id: 1, name: 'Region', description: 'Testing out', head: 'Afeez', assistant: 'Sammy'}
+  ],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -106,6 +110,29 @@ const companyStructurePageReducer = (state = initialState, action) =>
             },
             data: null,
           },
+        };
+      }
+      case Constants.GET_PARTY_GROUP: {
+        console.log('trigger actions from reducer');
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_PARTY_GROUP_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          partyGroupData: action.payload,
+        };
+      }
+      case Constants.GET_PARTY_GROUP_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
         };
       }
     }
