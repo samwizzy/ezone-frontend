@@ -29,7 +29,7 @@ export const initialState = {
       open: false,
     },
     data: null
-  },
+  }
 };
 
 /* eslint-disable default-case, no-param-reassign */

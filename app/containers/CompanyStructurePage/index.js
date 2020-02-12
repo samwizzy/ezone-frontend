@@ -43,7 +43,7 @@ CompanyStructurePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  companyStructurePage: makeSelectOrgPage(),
+  companyStructurePage: makeSelectOrgPage()
 });
 
 function mapDispatchToProps(dispatch) {

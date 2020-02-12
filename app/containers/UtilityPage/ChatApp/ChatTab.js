@@ -2,18 +2,13 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
-  Avatar,
-  AppBar,
   Box,
   Grid,
-  Icon,
   IconButton,
   Tabs,
   Tab,
-  Toolbar,
   Typography,
   Paper,
-  Button,
   TextField
 } from '@material-ui/core';
 import { compose } from 'redux';
@@ -21,12 +16,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames'
 import Add from '@material-ui/icons/Add';
-import SettingsVoice from '@material-ui/icons/SettingsVoice';
-import VideocamSharp from '@material-ui/icons/VideocamSharp';
-import Phone from '@material-ui/icons/Phone';
-import AttachFile from '@material-ui/icons/AttachFile';
 import * as Actions from '../actions';
-// import ChatBox from './ChatBox';
 import UserChat from './components/UserChat' 
 import NoAvailableChats from './components/NoAvailableChats' 
 import ChatHeader from './components/ChatHeader' 
@@ -107,7 +97,6 @@ const useStyles = makeStyles(theme => ({
     minHeight: '200px',
     height: '728px',
     overflow: 'auto',
-    border: '1px solid red'
   }
 }));
 
@@ -245,7 +234,7 @@ const ChatTab = props => {
                     // {'first-of-group': this.isFirstMessageOfGroup('item', 'i')},
                     // {'last-of-group': this.isLastMessageOfGroup('item', 'i')},
                   )} 
-                  style={{border: '1px solid red', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 20px'}}
+                  style={{border: '1px solid #efefef', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 20px'}}
                   >
                     <Paper className={classes.chatPane}>Hi brother</Paper>
                   </div>

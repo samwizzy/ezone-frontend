@@ -122,7 +122,7 @@ const TasksList = props => {
     return <List component={LoadingIndicator} />;
   }
 
-  if(!data){
+  if(data){
     return <NoTaskList />
   }
 
