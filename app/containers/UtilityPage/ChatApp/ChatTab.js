@@ -27,6 +27,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     color: console.log(theme, "Theme")
   },
+  messageRow: {
+    '&.me': {},
+    '&.contact': {},
+    '&.first-of-group': {}, 
+    '&.last-of-group': {}, 
+  },
   avatar: {
     width: theme.spacing(12),
     height: theme.spacing(12),
@@ -86,8 +92,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(1, 8),
-    borderRadius: '0 8px 8px 8px',
+    padding: theme.spacing(1, 12, 1, 2),
+    borderRadius: '0 20px 20px 20px',
     whiteSpace: 'pre-wrap',
     color: theme.palette.common.white
   },
@@ -97,6 +103,7 @@ const useStyles = makeStyles(theme => ({
     minHeight: '200px',
     height: '728px',
     overflow: 'auto',
+    padding: theme.spacing(3, 5)
   }
 }));
 
@@ -150,11 +157,11 @@ const ChatTab = props => {
   };
 
   const isFirstMessageOfGroup = (item, i) => {
-    return (i === 0 || (this.props.chat.dialog[i - 1] && this.props.chat.dialog[i - 1].who !== item.who));
+    // return (i === 0 || (props.chat.dialog[i - 1] && props.chat.dialog[i - 1].who !== item.who));
   };
 
   const isLastMessageOfGroup = (item, i) => {
-    return (i === this.props.chat.dialog.length - 1 || (this.props.chat.dialog[i + 1] && this.props.chat.dialog[i + 1].who !== item.who));
+    // return (i === props.chat.dialog.length - 1 || (props.chat.dialog[i + 1] && props.chat.dialog[i + 1].who !== item.who));
   };
 
   return (
@@ -168,7 +175,6 @@ const ChatTab = props => {
               <Paper square>
                 <div
                   style={{
-                    // border: '1px solid #efefef',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -228,16 +234,22 @@ const ChatTab = props => {
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.msgBody}>
-                  <div className={classNames(
-                    {'me': 'item.id' === 'user.id'},
-                    {'contact': 'item.id' !== 'user.id'},
-                    // {'first-of-group': this.isFirstMessageOfGroup('item', 'i')},
-                    // {'last-of-group': this.isLastMessageOfGroup('item', 'i')},
-                  )} 
-                  style={{border: '1px solid #efefef', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start', margin: '3px 20px'}}
-                  >
-                    <Paper className={classes.chatPane}>Hi brother</Paper>
-                  </div>
+                    <div className={classNames(
+                      classes.messageRow,
+                      {'me': 'item.id' === 'user.id'},
+                      {'contact': 'item.id' !== 'user.id'},
+                      {'first-of-group': isFirstMessageOfGroup('item', 'i')},
+                      {'last-of-group': isLastMessageOfGroup('item', 'i')},
+                    )} 
+                    style={{border: '1px solid #efefef', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start'}}
+                    >
+                      <Paper className={classes.chatPane}>
+                        <Typography variant="subtitle1">
+                          How you doing brother?
+                        </Typography>
+                        <Typography variant="caption" style={{position: 'absolute', right: 12, bottom: 0}}>05:56 am</Typography>
+                      </Paper>
+                    </div>
 
                     <ChatFooter />
                   </div>
