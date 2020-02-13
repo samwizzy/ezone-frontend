@@ -46,31 +46,34 @@ export function* createNewPartyGroupSaga() {
 
   console.log(accessToken, 'saga accessToken');
   console.log(currentUser, 'saga currentUser');
+  console.log(JSON.stringify(createNewPartyGroupParams), 'createNewPartyGroupParams');
 
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
 
   console.log(`orgId: --> ${currentUser.organisation.orgId}`)
-  console.log(requestURL, ' --> requestURL........');
+  console.log(requestURL, ' -> requestURL........');
 
   try {
-    const userPartyGroupResponse = yield call(request, requestURL, {
+    const createPartyGroupResponse = yield call(request, requestURL, {
       method: 'POST',
+      body: JSON.stringify(createNewPartyGroupParams),
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/Json',
       }),
     });
 
-    console.log(userPartyGroupResponse, '----> userPartyGroupResponse.');
-    yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
+    console.log(createPartyGroupResponse, '----> createPartyGroupResponse.');
+    yield put(Actions.createNewPartyGroupSuccessAction(createPartyGroupResponse));
 
   } catch (err) {
-    console.log(err, '---> getPartyGroupErrorAction');
-    yield put(Actions.getPartyGroupErrorAction(err));
+    console.log(err, '---> createNewPartyGroupErrorAction');
+    yield put(Actions.createNewPartyGroupErrorAction(err));
   }
 }
 
 // Individual exports for testing
 export default function* companyStructureSaga() {
   yield takeLatest(Constants.GET_PARTY_GROUP, getPartyGroupSaga);
+  yield takeLatest(Constants.CREATE_NEW_PARTY_GROUP, createNewPartyGroupSaga);
 }

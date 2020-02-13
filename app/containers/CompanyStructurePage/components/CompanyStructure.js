@@ -123,15 +123,6 @@ const CompanyStructure = props => {
     {title: 'Position', link: 'Add Position', action: openNewRoleDialog},
   ];
 
-  const rows = [
-    createData(
-      'Description',
-      "Lorem Ipsum copy in various charsets and languages for layouts.. The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
-    ),
-    // createData('Head', 'Christian Okeme'),
-    // createData('Assistant', 'Tina Umeh'),
-  ];
-
   if (!partyGroupData.length) {
     return (
       <NoPartyGroup openNewPartyAction={openNewPartyAction} />
@@ -172,7 +163,7 @@ const CompanyStructure = props => {
                   selected={selectedIndex === 0}
                   onClick={() => DispatchgetSelectedPartyGroupAction(data)}
                 >
-                  <ListItemText primary={data.name} />
+                <ListItemText primary={data.name} />
                 </ListItem>
                 )
 
