@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
+  Breadcrumbs,
   List,
   ListItem,
   ListItemText,
@@ -22,13 +23,28 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Add from '@material-ui/icons/Add';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import * as Actions from '../actions';
 import * as Selectors from '../selectors';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    flexGrow: 1,
+    width: '100%',
+  },
+  list: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+    '& :hover': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white
+    }
+  },
+  breadcrumbs: {
+    padding: theme.spacing(2, 0),
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
   },
   partyButton: {
     float: 'right',
@@ -48,8 +64,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '20px',
         padding: theme.spacing(1, 2)
       }
-    },
-    border: '1px solid #dcdcdc'
+    }
   },
   header: {
     padding: theme.spacing(1.5, 0),
@@ -147,7 +162,7 @@ const CompanyStructure = props => {
               <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                className={classes.root}
+                className={classes.list}
               >
               {partyGroupData.map((data, index) => (
                 
