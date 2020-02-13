@@ -5,6 +5,7 @@
  */
 
 import {
+  GET_UTILITY_TASKS,
   OPEN_FILE_UPLOAD_DIALOG,
   CLOSE_FILE_UPLOAD_DIALOG,
   OPEN_SHARE_FILE_DIALOG,
@@ -24,6 +25,13 @@ import {
   OPEN_EDIT_DEPARTMENT_DIALOG,
   CLOSE_EDIT_DEPARTMENT_DIALOG,
 } from './constants';
+
+export function getUtilityTasks(data) {
+  return {
+    type: GET_UTILITY_TASKS,
+    payload: data
+  };
+}
 
 export function openFileUploadDialog(data) {
   return {

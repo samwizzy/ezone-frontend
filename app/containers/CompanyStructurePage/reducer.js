@@ -7,9 +7,11 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  createNewPartyGroupData: false,
   partyGroupData: false,
   loading: false,
   error: false,
+  selectedPartyGroupData: false,
   partyDialog: {
     type: 'new',
     props: {
@@ -129,6 +131,34 @@ const companyStructurePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.GET_PARTY_GROUP_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.GET_SELECTED_PARTY_GROUP: {
+        return {
+          ...state,
+          selectedPartyGroupData: action.payload,
+
+        };
+      }
+      case Constants.CREATE_NEW_PARTY_GROUP: {
+        return {
+          ...state,
+          createNewPartyGroupData: action.payload,
+        };
+      }
+      case Constants.CREATE_NEW_PARTY_GROUP_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          // success: action.payload,
+        };
+      }
+      case Constants.CREATE_NEW_PARTY_GROUP_ERROR: {
         return {
           ...state,
           loading: false,

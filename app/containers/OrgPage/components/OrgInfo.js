@@ -162,7 +162,7 @@ const OrgInfo = props => {
       <Paper className={classes.paper} variant="outlined">
         <Grid container spacing={2}>
           <Grid item xs={12} md={12} sm={12}>
-            <Typography variant="h6">Company Information</Typography>
+            <Typography variant="h6">Company Information...</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <List>

@@ -63,13 +63,11 @@ const PartyDialog = props => {
   const classes = useStyles();
   const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
-    partyGroup: '',
+    name: '',
     description: '',
-    head: '',
-    assistant: ''
   });
 
-  console.log(partyDialog, "Pary dialog...")
+  console.log(partyDialog, "Party dialog...")
 
   const handleSelectChange = event => {
     setCurrency(event.target.value);
@@ -107,8 +105,8 @@ const PartyDialog = props => {
                 id="party-group"
                 label="Party Group"
                 className={classes.textField}
-                value={values.branchName}
-                onChange={handleChange('partyGroup')}
+                value={values.name}
+                onChange={handleChange('name')}
                 margin="normal"
                 variant="outlined"
                 size="small"
@@ -119,7 +117,7 @@ const PartyDialog = props => {
                 id="description"
                 label="Description"
                 className={classes.textField}
-                value={values.address}
+                value={values.description}
                 variant="outlined"
                 onChange={handleChange('description')}
                 margin="normal"
@@ -127,7 +125,7 @@ const PartyDialog = props => {
                 multiline
                 rows="3"
               />
-              <TextField
+              {/* <TextField
                 id="select-head"
                 select
                 fullWidth
@@ -160,7 +158,7 @@ const PartyDialog = props => {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField> */}
             </div>
           ) : null }
         </DialogContent>
@@ -199,6 +197,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     closeNewPartyDialog: () => dispatch(Actions.closeNewPartyDialog()),
+    createNewPartyGroupAction: evt => dispatch(Actions.createNewPartyGroupAction(evt)),
     dispatch,
   };
 }
