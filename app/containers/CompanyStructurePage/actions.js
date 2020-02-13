@@ -43,7 +43,6 @@ export function closeNewRoleDialog() {
   };
 }
 
-
 export function getPartyGroupAction() {
   console.log('trigger actions');
   return {
@@ -52,6 +51,7 @@ export function getPartyGroupAction() {
 }
 
 export function getPartyGroupSuccessAction(data) {
+  console.log(data, 'getPartyGroupSuccessAction.');
   return {
     type: Constants.GET_PARTY_GROUP_SUCCESS,
     payload: data,
@@ -59,10 +59,44 @@ export function getPartyGroupSuccessAction(data) {
 }
 
 export function getPartyGroupErrorAction(data) {
+  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.GET_PARTY_GROUP_ERROR,
     payload: data,
   };
 }
+
+export function getSelectedPartyGroupAction(data) {
+  console.log(data, 'getPartyGroupErrorAction');
+  return {
+    type: Constants.GET_SELECTED_PARTY_GROUP,
+    payload: data,
+  };
+}
+
+export function createNewPartyGroupAction(data) {
+  console.log(data, 'getPartyGroupErrorAction');
+  return {
+    type: Constants.CREATE_NEW_PARTY_GROUP,
+    payload: data,
+  };
+}
+
+export function createNewPartyGroupSuccessAction(data) {
+  console.log(data, 'getPartyGroupErrorAction');
+  return {
+    type: Constants.CREATE_NEW_PARTY_GROUP_SUCCESS,
+    payload: data,
+  };
+}
+
+export function createNewPartyGroupErrorAction(data) {
+  console.log(data, 'getPartyGroupErrorAction');
+  return {
+    type: Constants.CREATE_NEW_PARTY_GROUP_ERROR,
+    payload: data,
+  };
+}
+
 
 
