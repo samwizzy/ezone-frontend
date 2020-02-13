@@ -43,7 +43,6 @@ export function closeNewRoleDialog() {
   };
 }
 
-
 export function getPartyGroupAction() {
   console.log('trigger actions');
   return {
