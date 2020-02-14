@@ -1,11 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import qs from 'query-string';
 import request from '../../utils/request';
-
 import { BaseUrl } from '../../components/BaseUrl';
-// import { makeSelectLoginDetails } from '../App/selectors';
-// import * as Actions from '../App/actions';
-// import { LOGIN } from '../App/constants';
 import * as Selectors from '../App/selectors';
 import * as Actions from '../App/actions';
 import * as Constants from '../App/constants';

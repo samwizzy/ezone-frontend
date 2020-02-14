@@ -74,18 +74,24 @@ const App = () => {
               <Layout3>
                 {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
                 {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
-                <Route exact path="/organization" component={OrgPage} />
-                <Route
+                <PrivateRoute exact path="/organization" component={OrgPage} />
+                <PrivateRoute
                   exact
                   path="/organization/company/structure"
                   component={CompanyStructure}
                 />
-                <Route path="/employee" component={EmployeePage} />
-                <Route path="/utility" component={UtilityPage} />
-                <Route exact path="/email" component={EmailConfig} />
-                <Route path="/email/configuration" component={EmailConfigs} />
-                <Route path="/email/template" component={EmailTemplate} />
-                <Route
+                <PrivateRoute path="/employee" component={EmployeePage} />
+                <PrivateRoute path="/utility" component={UtilityPage} />
+                <PrivateRoute exact path="/email" component={EmailConfig} />
+                <PrivateRoute
+                  path="/email/configuration"
+                  component={EmailConfigs}
+                />
+                <PrivateRoute
+                  path="/email/template"
+                  component={EmailTemplate}
+                />
+                <PrivateRoute
                   path="/email/password/template"
                   component={EmailPasswordTemplate}
                 />

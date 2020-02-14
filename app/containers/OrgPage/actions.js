@@ -81,3 +81,44 @@ export function closeEditDepartmentDialog() {
     type: Constants.CLOSE_EDIT_DEPARTMENT_DIALOG,
   };
 }
+
+export function getCompanyInfo() {
+  return {
+    type: Constants.GET_COMPANY_INFO,
+  };
+}
+
+export function getCompanyInfoSuccess(data) {
+  return {
+    type: Constants.GET_COMPANY_INFO_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getCompanyInfoError(data) {
+  return {
+    type: Constants.GET_COMPANY_INFO_ERROR,
+    payload: data,
+  };
+}
+
+export function updateCompanyInfo(data) {
+  return {
+    type: Constants.UPDATE_COMPANY_INFO,
+    payload: data,
+  };
+}
+
+export function updateCompanyInfoSuccess(data) {
+  return {
+    type: Constants.UPDATE_COMPANY_INFO_SUCCESS,
+    payload: data,
+  };
+}
+
+export function updateCompanyInfoError(data) {
+  return {
+    type: Constants.UPDATE_COMPANY_INFO_ERROR,
+    payload: data,
+  };
+}

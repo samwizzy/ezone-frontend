@@ -103,16 +103,29 @@ const CompanyDialog = props => {
   const {
     companyDialog,
     closeEditCompanyDialog,
-    // dispatchUpdatePostAction,
+    dispatchUpdateCompanyInfoAction,
   } = props;
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState('panel1');
   const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
-    title: '',
-    // desc: '',
-    content: '',
+    companyName: '',
+    industry: '',
+    sector: '',
+    noOfEmployees: '',
+    country: '',
+    state: '',
+    city: '',
+    postalCode: '',
+    address: '',
+    timeZone: '',
+    language: '',
+    contactPersonName: '',
+    contactPersonEmail: '',
+    contactPersonPhone: '',
+    contactPersonTel: '',
+    website: '',
   });
 
   const handleSelectChange = event => {
@@ -127,12 +140,11 @@ const CompanyDialog = props => {
 
   console.log(companyDialog, 'companyDialog');
 
-  // useEffect(() => {
-  //   setValues({
-  //     ...companyDialog.data,
-  //   });
-  // }, []);
-  // }, [companyDialog.data]);
+  useEffect(() => {
+    setValues({
+      ...companyDialog.data,
+    });
+  }, [companyDialog.data]);
 
   const closeComposeDialog = () => {
     // eslint-disable-next-line no-unused-expressions
@@ -178,7 +190,7 @@ const CompanyDialog = props => {
                         id="standard-title"
                         label="Company Name"
                         className={classes.textField}
-                        value={values.desc}
+                        value={values.companyName}
                         onChange={handleChange('companyName')}
                         margin="normal"
                         fullWidth
@@ -215,9 +227,9 @@ const CompanyDialog = props => {
                         id="standard-numberOfEmployees"
                         label="Number Of Employees"
                         className={classes.textField}
-                        value={values.desc}
+                        value={values.noOfEmployees}
                         type="number"
-                        onChange={handleChange('numberOfEmployees')}
+                        onChange={handleChange('noOfEmployees')}
                         margin="normal"
                         fullWidth
                       />
@@ -283,7 +295,7 @@ const CompanyDialog = props => {
                         id="standard-postalCode"
                         label="Postal Code"
                         className={classes.textField}
-                        value={values.desc}
+                        value={values.postalCode}
                         onChange={handleChange('postalCode')}
                         margin="normal"
                         fullWidth
@@ -292,7 +304,7 @@ const CompanyDialog = props => {
                         id="standard-address"
                         label="Address"
                         className={classes.textField}
-                        value={values.content}
+                        value={values.address}
                         onChange={handleChange('address')}
                         margin="normal"
                         fullWidth
@@ -352,16 +364,6 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
-                      <TextField
-                        id="standard-numberOfEmployees"
-                        label="Number Of Employees"
-                        className={classes.textField}
-                        value={values.desc}
-                        type="number"
-                        onChange={handleChange('numberOfEmployees')}
-                        margin="normal"
-                        fullWidth
-                      />
                     </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
@@ -382,8 +384,8 @@ const CompanyDialog = props => {
                         id="standard-adminName"
                         label="Admin Name"
                         className={classes.textField}
-                        value={values.desc}
-                        onChange={handleChange('adminName')}
+                        value={values.contactPersonName}
+                        onChange={handleChange('contactPersonName')}
                         margin="normal"
                         fullWidth
                       />
@@ -391,8 +393,8 @@ const CompanyDialog = props => {
                         id="standard-adminEmail"
                         label="Admin Email"
                         className={classes.textField}
-                        value={values.desc}
-                        onChange={handleChange('adminEmail')}
+                        value={values.contactPersonEmail}
+                        onChange={handleChange('contactPersonEmail')}
                         margin="normal"
                         fullWidth
                       />
@@ -400,9 +402,9 @@ const CompanyDialog = props => {
                         id="standard-phoneNumber"
                         label="Phone Number"
                         className={classes.textField}
-                        value={values.desc}
+                        value={values.contactPersonPhone}
                         type="number"
-                        onChange={handleChange('phoneNumber')}
+                        onChange={handleChange('contactPersonPhone')}
                         margin="normal"
                         fullWidth
                       />
@@ -410,8 +412,8 @@ const CompanyDialog = props => {
                         id="standard-telephoneNumber"
                         label="Telephone Number"
                         className={classes.textField}
-                        value={values.desc}
-                        onChange={handleChange('telephoneNumber')}
+                        value={values.contactPersonTel}
+                        onChange={handleChange('contactPersonTel')}
                         margin="normal"
                         fullWidth
                       />
@@ -419,7 +421,7 @@ const CompanyDialog = props => {
                         id="standard-website"
                         label="website"
                         className={classes.textField}
-                        value={values.desc}
+                        value={values.website}
                         onChange={handleChange('website')}
                         margin="normal"
                         fullWidth
@@ -436,7 +438,7 @@ const CompanyDialog = props => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  dispatchUpdatePostAction(values);
+                  dispatchUpdateCompanyInfoAction(values);
                   closeComposeDialog();
                 }}
                 color="primary"
@@ -464,6 +466,7 @@ CompanyDialog.propTypes = {
   closeNewPostDialog: PropTypes.func,
   closeEditCompanyDialog: PropTypes.func,
   companyDialog: PropTypes.object,
+  dispatchUpdateCompanyInfoAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -474,7 +477,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // dispatchNewPostAction: evt => dispatch(Actions.saveNewPost(evt)),
     closeEditCompanyDialog: () => dispatch(Actions.closeEditCompanyDialog()),
-    // dispatchUpdatePostAction: evt => dispatch(Actions.updatePost(evt)),
+    dispatchUpdateCompanyInfoAction: evt =>
+      dispatch(Actions.updateCompanyInfo(evt)),
     dispatch,
   };
 }
