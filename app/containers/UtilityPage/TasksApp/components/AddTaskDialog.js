@@ -13,7 +13,8 @@ import {
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Slide, Typography, TextField } from '@material-ui/core';
+import _ from 'lodash';
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, MenuItem, Slide, Typography, TextField } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
 
@@ -25,7 +26,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
+const heads = [
+  {
+    uuid: 1,
+    label: 'Joel Johnson',
+    value: 'joel johnson',
+  },
+  {
+    uuid: 2,
+    label: 'Fela Brown',
+    value: 'fela brown',
+  },
+  {
+    uuid: 3,
+    label: 'Charles Brooks',
+    value: 'charles brooks',
+  },
+  {
+    uuid: 4,
+    label: 'Tom Cruise',
+    value: 'tom cruise',
+  },
+];
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,20 +55,38 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddTaskDialog(props) {
   const classes = useStyles();
-  const { openTaskPreviewDialog, closeNewTaskDialog, data } = props;
-  const [form, setForm] = React.useState({task: '', description: '', startTime: new Date(), endTime: new Date(), emails: []});
+  const { openTaskPreviewDialog, closeNewTaskDialog, createUtilityTask, data } = props;
+  const [form, setForm] = React.useState({
+    title: '',
+    description: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    assignedTo: ""
+  });
 
-  const handleChange = () => {}
-  const handleDateChange = date => {
-    setForm({form: {...form, startTime: date}})
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setForm({...form, [name]: value});
+    // setForm(_.set({...form}, event.target.name, event.target.value))
+  }
+
+  const handleSelectChange = event => {
+    const { name, value } = event.target
+    console.log(name, "Name")
+    console.log(value, "Value")
+  }
+
+  const handleDateChange = (date, formatted, name) => {
+    setForm(_.set({...form}, name, date))
   }
 
   const handleSubmit = event => {
-    closeNewTaskDialog()
-    openTaskPreviewDialog()
+    createUtilityTask(form)
+    // closeNewTaskDialog()
+    // openTaskPreviewDialog()
   }
 
-  console.log(data, 'checking task...')
+  console.log(form, 'checking form task...')
 
   return (
     <div>
@@ -61,31 +101,31 @@ function AddTaskDialog(props) {
         <DialogTitle id="alert-dialog-slide-title">Add Task</DialogTitle>
         <Divider />
         <DialogContent>
-          {/* <DialogContentText id="alert-dialog-slide-description"></DialogContentText> */}
           <form className={classes.root}>
           <Grid container>
             <Grid item xs={12}>
               <TextField
-                label="Task name"
+                name="title"
+                label="Title"
                 id="outlined-size-small"
                 fullWidth
-                defaultValue="Small"
                 variant="outlined"
                 size="small"
-                value={form.email}
+                value={form.title}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="outlined-multiline-static"
+                name="description"
                 label="Description"
                 multiline
                 fullWidth
                 rows="4"
                 rowsMax="4"
-                value={form.comment}
+                value={form.description}
                 onChange={handleChange}
-                defaultValue="Default Value"
                 variant="outlined"
               />
             </Grid>
@@ -99,10 +139,11 @@ function AddTaskDialog(props) {
                       variant="inline"
                       format="MM/dd/yyyy"
                       margin="normal"
+                      name="startDate"
                       id="date-picker-inline"
-                      label="Start time"
-                      value={form.startTime}
-                      onChange={handleDateChange}
+                      label="Start Date"
+                      value={form.startDate}
+                      onChange={(date, formatted) => handleDateChange(date, formatted, 'startDate')}
                       KeyboardButtonProps={{
                         'aria-label': 'change date',
                       }}
@@ -116,10 +157,11 @@ function AddTaskDialog(props) {
                       variant="inline"
                       format="MM/dd/yyyy"
                       margin="normal"
+                      name="endDate"
                       id="date-picker-inline"
-                      label="End time"
-                      value={form.endTime}
-                      onChange={handleDateChange}
+                      label="End Date"
+                      value={form.endDate}
+                      onChange={(date, formatted) => handleDateChange(date, formatted, 'endDate')}
                       KeyboardButtonProps={{
                         'aria-label': 'change date',
                       }}
@@ -131,18 +173,27 @@ function AddTaskDialog(props) {
 
             <Grid item xs={12}>
               <TextField
-                label="Assign task"
-                placeholder="Enter email address or usernames"
-                id="outlined-size-small"
+                id="select-head"
+                name="assignedTo"
+                placeholder="Select employee to assign to task"
+                select
                 fullWidth
-                defaultValue="Small"
+                className={classes.textField}
                 variant="outlined"
                 size="small"
-                value={form.email}
-              />
+                label="Assigned To"
+                value={form.assignedTo}
+                onChange={handleChange}
+              >
+                {heads.map(option => (
+                  <MenuItem key={option.uuid} value={option.uuid}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Button
                 variant="outlined"
                 component="label"
@@ -153,7 +204,7 @@ function AddTaskDialog(props) {
                   style={{ display: "none" }}
                 />
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
           </form>
         </DialogContent>
@@ -185,6 +236,7 @@ function mapDispatchToProps(dispatch) {
   return {
     openNewTaskDialog: ev => dispatch(Actions.openNewTaskDialog(ev)),
     openTaskPreviewDialog: ev => dispatch(Actions.openTaskPreviewDialog(ev)),
+    createUtilityTask: ev => dispatch(Actions.createUtilityTask(ev)),
     closeNewTaskDialog: () => dispatch(Actions.closeNewTaskDialog()),
     dispatch,
   };

@@ -88,8 +88,6 @@ const CompanyStructure = props => {
     setSelectedIndex(index);
     console.log(`item ${index} clicked`);
   };
-  
-
 
   console.log(openNewSubPartyAction, 'openNewSubPartyAction');
 
