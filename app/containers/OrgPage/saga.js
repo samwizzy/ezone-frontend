@@ -49,6 +49,7 @@ export function* updateCompanyDetail() {
       }),
     });
 
+    console.log(companyDetailResponse, 'companyDetailResponse')
     yield put(Actions.getCompanyInfoSuccess());
     yield put(Actions.updateCompanyInfoSuccess(companyDetailResponse));
   } catch (err) {

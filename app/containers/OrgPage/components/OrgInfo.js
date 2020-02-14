@@ -170,19 +170,23 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={user} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo.companyName} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.companyName}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={msg} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo.email_address} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.email_address}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone2} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo.phone} />
+                <ListItemText primary={companyInfo && companyInfo.phone} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
@@ -194,7 +198,7 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
-                <ListItemText primary="www.octivercommunications .org" />
+                <ListItemText primary="www.octivercommunications.org" />
               </ListItem>
             </List>
           </Grid>
@@ -204,7 +208,7 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo.address} />
+                <ListItemText primary={companyInfo && companyInfo.address} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
@@ -293,7 +297,7 @@ const OrgInfo = props => {
 OrgInfo.propTypes = {
   openEditColorDialog: PropTypes.func,
   openEditCompanyDialog: PropTypes.func,
-  companyInfo: PropTypes.object,
+  companyInfo: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
 };
 

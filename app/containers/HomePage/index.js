@@ -56,10 +56,11 @@ export function HomePage(props) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  const { user, token } = props;
+  // const { user, token } = props;
 
-  console.log(user, 'user from home');
-  console.log(token, 'token from home');
+  // console.log(user, 'user from home');
+  // console.log(token, 'token from home');
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -85,13 +86,13 @@ export function HomePage(props) {
 
 HomePage.propTypes = {
   // loading: PropTypes.bool,
-  user: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  token: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  // user: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  // token: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: Selectors.makeSelectCurrentUser(),
-  token: Selectors.makeSelectAccessToken(),
+  // user: Selectors.makeSelectCurrentUser(),
+  // token: Selectors.makeSelectAccessToken(),
 });
 
 export function mapDispatchToProps(dispatch) {

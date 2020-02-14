@@ -48,7 +48,6 @@ export function OrgPage(props) {
 }
 
 OrgPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   getCompanyInfoAction: PropTypes.func,
 };
 
