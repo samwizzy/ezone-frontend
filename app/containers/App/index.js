@@ -6,7 +6,7 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { Helmet } from 'react-helmet';
 // import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -16,7 +16,6 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
-import AllPosts from '../AllPosts/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
@@ -34,6 +33,7 @@ import Layout2 from '../../components/layouts/layout2/Layout2';
 import Layout3 from '../../components/layouts/layout3/Layout3';
 // import { makeSelectUserToken } from './selectors';
 import PrivateRoute from '../AuthProvider/PrivateRoute';
+import Snackbar from './components/Snackbar';
 // import { AppContext } from '../context/AppContext';
 
 // import { makeSelectGetSaveToken } from './selectors';
@@ -99,6 +99,7 @@ const App = () => {
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>
+            <Snackbar />
           </div>
         </main>
       </React.Fragment>

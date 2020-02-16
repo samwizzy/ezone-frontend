@@ -29,16 +29,16 @@ import {
   Link,
   Paper,
   Typography,
-  TextField
+  TextField,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import * as Selectors from '../App/selectors';
+import * as AppSelectors from '../App/selectors';
+import * as AppActions from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import logo from '../../images/logo.svg';
-
 
 const key = 'home';
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
     overflow: 'hidden',
-  }
+  },
 }));
 
 export function HomePage(props) {
@@ -56,8 +56,18 @@ export function HomePage(props) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  // const { user, token } = props;
+  // const { snackBar, currentUser } = props;
 
+  // useEffect(
+  //   () =>
+  //     snackBar({
+  //       open: true,
+  //       message: `Welcome back ${currentUser.firstName} ${
+  //         currentUser.lastName
+  //       }`,
+  //     }),
+  //   [],
+  // );
   // console.log(user, 'user from home');
   // console.log(token, 'token from home');
 
@@ -69,16 +79,16 @@ export function HomePage(props) {
         <meta name="description" content="ezone application homepage" />
       </Helmet>
       <div>
-
-        <Grid container style={{padding: '20px'}}>
+        <Grid container style={{ padding: '20px' }}>
           <Grid item xs={12} md={9}>
-            <Typography variant='h4'>EZONE</Typography>
-            <Typography variant='h6'>Welcome Page</Typography>
-            <Typography variant='body2'>Enterprise Resource Planning</Typography>
+            <Typography variant="h4">EZONE</Typography>
+            <Typography variant="h6">Welcome Page</Typography>
+            <Typography variant="body2">
+              Enterprise Resource Planning
+            </Typography>
           </Grid>
-          <Grid item xs={12} md={4}></Grid>
+          <Grid item xs={12} md={4} />
         </Grid>
-
       </div>
     </React.Fragment>
   );
@@ -86,17 +96,19 @@ export function HomePage(props) {
 
 HomePage.propTypes = {
   // loading: PropTypes.bool,
-  // user: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  // currentUser: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   // token: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 const mapStateToProps = createStructuredSelector({
-  // user: Selectors.makeSelectCurrentUser(),
+  // currentUser: AppSelectors.makeSelectCurrentUser(),
   // token: Selectors.makeSelectAccessToken(),
 });
 
 export function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    // snackBar: evt => dispatch(AppActions.openSnackBar(evt)),
+  };
 }
 
 const withConnect = connect(

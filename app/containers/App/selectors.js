@@ -39,6 +39,12 @@ const makeSelectCurrentUser = () =>
     globalState => globalState.user,
   );
 
+const makeSelectSnackBar = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.messageDialog,
+  );
+
 // const makeSelectLocation = () =>
 //   createSelector(
 //     selectRouter,
@@ -53,4 +59,5 @@ export {
   // makeSelectLocation,
   makeSelectLoginDetails,
   makeSelectAccessToken,
+  makeSelectSnackBar,
 };

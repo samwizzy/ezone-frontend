@@ -27,6 +27,9 @@ export const initialState = {
   accessToken: userToken,
   saveToken: false,
   getSaveToken: {},
+  messageDialog: {
+    data: { open: false, message: false, status: false },
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -75,6 +78,20 @@ const appReducer = (state = initialState, action) =>
         return {
           loading: false,
           error: action.payload,
+        };
+      }
+      case Constants.OPEN_SNACKBAR: {
+        return {
+          messageDialog: {
+            data: action.payload,
+          },
+        };
+      }
+      case Constants.CLOSE_SNACKBAR: {
+        return {
+          messageDialog: {
+            data: { open: false },
+          },
         };
       }
     }

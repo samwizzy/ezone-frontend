@@ -20,6 +20,7 @@ import LoginForm from './components/LoginForm';
 
 // import { useAuth } from '../context/AppContext';
 import * as Selectors from '../App/selectors';
+import Snackbar from '../App/components/Snackbar';
 
 export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
@@ -39,6 +40,7 @@ export function LoginPage(props) {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <LoginForm />
+      <Snackbar />
     </div>
   );
 }
