@@ -27,6 +27,7 @@ import Banner from './banner.jpg';
 import SideBanner from '../../images/side-banner.png';
 import Logo from '../../images/logo.svg';
 import OctivierLogo from '../../images/octivier-logo.svg';
+import UserMenu from '../layouts/shared-components/UserMenu';
 
 const links = [
   'Dashboard',
@@ -286,6 +287,7 @@ function Header(props) {
                       <img src={OctivierLogo} />
                     </ListItemIcon>
                     <ListItemText primary={'Octiver Communications'} /> */}
+                    <UserMenu />
                   </ListItem>
                 </List>
             </Grid>

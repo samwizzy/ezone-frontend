@@ -16,7 +16,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Apps from '@material-ui/icons/Apps';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
@@ -50,6 +49,9 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+  list: {
+    marginTop: theme.spacing(4)
+  },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -70,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     whiteSpace: 'nowrap',
     marginTop: '80px',
-    zIndex: 1099
+    zIndex: 1099,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -142,7 +144,7 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List className={classes.list}>
           {links.map((text, index) => {
             switch (text) {
               case 'Dashboard':
