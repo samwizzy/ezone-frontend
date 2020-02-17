@@ -9,19 +9,49 @@ import * as Actions from './actions';
 import * as Constants from './constants';
 import * as Endpoints from '../../components/Endpoints';
 
-export function* addUtilityTasks(data) {
-  console.log(data, "checking data from saga")
+export function* addUtilityFile({type, payload}) {
+  console.log(payload, "checking data from saga")
+  const accessToken = yield select(makeSelectAccessToken());
+  const user = yield select(makeSelectCurrentUser());
+  const requestURL = `${BaseUrl}${Endpoints.CreateUtilityFilesApi}`;
+  payload.orgId = user.organisation.orgId;
+
+  try {
+    const createdFileResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: qs.stringify(payload),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(createdFileResponse, "createdFileResponse")
+
+    yield put(Actions.createUtilityFileSuccess(createdFileResponse));
+  } catch (err) {
+    yield put(Actions.getUtilityFilesError(err));
+    console.error(err, "I got the error")
+  }
+}
+
+export function* addUtilityTasks({type, payload}) {
+  console.log(payload, "checking data from saga")
   const accessToken = yield select(makeSelectAccessToken());
   const user = yield select(makeSelectCurrentUser());
   const requestURL = `${BaseUrl}${Endpoints.CreateUtilityTasksApi}`;
+  payload.orgId = user.organisation.orgId;
+
+  console.log(payload, "Task Payloader")
+  console.log(user, "user")
 
   try {
     const createdTasksResponse = yield call(request, requestURL, {
       method: 'POST',
-      body: data,
+      body: qs.stringify(payload),
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       }),
     });
 
@@ -90,5 +120,6 @@ export default function* UtilityPageSaga() {
   yield takeLatest(Constants.GET_UTILITY_TASKS, getUtilityTasks);
   yield takeLatest(Constants.GET_UTILITY_FILES, getUtilityFiles);
   yield takeLatest(Constants.CREATE_UTILITY_TASKS, addUtilityTasks);
+  yield takeLatest(Constants.CREATE_UTILITY_FILES, addUtilityFile);
   // yield all([utilityTasks()])
 }

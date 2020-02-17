@@ -70,20 +70,25 @@ function AddTaskDialog(props) {
     // setForm(_.set({...form}, event.target.name, event.target.value))
   }
 
-  const handleSelectChange = event => {
-    const { name, value } = event.target
-    console.log(name, "Name")
-    console.log(value, "Value")
+  const reformattedDate = (date) => {
+    var month = date.getMonth() + 1; //months from 1-12
+    var day = date.getDate();
+    var year = date.getFullYear();
+    
+    var day = day.length > 0? day : day.toString().padStart(2, '0')
+    var month = month.length > 0? month : month.toString().padStart(2, '0')
+    
+    const newdate = year + "-" + month + "-" + day;
+    return newdate;
   }
 
-  const handleDateChange = (date, formatted, name) => {
-    setForm(_.set({...form}, name, date))
+  const handleDateChange = (date, formatted, name) => { 
+    setForm(_.set({...form}, name, reformattedDate(date)))
   }
 
   const handleSubmit = event => {
     createUtilityTask(form)
     // closeNewTaskDialog()
-    // openTaskPreviewDialog()
   }
 
   console.log(form, 'checking form task...')

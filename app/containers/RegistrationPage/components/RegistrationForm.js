@@ -51,12 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     [theme.breakpoints.up('md')]: {
-      width: '50%',
+      width: '55%',
+      maxWidth: '100%',
       height: '100%',
       backgroundImage: `url(${banner})`,
       backgroundRepeat: 'no-repeat',
-      backgroundSize: '100%',
-      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center right',
       position: 'absolute',
       top: 0,
       bottom: 0
@@ -134,9 +135,9 @@ const RegistrationForm = props => {
       <div className={classes.image}></div>
 
       <div className={classes.root}>
-        <Grid container component={Paper} className={classes.grid}>
-          <Grid item xs={0} sm={4} md={7} />
-          <Grid item xs={12} sm={8} md={5} style={{display: 'flex'}}>
+        <Grid container component={Paper} className={classes.grid} justify="center">
+          <Grid item xs={0} sm={0} md={7} />
+          <Grid item xs={12} sm={10} md={5} style={{display: 'flex'}}>
             <div className={classes.paper}>
               <Box className={classes.avatar}>
                 <img src={logo} alt="" />

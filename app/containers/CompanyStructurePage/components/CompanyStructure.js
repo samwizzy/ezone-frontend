@@ -112,11 +112,6 @@ const CompanyStructure = props => {
     setSelectedIndex(item);
     console.log(item, 'clicked');
   };
-<<<<<<< HEAD
-
-  console.log(openNewSubPartyAction, 'openNewSubPartyAction');
-=======
->>>>>>> ebd5bdcd7276e607b50313e24389350657e95151
 
   function createData(title, description) {
     return { title, description };

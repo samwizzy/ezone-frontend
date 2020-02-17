@@ -10,6 +10,7 @@ import {
   CREATE_UTILITY_TASKS_SUCCESS,
   GET_UTILITY_TASKS_ERROR,
   GET_UTILITY_FILES,
+  CREATE_UTILITY_FILES,
   CREATE_UTILITY_FILES_SUCCESS,
   GET_UTILITY_FILES_ERROR,
   OPEN_FILE_UPLOAD_DIALOG,
@@ -112,7 +113,7 @@ const utilityPageReducer = (state = initialState, action) =>
       case CREATE_UTILITY_TASKS: {
         return {
           ...state,
-          tasks: action.payload
+          task: action.payload
         };
       }
       case GET_UTILITY_TASKS: {
@@ -131,6 +132,12 @@ const utilityPageReducer = (state = initialState, action) =>
         return {
           ...state,
           error: action.payload
+        };
+      }
+      case CREATE_UTILITY_FILES: {
+        return {
+          ...state,
+          task: action.payload
         };
       }
       case CREATE_UTILITY_FILES_SUCCESS: {

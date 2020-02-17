@@ -45,30 +45,6 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-// const NoFileList = props => {
-//   const classes = useStyles();
-
-//   return (
-//     <React.Fragment>
-//       <Grid container justify='center' alignItems='center' className={classes.root}>
-//         <Grid item>
-//           <Box my={4}>
-//             <img src={tasksIcon} />
-//           </Box>
-//           <Box>
-//             <Typography variant='h6'>No file yet</Typography>
-
-//             <Button variant="contained" color="primary" className={classes.button} disableElevation>
-//               Upload a file
-//             </Button>
-//           </Box>
-//         </Grid>
-//       </Grid>
-//     </React.Fragment>
-//   )
-// }
-
-
 const FilesList = props => {
   const classes = useStyles();
   const { loading, files, getUtilityFiles, openFileUploadDialog, openShareFileDialog, openNewTaskDialog } = props
