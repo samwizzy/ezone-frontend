@@ -69,7 +69,7 @@ const makeSelectPartyGroupData = () =>
     subState => subState.selectedPartyGroupData,
   );
 
-  const createNewPartyGroupData = () =>
+  const makeSelectCreateNewPartyGroupData = () =>
   createSelector(
     selectCompanyStructurePageDomain,
     subState => subState.createNewPartyGroupData,
@@ -86,5 +86,5 @@ export {
   makeSelectParty,
   makeSelectPartyGroupData,
   makeSelectSelectedPartyGroupData,
-  createNewPartyGroupData,
+  makeSelectCreateNewPartyGroupData,
 };

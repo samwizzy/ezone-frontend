@@ -58,7 +58,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const PartyDialog = props => {
-  const { partyDialog, closeNewPartyDialog } = props;
+  const { createNewPartyGroupAction, partyDialog, closeNewPartyDialog } = props;
 
   const classes = useStyles();
   const [currency, setCurrency] = React.useState('EUR');
@@ -165,7 +165,8 @@ const PartyDialog = props => {
           <DialogActions>
             <Button
               onClick={() => {
-                closeComposeDialog();
+                createNewPartyGroupAction(values);
+                closeNewPartyDialog();
               }}
               color="primary"
               variant="contained"
@@ -188,6 +189,7 @@ const PartyDialog = props => {
 PartyDialog.propTypes = {
   closeNewPartyDialog: PropTypes.func,
   partyDialog: PropTypes.object,
+  createNewPartyGroupAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

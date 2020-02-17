@@ -141,7 +141,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
         return {
           ...state,
           selectedPartyGroupData: action.payload,
-
         };
       }
       case Constants.CREATE_NEW_PARTY_GROUP: {

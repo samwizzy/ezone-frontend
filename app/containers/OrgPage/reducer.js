@@ -9,6 +9,9 @@ import * as Constants from './constants';
 export const initialState = {
   loading: false,
   error: false,
+  companyInfo: false,
+  updateCompanyInfoData: false,
+  message: false,
   colorDialog: {
     type: 'new',
     props: {
@@ -185,6 +188,51 @@ const orgPageReducer = (state = initialState, action) =>
             },
             data: null,
           },
+        };
+      }
+      case Constants.GET_COMPANY_INFO: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_COMPANY_INFO_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          companyInfo: action.payload,
+        };
+      }
+      case Constants.GET_COMPANY_INFO_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.UPDATE_COMPANY_INFO: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          updateCompanyInfoData: action.payload,
+        };
+      }
+      case Constants.UPDATE_COMPANY_INFO_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          message: action.payload,
+        };
+      }
+      case Constants.UPDATE_COMPANY_INFO_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
         };
       }
     }

@@ -21,5 +21,14 @@ const makeSelectEmailConfig = () =>
     substate => substate,
   );
 
+  const makeSelectUserEmailConfigData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPartyGroupData,
+  );
+
 export default makeSelectEmailConfig;
-export { selectEmailConfigDomain };
+export { 
+  selectEmailConfigDomain,
+  makeSelectUserEmailConfigData,
+};

@@ -1,25 +1,23 @@
-import React, {Component} from 'react'
-import {DropzoneArea} from 'material-ui-dropzone'
- 
-class DropzoneAreaExample extends Component{
-  constructor(props){
+import React, { Component } from 'react';
+import { DropzoneArea } from 'material-ui-dropzone';
+
+class DropzoneAreaExample extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      files: []
+      files: [],
     };
   }
-  handleChange(files){
+
+  handleChange(files) {
     this.setState({
-      files: files
+      files,
     });
   }
-  render(){
-    return (
-      <DropzoneArea 
-        onChange={this.handleChange.bind(this)}
-        />
-    )  
+
+  render() {
+    return <DropzoneArea onChange={this.handleChange.bind(this)} />;
   }
-} 
- 
+}
+
 export default DropzoneAreaExample;

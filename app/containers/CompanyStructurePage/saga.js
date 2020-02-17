@@ -1,23 +1,24 @@
-
 import { takeLatest, call, put, select } from 'redux-saga/effects';
-import * as Selectors from '../App/selectors';
+import * as AppSelectors from '../App/selectors';
+import * as Selectors from './selectors';
 import { BaseUrl } from '../../components/BaseUrl';
 import request from '../../utils/request';
 import * as Endpoints from '../../components/Endpoints';
 import * as Actions from './actions';
 import * as Constants from './constants';
 
-
 export function* getPartyGroupSaga() {
-  const accessToken = yield select(Selectors.makeSelectAccessToken());
-  const currentUser = yield select(Selectors.makeSelectCurrentUser());
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
   console.log(accessToken, 'saga accessToken');
   console.log(currentUser, 'saga currentUser');
 
-  const requestURL = `${BaseUrl}${Endpoints.GetPartyGroup}?orgId=${currentUser.organisation.orgId}`;
+  const requestURL = `${BaseUrl}${Endpoints.GetPartyGroup}?orgId=${
+    currentUser.organisation.orgId
+  }`;
 
-  console.log(`orgId: --> ${currentUser.organisation.orgId}`)
+  console.log(`orgId: --> ${currentUser.organisation.orgId}`);
   console.log(requestURL, ' --> requestURL........');
 
   try {
@@ -29,9 +30,10 @@ export function* getPartyGroupSaga() {
       }),
     });
 
+    
+
     console.log(userPartyGroupResponse, '----> userPartyGroupResponse.');
     yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
-
   } catch (err) {
     console.log(err, '---> getPartyGroupErrorAction');
     yield put(Actions.getPartyGroupErrorAction(err));
@@ -39,18 +41,18 @@ export function* getPartyGroupSaga() {
 }
 
 export function* createNewPartyGroupSaga() {
-  const accessToken = yield select(Selectors.makeSelectAccessToken());
-  const currentUser = yield select(Selectors.makeSelectCurrentUser());
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  // const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
-  const createNewPartyGroupParams = yield select(Selectors.createNewPartyGroupData());
+  const createNewPartyGroupParams = yield select(
+    Selectors.createNewPartyGroupData(),
+  );
 
   console.log(accessToken, 'saga accessToken');
-  console.log(currentUser, 'saga currentUser');
+  // console.log(currentUser, 'saga currentUser');
   console.log(JSON.stringify(createNewPartyGroupParams), 'createNewPartyGroupParams');
 
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
-
-  console.log(`orgId: --> ${currentUser.organisation.orgId}`)
   console.log(requestURL, ' -> requestURL........');
 
   try {
@@ -65,7 +67,10 @@ export function* createNewPartyGroupSaga() {
 
     console.log(createPartyGroupResponse, '----> createPartyGroupResponse.');
     yield put(Actions.createNewPartyGroupSuccessAction(createPartyGroupResponse));
+    yield put(Actions.getPartyGroupAction());
 
+    // console.log(userPartyGroupResponse, '----> userPartyGroupResponse.');
+    // yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
   } catch (err) {
     console.log(err, '---> createNewPartyGroupErrorAction');
     yield put(Actions.createNewPartyGroupErrorAction(err));

@@ -57,6 +57,18 @@ const makeSelectDepartmentDialog = () =>
     subState => subState.departmentDialog,
   );
 
+const makeSelectCompanyInfo = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.companyInfo,
+  );
+
+const makeSelectUpdateCompanyInfoData = () =>
+  createSelector(
+    selectOrgPageDomain,
+    subState => subState.updateCompanyInfoData,
+  );
+
 export default makeSelectOrgPage;
 export {
   selectOrgPageDomain,
@@ -65,5 +77,7 @@ export {
   makeSelectEditColorDialog,
   makeSelectEditCompanyDialog,
   makeSelectBranchDialog,
-  makeSelectDepartmentDialog
+  makeSelectDepartmentDialog,
+  makeSelectCompanyInfo,
+  makeSelectUpdateCompanyInfoData,
 };

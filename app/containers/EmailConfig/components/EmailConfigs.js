@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
@@ -10,6 +10,14 @@ import {
   Divider,
   Button,
 } from '@material-ui/core';
+
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox'
+
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -37,14 +45,34 @@ const useStyles = makeStyles(theme => ({
 const EmailConfigs = props => {
   const classes = useStyles();
 
-  const {} = props;
+  const [state, setState] = React.useState({
+    gilad: true,
+    jason: false,
+    antoine: false,
+  });
+
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.checked });
+  };
+
+  const { gilad, jason, antoine } = state;
+  const error = [gilad, jason, antoine].filter(v => v).length !== 2;
+
+  const { dispatchGetEmailConfigAction } = props;
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    dispatchGetEmailConfigAction();
+  }, []);
+
+
   return (
     <React.Fragment>
-      Email Configuration Settings
+      Email Configuration Settings.
       <Card className={classes.card} variant="outlined">
         <CardContent>
           <Grid container spacing={3} className={classes.formStyle}>
-            <Grid item xs={12} md={6} lg={6}>
+            {/* <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
                   id="outlined-Description"
@@ -53,12 +81,12 @@ const EmailConfigs = props => {
                   fullWidth
                 />
               </div>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
                   id="outlined-serverName"
-                  label="Server Name"
+                  label="Host Name"
                   variant="outlined"
                   fullWidth
                 />
@@ -74,7 +102,7 @@ const EmailConfigs = props => {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={6} lg={3}>
+            {/* <Grid item xs={12} md={6} lg={3}>
               <Typography
                 variant="h6"
                 component="h6"
@@ -82,7 +110,7 @@ const EmailConfigs = props => {
               >
                 Default ***
               </Typography>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Divider component="hr" />
 
@@ -90,7 +118,7 @@ const EmailConfigs = props => {
             Security and Authentication
           </Typography>
           <Grid container spacing={3} className={classes.formStyle}>
-            <Grid item xs={12} md={6} lg={6}>
+            {/* <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
                   id="outlined-Connection-Security"
@@ -99,17 +127,8 @@ const EmailConfigs = props => {
                   fullWidth
                 />
               </div>
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}>
-              <div>
-                <TextField
-                  id="outlined-Authentication-Method"
-                  label="Authentication Method"
-                  variant="outlined"
-                  fullWidth
-                />
-              </div>
-            </Grid>
+            </Grid> */}
+            
             <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
@@ -120,7 +139,36 @@ const EmailConfigs = props => {
                 />
               </div>
             </Grid>
+
+            <Grid item xs={12} md={6} lg={6}>
+              <div>
+                <TextField
+                  id="outlined-Password"
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
+                />
+              </div>
+            </Grid>
           </Grid>
+
+          <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={gilad} onChange={handleChange('gilad')} value="gilad" />}
+            label="TLS"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={jason} onChange={handleChange('jason')} value="jason" />}
+            label="TLS Required"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox checked={antoine} onChange={handleChange('antoine')} value="antoine" />
+            }
+            label="Authentication"
+          />
+        </FormGroup>
+
           <Grid item xs={12} md={6} lg={6}>
             <Button variant="contained" color="primary" className={classes.buttonStyle}>
               Save
@@ -146,6 +194,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     // openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    dispatchGetEmailConfigAction: evt => dispatch(Actions.getEmailConfigAction(evt)),
   };
 }
 
