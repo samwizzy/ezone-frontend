@@ -8,7 +8,7 @@ COPY package.json ezone/package.json
 COPY build ezone/build
 COPY server ezone/server
 
-WORKDIR ezone/
+WORKDIR /home/ezone
 
 ENV NODE_ENV production
 
