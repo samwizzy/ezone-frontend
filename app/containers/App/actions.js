@@ -54,3 +54,9 @@ export function closeSnackBar() {
     type: Constants.CLOSE_SNACKBAR,
   };
 }
+
+export function logout() {
+  return {
+    type: Constants.LOG_OUT,
+  };
+}

@@ -8,3 +8,5 @@ export const GET_USER_PROFILE_ERROR = 'app/App/GET_USER_PROFILE_ERROR';
 
 export const OPEN_SNACKBAR = 'app/App/OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'app/App/CLOSE_SNACKBAR';
+
+export const LOG_OUT = 'app/App/LOG_OUT';

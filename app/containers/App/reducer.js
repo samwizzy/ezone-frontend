@@ -1,7 +1,19 @@
 import produce from 'immer';
 import * as Constants from './constants';
+import moment from 'moment';
 
-// let userActive = JSON.parse(localStorage.getItem('user'));
+const getToken = () => {
+  const expiresIn = localStorage.getItem('expires_in');
+  const accessToken = localStorage.getItem('access_token');
+  if (
+    accessToken(
+      !expiresIn || moment.unix(Number(expiresIn)).diff(moment(), 'minute') > 1,
+    )
+  ) {
+    return accessToken;
+  }
+  return refreshToken();
+}
 
 let userActive;
 if (!JSON.parse(localStorage.getItem('user'))) {
@@ -59,6 +71,7 @@ const appReducer = (state = initialState, action) =>
       case Constants.GET_USER_PROFILE: {
         localStorage.setItem('access_token', action.payload.access_token);
         localStorage.setItem('refresh_token', action.payload.refresh_token);
+        localStorage.setItem('expires_in', action.payload.expires_in);
         return {
           loading: true,
           error: false,
@@ -93,6 +106,12 @@ const appReducer = (state = initialState, action) =>
             data: { open: false },
           },
         };
+      }
+      case Constants.LOG_OUT: {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('expires_in');
+        return {};
       }
     }
   });

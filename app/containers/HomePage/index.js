@@ -57,6 +57,7 @@ export function HomePage(props) {
   useInjectSaga({ key, saga });
 
   // const { snackBar, currentUser } = props;
+  const { dispatchLogoutAction } = props;
 
   // useEffect(
   //   () =>
@@ -86,6 +87,15 @@ export function HomePage(props) {
             <Typography variant="body2">
               Enterprise Resource Planning
             </Typography>
+            <Link href="/login">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => dispatchLogoutAction()}
+              >
+                Logout
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={12} md={4} />
         </Grid>
@@ -98,6 +108,7 @@ HomePage.propTypes = {
   // loading: PropTypes.bool,
   // currentUser: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   // token: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  dispatchLogoutAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -108,6 +119,7 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     // snackBar: evt => dispatch(AppActions.openSnackBar(evt)),
+    dispatchLogoutAction: () => dispatch(AppActions.logout()),
   };
 }
 
