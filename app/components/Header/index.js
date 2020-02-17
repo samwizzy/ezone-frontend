@@ -282,10 +282,10 @@ function Header(props) {
             <Grid item>
                 <List>
                   <ListItem>
-                    <ListItemIcon>
+                    {/* <ListItemIcon>
                       <img src={OctivierLogo} />
                     </ListItemIcon>
-                    <ListItemText primary={'Octiver Communications'} />
+                    <ListItemText primary={'Octiver Communications'} /> */}
                   </ListItem>
                 </List>
             </Grid>

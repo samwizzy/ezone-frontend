@@ -25,7 +25,7 @@ class UserMenu extends Component {
         const {user, logout} = this.props;
         const {userMenu} = this.state;
 
-        console.log(user, 'User object')
+        // console.log(user, 'User object')
         if(!user.data || !user.data.role){
             return ''
         }
