@@ -41,6 +41,7 @@ export function* addUtilityTasks({type, payload}) {
   const user = yield select(makeSelectCurrentUser());
   const requestURL = `${BaseUrl}${Endpoints.CreateUtilityTasksApi}`;
   payload.orgId = user.organisation.orgId;
+  delete payload.assignedTo
 
   console.log(payload, "Task Payloader")
   console.log(user, "user")
@@ -48,10 +49,12 @@ export function* addUtilityTasks({type, payload}) {
   try {
     const createdTasksResponse = yield call(request, requestURL, {
       method: 'POST',
-      body: qs.stringify(payload),
+      body: payload,
+      // body: qs.stringify(payload),
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       }),
     });
 
