@@ -192,14 +192,14 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={phone} />
                 </ListItemIcon>
-                <ListItemText primary="+234 097 637 7383" />
+                <ListItemText primary={companyInfo && companyInfo.contactPersonEmail} />
               </ListItem>
-              <ListItem className={classes.listFormat}>
+              {/* <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
                 <ListItemText primary="www.octivercommunications.org" />
-              </ListItem>
+              </ListItem> */}
             </List>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -238,32 +238,32 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={user} />
                 </ListItemIcon>
-                <ListItemText primary="Joy Essien" />
+                <ListItemText primary={companyInfo && companyInfo.contactPersonName} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={msg} />
                 </ListItemIcon>
-                <ListItemText primary="joy.essien@octiver.ng" />
+                <ListItemText primary={companyInfo && companyInfo.contactPersonEmail} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone2} />
                 </ListItemIcon>
-                <ListItemText primary="+234 097 637 7383" />
+                <ListItemText primary={companyInfo && companyInfo.contactPersonPhone} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone} />
                 </ListItemIcon>
-                <ListItemText primary="+234 097 637 7383" />
+                <ListItemText primary={companyInfo && companyInfo.contactPersonTel} />
               </ListItem>
-              <ListItem className={classes.listFormat}>
+              {/* <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
                 <ListItemText primary="www.octivercommunications .org" />
-              </ListItem>
+              </ListItem> */}
             </List>
           </Grid>
           <Grid item xs={12} md={6}>

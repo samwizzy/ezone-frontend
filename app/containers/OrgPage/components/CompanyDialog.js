@@ -16,6 +16,7 @@ import {
   Toolbar,
   Typography,
   MenuItem,
+  Grid,
 } from '@material-ui/core';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -107,24 +108,26 @@ const CompanyDialog = props => {
   } = props;
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState('panel1');
   const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
-    companyName: '',
-    industry: '',
-    sector: '',
-    noOfEmployees: '',
-    country: '',
-    state: '',
-    city: '',
-    postalCode: '',
     address: '',
-    timeZone: '',
-    language: '',
+    city: '',
+    companyName: '',
+    companyShortName: '',
     contactPersonName: '',
     contactPersonEmail: '',
     contactPersonPhone: '',
     contactPersonTel: '',
+    country: '',
+    emailAddress: '',
+    industry: '',
+    language: '',
+    noOfEmployees: '',
+    phoneNumber: '',
+    postalCode: '',
+    sector: '',
+    state: '',
+    timeZone: '',
     website: '',
   });
 
@@ -173,42 +176,171 @@ const CompanyDialog = props => {
               <div />
             ) : (
               <div>
-                <ExpansionPanel
-                  square
-                  expanded={expanded === 'panel1'}
-                  onChange={handlePanelChange('panel1')}
-                >
-                  <ExpansionPanelSummary
-                    aria-controls="panel1d-content"
-                    id="panel1d-header"
-                  >
-                    <Typography>Company Information</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div>
+                <TextField
+                  id="standard-companyName"
+                  variant="outlined"
+                  label="Company Name"
+                  className={classes.textField}
+                  value={values.companyName}
+                  onChange={handleChange('companyName')}
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  id="standard-companyShortName"
+                  variant="outlined"
+                  label="Company Short Name"
+                  className={classes.textField}
+                  value={values.companyShortName}
+                  onChange={handleChange('companyShortName')}
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  id="standard-emailAddress"
+                  variant="outlined"
+                  label="Company Email"
+                  className={classes.textField}
+                  value={values.emailAddress}
+                  type="email"
+                  onChange={handleChange('emailAddress')}
+                  margin="normal"
+                  fullWidth
+                />
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    {/* <Grid item xs={6}>
                       <TextField
-                        id="standard-title"
-                        label="Company Name"
+                        id="standard-contactPersonTel"
+                        variant="outlined"
+                        label="Contact Person Tel"
                         className={classes.textField}
-                        value={values.companyName}
-                        onChange={handleChange('companyName')}
+                        value={values.contactPersonTel}
+                        onChange={handleChange('contactPersonTel')}
+                        margin="normal"
+                        type="number"
+                        fullWidth
+                      />
+                    </Grid> */}
+                    <Grid item xs={12}>
+                      <TextField
+                        id="standard-phoneNumber"
+                        variant="outlined"
+                        label="Phone Number"
+                        className={classes.textField}
+                        value={values.phoneNumber}
+                        type="number"
+                        onChange={handleChange('phoneNumber')}
                         margin="normal"
                         fullWidth
                       />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
                       <TextField
-                        id="standard-select-sector"
-                        select
+                        id="standard-numberOfEmployees"
+                        variant="outlined"
+                        label="Number Of Employees"
+                        className={classes.textField}
+                        value={values.noOfEmployees}
+                        type="number"
+                        onChange={handleChange('noOfEmployees')}
+                        margin="normal"
                         fullWidth
-                        label="Select Sector"
-                        value={currency}
-                        onChange={handleSelectChange}
-                      >
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="standard-postalCode"
+                        variant="outlined"
+                        label="Postal Code"
+                        className={classes.textField}
+                        value={values.postalCode}
+                        onChange={handleChange('postalCode')}
+                        margin="normal"
+                        fullWidth
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <TextField
+                  id="standard-website"
+                  variant="outlined"
+                  label="website"
+                  className={classes.textField}
+                  value={values.website}
+                  onChange={handleChange('website')}
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  id="standard-adminName"
+                  variant="outlined"
+                  label="Contact Person Name"
+                  className={classes.textField}
+                  value={values.contactPersonName}
+                  onChange={handleChange('contactPersonName')}
+                  margin="normal"
+                  fullWidth
+                />
+                <TextField
+                  id="standard-adminEmail"
+                  variant="outlined"
+                  label="Contact Person Email"
+                  className={classes.textField}
+                  value={values.contactPersonEmail}
+                  onChange={handleChange('contactPersonEmail')}
+                  margin="normal"
+                  fullWidth
+                />
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="standard-contactPersonPhone"
+                        variant="outlined"
+                        label="Contact Person Phone"
+                        className={classes.textField}
+                        value={values.contactPersonPhone}
+                        type="number"
+                        onChange={handleChange('contactPersonPhone')}
+                        margin="normal"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        id="standard-contactPersonTel"
+                        variant="outlined"
+                        label="Contact Person Tel"
+                        className={classes.textField}
+                        value={values.contactPersonTel}
+                        onChange={handleChange('contactPersonTel')}
+                        margin="normal"
+                        type="number"
+                        fullWidth
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <TextField
+                  id="standard-address"
+                  label="Address"
+                  className={classes.textField}
+                  value={values.address}
+                  onChange={handleChange('address')}
+                  margin="normal"
+                  fullWidth
+                  multiline
+                  rows="2"
+                />
+
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-industry"
                         select
@@ -223,32 +355,28 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
+                    </Grid>
+                    <Grid item xs={6}>
                       <TextField
-                        id="standard-numberOfEmployees"
-                        label="Number Of Employees"
-                        className={classes.textField}
-                        value={values.noOfEmployees}
-                        type="number"
-                        onChange={handleChange('noOfEmployees')}
-                        margin="normal"
+                        id="standard-select-sector"
+                        select
                         fullWidth
-                      />
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel
-                  square
-                  expanded={expanded === 'panel2'}
-                  onChange={handlePanelChange('panel2')}
-                >
-                  <ExpansionPanelSummary
-                    aria-controls="panel2d-content"
-                    id="panel2d-header"
-                  >
-                    <Typography>Address</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div>
+                        label="Select Sector"
+                        value={currency}
+                        onChange={handleSelectChange}
+                      >
+                        {currencies.map(option => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-country"
                         select
@@ -263,6 +391,8 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
+                    </Grid>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-state"
                         select
@@ -277,6 +407,12 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-city"
                         select
@@ -291,65 +427,8 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
-                      <TextField
-                        id="standard-postalCode"
-                        label="Postal Code"
-                        className={classes.textField}
-                        value={values.postalCode}
-                        onChange={handleChange('postalCode')}
-                        margin="normal"
-                        fullWidth
-                      />
-                      <TextField
-                        id="standard-address"
-                        label="Address"
-                        className={classes.textField}
-                        value={values.address}
-                        onChange={handleChange('address')}
-                        margin="normal"
-                        fullWidth
-                        multiline
-                        rows="3"
-                      />
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel
-                  square
-                  expanded={expanded === 'panel3'}
-                  onChange={handlePanelChange('panel3')}
-                >
-                  <ExpansionPanelSummary
-                    aria-controls="panel3d-content"
-                    id="panel3d-header"
-                  >
-                    <Typography>Region</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div>
-                      {/* <TextField
-                        id="standard-title"
-                        label="Company Name"
-                        className={classes.textField}
-                        value={values.desc}
-                        onChange={handleChange('companyName')}
-                        margin="normal"
-                        fullWidth
-                      /> */}
-                      <TextField
-                        id="standard-select-timeZone"
-                        select
-                        fullWidth
-                        label="Time Zone"
-                        value={currency}
-                        onChange={handleSelectChange}
-                      >
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                    </Grid>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-language"
                         select
@@ -364,71 +443,23 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel
-                  square
-                  expanded={expanded === 'panel4'}
-                  onChange={handlePanelChange('panel4')}
-                >
-                  <ExpansionPanelSummary
-                    aria-controls="panel4d-content"
-                    id="panel4d-header"
-                  >
-                    <Typography>Contact Details</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <div>
-                      <TextField
-                        id="standard-adminName"
-                        label="Admin Name"
-                        className={classes.textField}
-                        value={values.contactPersonName}
-                        onChange={handleChange('contactPersonName')}
-                        margin="normal"
+                      {/* <TextField
+                        id="standard-select-timeZone"
+                        select
                         fullWidth
-                      />
-                      <TextField
-                        id="standard-adminEmail"
-                        label="Admin Email"
-                        className={classes.textField}
-                        value={values.contactPersonEmail}
-                        onChange={handleChange('contactPersonEmail')}
-                        margin="normal"
-                        fullWidth
-                      />
-                      <TextField
-                        id="standard-phoneNumber"
-                        label="Phone Number"
-                        className={classes.textField}
-                        value={values.contactPersonPhone}
-                        type="number"
-                        onChange={handleChange('contactPersonPhone')}
-                        margin="normal"
-                        fullWidth
-                      />
-                      <TextField
-                        id="standard-telephoneNumber"
-                        label="Telephone Number"
-                        className={classes.textField}
-                        value={values.contactPersonTel}
-                        onChange={handleChange('contactPersonTel')}
-                        margin="normal"
-                        fullWidth
-                      />
-                      <TextField
-                        id="standard-website"
-                        label="website"
-                        className={classes.textField}
-                        value={values.website}
-                        onChange={handleChange('website')}
-                        margin="normal"
-                        fullWidth
-                      />
-                    </div>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
+                        label="Time Zone"
+                        value={currency}
+                        onChange={handleSelectChange}
+                      >
+                        {currencies.map(option => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField> */}
+                    </Grid>
+                  </Grid>
+                </Grid>
               </div>
             )}
           </DialogContent>
