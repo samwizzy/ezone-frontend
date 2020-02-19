@@ -17,53 +17,10 @@ import {
   Typography,
   MenuItem,
   Grid,
+  InputLabel,
 } from '@material-ui/core';
-import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
-import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
-
-const ExpansionPanel = withStyles({
-  root: {
-    border: '1px solid rgba(0, 0, 0, .125)',
-    boxShadow: 'none',
-    '&:not(:last-child)': {
-      borderBottom: 0,
-    },
-    '&:before': {
-      display: 'none',
-    },
-    '&$expanded': {
-      margin: 'auto',
-    },
-  },
-  expanded: {},
-})(MuiExpansionPanel);
-
-const ExpansionPanelSummary = withStyles({
-  root: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
-    borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    marginBottom: -1,
-    minHeight: 56,
-    '&$expanded': {
-      minHeight: 56,
-    },
-  },
-  content: {
-    '&$expanded': {
-      margin: '12px 0',
-    },
-  },
-  expanded: {},
-})(MuiExpansionPanelSummary);
-
-const ExpansionPanelDetails = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiExpansionPanelDetails);
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -83,20 +40,79 @@ const useStyles = makeStyles(theme => ({
 
 const currencies = [
   {
-    value: 'USD',
-    label: '$',
+    value: 'Agriculture Industry',
+    label: 'Agriculture Industry',
   },
   {
-    value: 'EUR',
-    label: '€',
+    value: 'Real Estate/Construction',
+    label: 'Real Estate/Construction',
   },
   {
-    value: 'BTC',
-    label: '฿',
+    value: 'Consumer Goods',
+    label: 'Consumer Goods',
   },
   {
-    value: 'JPY',
-    label: '¥',
+    value: 'Healthcare',
+    label: 'Healthcare',
+  },
+  {
+    value: 'Industrial Goods',
+    label: 'Industrial Goods',
+  },
+  {
+    value: 'Natural Resources',
+    label: 'Natural Resources',
+  },
+  {
+    value: 'Oil And Gas',
+    label: 'Oil And Gas',
+  },
+  {
+    value: 'Services',
+    label: 'Services',
+  },
+  {
+    value: 'Utilities',
+    label: 'Utilities',
+  },
+];
+
+const industries = [
+  {
+    value: 'Agriculture Industry',
+    label: 'Agriculture Industry',
+  },
+  {
+    value: 'Real Estate/Construction',
+    label: 'Real Estate/Construction',
+  },
+  {
+    value: 'Consumer Goods',
+    label: 'Consumer Goods',
+  },
+  {
+    value: 'Healthcare',
+    label: 'Healthcare',
+  },
+  {
+    value: 'Industrial Goods',
+    label: 'Industrial Goods',
+  },
+  {
+    value: 'Natural Resources',
+    label: 'Natural Resources',
+  },
+  {
+    value: 'Oil And Gas',
+    label: 'Oil And Gas',
+  },
+  {
+    value: 'Services',
+    label: 'Services',
+  },
+  {
+    value: 'Utilities',
+    label: 'Utilities',
   },
 ];
 
@@ -130,9 +146,10 @@ const CompanyDialog = props => {
     timeZone: '',
     website: '',
   });
+  const inputLabel = React.useRef(null);
 
-  const handleSelectChange = event => {
-    setCurrency(event.target.value);
+  const handleSelectChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
   };
   const handlePanelChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -329,6 +346,7 @@ const CompanyDialog = props => {
                 <TextField
                   id="standard-address"
                   label="Address"
+                  variant="outlined"
                   className={classes.textField}
                   value={values.address}
                   onChange={handleChange('address')}
@@ -340,23 +358,27 @@ const CompanyDialog = props => {
 
                 <Grid item xs={12}>
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                       <TextField
                         id="standard-select-industry"
                         select
                         fullWidth
+                        variant="outlined"
                         label="Select Industry"
-                        value={currency}
+                        value={values.industry}
                         onChange={handleSelectChange}
                       >
-                        {currencies.map(option => (
+                        <InputLabel id="select-industry-label">
+                          Select Industry
+                        </InputLabel>
+                        {industries.map(option => (
                           <MenuItem key={option.value} value={option.value}>
                             {option.label}
                           </MenuItem>
                         ))}
                       </TextField>
                     </Grid>
-                    <Grid item xs={6}>
+                    {/* <Grid item xs={6}>
                       <TextField
                         id="standard-select-sector"
                         select
@@ -371,7 +393,7 @@ const CompanyDialog = props => {
                           </MenuItem>
                         ))}
                       </TextField>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -385,6 +407,9 @@ const CompanyDialog = props => {
                         value={currency}
                         onChange={handleSelectChange}
                       >
+                        <InputLabel id="select-country-label">
+                          Select Industry
+                        </InputLabel>
                         {currencies.map(option => (
                           <MenuItem key={option.value} value={option.value}>
                             {option.label}
