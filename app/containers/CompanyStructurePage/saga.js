@@ -11,31 +11,21 @@ export function* getPartyGroupSaga() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
   const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
-  console.log(accessToken, 'saga accessToken');
-  console.log(currentUser, 'saga currentUser');
-
   const requestURL = `${BaseUrl}${Endpoints.GetPartyGroup}?orgId=${
     currentUser.organisation.orgId
   }`;
-
-  console.log(`orgId: --> ${currentUser.organisation.orgId}`);
-  console.log(requestURL, ' --> requestURL........');
 
   try {
     const userPartyGroupResponse = yield call(request, requestURL, {
       method: 'GET',
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       }),
     });
 
-    
-
-    console.log(userPartyGroupResponse, '----> userPartyGroupResponse.');
     yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
   } catch (err) {
-    console.log(err, '---> getPartyGroupErrorAction');
     yield put(Actions.getPartyGroupErrorAction(err));
   }
 }
@@ -48,12 +38,7 @@ export function* createNewPartyGroupSaga() {
     Selectors.createNewPartyGroupData(),
   );
 
-  console.log(accessToken, 'saga accessToken');
-  // console.log(currentUser, 'saga currentUser');
-  console.log(JSON.stringify(createNewPartyGroupParams), 'createNewPartyGroupParams');
-
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
-  console.log(requestURL, ' -> requestURL........');
 
   try {
     const createPartyGroupResponse = yield call(request, requestURL, {
@@ -77,8 +62,60 @@ export function* createNewPartyGroupSaga() {
   }
 }
 
+export function* getAllUsers() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+
+  const requestURL = `${BaseUrl}${Endpoints.GetAllUsersApi}`;
+
+  try {
+    const getAllUsersResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(getAllUsersResponse, 'getAllUsersResponse');
+
+    yield put(Actions.getAllUsersSuccess(getAllUsersResponse));
+  } catch (err) {
+    yield put(Actions.getAllUsersError(err));
+  }
+}
+
+export function* createNewParty() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  
+  const createNewPartyData = yield select(
+    Selectors.makeSelectCreateNewPartyData(),
+  );
+
+  console.log(createNewPartyData, 'createNewPartyData');
+  const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyApi}`;
+
+  try {
+    const createNewPartyResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(createNewPartyData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(createNewPartyResponse, 'createNewPartyResponse');
+
+    yield put(Actions.createNewPartySuccess(createNewPartyResponse));
+  } catch (err) {
+    yield put(Actions.createNewPartyError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* companyStructureSaga() {
   yield takeLatest(Constants.GET_PARTY_GROUP, getPartyGroupSaga);
-  yield takeLatest(Constants.CREATE_NEW_PARTY_GROUP, createNewPartyGroupSaga);
+  yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
+  yield takeLatest(Constants.CREATE_NEW_PARTY, createNewParty);
 }

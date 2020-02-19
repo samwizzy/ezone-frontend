@@ -63,16 +63,28 @@ const makeSelectPartyGroupData = () =>
     subState => subState.partyGroupData,
   );
 
-  const makeSelectSelectedPartyGroupData = () =>
+const makeSelectSelectedPartyGroupData = () =>
   createSelector(
     selectCompanyStructurePageDomain,
     subState => subState.selectedPartyGroupData,
   );
 
-  const makeSelectCreateNewPartyGroupData = () =>
+const createNewPartyGroupData = () =>
   createSelector(
     selectCompanyStructurePageDomain,
     subState => subState.createNewPartyGroupData,
+  );
+
+const makeSelectAllUsersData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.getAllUsersData,
+  );
+
+const makeSelectCreateNewPartyData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPartyData,
   );
 
 export default makeSelectCompanyStructurePage;
@@ -86,5 +98,7 @@ export {
   makeSelectParty,
   makeSelectPartyGroupData,
   makeSelectSelectedPartyGroupData,
-  makeSelectCreateNewPartyGroupData,
+  createNewPartyGroupData,
+  makeSelectAllUsersData,
+  makeSelectCreateNewPartyData,
 };

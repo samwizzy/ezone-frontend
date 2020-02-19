@@ -44,14 +44,12 @@ export function closeNewRoleDialog() {
 }
 
 export function getPartyGroupAction() {
-  console.log('trigger actions');
   return {
     type: Constants.GET_PARTY_GROUP,
   };
 }
 
 export function getPartyGroupSuccessAction(data) {
-  console.log(data, 'getPartyGroupSuccessAction.');
   return {
     type: Constants.GET_PARTY_GROUP_SUCCESS,
     payload: data,
@@ -59,7 +57,6 @@ export function getPartyGroupSuccessAction(data) {
 }
 
 export function getPartyGroupErrorAction(data) {
-  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.GET_PARTY_GROUP_ERROR,
     payload: data,
@@ -67,7 +64,6 @@ export function getPartyGroupErrorAction(data) {
 }
 
 export function getSelectedPartyGroupAction(data) {
-  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.GET_SELECTED_PARTY_GROUP,
     payload: data,
@@ -75,7 +71,6 @@ export function getSelectedPartyGroupAction(data) {
 }
 
 export function createNewPartyGroupAction(data) {
-  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.CREATE_NEW_PARTY_GROUP,
     payload: data,
@@ -83,7 +78,6 @@ export function createNewPartyGroupAction(data) {
 }
 
 export function createNewPartyGroupSuccessAction(data) {
-  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.CREATE_NEW_PARTY_GROUP_SUCCESS,
     payload: data,
@@ -91,12 +85,49 @@ export function createNewPartyGroupSuccessAction(data) {
 }
 
 export function createNewPartyGroupErrorAction(data) {
-  console.log(data, 'getPartyGroupErrorAction');
   return {
     type: Constants.CREATE_NEW_PARTY_GROUP_ERROR,
     payload: data,
   };
 }
 
+export function getAllUsers() {
+  return {
+    type: Constants.GET_ALL_USERS,
+  };
+}
 
+export function getAllUsersSuccess(data) {
+  return {
+    type: Constants.GET_ALL_USERS_SUCCESS,
+    payload: data,
+  };
+}
 
+export function getAllUsersError(data) {
+  return {
+    type: Constants.GET_ALL_USERS_ERROR,
+    payload: data,
+  };
+}
+
+export function createNewParty(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTY,
+    payload: data,
+  };
+}
+
+export function createNewPartySuccess(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTY_SUCCESS,
+    payload: data,
+  };
+}
+
+export function createNewPartyError(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTY_ERROR,
+    payload: data,
+  };
+}

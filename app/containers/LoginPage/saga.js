@@ -33,9 +33,25 @@ export function* login() {
 
     // if login is success get user profile with access token
     yield put(Actions.getUserProfileAction(loginResponse));
+    // yield put(
+    //   Actions.openSnackBar({
+    //     open: true,
+    //     message: `Welcome back ${loginResponse.firstName} ${
+    //       loginResponse.lastName
+    //     }`,
+    //     status: 'success',
+    //   }),
+    // );
   } catch (err) {
     console.log(err, 'err');
     yield put(Actions.loginErrorAction(err));
+    yield put(
+      Actions.openSnackBar({
+        open: true,
+        message: 'Wrong email or password',
+        status: 'error',
+      }),
+    );
   }
 }
 

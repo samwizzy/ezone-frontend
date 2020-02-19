@@ -41,3 +41,22 @@ export function getUserProfileErrorAction(data) {
     payload: data,
   };
 }
+
+export function openSnackBar(data) {
+  return {
+    type: Constants.OPEN_SNACKBAR,
+    payload: data,
+  };
+}
+
+export function closeSnackBar() {
+  return {
+    type: Constants.CLOSE_SNACKBAR,
+  };
+}
+
+export function logout() {
+  return {
+    type: Constants.LOG_OUT,
+  };
+}

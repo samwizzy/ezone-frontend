@@ -34,9 +34,41 @@ export function* getEmailConfigSaga() {
   }
 }
 
+// Save email configurations
+export function* saveEmailConfigSaga() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+
+  const updateUserEmailConfigPostData = yield select(
+    Selectors.makeSelectUserEmailConfigPostData(),
+  );
+  console.log("updateUserEmailConfigPostData: ", updateUserEmailConfigPostData);
+
+  const requestURL = `${BaseUrl}${Endpoints.SaveEmailConfigApi}`;
+  console.log('postURL --> ', requestURL);
+
+  try {
+    const saveEmailConfigResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(updateUserEmailConfigPostData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(saveEmailConfigResponse, '----> saveEmailConfigResponse.');
+    yield put(Actions.getEmailConfigSuccessAction(saveEmailConfigResponse));
+
+  } catch (err) {
+    console.log(err, '---> getPartyGroupErrorAction');
+    yield put(Actions.getEmailConfigErrorAction(err));
+  }
+}
+
 
 // Individual exports for testing
 export default function* emailConfigSaga() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(Constants.GET_EMAIL_CONFIG, getEmailConfigSaga);
+  yield takeLatest(Constants.UPDATE_EMAIL_CONFIG, saveEmailConfigSaga);
 }

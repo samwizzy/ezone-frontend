@@ -45,20 +45,26 @@ const useStyles = makeStyles(theme => ({
 const EmailConfigs = props => {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
+  const [values, setValues] = React.useState({
+    host: '',
+    port: '',
+    username: '',
+    password: '',
+    tls: false,
+    tlsRequired: false,
+    authenticate: false
   });
 
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
-  };
+  const handleChange = event => {
+    setValues({ ...values, [event.target.name]: event.target.type === 'checkbox'? event.target.checked : event.target.value });
+  }
 
-  const { gilad, jason, antoine } = state;
-  const error = [gilad, jason, antoine].filter(v => v).length !== 2;
+  const canSubmitForm = () => {
+    const { host, port, username, password, tls, tlsRequired, authenticate } = values
+    return host.length > 0 && port.length > 0 && username.length > 0 && password.length > 0 && tls === true && tlsRequired === true && authenticate === true
+  } 
 
-  const { dispatchGetEmailConfigAction } = props;
+  const { dispatchUpdateEmailConfigAction, dispatchGetEmailConfigAction } = props;
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
@@ -68,49 +74,36 @@ const EmailConfigs = props => {
 
   return (
     <React.Fragment>
-      Email Configuration Settings.
+      Email Configuration Settings
       <Card className={classes.card} variant="outlined">
         <CardContent>
           <Grid container spacing={3} className={classes.formStyle}>
-            {/* <Grid item xs={12} md={6} lg={6}>
-              <div>
-                <TextField
-                  id="outlined-Description"
-                  label="Description"
-                  variant="outlined"
-                  fullWidth
-                />
-              </div>
-            </Grid> */}
             <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
-                  id="outlined-serverName"
+                  name="host"
+                  value={values.host}
+                  id="host"
                   label="Host Name"
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange}
                 />
               </div>
             </Grid>
             <Grid item xs={12} md={6} lg={3}>
               <div>
                 <TextField
+                  name="port"
+                  value={values.port}
                   id="outlined-Port"
                   label="Port"
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange}
                 />
               </div>
             </Grid>
-            {/* <Grid item xs={12} md={6} lg={3}>
-              <Typography
-                variant="h6"
-                component="h6"
-                className={classes.header}
-              >
-                Default ***
-              </Typography>
-            </Grid> */}
           </Grid>
           <Divider component="hr" />
 
@@ -118,24 +111,17 @@ const EmailConfigs = props => {
             Security and Authentication
           </Typography>
           <Grid container spacing={3} className={classes.formStyle}>
-            {/* <Grid item xs={12} md={6} lg={6}>
-              <div>
-                <TextField
-                  id="outlined-Connection-Security"
-                  label="Connection Security"
-                  variant="outlined"
-                  fullWidth
-                />
-              </div>
-            </Grid> */}
             
             <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
+                  name="username"
+                  value={values.username}
                   id="outlined-Username"
                   label="Username"
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange}
                 />
               </div>
             </Grid>
@@ -143,10 +129,13 @@ const EmailConfigs = props => {
             <Grid item xs={12} md={6} lg={6}>
               <div>
                 <TextField
+                  name="password"
+                  value={values.password}
                   id="outlined-Password"
                   label="Password"
                   variant="outlined"
                   fullWidth
+                  onChange={handleChange}
                 />
               </div>
             </Grid>
@@ -154,23 +143,26 @@ const EmailConfigs = props => {
 
           <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={gilad} onChange={handleChange('gilad')} value="gilad" />}
+            value={values.tls}
+            control={<Checkbox checked={values.tls} name="tls" onChange={handleChange} value="tls" />}
             label="TLS"
           />
           <FormControlLabel
-            control={<Checkbox checked={jason} onChange={handleChange('jason')} value="jason" />}
+            value={values.tlsRequired}
+            control={<Checkbox checked={values.tlsRequired} name="tlsRequired" onChange={handleChange} value="tlsRequired" />}
             label="TLS Required"
           />
           <FormControlLabel
+            value={values.authenticate}
             control={
-              <Checkbox checked={antoine} onChange={handleChange('antoine')} value="antoine" />
+              <Checkbox checked={values.authenticate} onChange={handleChange} name="authenticate" value="authenticate" />
             }
             label="Authentication"
           />
         </FormGroup>
 
           <Grid item xs={12} md={6} lg={6}>
-            <Button variant="contained" color="primary" className={classes.buttonStyle}>
+            <Button variant="contained" color="primary" className={classes.buttonStyle} onClick={() => dispatchUpdateEmailConfigAction(values)} disabled={!canSubmitForm()}>
               Save
             </Button>
             <Button variant="contained" color="primary" className={classes.buttonStyle}>
@@ -195,6 +187,7 @@ function mapDispatchToProps(dispatch) {
   return {
     // openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
     dispatchGetEmailConfigAction: evt => dispatch(Actions.getEmailConfigAction(evt)),
+    dispatchUpdateEmailConfigAction: evt => dispatch(Actions.updateEmailConfigAction(evt)),
   };
 }
 

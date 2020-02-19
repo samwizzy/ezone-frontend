@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -20,6 +20,8 @@ import LoginForm from './components/LoginForm';
 
 // import { useAuth } from '../context/AppContext';
 import * as Selectors from '../App/selectors';
+import * as AppActions from '../App/actions';
+import Snackbar from '../App/components/Snackbar';
 
 export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
@@ -39,12 +41,14 @@ export function LoginPage(props) {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <LoginForm />
+      <Snackbar />
     </div>
   );
 }
 
 LoginPage.propTypes = {
   tokens: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  dispatchLogoutAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -52,8 +56,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  // console.log(dispatch, 'dispatch');
-  return {};
+  return {
+    dispatchLogoutAction: () => dispatch(AppActions.logout()),
+  };
 }
 
 const withConnect = connect(
