@@ -152,6 +152,7 @@ const OrgInfo = props => {
                   }
                 >
                   Company Structure
+                  <Link href="/organization/company/structure">Company Structure</Link>
                 </Button>
               </Grid>
             </Grid>
@@ -192,7 +193,9 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={phone} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.contactPersonEmail} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.contactPersonEmail}
+                />
               </ListItem>
               {/* <ListItem className={classes.listFormat}>
                 <ListItemIcon>
@@ -238,25 +241,33 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={user} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.contactPersonName} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.contactPersonName}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={msg} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.contactPersonEmail} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.contactPersonEmail}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone2} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.contactPersonPhone} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.contactPersonPhone}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.contactPersonTel} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.contactPersonTel}
+                />
               </ListItem>
               {/* <ListItem className={classes.listFormat}>
                 <ListItemIcon>

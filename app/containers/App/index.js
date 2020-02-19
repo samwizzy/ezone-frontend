@@ -80,8 +80,8 @@ const App = () => {
                   path="/organization/company/structure"
                   component={CompanyStructure}
                 />
-                <PrivateRoute path="/employee" component={EmployeePage} />
-                <PrivateRoute path="/utility" component={UtilityPage} />
+                <PrivateRoute exact path="/employee" component={EmployeePage} />
+                <PrivateRoute exact path="/dashboard" component={UtilityPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute
                   path="/email/configuration"
@@ -95,7 +95,7 @@ const App = () => {
                   path="/email/password/template"
                   component={EmailPasswordTemplate}
                 />
-                <PrivateRoute exact path="/dashboard" component={HomePage} />
+                <PrivateRoute exact path="/home" component={HomePage} />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>
