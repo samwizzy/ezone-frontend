@@ -16,9 +16,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
-import LoginPage from '../LoginPage/Loadable';
-import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
-import RegistrationPage from '../RegistrationPage/Loadable';
+import Registration from '../AuthorizationPage/Register/Loadable';
+import Login from '../AuthorizationPage/Login/Loadable';
+import ForgotPassword from '../AuthorizationPage/Login/components/ForgotPasswordForm';
+// import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
+// import LoginPage from '../LoginPage/Loadable';
+// import RegistrationPage from '../RegistrationPage/Loadable';
 // import OrgPage from '../OrgPage/Loadable';
 // import CompanyStructure from '../OrgPage/companyStructure';
 // import CompanyStructure from '../CompanyStructurePage/Loadable';
@@ -65,14 +68,10 @@ const App = () => {
             </Helmet>
 
             <Switch>
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/" component={LoginPage} />
-              <Route
-                exact
-                path="/forgot-password"
-                component={ForgotPasswordForm}
-              />
-              <Route exact path="/register" component={RegistrationPage} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Login} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
+              <Route exact path="/register" component={Registration} />
               <Layout3>
                 {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
                 {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
