@@ -19,9 +19,11 @@ import NotFoundPage from '../NotFoundPage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
 import RegistrationPage from '../RegistrationPage/Loadable';
-import OrgPage from '../OrgPage/Loadable';
+// import OrgPage from '../OrgPage/Loadable';
 // import CompanyStructure from '../OrgPage/companyStructure';
-import CompanyStructure from '../CompanyStructurePage/Loadable';
+// import CompanyStructure from '../CompanyStructurePage/Loadable';
+import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable';
+import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
@@ -74,7 +76,11 @@ const App = () => {
               <Layout3>
                 {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
                 {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
-                <PrivateRoute exact path="/organization" component={OrgPage} />
+                <PrivateRoute
+                  exact
+                  path="/organization"
+                  component={organizationPage}
+                />
                 <PrivateRoute
                   exact
                   path="/organization/company/structure"

@@ -87,6 +87,44 @@ const makeSelectCreateNewPartyData = () =>
     subState => subState.createNewPartyData,
   );
 
+// organization selectors
+const makeSelectEditColorDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.colorDialog,
+  );
+
+const makeSelectEditCompanyDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.companyDialog,
+  );
+
+const makeSelectBranchDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.branchDialog,
+  );
+
+const makeSelectDepartmentDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.departmentDialog,
+  );
+
+const makeSelectCompanyInfo = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.companyInfo,
+  );
+
+const makeSelectUpdateCompanyInfoData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.updateCompanyInfoData,
+  );
+
+
 export default makeSelectCompanyStructurePage;
 export {
   selectCompanyStructurePageDomain,
@@ -101,4 +139,11 @@ export {
   createNewPartyGroupData,
   makeSelectAllUsersData,
   makeSelectCreateNewPartyData,
+  // organization export function
+  makeSelectEditColorDialog,
+  makeSelectEditCompanyDialog,
+  makeSelectBranchDialog,
+  makeSelectDepartmentDialog,
+  makeSelectCompanyInfo,
+  makeSelectUpdateCompanyInfoData,
 };

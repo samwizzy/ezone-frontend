@@ -107,9 +107,63 @@ export function* createNewParty() {
   }
 }
 
+// Organization Info Saga
+export function* companyDetail() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+
+  const requestURL = `${BaseUrl}${Endpoints.CompanyInfoUrl}/${
+    currentUser.organisation.orgId
+  }`;
+
+  try {
+    const companyDetailResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    yield put(Actions.getCompanyInfoSuccess(companyDetailResponse));
+  } catch (err) {
+    yield put(Actions.getCompanyInfoError(err));
+  }
+}
+
+export function* updateCompanyDetail() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const updateCompanyInfoData = yield select(
+    Selectors.makeSelectUpdateCompanyInfoData(),
+  );
+
+  console.log(updateCompanyInfoData, 'updateCompanyInfoData')
+  const requestURL = `${BaseUrl}${Endpoints.UpdateCompanyInfoUrl}`;
+
+  try {
+    const companyDetailResponse = yield call(request, requestURL, {
+      method: 'PUT',
+      body: JSON.stringify(updateCompanyInfoData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(companyDetailResponse, 'companyDetailResponse')
+    yield put(Actions.getCompanyInfoSuccess());
+    yield put(Actions.updateCompanyInfoSuccess(companyDetailResponse));
+  } catch (err) {
+    yield put(Actions.updateCompanyInfoError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* companyStructureSaga() {
   yield takeLatest(Constants.GET_PARTY_GROUP, getPartyGroupSaga);
   yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
   yield takeLatest(Constants.CREATE_NEW_PARTY, createNewParty);
+  // Organization Info
+  yield takeLatest(Constants.GET_COMPANY_INFO, companyDetail);
+  yield takeLatest(Constants.UPDATE_COMPANY_INFO, updateCompanyDetail);
 }
