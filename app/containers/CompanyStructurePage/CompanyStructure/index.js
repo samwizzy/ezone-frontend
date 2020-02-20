@@ -17,20 +17,20 @@ import makeSelectOrgPage from '../selectors';
 import reducer from '../reducer';
 import saga from '../saga';
 import TabsPage from './components/TabsPage';
-import PartyDialog from './components/PartyDialog';
-import SubPartyDialog from './components/SubPartyDialog';
+// import PartyGroupDialog from './components/PartyGroupDialog';
+// import PartyDialog from './components/PartyDialog';
 
 import * as Actions from '../actions';
 
 export function CompanyStructurePage(props) {
-  const { dispatchGetAllUsersAction, getPartyGroup } = props;
+  const { dispatchGetAllUsersAction, dispatchGetPartyGroups } = props;
 
   useInjectReducer({ key: 'companyStructurePage', reducer });
   useInjectSaga({ key: 'companyStructurePage', saga });
 
   useEffect(() => {
-    getPartyGroup();
-    dispatchGetAllUsersAction();
+    dispatchGetPartyGroups();
+    // dispatchGetAllUsersAction();
   }, []);
 
   return (
@@ -44,14 +44,14 @@ export function CompanyStructurePage(props) {
       </Helmet>
       <TabsPage />
 
-      <PartyDialog />
-      <SubPartyDialog />
+      {/* <PartyGroupDialog /> */}
+      {/* <PartyDialog /> */}
     </div>
   );
 }
 
 CompanyStructurePage.propTypes = {
-  getPartyGroup: PropTypes.func,
+  dispatchGetPartyGroups: PropTypes.func,
   dispatchGetAllUsersAction: PropTypes.func,
 };
 
@@ -61,8 +61,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPartyGroup: () => dispatch(Actions.getPartyGroupAction()),
-    dispatchGetAllUsersAction: () => dispatch(Actions.getAllUsers()),
+    dispatchGetPartyGroups: () => dispatch(Actions.getPartyGroupAction()),
+    // dispatchGetAllUsersAction: () => dispatch(Actions.getAllUsers()),
   };
 }
 

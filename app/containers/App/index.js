@@ -19,14 +19,9 @@ import NotFoundPage from '../NotFoundPage/Loadable';
 import Registration from '../AuthorizationPage/Register/Loadable';
 import Login from '../AuthorizationPage/Login/Loadable';
 import ForgotPassword from '../AuthorizationPage/Login/components/ForgotPasswordForm';
-// import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
-// import LoginPage from '../LoginPage/Loadable';
-// import RegistrationPage from '../RegistrationPage/Loadable';
-// import OrgPage from '../OrgPage/Loadable';
-// import CompanyStructure from '../OrgPage/companyStructure';
-// import CompanyStructure from '../CompanyStructurePage/Loadable';
 import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable';
 import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
+import PartyPage from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
@@ -73,8 +68,6 @@ const App = () => {
               <Route exact path="/forgot-password" component={ForgotPassword} />
               <Route exact path="/register" component={Registration} />
               <Layout3>
-                {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
-                {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
                 <PrivateRoute
                   exact
                   path="/organization"
@@ -84,6 +77,11 @@ const App = () => {
                   exact
                   path="/organization/company/structure"
                   component={CompanyStructure}
+                />
+                <PrivateRoute
+                  exact
+                  path="/organization/company/structure/:partyGroupId/:partyId"
+                  component={PartyPage}
                 />
                 <PrivateRoute exact path="/employee" component={EmployeePage} />
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />

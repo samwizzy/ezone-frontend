@@ -101,7 +101,7 @@ NoPartyGroup.propTypes = {
   dispatchOpenNewPartyGroupAction: PropTypes.func,
 };
 
-const CompanyStructure = props => {
+const EmployeePage = props => {
   const {
     dispatchGetAllUsersAction,
     // dispatchGetPartyGroups,
@@ -119,6 +119,10 @@ const CompanyStructure = props => {
     dispatchGetAllUsersAction();
   }, []);
   const classes = useStyles();
+
+  function createData(title, description) {
+    return { title, description };
+  }
 
   console.log(partyGroupData, 'partyGroupData');
 
@@ -165,7 +169,7 @@ const CompanyStructure = props => {
                   <ListItem
                     button
                     key={index}
-                    // selected={selectedIndex === 0}
+                    selected={selectedIndex === 0}
                     onClick={() => DispatchgetSelectedPartyGroupAction(data)}
                   >
                     <ListItemText primary={data.name} />
@@ -249,18 +253,11 @@ const CompanyStructure = props => {
                           component="th"
                           scope="row"
                           width="25%"
-                          // onClick={() =>
-                          //   DispatchgetSelectedPartyGroupAction(party)
-                          // }
+                          onClick={() =>
+                            DispatchgetSelectedPartyGroupAction(party)
+                          }
                         >
-                          <Link
-                            href={`/organization/company/structure/${
-                              selectedPartyGroupData.id
-                            }/${party.id}`}
-                          >
-                            {party.name}
-                            {/* <div>{party.name}</div> */}
-                          </Link>
+                          <div>{party.name}</div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -274,7 +271,7 @@ const CompanyStructure = props => {
   );
 };
 
-CompanyStructure.propTypes = {
+EmployeePage.propTypes = {
   // dispatchGetPartyGroups: PropTypes.func,
   dispatchGetAllUsersAction: PropTypes.func,
   loading: PropTypes.bool,
@@ -314,4 +311,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(CompanyStructure);
+)(EmployeePage);

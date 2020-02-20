@@ -33,16 +33,16 @@ const makeSelectError = () =>
     subState => subState.error,
   );
 
-const makeSelectPartyDialog = () =>
+const makeSelectNewPartyGroupDialog = () =>
   createSelector(
     selectCompanyStructurePageDomain,
-    subState => subState.partyDialog,
+    subState => subState.newPartyGroupDialog,
   );
 
-const makeSelectSubPartyDialog = () =>
+const makeSelectNewPartyDialog = () =>
   createSelector(
     selectCompanyStructurePageDomain,
-    subState => subState.subPartyDialog,
+    subState => subState.newPartyDialog,
   );
 
 const makeSelectRoleDialog = () =>
@@ -87,6 +87,12 @@ const makeSelectCreateNewPartyData = () =>
     subState => subState.createNewPartyData,
   );
 
+// const makeSelectSelectedParty = () =>
+//   createSelector(
+//     selectCompanyStructurePageDomain,
+//     subState => subState.selectedParty,
+//   );
+
 // organization selectors
 const makeSelectEditColorDialog = () =>
   createSelector(
@@ -130,8 +136,8 @@ export {
   selectCompanyStructurePageDomain,
   makeSelectLoading,
   makeSelectError,
-  makeSelectPartyDialog,
-  makeSelectSubPartyDialog,
+  makeSelectNewPartyGroupDialog,
+  makeSelectNewPartyDialog,
   makeSelectRoleDialog,
   makeSelectParty,
   makeSelectPartyGroupData,
@@ -139,6 +145,7 @@ export {
   createNewPartyGroupData,
   makeSelectAllUsersData,
   makeSelectCreateNewPartyData,
+  // makeSelectSelectedParty,
   // organization export function
   makeSelectEditColorDialog,
   makeSelectEditCompanyDialog,

@@ -15,8 +15,8 @@ import { createStructuredSelector } from 'reselect';
 import * as Actions from '../../actions';
 import CompanyStructure from './CompanyStructure';
 import UserMenu from '../../../../components/layouts/shared-components/UserMenu';
+import PartyGroupDialog from './PartyGroupDialog';
 import PartyDialog from './PartyDialog';
-import SubPartyDialog from './SubPartyDialog';
 import RoleDialog from './RoleDialog';
 
 const useStyles = makeStyles(theme => ({
@@ -91,7 +91,7 @@ function TabsPage() {
             <Tab label="Organization Info" {...a11yProps(0)} />
           </Tabs>
 
-          <UserMenu />
+          {/* <UserMenu /> */}
         </Toolbar>
       </AppBar>
 
@@ -99,8 +99,8 @@ function TabsPage() {
         <CompanyStructure />
       </TabPanel>
 
+      <PartyGroupDialog />
       <PartyDialog />
-      <SubPartyDialog />
       <RoleDialog />
     </div>
   );

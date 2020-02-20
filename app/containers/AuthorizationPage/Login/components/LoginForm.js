@@ -65,8 +65,8 @@ const useStyles = makeStyles(theme => ({
       backgroundPosition: 'center right',
       position: 'absolute',
       top: 0,
-      bottom: 0
-    }
+      bottom: 0,
+    },
   },
   paper: {
     width: '100%',
@@ -121,9 +121,14 @@ const LoginForm = props => {
       <div className={classes.image} />
 
       <div className={classes.root}>
-        <Grid container component={Paper} className={classes.grid} justify="center">
+        <Grid
+          container
+          component={Paper}
+          className={classes.grid}
+          justify="center"
+        >
           <Grid item xs={0} sm={0} md={7} />
-          <Grid item xs={12} sm={10} md={5} style={{display: 'flex'}}>
+          <Grid item xs={12} sm={10} md={5} style={{ display: 'flex' }}>
             <div className={classes.paper}>
               <Box className={classes.avatar}>
                 <img src={logo} alt="" />

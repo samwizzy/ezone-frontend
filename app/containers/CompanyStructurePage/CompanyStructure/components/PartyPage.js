@@ -101,7 +101,7 @@ NoPartyGroup.propTypes = {
   dispatchOpenNewPartyGroupAction: PropTypes.func,
 };
 
-const CompanyStructure = props => {
+const PartyPage = props => {
   const {
     dispatchGetAllUsersAction,
     // dispatchGetPartyGroups,
@@ -120,7 +120,32 @@ const CompanyStructure = props => {
   }, []);
   const classes = useStyles();
 
+  const [selectedIndex, setSelectedIndex] = React.useState();
+
+  const handleListItemClick = item => {
+    setSelectedIndex(item);
+    console.log(item, 'clicked');
+  };
+
+  function createData(title, description) {
+    return { title, description };
+  }
+
+  const actions = [
+    // {title: 'Group', link: 'Add Group', action: openNewPartyAction},
+    { title: 'Party', link: 'Add Party', action: dispatchOpenNewPartyAction },
+    { title: 'Position', link: 'Add Position', action: openNewRoleDialog },
+  ];
+
   console.log(partyGroupData, 'partyGroupData');
+  const rows = [
+    createData(
+      'Description',
+      "Lorem Ipsum copy in various charsets and languages for layouts.. The dummy copy at this site is made from a dictionary of 500 words from Cicero's original ",
+    ),
+    // createData('Head', 'Christian Okeme'),
+    // createData('Assistant', 'Tina Umeh'),
+  ];
 
   if (loading) {
     return <LoadingIndicator />;
@@ -165,7 +190,7 @@ const CompanyStructure = props => {
                   <ListItem
                     button
                     key={index}
-                    // selected={selectedIndex === 0}
+                    selected={selectedIndex === 0}
                     onClick={() => DispatchgetSelectedPartyGroupAction(data)}
                   >
                     <ListItemText primary={data.name} />
@@ -249,18 +274,11 @@ const CompanyStructure = props => {
                           component="th"
                           scope="row"
                           width="25%"
-                          // onClick={() =>
-                          //   DispatchgetSelectedPartyGroupAction(party)
-                          // }
+                          onClick={() =>
+                            DispatchgetSelectedPartyGroupAction(party)
+                          }
                         >
-                          <Link
-                            href={`/organization/company/structure/${
-                              selectedPartyGroupData.id
-                            }/${party.id}`}
-                          >
-                            {party.name}
-                            {/* <div>{party.name}</div> */}
-                          </Link>
+                          <div>{party.name}</div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -274,7 +292,7 @@ const CompanyStructure = props => {
   );
 };
 
-CompanyStructure.propTypes = {
+PartyPage.propTypes = {
   // dispatchGetPartyGroups: PropTypes.func,
   dispatchGetAllUsersAction: PropTypes.func,
   loading: PropTypes.bool,
@@ -314,4 +332,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(CompanyStructure);
+)(PartyPage);

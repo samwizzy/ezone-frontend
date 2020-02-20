@@ -7,6 +7,7 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  selectedParty: false,
   createNewPartyData: false,
   createNewPartyGroupData: false,
   partyGroupData: false,
@@ -14,29 +15,35 @@ export const initialState = {
   error: false,
   selectedPartyGroupData: false,
   getAllUsersData: false,
-  partyDialog: {
+  newPartyGroupDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
-  subPartyDialog: {
+  newPartyDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
   roleDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
   party: [
-    {id: 1, name: 'Region', description: 'Testing out', head: 'Afeez', assistant: 'Sammy'}
+    {
+      id: 1,
+      name: 'Region',
+      description: 'Testing out',
+      head: 'Afeez',
+      assistant: 'Sammy',
+    },
   ],
   // Organization initial state
   companyInfo: false,
@@ -76,22 +83,22 @@ export const initialState = {
 const companyStructurePageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case Constants.OPEN_NEW_PARTY_DIALOG: {
+      case Constants.OPEN_NEW_PARTY_GROUP_DIALOG: {
         return {
           ...state,
-          partyDialog: {
+          newPartyGroupDialog: {
             type: 'new',
             props: {
               open: true,
             },
-            data: null
+            data: null,
           },
         };
       }
-      case Constants.CLOSE_NEW_PARTY_DIALOG: {
+      case Constants.CLOSE_NEW_PARTY_GROUP_DIALOG: {
         return {
           ...state,
-          partyDialog: {
+          newPartyGroupDialog: {
             type: 'new',
             props: {
               open: false,
@@ -100,10 +107,10 @@ const companyStructurePageReducer = (state = initialState, action) =>
           },
         };
       }
-      case Constants.OPEN_NEW_SUB_PARTY_DIALOG: {
+      case Constants.OPEN_NEW_PARTY_DIALOG: {
         return {
           ...state,
-          subPartyDialog: {
+          newPartyDialog: {
             type: 'new',
             props: {
               open: true,
@@ -112,10 +119,10 @@ const companyStructurePageReducer = (state = initialState, action) =>
           },
         };
       }
-      case Constants.CLOSE_NEW_SUB_PARTY_DIALOG: {
+      case Constants.CLOSE_NEW_PARTY_DIALOG: {
         return {
           ...state,
-          subPartyDialog: {
+          newPartyDialog: {
             type: 'new',
             props: {
               open: false,
@@ -149,7 +156,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.GET_PARTY_GROUP: {
-        console.log('trigger actions from reducer');
         return {
           ...state,
           loading: true,
@@ -175,7 +181,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
         return {
           ...state,
           selectedPartyGroupData: action.payload,
-
         };
       }
       case Constants.CREATE_NEW_PARTY_GROUP: {
@@ -242,6 +247,13 @@ const companyStructurePageReducer = (state = initialState, action) =>
           ...state,
           loading: false,
           error: action.payload,
+        };
+      }
+      case Constants.SELECTED_PARTY: {
+        return {
+          ...state,
+          loading: false,
+          selectedPartyGroupData: action.payload,
         };
       }
       // organization reduce

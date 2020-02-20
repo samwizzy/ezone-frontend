@@ -4,25 +4,25 @@
  *
  */
 
-export const OPEN_NEW_PARTY_DIALOG =
-  'app/CompanyStructurePage/OPEN_NEW_PARTY_DIALOG';
-export const CLOSE_NEW_PARTY_DIALOG =
-  'app/CompanyStructurePage/CLOSE_NEW_PARTY_DIALOG';
+export const OPEN_NEW_PARTY_GROUP_DIALOG =
+  'app/CompanyStructurePage/OPEN_NEW_PARTY_GROUP_DIALOG';
+export const CLOSE_NEW_PARTY_GROUP_DIALOG =
+  'app/CompanyStructurePage/CLOSE_NEW_PARTY_GROUP_DIALOG';
 
-export const OPEN_EDIT_PARTY_DIALOG =
-  'app/CompanyStructurePage/OPEN_EDIT_PARTY_DIALOG';
-export const CLOSE_EDIT_PARTY_DIALOG =
-  'app/CompanyStructurePage/CLOSE_EDIT_PARTY_DIALOG';
+export const OPEN_EDIT_PARTY_GROUP_DIALOG =
+  'app/CompanyStructurePage/OPEN_EDIT_PARTY_GROUP_DIALOG';
+export const CLOSE_EDIT_PARTY_GROUP_DIALOG =
+  'app/CompanyStructurePage/CLOSE_EDIT_PARTY_GROUP_DIALOG';
 
 export const OPEN_NEW_ROLE_DIALOG =
   'app/CompanyStructurePage/OPEN_NEW_ROLE_DIALOG';
 export const CLOSE_NEW_ROLE_DIALOG =
   'app/CompanyStructurePage/CLOSE_NEW_ROLE_DIALOG';
 
-export const OPEN_NEW_SUB_PARTY_DIALOG =
-  'app/CompanyStructurePage/OPEN_NEW_SUB_PARTY_DIALOG';
-export const CLOSE_NEW_SUB_PARTY_DIALOG =
-  'app/CompanyStructurePage/CLOSE_NEW_SUB_PARTY_DIALOG';
+export const OPEN_NEW_PARTY_DIALOG =
+  'app/CompanyStructurePage/OPEN_NEW_PARTY_DIALOG';
+export const CLOSE_NEW_PARTY_DIALOG =
+  'app/CompanyStructurePage/CLOSE_NEW_PARTY_DIALOG';
 
 export const GET_PARTY_GROUP = 'app/CompanyStructurePage/GET_PARTY_GROUP';
 export const GET_PARTY_GROUP_SUCCESS =
@@ -51,6 +51,8 @@ export const CREATE_NEW_PARTY_SUCCESS =
   'app/CompanyStructurePage/CREATE_NEW_PARTY_SUCCESS';
 export const CREATE_NEW_PARTY_ERROR =
   'app/CompanyStructurePage/CREATE_NEW_PARTY_ERROR';
+
+export const SELECTED_PARTY = 'app/CompanyStructurePage/SELECTED_PARTY';
 
 // Organization constants
 export const OPEN_EDIT_COLOR_DIALOG =

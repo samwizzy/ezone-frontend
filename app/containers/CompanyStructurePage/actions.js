@@ -6,6 +6,18 @@
 
 import * as Constants from './constants';
 
+export function openNewPartyGroupDialog() {
+  return {
+    type: Constants.OPEN_NEW_PARTY_GROUP_DIALOG,
+  };
+}
+
+export function closeNewPartyGroupDialog() {
+  return {
+    type: Constants.CLOSE_NEW_PARTY_GROUP_DIALOG,
+  };
+}
+
 export function openNewPartyDialog() {
   return {
     type: Constants.OPEN_NEW_PARTY_DIALOG,
@@ -15,18 +27,6 @@ export function openNewPartyDialog() {
 export function closeNewPartyDialog() {
   return {
     type: Constants.CLOSE_NEW_PARTY_DIALOG,
-  };
-}
-
-export function openNewSubGroupDialog() {
-  return {
-    type: Constants.OPEN_NEW_SUB_PARTY_DIALOG,
-  };
-}
-
-export function closeNewSubGroupDialog() {
-  return {
-    type: Constants.CLOSE_NEW_SUB_PARTY_DIALOG,
   };
 }
 
@@ -70,6 +70,7 @@ export function getSelectedPartyGroupAction(data) {
 }
 
 export function createNewPartyGroupAction(data) {
+  console.log(data, 'data new')
   return {
     type: Constants.CREATE_NEW_PARTY_GROUP,
     payload: data,
@@ -127,6 +128,13 @@ export function createNewPartySuccess(data) {
 export function createNewPartyError(data) {
   return {
     type: Constants.CREATE_NEW_PARTY_ERROR,
+    payload: data,
+  };
+}
+
+export function selectedParty(data) {
+  return {
+    type: Constants.SELECTED_PARTY,
     payload: data,
   };
 }

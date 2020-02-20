@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { makeStyles } from '@material-ui/core/styles' 
 import {
   Divider,
   TextField,
+  makeStyles,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
+  Typography,
   MenuItem,
-  Slide
+  Slide,
 } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,168 +36,207 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const heads = [
-  {
-    label: 'Joel Johnson',
-    value: 'joel johnson',
-  },
-  {
-    label: 'Fela Brown',
-    value: 'fela brown',
-  },
-  {
-    label: 'Charles Brooks',
-    value: 'charles brooks',
-  },
-  {
-    label: 'Tom Cruise',
-    value: 'tom cruise',
-  },
-];
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const PartyDialog = props => {
-  const { partyDialog, closeNewPartyDialog } = props;
+  const {
+    loading,
+    partyGroupData,
+    newPartyDialog,
+    dispatchCloseNewPartyDialog,
+    // closeEditBranchDialogAction,
+    AllUserData,
+    dispatchCreateNewPartyAction,
+  } = props;
 
   const classes = useStyles();
-  const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
+    partyGroupId: '',
+    partyHead: { id: '' },
+    assistantPartyHead: { id: '' },
     name: '',
     description: '',
   });
 
-  const handleSelectChange = event => {
-    setCurrency(event.target.value);
+  console.log(AllUserData, 'AllUserData AllUserData');
+  // console.log(newPartyDialog, 'newPartyDialog props ...');
+
+  const handleSelectChange = name => event => {
+    setValues({ ...values, [name]: { id: event.target.value } });
   };
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
+    setValues({
+      ...values,
+      [name]: event.target.value,
+    });
   };
 
-  const closeComposeDialog = () => {
-    partyDialog.type === 'new'
-      ? closeNewPartyDialog()
-      : null;
+  const canBeSubmitted = () => {
+    const {
+      partyGroupId,
+      partyHead,
+      assistantPartyHead,
+      name,
+      description,
+    } = values;
+    return (
+      partyGroupId !== '' &&
+      partyHead !== '' &&
+      assistantPartyHead !== '' &&
+      name !== '' &&
+      description !== ''
+    );
   };
 
   return (
     <div>
       <Dialog
-        {...partyDialog.props}
-        TransitionComponent={Transition}
-        onClose={closeNewPartyDialog}
+        {...newPartyDialog.props}
+        onClose={dispatchCloseNewPartyDialog}
         keepMounted
+        TransitionComponent={Transition}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {partyDialog.type === 'new' ? 'New Party' : 'Edit Party'}
+          {newPartyDialog.type === 'new' ? 'New Party' : 'Edit Party'}
         </DialogTitle>
 
         <Divider />
 
         <DialogContent>
-          {partyDialog.type === 'new' ? (
+          {newPartyDialog.type === 'new' ? (
             <div>
               <TextField
-                id="party-group"
-                label="Party Group"
+                id="select-group"
+                select
+                fullWidth
+                className={classes.textField}
+                variant="outlined"
+                label="Select Group"
+                value={values.partyGroupId}
+                name="partyGroupId"
+                onChange={handleChange('partyGroupId')}
+              >
+                {partyGroupData &&
+                  partyGroupData.map(option => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+              </TextField>
+
+              <TextField
+                id="subgroup-name"
+                label="Name"
                 className={classes.textField}
                 value={values.name}
+                variant="outlined"
                 onChange={handleChange('name')}
                 margin="normal"
-                variant="outlined"
-                size="small"
                 fullWidth
               />
-
               <TextField
                 id="description"
                 label="Description"
                 className={classes.textField}
                 value={values.description}
-                variant="outlined"
                 onChange={handleChange('description')}
                 margin="normal"
+                variant="outlined"
                 fullWidth
                 multiline
                 rows="3"
               />
-              {/* <TextField
+
+              <TextField
                 id="select-head"
                 select
                 fullWidth
-                className={classes.textField}
                 variant="outlined"
-                size="small"
                 label="Select Head"
-                value={currency}
-                onChange={handleSelectChange}
+                className={classes.textField}
+                value={values.partyHead.id}
+                onChange={handleSelectChange('partyHead')}
               >
-                {heads.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
+                {AllUserData &&
+                  AllUserData.map(option => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.emailAddress} {option.lastName}
+                    </MenuItem>
+                  ))}
               </TextField>
               <TextField
-                id="standard-select-state"
+                id="select-assistant"
                 select
                 fullWidth
-                className={classes.textField}
                 variant="outlined"
-                size="small"
+                className={classes.textField}
                 label="Select Assistant"
-                value={currency}
-                onChange={handleSelectChange}
+                value={values.assistantPartyHead.id}
+                onChange={handleSelectChange('assistantPartyHead')}
               >
-                {heads.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField> */}
+                {AllUserData &&
+                  AllUserData.map(option => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.emailAddress} {option.lastName}
+                    </MenuItem>
+                  ))}
+              </TextField>
             </div>
-          ) : null }
+          ) : null}
         </DialogContent>
-          <DialogActions>
+
+        <DialogActions>
+          {loading ? (
+            <LoadingIndicator />
+          ) : (
             <Button
               onClick={() => {
-                closeComposeDialog();
+                dispatchCreateNewPartyAction(values);
               }}
               color="primary"
               variant="contained"
+              disabled={!canBeSubmitted()}
             >
-              {partyDialog.type === 'new' ? 'Save' : 'Update'}
+              {newPartyDialog.type === 'new' ? 'Save' : 'Update'}
             </Button>
-            <Button
-              onClick={() => closeNewPartyDialog()}
-              color="primary"
-              variant="contained"
-            >
-              Cancel
-            </Button>
-          </DialogActions>
+          )}
+          <Button
+            onClick={() => dispatchCloseNewPartyDialog()}
+            color="primary"
+            variant="contained"
+          >
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
 };
 
 PartyDialog.propTypes = {
-  closeNewPartyDialog: PropTypes.func,
-  partyDialog: PropTypes.object,
+  dispatchCloseNewPartyDialog: PropTypes.func,
+  newPartyDialog: PropTypes.object,
+  partyGroupData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  AllUserData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  dispatchCreateNewPartyAction: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  partyDialog: Selectors.makeSelectPartyDialog(),
+  loading: Selectors.makeSelectLoading(),
+  newPartyDialog: Selectors.makeSelectNewPartyDialog(),
+  partyGroupData: Selectors.makeSelectPartyGroupData(),
+  AllUserData: Selectors.makeSelectAllUsersData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    closeNewPartyDialog: () => dispatch(Actions.closeNewPartyDialog()),
-    createNewPartyGroupAction: evt => dispatch(Actions.createNewPartyGroupAction(evt)),
+    dispatchCloseNewPartyDialog: () => dispatch(Actions.closeNewPartyDialog()),
+    dispatchCreateNewPartyAction: evt => dispatch(Actions.createNewParty(evt)),
     dispatch,
   };
 }

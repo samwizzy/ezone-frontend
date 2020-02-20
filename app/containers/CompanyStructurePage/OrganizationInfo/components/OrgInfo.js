@@ -71,7 +71,7 @@ const OrgInfo = props => {
     loading,
     openEditColorDialog,
     openEditCompanyDialog,
-    // history,
+    history,
   } = props;
 
   if (loading) {

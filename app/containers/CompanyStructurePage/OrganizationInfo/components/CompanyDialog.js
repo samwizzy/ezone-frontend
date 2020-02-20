@@ -23,7 +23,6 @@ import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
 import LoadingIndicator from '../../../../components/LoadingIndicator';
 import CountriesAndStates from '../../../../utils/countries_states.json';
-import { getState } from 'expect/build/jestMatchersObject';
 
 const useStyles = makeStyles(theme => ({
   container: {

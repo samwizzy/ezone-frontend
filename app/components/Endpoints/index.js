@@ -8,7 +8,7 @@ export const CompanyInfoUrl = '/authserv/api/v1/organisation';
 export const UpdateCompanyInfoUrl = '/authserv/api/v1/update_organization';
 export const GetPartyGroup = '/authserv/api/v1/organisation/partygroups';
 export const CreateNewPartyGroup = '/authserv/api/v1/partygroup';
-export const GetAllUsersApi = '/authserv/api/v1/users';
+export const GetAllUsersApi = '/authserv/api/v1/users/get_by_orgid';
 export const CreateNewPartyApi =
   '/authserv/api/v1/party/create_and_add_to_group';
 export const CreateNewEmployeeApi = '/authserv/api/v1/user';

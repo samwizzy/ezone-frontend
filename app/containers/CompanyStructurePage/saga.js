@@ -39,29 +39,56 @@ export function* createNewPartyGroupSaga() {
     Selectors.createNewPartyGroupData(),
   );
 
+  // console.log(accessToken, 'accessToken');
+  // console.log(currentUser, 'currentUser');
+  const { name, description } = createNewPartyGroupParams;
+  const newData = {
+    name,
+    description,
+    organisation: { orgId: currentUser.organisation.orgId }, // TODO: user object clear from store
+  };
+
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
 
   try {
     const userPartyGroupResponse = yield call(request, requestURL, {
       method: 'POST',
+      body: JSON.stringify(newData),
       headers: new Headers({
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/Json',
       }),
     });
 
-    console.log(userPartyGroupResponse, '----> userPartyGroupResponse.');
     yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
+    yield put(Actions.getPartyGroupAction());
+    yield put(Actions.closeNewPartyGroupDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Party Group Created Successfully',
+        status: 'success',
+      }),
+    );
   } catch (err) {
-    console.log(err, '---> getPartyGroupErrorAction');
     yield put(Actions.getPartyGroupErrorAction(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: `${err} Failed To Create Party Group`,
+        status: 'error',
+      }),
+    );
   }
 }
 
 export function* getAllUsers() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
-  const requestURL = `${BaseUrl}${Endpoints.GetAllUsersApi}`;
+  const requestURL = `${BaseUrl}${Endpoints.GetAllUsersApi}/${
+    currentUser.organisation.orgId
+  }`;
 
   try {
     const getAllUsersResponse = yield call(request, requestURL, {
@@ -76,6 +103,7 @@ export function* getAllUsers() {
 
     yield put(Actions.getAllUsersSuccess(getAllUsersResponse));
   } catch (err) {
+    console.log(err, 'getAllUsersResponse');
     yield put(Actions.getAllUsersError(err));
   }
 }
@@ -103,8 +131,24 @@ export function* createNewParty() {
     console.log(createNewPartyResponse, 'createNewPartyResponse');
 
     yield put(Actions.createNewPartySuccess(createNewPartyResponse));
+    yield put(Actions.getPartyGroupAction());
+    yield put(Actions.closeNewPartyDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Party Created Successfully',
+        status: 'success',
+      }),
+    );
   } catch (err) {
     yield put(Actions.createNewPartyError(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: `${err} Party Failed`,
+        status: 'error',
+      }),
+    );
   }
 }
 
@@ -175,6 +219,7 @@ export function* updateCompanyDetail() {
 export default function* companyStructureSaga() {
   yield takeLatest(Constants.GET_PARTY_GROUP, getPartyGroupSaga);
   yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
+  yield takeLatest(Constants.CREATE_NEW_PARTY_GROUP, createNewPartyGroupSaga);
   yield takeLatest(Constants.CREATE_NEW_PARTY, createNewParty);
   // Organization Info
   yield takeLatest(Constants.GET_COMPANY_INFO, companyDetail);
