@@ -57,11 +57,8 @@ const ColorDialog = props => {
   });
 
   const handleChange = name => event => {
-    console.log(name, event, 'name, event');
-    setValues({ ...event });
+    setValues({ ...values, [name]: event });
   };
-
-  // console.log(colorDialog, 'colorDialog');
 
   // useEffect(() => {
   //   setValues({
@@ -97,12 +94,16 @@ const ColorDialog = props => {
               <div />
             ) : (
               <div>
-                <ColorDropZone handleChange={handleChange} logo={values.logo} />
+                <ColorDropZone
+                  handleChange={handleChange('logo')}
+                  logo={values.logo}
+                />
                 <ColorPicker
                   name="color"
                   defaultValue="#000"
                   value={values.color}
-                  onChange={evt => handleChange(evt)}
+                  variant="outlined"
+                  onChange={handleChange('color')}
                   label="Choose Company Color"
                   className={classes.textField}
                   margin="normal"

@@ -21,6 +21,9 @@ import {
 } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
+import CountriesAndStates from '../../../../utils/countries_states.json';
+import { getState } from 'expect/build/jestMatchersObject';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -38,42 +41,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const currencies = [
+const countries = [
   {
-    value: 'Agriculture Industry',
-    label: 'Agriculture Industry',
+    value: 'English',
+    label: 'English',
   },
   {
-    value: 'Real Estate/Construction',
-    label: 'Real Estate/Construction',
-  },
-  {
-    value: 'Consumer Goods',
-    label: 'Consumer Goods',
-  },
-  {
-    value: 'Healthcare',
-    label: 'Healthcare',
-  },
-  {
-    value: 'Industrial Goods',
-    label: 'Industrial Goods',
-  },
-  {
-    value: 'Natural Resources',
-    label: 'Natural Resources',
-  },
-  {
-    value: 'Oil And Gas',
-    label: 'Oil And Gas',
-  },
-  {
-    value: 'Services',
-    label: 'Services',
-  },
-  {
-    value: 'Utilities',
-    label: 'Utilities',
+    value: 'French',
+    label: 'French',
   },
 ];
 
@@ -116,15 +91,18 @@ const industries = [
   },
 ];
 
+let getCountry;
+let getStates;
+
 const CompanyDialog = props => {
   const {
+    loading,
     companyDialog,
     closeEditCompanyDialog,
     dispatchUpdateCompanyInfoAction,
   } = props;
 
   const classes = useStyles();
-  const [currency, setCurrency] = React.useState('EUR');
   const [values, setValues] = React.useState({
     address: '',
     city: '',
@@ -146,19 +124,26 @@ const CompanyDialog = props => {
     timeZone: '',
     website: '',
   });
-  const inputLabel = React.useRef(null);
 
   const handleSelectChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
-  const handlePanelChange = panel => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  console.log(companyDialog, 'companyDialog');
+  const SelectState = name => {
+    getCountry = CountriesAndStates.filter(data => data.name === name);
+  };
+
+  if (getCountry) {
+    getCountry.map(data => {
+      getStates = data.states.map(data2 => {
+        return data2;
+      });
+    });
+  }
 
   useEffect(() => {
     setValues({
@@ -226,19 +211,6 @@ const CompanyDialog = props => {
                 />
                 <Grid item xs={12}>
                   <Grid container spacing={2}>
-                    {/* <Grid item xs={6}>
-                      <TextField
-                        id="standard-contactPersonTel"
-                        variant="outlined"
-                        label="Contact Person Tel"
-                        className={classes.textField}
-                        value={values.contactPersonTel}
-                        onChange={handleChange('contactPersonTel')}
-                        margin="normal"
-                        type="number"
-                        fullWidth
-                      />
-                    </Grid> */}
                     <Grid item xs={12}>
                       <TextField
                         id="standard-phoneNumber"
@@ -275,7 +247,7 @@ const CompanyDialog = props => {
                         variant="outlined"
                         label="Postal Code"
                         className={classes.textField}
-                        value={values.postalCode}
+                        value={values.postalCode ? values.postalCode : ''}
                         onChange={handleChange('postalCode')}
                         margin="normal"
                         fullWidth
@@ -358,15 +330,15 @@ const CompanyDialog = props => {
 
                 <Grid item xs={12}>
                   <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                       <TextField
                         id="standard-select-industry"
                         select
                         fullWidth
                         variant="outlined"
                         label="Select Industry"
-                        value={values.industry}
-                        onChange={handleSelectChange}
+                        value={values.industry ? values.industry : ''}
+                        onChange={handleSelectChange('industry')}
                       >
                         <InputLabel id="select-industry-label">
                           Select Industry
@@ -378,22 +350,23 @@ const CompanyDialog = props => {
                         ))}
                       </TextField>
                     </Grid>
-                    {/* <Grid item xs={6}>
+                    <Grid item xs={6}>
                       <TextField
-                        id="standard-select-sector"
+                        id="standard-select-language"
                         select
                         fullWidth
-                        label="Select Sector"
-                        value={currency}
-                        onChange={handleSelectChange}
+                        variant="outlined"
+                        label="Select Language"
+                        value={values.language ? values.language : ''}
+                        onChange={handleSelectChange('language')}
                       >
-                        {currencies.map(option => (
+                        {countries.map(option => (
                           <MenuItem key={option.value} value={option.value}>
                             {option.label}
                           </MenuItem>
                         ))}
                       </TextField>
-                    </Grid> */}
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -404,15 +377,17 @@ const CompanyDialog = props => {
                         select
                         fullWidth
                         label="Select country"
-                        value={currency}
-                        onChange={handleSelectChange}
+                        variant="outlined"
+                        value={values.country ? values.country : ''}
+                        onChange={handleSelectChange('country')}
+                        onClick={SelectState(values.country)}
                       >
                         <InputLabel id="select-country-label">
-                          Select Industry
+                          Select Country
                         </InputLabel>
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                        {CountriesAndStates.map(option => (
+                          <MenuItem key={option.name} value={option.name}>
+                            {option.name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -422,52 +397,37 @@ const CompanyDialog = props => {
                         id="standard-select-state"
                         select
                         fullWidth
+                        variant="outlined"
                         label="Select State"
-                        value={currency}
-                        onChange={handleSelectChange}
+                        value={values.state ? values.state : ''}
+                        onChange={handleSelectChange('state')}
                       >
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
+                        <InputLabel id="select-country-label">
+                          Select State
+                        </InputLabel>
+                        {getStates &&
+                          getStates.map(option => (
+                            <MenuItem key={option} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
                       </TextField>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                       <TextField
                         id="standard-select-city"
-                        select
                         fullWidth
+                        variant="outlined"
                         label="Select City"
-                        value={currency}
-                        onChange={handleSelectChange}
-                      >
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                        value={values.city}
+                        onChange={handleChange('city')}
+                      />
                     </Grid>
                     <Grid item xs={6}>
-                      <TextField
-                        id="standard-select-language"
-                        select
-                        fullWidth
-                        label="Select Language"
-                        value={currency}
-                        onChange={handleSelectChange}
-                      >
-                        {currencies.map(option => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
                       {/* <TextField
                         id="standard-select-timeZone"
                         select
@@ -492,16 +452,20 @@ const CompanyDialog = props => {
             <div />
           ) : (
             <DialogActions>
-              <Button
-                onClick={() => {
-                  dispatchUpdateCompanyInfoAction(values);
-                  closeComposeDialog();
-                }}
-                color="primary"
-                variant="contained"
-              >
-                Update
-              </Button>
+              {loading ? (
+                <LoadingIndicator />
+              ) : (
+                <Button
+                  onClick={() => {
+                    dispatchUpdateCompanyInfoAction(values);
+                    // closeComposeDialog();
+                  }}
+                  color="primary"
+                  variant="contained"
+                >
+                  Update
+                </Button>
+              )}
               <Button
                 onClick={() => closeComposeDialog()}
                 color="primary"
@@ -523,10 +487,12 @@ CompanyDialog.propTypes = {
   closeEditCompanyDialog: PropTypes.func,
   companyDialog: PropTypes.object,
   dispatchUpdateCompanyInfoAction: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   companyDialog: Selectors.makeSelectEditCompanyDialog(),
+  loading: Selectors.makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -71,10 +71,9 @@ const OrgInfo = props => {
     loading,
     openEditColorDialog,
     openEditCompanyDialog,
-    history,
+    // history,
   } = props;
 
-  console.log(companyInfo, 'companyInfo');
   if (loading) {
     return <LoadingIndicator />;
   }
@@ -152,7 +151,9 @@ const OrgInfo = props => {
                   }
                 >
                   Company Structure
-                  <Link href="/organization/company/structure">Company Structure</Link>
+                  <Link href="/organization/company/structure">
+                    Company Structure
+                  </Link>
                 </Button>
               </Grid>
             </Grid>
@@ -180,29 +181,23 @@ const OrgInfo = props => {
                   <img alt="" src={msg} />
                 </ListItemIcon>
                 <ListItemText
-                  primary={companyInfo && companyInfo.email_address}
+                  primary={companyInfo && companyInfo.emailAddress}
                 />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone2} />
                 </ListItemIcon>
-                <ListItemText primary={companyInfo && companyInfo.phone} />
+                <ListItemText
+                  primary={companyInfo && companyInfo.phoneNumber}
+                />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
-                  <img alt="" src={phone} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={companyInfo && companyInfo.contactPersonEmail}
-                />
-              </ListItem>
-              {/* <ListItem className={classes.listFormat}>
-                <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
-                <ListItemText primary="www.octivercommunications.org" />
-              </ListItem> */}
+                <ListItemText primary={companyInfo && companyInfo.website} />
+              </ListItem>
             </List>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -217,13 +212,13 @@ const OrgInfo = props => {
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
-                <ListItemText primary="GMT" />
+                <ListItemText primary={companyInfo && companyInfo.timeZone} />
               </ListItem>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={web} />
                 </ListItemIcon>
-                <ListItemText primary="English" />
+                <ListItemText primary={companyInfo && companyInfo.language} />
               </ListItem>
             </List>
           </Grid>
@@ -253,6 +248,10 @@ const OrgInfo = props => {
                   primary={companyInfo && companyInfo.contactPersonEmail}
                 />
               </ListItem>
+            </List>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <List>
               <ListItem className={classes.listFormat}>
                 <ListItemIcon>
                   <img alt="" src={phone2} />
@@ -268,34 +267,6 @@ const OrgInfo = props => {
                 <ListItemText
                   primary={companyInfo && companyInfo.contactPersonTel}
                 />
-              </ListItem>
-              {/* <ListItem className={classes.listFormat}>
-                <ListItemIcon>
-                  <img alt="" src={web} />
-                </ListItemIcon>
-                <ListItemText primary="www.octivercommunications .org" />
-              </ListItem> */}
-            </List>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <List>
-              <ListItem className={classes.listFormat}>
-                <ListItemIcon>
-                  <img alt="" src={web} />
-                </ListItemIcon>
-                <ListItemText primary="Mandilas House, Marina Lagos Nigeria" />
-              </ListItem>
-              <ListItem className={classes.listFormat}>
-                <ListItemIcon>
-                  <img alt="" src={web} />
-                </ListItemIcon>
-                <ListItemText primary="GMT" />
-              </ListItem>
-              <ListItem className={classes.listFormat}>
-                <ListItemIcon>
-                  <img alt="" src={web} />
-                </ListItemIcon>
-                <ListItemText primary="English" />
               </ListItem>
             </List>
           </Grid>

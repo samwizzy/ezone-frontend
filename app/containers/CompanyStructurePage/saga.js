@@ -1,4 +1,5 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
+import * as AppActions from '../App/actions';
 import * as AppSelectors from '../App/selectors';
 import * as Selectors from './selectors';
 import { BaseUrl } from '../../components/BaseUrl';
@@ -136,8 +137,6 @@ export function* updateCompanyDetail() {
   const updateCompanyInfoData = yield select(
     Selectors.makeSelectUpdateCompanyInfoData(),
   );
-
-  console.log(updateCompanyInfoData, 'updateCompanyInfoData')
   const requestURL = `${BaseUrl}${Endpoints.UpdateCompanyInfoUrl}`;
 
   try {
@@ -150,11 +149,25 @@ export function* updateCompanyDetail() {
       }),
     });
 
-    console.log(companyDetailResponse, 'companyDetailResponse')
-    yield put(Actions.getCompanyInfoSuccess());
+    yield put(Actions.getCompanyInfo());
     yield put(Actions.updateCompanyInfoSuccess(companyDetailResponse));
+    yield put(Actions.closeEditCompanyDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Company Profile Update Successfully',
+        status: 'success',
+      }),
+    );
   } catch (err) {
     yield put(Actions.updateCompanyInfoError(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: err.message,
+        status: 'error',
+      }),
+    );
   }
 }
 
