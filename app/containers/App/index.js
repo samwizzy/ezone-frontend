@@ -16,12 +16,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import HomePage from '../HomePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
-import LoginPage from '../LoginPage/Loadable';
-import ForgotPasswordForm from '../LoginPage/components/ForgotPasswordForm';
-import RegistrationPage from '../RegistrationPage/Loadable';
-import OrgPage from '../OrgPage/Loadable';
-// import CompanyStructure from '../OrgPage/companyStructure';
-import CompanyStructure from '../CompanyStructurePage/Loadable';
+import Registration from '../AuthorizationPage/Register/Loadable';
+import Login from '../AuthorizationPage/Login/Loadable';
+import ForgotPassword from '../AuthorizationPage/Login/components/ForgotPasswordForm';
+import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable';
+import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
+import CompanyStructureParty from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
@@ -63,25 +63,28 @@ const App = () => {
             </Helmet>
 
             <Switch>
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/" component={LoginPage} />
-              <Route
-                exact
-                path="/forgot-password"
-                component={ForgotPasswordForm}
-              />
-              <Route exact path="/register" component={RegistrationPage} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Login} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
+              <Route exact path="/register" component={Registration} />
               <Layout3>
-                {/* <PrivateRoute path="/dashboard" component={HomePage} /> */}
-                {/* <PrivateRoute path="/posts" component={AllPosts} /> */}
-                <PrivateRoute exact path="/organization" component={OrgPage} />
+                <PrivateRoute
+                  exact
+                  path="/organization"
+                  component={organizationPage}
+                />
                 <PrivateRoute
                   exact
                   path="/organization/company/structure"
                   component={CompanyStructure}
                 />
-                <PrivateRoute path="/employee" component={EmployeePage} />
-                <PrivateRoute path="/utility" component={UtilityPage} />
+                <PrivateRoute
+                  exact
+                  path="/organization/company/structure/:partyGroupId/:partyId"
+                  component={CompanyStructureParty}
+                />
+                <PrivateRoute exact path="/employee" component={EmployeePage} />
+                <PrivateRoute exact path="/dashboard" component={UtilityPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute
                   path="/email/configuration"
@@ -95,7 +98,7 @@ const App = () => {
                   path="/email/password/template"
                   component={EmailPasswordTemplate}
                 />
-                <PrivateRoute exact path="/dashboard" component={HomePage} />
+                <PrivateRoute exact path="/home" component={HomePage} />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>
