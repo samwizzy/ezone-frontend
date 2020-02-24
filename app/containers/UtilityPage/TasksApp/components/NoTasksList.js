@@ -59,7 +59,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     openNewTaskDialog: () => dispatch(Actions.openNewTaskDialog()),
-    getUtilityTasks: () => dispatch(Actions.getUtilityTasks()),
   };
 }
 

@@ -89,7 +89,7 @@ export function HomePage(props) {
             <Typography variant="body2">
               Enterprise Resource Planning
             </Typography>
-            <Link href="/login">
+            {/* <Link href="/login">
               <Button
                 variant="contained"
                 color="primary"
@@ -97,7 +97,7 @@ export function HomePage(props) {
               >
                 Logout
               </Button>
-            </Link>
+            </Link> */}
           </Grid>
           <Grid item xs={12} md={4} />
         </Grid>

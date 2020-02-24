@@ -5,7 +5,8 @@ import { initialState } from './reducer';
  * Direct selector to the companyStructurePage state domain
  */
 
-const selectCompanyStructurePageDomain = state => state.companyStructurePage || initialState;
+const selectCompanyStructurePageDomain = state =>
+  state.companyStructurePage || initialState;
 
 /**
  * Other specific selectors
@@ -33,16 +34,16 @@ const makeSelectError = () =>
     subState => subState.error,
   );
 
-const makeSelectPartyDialog = () =>
+const makeSelectNewPartyGroupDialog = () =>
   createSelector(
     selectCompanyStructurePageDomain,
-    subState => subState.partyDialog,
+    subState => subState.newPartyGroupDialog,
   );
 
-const makeSelectSubPartyDialog = () =>
+const makeSelectNewPartyDialog = () =>
   createSelector(
     selectCompanyStructurePageDomain,
-    subState => subState.subPartyDialog,
+    subState => subState.newPartyDialog,
   );
 
 const makeSelectRoleDialog = () =>
@@ -87,13 +88,90 @@ const makeSelectCreateNewPartyData = () =>
     subState => subState.createNewPartyData,
   );
 
+const makeSelectCreateNewPartiesData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPartiesData,
+  );
+
+const makeSelectNewPartiesDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.newPartiesDialog,
+  );
+
+const makeSelectNewPositionDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.newPositionDialog,
+  );
+
+const makeSelectCreateNewPositionData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPositionData,
+  );
+
+const makeSelectGetAllPositions = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.allPositions,
+  );
+
+// const makeSelectSelectedParty = () =>
+//   createSelector(
+//     selectCompanyStructurePageDomain,
+//     subState => subState.selectedParty,
+//   );
+
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
+
+// organization selectors
+const makeSelectEditColorDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.colorDialog,
+  );
+
+const makeSelectEditCompanyDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.companyDialog,
+  );
+
+const makeSelectBranchDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.branchDialog,
+  );
+
+const makeSelectDepartmentDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.departmentDialog,
+  );
+
+const makeSelectCompanyInfo = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.companyInfo,
+  );
+
+const makeSelectUpdateCompanyInfoData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.updateCompanyInfoData,
+  );
+
 export default makeSelectCompanyStructurePage;
 export {
   selectCompanyStructurePageDomain,
   makeSelectLoading,
   makeSelectError,
-  makeSelectPartyDialog,
-  makeSelectSubPartyDialog,
+  makeSelectNewPartyGroupDialog,
+  makeSelectNewPartyDialog,
   makeSelectRoleDialog,
   makeSelectParty,
   makeSelectPartyGroupData,
@@ -101,4 +179,17 @@ export {
   createNewPartyGroupData,
   makeSelectAllUsersData,
   makeSelectCreateNewPartyData,
+  makeSelectNewPartiesDialog,
+  makeSelectNewPositionDialog,
+  makeSelectCreateNewPositionData,
+  makeSelectGetAllPositions,
+  // makeSelectSelectedParty,
+  // organization export function
+  makeSelectEditColorDialog,
+  makeSelectEditCompanyDialog,
+  makeSelectBranchDialog,
+  makeSelectDepartmentDialog,
+  makeSelectCompanyInfo,
+  makeSelectUpdateCompanyInfoData,
+  makeSelectCreateNewPartiesData,
 };

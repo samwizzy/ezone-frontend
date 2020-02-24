@@ -1,30 +1,21 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.21.1/libexec/bin/yarn.js add @material-ui/lab/Alert
+  C:\Program Files\nodejs\node.exe C:\Users\saokeke\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add qs --dev
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Users\saokeke\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\saokeke\AppData\Local\Programs\Python\Python37-32\;C:\Users\saokeke\AppData\Local\Programs\Git\bin;C:\Users\saokeke\AppData\Roaming\Composer\vendor\bin;C:\ProgramData\chocolatey\bin;C:\Users\saokeke\AppData\Local\Yarn\Data\global\node_modules\.bin;C:\Program Files\Java\jdk1.8.0_221\bin;C:\src\flutter\bin;C:\Users\saokeke\AppData\Local\Android\Sdk\platform-tools;C:\openssl-0.9.8k_X64\bin;C:\wamp\bin\mysql\mysql5.7.26\bin;C:\Program Files\heroku\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Users\saokeke\AppData\Local\Microsoft\WindowsApps;C:\Users\saokeke\AppData\Local\atom\bin;C:\Users\saokeke\AppData\Roaming\npm;C:\Users\saokeke\AppData\Local\Programs\Microsoft VS Code\bin;C:\wamp\bin\php\php7.2.18;C:\Users\saokeke\AppData\Local\ComposerSetup\bin;C:\Users\saokeke\AppData\Roaming\Composer\vendor\;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
 
 Yarn version: 
-  1.21.1
+  1.16.0
 
 Node version: 
-  10.16.0
+  10.15.3
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@material-ui%2flab/Alert: Request "https://registry.yarnpkg.com/@material-ui%2flab/Alert" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:66956:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:140665:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:141637:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:141559:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
 
 npm manifest: 
   {
@@ -106,7 +97,7 @@ npm manifest:
       "@date-io/date-fns": "1.3.6",
       "@material-ui/core": "4.8.3",
       "@material-ui/icons": "4.5.1",
-      "@material-ui/lab": "^4.0.0-alpha.42",
+      "@material-ui/lab": "^4.0.0-alpha.43",
       "@material-ui/pickers": "^3.2.10",
       "babel-loader": "8.0.5",
       "babel-plugin-styled-components": "1.10.0",
@@ -1295,10 +1286,17 @@ Lockfile:
       "@babel/runtime" "^7.2.0"
       recompose "0.28.0 - 0.30.0"
   
+<<<<<<< HEAD
   "@material-ui/lab@^4.0.0-alpha.42":
     version "4.0.0-alpha.42"
     resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.42.tgz#f8789d3ba39a1e5a13f462d618c2eec53f87ae10"
     integrity sha512-JbKEMIXSslh03u6HNU1Pp1VXd9ycJ1dqkI+iQK6yR+Sng2mvMKzJ80GCV5ROXAXwwNnD8zHOopLZNIpTsEAVgQ==
+=======
+  "@material-ui/lab@^4.0.0-alpha.43":
+    version "4.0.0-alpha.43"
+    resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.43.tgz#4bc673924cf1922750d70adcbb71414d3c18ff23"
+    integrity sha512-UxsQggLpwr5HEZU+YRZkRVtpt5Cp27VwfYZz1InyGNWrtx9WovAYxEyR1xDvp/cmKhnSPCecVnqmb3dtLTpDqQ==
+>>>>>>> a03c9240bf6abc3c3d1179763f0dc53cd84661ff
     dependencies:
       "@babel/runtime" "^7.4.4"
       "@material-ui/utils" "^4.7.1"

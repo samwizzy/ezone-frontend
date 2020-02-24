@@ -6,7 +6,6 @@
 import produce from 'immer';
 import {
   CREATE_UTILITY_TASKS,
-  GET_UTILITY_TASKS,
   CREATE_UTILITY_TASKS_SUCCESS,
   GET_UTILITY_TASKS_ERROR,
   GET_UTILITY_FILES,
@@ -31,26 +30,46 @@ import {
   CLOSE_NEW_DEPARTMENT_DIALOG,
   OPEN_EDIT_DEPARTMENT_DIALOG,
   CLOSE_EDIT_DEPARTMENT_DIALOG,
+  GET_UTILITY_TASKS_SUCCESS,
 } from './constants';
 
 export const initialState = {
   loading: false,
   error: false,
-  data: [{id: 1, name: 'Samuel', format: 'PDF', size: '12mb', modified_by: 'Christian', date_uploaded: '3rd, Jul 2019'}],
-  data1: [{id: 1, name: 'Invoicing', description: 'Lorem ipsum flora iregi', assignedTo: 'Christian, Tina..', dateAssigned: '3rd, Jul 19', dueDate: '3rd, Jul 2019', status: 'expired'}],
+  data: [
+    {
+      id: 1,
+      name: 'Samuel',
+      format: 'PDF',
+      size: '12mb',
+      modified_by: 'Christian',
+      date_uploaded: '3rd, Jul 2019',
+    },
+  ],
+  data1: [
+    {
+      id: 1,
+      name: 'Invoicing',
+      description: 'Lorem ipsum flora iregi',
+      assignedTo: 'Christian, Tina..',
+      dateAssigned: '3rd, Jul 19',
+      dueDate: '3rd, Jul 2019',
+      status: 'expired',
+    },
+  ],
   fileDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
   fileUploadDialog: {
     type: 'new',
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
   shareFileDialog: {
     type: 'new',
@@ -85,13 +104,13 @@ export const initialState = {
     props: {
       open: false,
     },
-    data: null
+    data: null,
   },
   tasks: [],
   task: {},
   files: [],
   file: {},
-  error: { success: "", message: "" }
+  error: { success: '', message: '' },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -106,56 +125,56 @@ const utilityPageReducer = (state = initialState, action) =>
             props: {
               open: true,
             },
-            data: action.payload
+            data: action.payload,
           },
         };
       }
       case CREATE_UTILITY_TASKS: {
         return {
           ...state,
-          task: action.payload
+          task: action.payload,
         };
       }
-      case GET_UTILITY_TASKS: {
+      case GET_UTILITY_TASKS_SUCCESS: {
         return {
           ...state,
-          tasks: action.payload
+          tasks: action.payload,
         };
       }
       case CREATE_UTILITY_TASKS_SUCCESS: {
         return {
           ...state,
-          task: action.payload
+          task: action.payload,
         };
       }
       case GET_UTILITY_TASKS_ERROR: {
         return {
           ...state,
-          error: action.payload
+          error: action.payload,
         };
       }
       case CREATE_UTILITY_FILES: {
         return {
           ...state,
-          task: action.payload
+          task: action.payload,
         };
       }
       case CREATE_UTILITY_FILES_SUCCESS: {
         return {
           ...state,
-          file: action.payload
+          file: action.payload,
         };
       }
       case GET_UTILITY_FILES: {
         return {
           ...state,
-          files: action.payload
+          files: action.payload,
         };
       }
       case GET_UTILITY_FILES_ERROR: {
         return {
           ...state,
-          error: action.payload
+          error: action.payload,
         };
       }
       case CLOSE_FILE_UPLOAD_DIALOG: {

@@ -61,6 +61,7 @@ function AddTaskDialog(props) {
     description: '',
     startDate: new Date(),
     endDate: new Date(),
+    status: "PENDING",
     assignedTo: ""
   });
 
@@ -82,13 +83,18 @@ function AddTaskDialog(props) {
     return newdate;
   }
 
+  const canSubmitForm = () => {
+    const {title, description, startDate, endDate } = form
+    return title.length > 0 && description.length > 0
+  }
+
   const handleDateChange = (date, formatted, name) => { 
     setForm(_.set({...form}, name, reformattedDate(date)))
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
     createUtilityTask(form)
-    // closeNewTaskDialog()
+    closeNewTaskDialog()
   }
 
   console.log(form, 'checking form task...')
@@ -217,8 +223,8 @@ function AddTaskDialog(props) {
           <Button onClick={closeNewTaskDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Done
+          <Button onClick={handleSubmit} disabled={!canSubmitForm()} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>
