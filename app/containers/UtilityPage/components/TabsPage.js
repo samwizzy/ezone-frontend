@@ -84,7 +84,7 @@ function TabsPage(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color='secondary'>
+      <AppBar position="relative" color='secondary'>
         <Toolbar variant="dense" className={classes.toolbar}>
 
           <div>

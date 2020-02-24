@@ -7,9 +7,11 @@
 import {
   CREATE_UTILITY_TASKS_SUCCESS,
   GET_UTILITY_TASKS,
+  GET_UTILITY_TASKS_SUCCESS,
   CREATE_UTILITY_TASKS,
   GET_UTILITY_TASKS_ERROR,
   GET_UTILITY_FILES,
+  GET_ALL_UTILITY_FILES,
   CREATE_UTILITY_FILES,
   CREATE_UTILITY_FILES_SUCCESS,
   GET_UTILITY_FILES_ERROR,
@@ -40,6 +42,13 @@ export function getUtilityFiles(data) {
   };
 }
 
+export function getAllUtilityFiles(data) {
+  return {
+    type: GET_ALL_UTILITY_FILES,
+    payload: data
+  };
+}
+
 export function getUtilityFilesError(err) {
   return {
     type: GET_UTILITY_FILES_ERROR,
@@ -55,6 +64,7 @@ export function createUtilityFile(data) {
 }
 
 export function createUtilityFileSuccess(data) {
+  console.log("I just hit task action")
   return {
     type: CREATE_UTILITY_FILES_SUCCESS,
     payload: data
@@ -77,7 +87,13 @@ export function createUtilityTaskSuccess(data) {
 
 export function getUtilityTasks(data) {
   return {
-    type: GET_UTILITY_TASKS,
+    type: GET_UTILITY_TASKS
+  };
+}
+
+export function getUtilityTasksSuccess(data) {
+  return {
+    type: GET_UTILITY_TASKS_SUCCESS,
     payload: data
   };
 }

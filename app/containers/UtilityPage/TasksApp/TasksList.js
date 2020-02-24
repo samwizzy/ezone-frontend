@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import LoadingIndicator from '../../../components/LoadingIndicator';
+import moment from 'moment'
 import Lens from '@material-ui/icons/Lens'
 import tasksIcon from '../../../images/tasksIcon.svg'
 import {AddTask} from './../components/AddButton';
@@ -39,14 +40,14 @@ const TasksList = props => {
 
   console.log(tasks, "Get tasks")
 
-  // React.useEffect(() => {
-  //   getUtilityTasks()
-  // }, []);
+  React.useEffect(() => {
+    getUtilityTasks()
+  }, []);
 
   const columns = [
     {
-      name: 'name',
-      label: 'Name',
+      name: 'title',
+      label: 'Title',
       options: {
         filter: true,
       },
@@ -68,19 +69,48 @@ const TasksList = props => {
       },
     },
     {
-      name: 'dateAssigned',
-      label: 'Date Assign',
+      name: 'dateCreated',
+      label: 'Date Assigned',
       options: {
         filter: true,
         sort: false,
+        customBodyRender: day => {
+          return (
+            <Typography variant="inherit" color="textSecondary">
+                {moment(day).format('lll')}
+            </Typography>
+          )
+        }
       },
     },
     {
-      name: 'dueDate',
-      label: 'Due Date',
+      name: 'startDate',
+      label: 'Start Date',
       options: {
         filter: true,
         sort: false,
+        customBodyRender: day => {
+          return (
+            <Typography variant="inherit" color="textSecondary">
+                {moment(day).format('lll')}
+            </Typography>
+          )
+        }
+      },
+    },
+    {
+      name: 'endDate',
+      label: 'End Date',
+      options: {
+        filter: true,
+        sort: false,
+        customBodyRender: day => {
+          return (
+            <Typography variant="inherit" color="textSecondary">
+                {moment(day).format('lll')}
+            </Typography>
+          )
+        }
       },
     },
     {
@@ -90,17 +120,20 @@ const TasksList = props => {
         filter: true,
         sort: false,
         customBodyRender: value => {
-          return <Button><Icon color='error'>lens</Icon> {value} </Button>
+          return <Button><Icon color='primary' fontSize='small'>lens</Icon> {value} </Button>
         }
       },
     }
   ];
 
   const options = {
-    filterType: 'checkbox',
-    responsive: 'scrollMaxHeight',
+    filter: true,
+    filterType: "checkbox",
+    responsive: "scrollMaxHeight",
     selectableRows: 'none',
     customToolbar: () => <AddTask openNewTaskDialog={openNewTaskDialog} />,
+    rowsPerPage: 25,
+    rowsPerPageOptions: [25,50,100],
   };
 
   if (loading) {
@@ -114,7 +147,7 @@ const TasksList = props => {
   return (
     <React.Fragment>
       <Grid container justify='center'>
-        <Grid item xs={2} md={2}>
+        <Grid item xs={12} md={2}>
           <List component="nav" aria-label="secondary mailbox folders">
             <ListItem button>
               <ListItemText primary="All" />
@@ -130,7 +163,7 @@ const TasksList = props => {
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={10} md={10}>
+        <Grid item xs={12} md={10}>
           <MUIDataTable
             title="Task List"
             data={tasks}

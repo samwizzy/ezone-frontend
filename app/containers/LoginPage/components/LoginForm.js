@@ -46,14 +46,17 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    padding: '50px',
     height: '100vh',
+    padding: '50px',
+    [theme.breakpoints.down('md')]: {
+      padding: '20px',
+    }
   },
   grid: {
     height: '100%',
     backgroundColor: theme.palette.grey[50],
     borderRadius: theme.spacing(5),
-    overflow: 'hidden',
+    overflow: 'auto',
   },
   image: {
     [theme.breakpoints.up('md')]: {
@@ -74,9 +77,11 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     borderRadius: theme.spacing(5),
     padding: theme.spacing(2),
-    margin: theme.spacing(4),
     border: '1px solid #F1F5F8',
     backgroundColor: '#FFFFFF',
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(4),
+    }
   },
   avatar: {
     margin: theme.spacing(1),
@@ -122,7 +127,7 @@ const LoginForm = props => {
 
       <div className={classes.root}>
         <Grid container component={Paper} className={classes.grid} justify="center">
-          <Grid item xs={0} sm={0} md={7} />
+          <Grid item xs={false} sm={false} md={7} />
           <Grid item xs={12} sm={10} md={5} style={{display: 'flex'}}>
             <div className={classes.paper}>
               <Box className={classes.avatar}>

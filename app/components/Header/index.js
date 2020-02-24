@@ -23,6 +23,7 @@ import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import Group from '@material-ui/icons/Group';
 import BusinessCenter from '@material-ui/icons/BusinessCenter';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Banner from './banner.jpg';
 import SideBanner from '../../images/side-banner.png';
 import Logo from '../../images/logo.svg';
@@ -80,7 +81,7 @@ const styles = theme => ({
     width: 250,
     height: '100%',
     marginTop: '80px',
-    backgroundImage: `url(${SideBanner})`,
+    // backgroundImage: `url(${SideBanner})`,
     backgroundSize: 'cover',
     backgroundPosition: 'top center',
   },
@@ -121,6 +122,9 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  icon: {
+    // height: '20px',
   },
   search: {
     position: 'relative',
@@ -257,7 +261,7 @@ function Header(props) {
   return (
     <div className={classes.grow}>
       <AppBar position="relative" color="inherit" className={classes.appBar}>
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" disableGutters={false}>
           <IconButton
             onClick={toggleDrawer('open', true)}
             edge="start"
@@ -281,15 +285,21 @@ function Header(props) {
             </Grid>
 
             <Grid item>
-                <List>
-                  <ListItem>
-                    {/* <ListItemIcon>
-                      <img src={OctivierLogo} />
-                    </ListItemIcon>
-                    <ListItemText primary={'Octiver Communications'} /> */}
-                    <UserMenu />
-                  </ListItem>
-                </List>
+              <List>
+                <ListItem>
+                  {/* <ListItemIcon>
+                    <img src={OctivierLogo} />
+                  </ListItemIcon>
+                  <ListItemText primary={'Octiver Communications'} /> */}
+                  {/* <UserMenu /> */}
+                  <Link
+                    aria-label="search" 
+                    color="primary"
+                  >
+                    <MoreHorizIcon className={classes.icon} />
+                  </Link>
+                </ListItem>
+              </List>
             </Grid>
           </Grid>
         </Toolbar>
