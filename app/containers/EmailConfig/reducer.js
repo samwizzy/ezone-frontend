@@ -43,7 +43,6 @@ const emailConfigReducer = (state = initialState, action) =>
 
       case Constants.UPDATE_EMAIL_CONFIG: {
         console.log(action.payload, 'action.payload');
-        // console.log("action.payload: ", action.payload)
         return {
           ...state,
           loading: true,
@@ -71,7 +70,6 @@ const emailConfigReducer = (state = initialState, action) =>
       }
     }
   });
-
 
 
 export default emailConfigReducer;

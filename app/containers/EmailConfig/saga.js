@@ -13,7 +13,7 @@ export function* getEmailConfigSaga() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
   const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
-  const requestURL = `${BaseUrl}${Endpoints.GetEmailConfigApi}/orgId=${currentUser.organisation.orgId}`;
+  const requestURL = `${BaseUrl}${Endpoints.GetEmailConfigApi}/${currentUser.organisation.orgId}`;
   console.log('requestURL --> ', requestURL);
 
   try {

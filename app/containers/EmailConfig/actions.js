@@ -13,11 +13,10 @@ import * as Constants from './constants';
 // }
 
 // Get email configuration details
-export function getEmailConfigAction(data) {
-  console.log(data, 'getEmailConfigAction');
+export function getEmailConfigAction() {
+  console.log('getEmailConfigAction');
   return {
     type: Constants.GET_EMAIL_CONFIG,
-    payload: data,
   };
 }
 

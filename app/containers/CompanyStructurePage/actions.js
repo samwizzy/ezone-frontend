@@ -5,7 +5,6 @@
  */
 
 import * as Constants from './constants';
-import { func } from 'prop-types';
 
 export function openNewPartyDialog() {
   return {
