@@ -7,8 +7,11 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  allPositions: false,
   selectedParty: false,
   createNewPartyData: false,
+  createNewPartiesData: false,
+  createNewPositionData: false,
   createNewPartyGroupData: false,
   partyGroupData: false,
   loading: false,
@@ -23,6 +26,13 @@ export const initialState = {
     data: null,
   },
   newPartyDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null,
+  },
+  newPartiesDialog: {
     type: 'new',
     props: {
       open: false,
@@ -71,6 +81,13 @@ export const initialState = {
     data: null,
   },
   departmentDialog: {
+    type: 'new',
+    props: {
+      open: false,
+    },
+    data: null,
+  },
+  newPositionDialog: {
     type: 'new',
     props: {
       open: false,
@@ -256,7 +273,125 @@ const companyStructurePageReducer = (state = initialState, action) =>
           selectedPartyGroupData: action.payload,
         };
       }
-      // organization reduce
+      case Constants.OPEN_NEW_PARTIES_DIALOG: {
+        return {
+          ...state,
+          newPartiesDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_NEW_PARTIES_DIALOG: {
+        return {
+          ...state,
+          newPartiesDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CREATE_NEW_PARTIES: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          createNewPartiesData: action.payload,
+        };
+      }
+      case Constants.CREATE_NEW_PARTIES_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+        };
+      }
+      case Constants.CREATE_NEW_PARTIES_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.OPEN_NEW_POSITION_DIALOG: {
+        return {
+          ...state,
+          newPositionDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_NEW_POSITION_DIALOG: {
+        return {
+          ...state,
+          newPositionDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CREATE_NEW_POSITION: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          createNewPositionData: action.payload,
+        };
+      }
+      case Constants.CREATE_NEW_POSITION_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+        };
+      }
+      case Constants.CREATE_NEW_POSITION_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.GET_POSITIONS: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          allPositions: action.payload,
+        };
+      }
+      case Constants.GET_POSITIONS_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+        };
+      }
+      case Constants.GET_POSITIONS_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+
+      /** *****************************************************************
+       * Organization constants
+       ******************************************************************* */
+
       case Constants.OPEN_EDIT_COLOR_DIALOG: {
         return {
           ...state,

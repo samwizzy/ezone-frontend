@@ -216,7 +216,7 @@ const CompanyStructure = props => {
               </List>
 
               <Divider />
-              <Grid item xs="12" md="6" lg="6">
+              <Grid item>
                 <Button
                   variant="contained"
                   color="primary"
@@ -226,7 +226,7 @@ const CompanyStructure = props => {
                   <Add /> Add New Position
                 </Button>
               </Grid>
-              <Grid item xs="12" md="6" lg="6">
+              <Grid item>
                 <Button
                   variant="contained"
                   color="primary"

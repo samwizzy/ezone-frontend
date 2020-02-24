@@ -3,6 +3,10 @@ export const RegistrationUrl = '/authserv/api/v1/register';
 export const LoginUrl = '/authserv/oauth/token';
 export const UserProfileUrl = '/authserv/api/v1/users/profile';
 
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
+
 // Company structure Apis
 export const CompanyInfoUrl = '/authserv/api/v1/organisation';
 export const UpdateCompanyInfoUrl = '/authserv/api/v1/update_organization';
@@ -11,9 +15,14 @@ export const CreateNewPartyGroup = '/authserv/api/v1/partygroup';
 export const GetAllUsersApi = '/authserv/api/v1/users/get_by_orgid';
 export const CreateNewPartyApi =
   '/authserv/api/v1/party/create_and_add_to_group';
+export const CreateNewPartiesApi =
+  '/authserv/api/v1/party/create_and_add_to_party';
+export const CreateNewPositionApi = '/authserv/api/v1/position';
+export const GetAllPositionsApi =
+  '/authserv/api/v1/position/get_position_by_orgId';
 export const CreateNewEmployeeApi = '/authserv/api/v1/user';
 
-// Utility Apis -> File 
+// Utility Apis -> File
 export const GetUtilityFilesApi = '/utilityserv/api/v1/get_document_by_orgid';
 export const CreateUtilityFilesApi = '/utilityserv/api/v1/share_document';
 // Task Api

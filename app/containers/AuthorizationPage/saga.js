@@ -25,14 +25,23 @@ export function* signup() {
 
     console.log(signupRes, 'signupRes');
     yield put(Actions.signupSuccessRequest(signupRes));
-    yield put(
-      AppActions.openSnackBar({
-        open: true,
-        message: signupRes.message,
-        status: 'warning',
-      }),
-    );
-    // yield put(AppActions.openSnackBar({ open: true, message: 'Registration Successful', status: 'success' }));
+    if (signupRes.success === true) {
+      yield put(
+        AppActions.openSnackBar({
+          open: true,
+          message: signupRes.message,
+          status: 'success',
+        }),
+      );
+    } else {
+      yield put(
+        AppActions.openSnackBar({
+          open: true,
+          message: signupRes.message,
+          status: 'warning',
+        }),
+      );
+    }
   } catch (err) {
     console.log(err, 'signupRes error');
     yield put(Actions.signupErrorRequest(err));
@@ -126,5 +135,4 @@ export default function* authorizationPageSaga() {
   // login actions
   yield takeLatest(AppConstants.LOGIN, login);
   yield takeLatest(AppConstants.GET_USER_PROFILE, userProfile);
-
 }

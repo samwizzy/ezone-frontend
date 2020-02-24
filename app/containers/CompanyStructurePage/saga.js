@@ -152,6 +152,142 @@ export function* createNewParty() {
   }
 }
 
+export function* createNewParties() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  const createNewPartiesData = yield select(
+    Selectors.makeSelectCreateNewPartiesData(),
+  );
+
+  console.log(createNewPartiesData, 'createNewPartiesData');
+  const requestURL = `${BaseUrl}${Endpoints.CreateNewPartiesApi}`;
+
+  try {
+    const createNewPartyResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(createNewPartiesData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(createNewPartyResponse, 'createNewPartyResponse');
+
+    yield put(Actions.createNewPartySuccess(createNewPartyResponse));
+    yield put(Actions.getPartyGroupAction());
+    yield put(Actions.closeNewPartyDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Party Created Successfully',
+        status: 'success',
+      }),
+    );
+  } catch (err) {
+    console.log(err, 'ik is bug');
+    yield put(Actions.createNewPartyError(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: `${err} Party Failed`,
+        status: 'error',
+      }),
+    );
+  }
+}
+
+export function* createNewPosition() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  const createNewPositionData = yield select(
+    Selectors.makeSelectCreateNewPositionData(),
+  );
+
+  console.log(createNewPositionData, 'createNewPositionData');
+  const requestURL = `${BaseUrl}${Endpoints.CreateNewPositionApi}`;
+
+  try {
+    const createNewPositionResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(createNewPositionData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(createNewPositionResponse, 'createNewPositionResponse');
+
+    yield put(Actions.createNewPositionSuccess(createNewPositionResponse));
+    yield put(Actions.getAllPositions());
+    yield put(Actions.closeNewPositionDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Position Created Successfully',
+        status: 'success',
+      }),
+    );
+  } catch (err) {
+    yield put(Actions.createNewPositionError(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: `${err}`,
+        status: 'error',
+      }),
+    );
+  }
+}
+
+export function* getAllPosition() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  const createNewPositionData = yield select(
+    Selectors.makeSelectCreateNewPositionData(),
+  );
+
+  console.log(createNewPositionData, 'createNewPositionData');
+  const requestURL = `${BaseUrl}${Endpoints.GetAllPositionsApi}/${
+    currentUser.organisation.orgId
+  }`;
+
+  try {
+    const getPositionsResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(getPositionsResponse, 'getPositionsResponse');
+
+    yield put(Actions.getAllPositionsSuccess(getPositionsResponse));
+    // yield put(
+    //   AppActions.openSnackBar({
+    //     open: true,
+    //     message: 'Position Created Successfully',
+    //     status: 'success',
+    //   }),
+    // );
+  } catch (err) {
+    yield put(Actions.createNewPositionError(err));
+    // yield put(
+    //   AppActions.openSnackBar({
+    //     open: true,
+    //     message: `${err}`,
+    //     status: 'error',
+    //   }),
+    // );
+  }
+}
+
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
+
 // Organization Info Saga
 export function* companyDetail() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
@@ -221,7 +357,13 @@ export default function* companyStructureSaga() {
   yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
   yield takeLatest(Constants.CREATE_NEW_PARTY_GROUP, createNewPartyGroupSaga);
   yield takeLatest(Constants.CREATE_NEW_PARTY, createNewParty);
-  // Organization Info
+  yield takeLatest(Constants.CREATE_NEW_PARTIES, createNewParties);
+  yield takeLatest(Constants.CREATE_NEW_POSITION, createNewPosition);
+  yield takeLatest(Constants.GET_POSITIONS, getAllPosition);
+
+  /** *****************************************************************
+   * Organization constants
+   ******************************************************************* */
   yield takeLatest(Constants.GET_COMPANY_INFO, companyDetail);
   yield takeLatest(Constants.UPDATE_COMPANY_INFO, updateCompanyDetail);
 }

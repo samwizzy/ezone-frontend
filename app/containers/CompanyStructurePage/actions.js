@@ -139,7 +139,96 @@ export function selectedParty(data) {
   };
 }
 
-// Organization actions
+export function openNewPartiesDialog() {
+  return {
+    type: Constants.OPEN_NEW_PARTIES_DIALOG,
+  };
+}
+
+export function closeNewPartiesDialog() {
+  return {
+    type: Constants.CLOSE_NEW_PARTIES_DIALOG,
+  };
+}
+
+export function createNewParties(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTIES,
+    payload: data,
+  };
+}
+
+export function createNewPartiesSuccess(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTIES_SUCCESS,
+    payload: data,
+  };
+}
+
+export function createNewPartiesError(data) {
+  return {
+    type: Constants.CREATE_NEW_PARTIES_ERROR,
+    payload: data,
+  };
+}
+
+export function openNewPositionDialog() {
+  return {
+    type: Constants.OPEN_NEW_POSITION_DIALOG,
+  };
+}
+
+export function closeNewPositionDialog() {
+  return {
+    type: Constants.CLOSE_NEW_POSITION_DIALOG,
+  };
+}
+
+export function createNewPosition(data) {
+  return {
+    type: Constants.CREATE_NEW_POSITION,
+    payload: data,
+  };
+}
+
+export function createNewPositionSuccess(data) {
+  return {
+    type: Constants.CREATE_NEW_POSITION_SUCCESS,
+    payload: data,
+  };
+}
+
+export function createNewPositionAError(data) {
+  return {
+    type: Constants.CREATE_NEW_POSITION_ERROR,
+    payload: data,
+  };
+}
+
+export function getAllPositions() {
+  return {
+    type: Constants.GET_POSITIONS,
+  };
+}
+
+export function getAllPositionsSuccess(data) {
+  return {
+    type: Constants.GET_POSITIONS_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getAllPositionsError(data) {
+  return {
+    type: Constants.GET_POSITIONS_ERROR,
+    payload: data,
+  };
+}
+
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
+
 export function openEditColorDialog(data) {
   return {
     type: Constants.OPEN_EDIT_COLOR_DIALOG,

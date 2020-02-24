@@ -99,9 +99,9 @@ function TabsPage() {
         <CompanyStructure />
       </TabPanel>
 
-      <PartyGroupDialog />
+      {/* <PartyGroupDialog />
       <PartyDialog />
-      <RoleDialog />
+      <RoleDialog /> */}
     </div>
   );
 }

@@ -5,7 +5,8 @@ import { initialState } from './reducer';
  * Direct selector to the companyStructurePage state domain
  */
 
-const selectCompanyStructurePageDomain = state => state.companyStructurePage || initialState;
+const selectCompanyStructurePageDomain = state =>
+  state.companyStructurePage || initialState;
 
 /**
  * Other specific selectors
@@ -87,11 +88,45 @@ const makeSelectCreateNewPartyData = () =>
     subState => subState.createNewPartyData,
   );
 
+const makeSelectCreateNewPartiesData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPartiesData,
+  );
+
+const makeSelectNewPartiesDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.newPartiesDialog,
+  );
+
+const makeSelectNewPositionDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.newPositionDialog,
+  );
+
+const makeSelectCreateNewPositionData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.createNewPositionData,
+  );
+
+const makeSelectGetAllPositions = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.allPositions,
+  );
+
 // const makeSelectSelectedParty = () =>
 //   createSelector(
 //     selectCompanyStructurePageDomain,
 //     subState => subState.selectedParty,
 //   );
+
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
 
 // organization selectors
 const makeSelectEditColorDialog = () =>
@@ -130,7 +165,6 @@ const makeSelectUpdateCompanyInfoData = () =>
     subState => subState.updateCompanyInfoData,
   );
 
-
 export default makeSelectCompanyStructurePage;
 export {
   selectCompanyStructurePageDomain,
@@ -145,6 +179,10 @@ export {
   createNewPartyGroupData,
   makeSelectAllUsersData,
   makeSelectCreateNewPartyData,
+  makeSelectNewPartiesDialog,
+  makeSelectNewPositionDialog,
+  makeSelectCreateNewPositionData,
+  makeSelectGetAllPositions,
   // makeSelectSelectedParty,
   // organization export function
   makeSelectEditColorDialog,
@@ -153,4 +191,5 @@ export {
   makeSelectDepartmentDialog,
   makeSelectCompanyInfo,
   makeSelectUpdateCompanyInfoData,
+  makeSelectCreateNewPartiesData,
 };

@@ -17,6 +17,11 @@ import makeSelectOrgPage from '../selectors';
 import reducer from '../reducer';
 import saga from '../saga';
 import TabsPage from './components/TabsPage';
+
+import PartyGroupDialog from './components/PartyGroupDialog';
+import PartyDialog from './components/PartyDialog';
+import RoleDialog from './components/RoleDialog';
+
 // import PartyGroupDialog from './components/PartyGroupDialog';
 // import PartyDialog from './components/PartyDialog';
 
@@ -44,8 +49,9 @@ export function CompanyStructurePage(props) {
       </Helmet>
       <TabsPage />
 
-      {/* <PartyGroupDialog /> */}
-      {/* <PartyDialog /> */}
+      <PartyGroupDialog />
+      <PartyDialog />
+      <RoleDialog />
     </div>
   );
 }

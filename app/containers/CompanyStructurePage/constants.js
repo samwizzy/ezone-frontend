@@ -54,7 +54,39 @@ export const CREATE_NEW_PARTY_ERROR =
 
 export const SELECTED_PARTY = 'app/CompanyStructurePage/SELECTED_PARTY';
 
-// Organization constants
+export const OPEN_NEW_PARTIES_DIALOG =
+  'app/CompanyStructurePage/OPEN_NEW_PARTIES_DIALOG';
+export const CLOSE_NEW_PARTIES_DIALOG =
+  'app/CompanyStructurePage/CLOSE_NEW_PARTIES_DIALOG';
+
+export const CREATE_NEW_PARTIES = 'app/CompanyStructurePage/CREATE_NEW_PARTIES';
+export const CREATE_NEW_PARTIES_SUCCESS =
+  'app/CompanyStructurePage/CREATE_NEW_PARTIES_SUCCESS';
+export const CREATE_NEW_PARTIES_ERROR =
+  'app/CompanyStructurePage/CREATE_NEW_PARTIES_ERROR';
+
+export const OPEN_NEW_POSITION_DIALOG =
+  'app/CompanyStructurePage/OPEN_NEW_POSITION_DIALOG';
+export const CLOSE_NEW_POSITION_DIALOG =
+  'app/CompanyStructurePage/CLOSE_NEW_POSITION_DIALOG';
+
+export const CREATE_NEW_POSITION =
+  'app/CompanyStructurePage/CREATE_NEW_POSITION';
+export const CREATE_NEW_POSITION_SUCCESS =
+  'app/CompanyStructurePage/CREATE_NEW_POSITION_SUCCESS';
+export const CREATE_NEW_POSITION_ERROR =
+  'app/CompanyStructurePage/CREATE_NEW_POSITION_ERROR';
+
+export const GET_POSITIONS = 'app/CompanyStructurePage/GET_POSITIONS';
+export const GET_POSITIONS_SUCCESS =
+  'app/CompanyStructurePage/GET_POSITIONS_SUCCESS';
+export const GET_POSITIONS_ERROR =
+  'app/CompanyStructurePage/GET_POSITIONS_ERROR';
+
+/** *****************************************************************
+ * Organization constants
+ ******************************************************************* */
+
 export const OPEN_EDIT_COLOR_DIALOG =
   'app/CompanyStructurePage/OPEN_EDIT_COLOR_DIALOG';
 export const CLOSE_EDIT_COLOR_DIALOG =
