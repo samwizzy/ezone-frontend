@@ -83,6 +83,24 @@ export const GET_POSITIONS_SUCCESS =
 export const GET_POSITIONS_ERROR =
   'app/CompanyStructurePage/GET_POSITIONS_ERROR';
 
+export const OPEN_ADD_EMPLOYEE_TO_POSITION_DIALOG =
+  'app/CompanyStructurePage/OPEN_ADD_EMPLOYEE_TO_POSITION_DIALOG';
+export const CLOSE_ADD_EMPLOYEE_TO_POSITION_DIALOG =
+  'app/CompanyStructurePage/CLOSE_ADD_EMPLOYEE_TO_POSITION_DIALOG';
+
+export const ADD_EMPLOYEE_TO_POSITION =
+  'app/CompanyStructurePage/ADD_EMPLOYEE_TO_POSITION';
+export const ADD_EMPLOYEE_TO_POSITION_SUCCESS =
+  'app/CompanyStructurePage/ADD_EMPLOYEE_TO_POSITION_SUCCESS';
+export const ADD_EMPLOYEE_TO_POSITION_ERROR =
+  'app/CompanyStructurePage/ADD_EMPLOYEE_TO_POSITION_ERROR';
+
+// export const GET_EMPLOYEES = 'app/CompanyStructurePage/GET_EMPLOYEES';
+// export const GET_EMPLOYEES_SUCCESS =
+//   'app/CompanyStructurePage/GET_EMPLOYEES_SUCCESS';
+// export const GET_EMPLOYEES_ERROR =
+//   'app/CompanyStructurePage/GET_EMPLOYEES_ERROR';
+
 /** *****************************************************************
  * Organization constants
  ******************************************************************* */

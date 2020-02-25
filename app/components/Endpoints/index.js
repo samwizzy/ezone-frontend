@@ -20,7 +20,10 @@ export const CreateNewPartiesApi =
 export const CreateNewPositionApi = '/authserv/api/v1/position';
 export const GetAllPositionsApi =
   '/authserv/api/v1/position/get_position_by_orgId';
+export const AddNewEmployeeToPositionApi =
+  '/authserv/api/v1/user/add_to_position';
 export const CreateNewEmployeeApi = '/authserv/api/v1/user';
+export const GetAllEmployeesApi = '/authserv/api/v1/users/get_by_orgid';
 
 // Utility Apis -> File
 export const GetUtilityFilesApi = '/utilityserv/api/v1/get_document_by_orgid';

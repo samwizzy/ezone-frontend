@@ -7,6 +7,8 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  allEmployees: false,
+  addEmployeeToPositionData: false,
   allPositions: false,
   selectedParty: false,
   createNewPartyData: false,
@@ -46,15 +48,13 @@ export const initialState = {
     },
     data: null,
   },
-  party: [
-    {
-      id: 1,
-      name: 'Region',
-      description: 'Testing out',
-      head: 'Afeez',
-      assistant: 'Sammy',
+  addEmployeeToPositionDialog: {
+    type: 'new',
+    props: {
+      open: false,
     },
-  ],
+    data: null,
+  },
   // Organization initial state
   companyInfo: false,
   updateCompanyInfoData: false,
@@ -387,6 +387,76 @@ const companyStructurePageReducer = (state = initialState, action) =>
           error: action.payload,
         };
       }
+
+      case Constants.OPEN_ADD_EMPLOYEE_TO_POSITION_DIALOG: {
+        return {
+          ...state,
+          addEmployeeToPositionDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_ADD_EMPLOYEE_TO_POSITION_DIALOG: {
+        return {
+          ...state,
+          addEmployeeToPositionDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+
+      case Constants.ADD_EMPLOYEE_TO_POSITION: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          addEmployeeToPositionData: action.payload,
+        };
+      }
+      case Constants.ADD_EMPLOYEE_TO_POSITION_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+        };
+      }
+      case Constants.ADD_EMPLOYEE_TO_POSITION_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      // case Constants.GET_EMPLOYEES: {
+      //   return {
+      //     ...state,
+      //     loading: true,
+      //     error: false,
+      //     allEmployees: action.payload,
+      //   };
+      // }
+      // case Constants.GET_EMPLOYEES_SUCCESS: {
+      //   return {
+      //     ...state,
+      //     loading: false,
+      //     error: false,
+      //   };
+      // }
+      // case Constants.GET_EMPLOYEES_ERROR: {
+      //   return {
+      //     ...state,
+      //     loading: false,
+      //     error: action.payload,
+      //   };
+      // }
 
       /** *****************************************************************
        * Organization constants

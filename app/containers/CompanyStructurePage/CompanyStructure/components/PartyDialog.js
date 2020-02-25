@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Typography,
   MenuItem,
   Slide,
 } from '@material-ui/core';
@@ -46,7 +45,6 @@ const PartyDialog = props => {
     partyGroupData,
     newPartyDialog,
     dispatchCloseNewPartyDialog,
-    // closeEditBranchDialogAction,
     AllUserData,
     dispatchCreateNewPartyAction,
   } = props;
@@ -59,9 +57,6 @@ const PartyDialog = props => {
     name: '',
     description: '',
   });
-
-  console.log(AllUserData, 'AllUserData AllUserData');
-  // console.log(newPartyDialog, 'newPartyDialog props ...');
 
   const handleSelectChange = name => event => {
     setValues({ ...values, [name]: { id: event.target.value } });

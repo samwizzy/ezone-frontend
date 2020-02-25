@@ -118,6 +118,24 @@ const makeSelectGetAllPositions = () =>
     subState => subState.allPositions,
   );
 
+const makeSelectAddEmployeeToPositionDialog = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.addEmployeeToPositionDialog,
+  );
+
+const makeSelectAddEmployeeToPositionData = () =>
+  createSelector(
+    selectCompanyStructurePageDomain,
+    subState => subState.addEmployeeToPositionData,
+  );
+
+// const makeSelectGetAllEmployees = () =>
+//   createSelector(
+//     selectCompanyStructurePageDomain,
+//     subState => subState.allEmployees,
+//   );
+
 // const makeSelectSelectedParty = () =>
 //   createSelector(
 //     selectCompanyStructurePageDomain,
@@ -183,6 +201,9 @@ export {
   makeSelectNewPositionDialog,
   makeSelectCreateNewPositionData,
   makeSelectGetAllPositions,
+  makeSelectAddEmployeeToPositionDialog,
+  makeSelectAddEmployeeToPositionData,
+  // makeSelectGetAllEmployees,
   // makeSelectSelectedParty,
   // organization export function
   makeSelectEditColorDialog,
