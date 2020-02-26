@@ -21,22 +21,43 @@ const makeSelectEmailConfig = () =>
     substate => substate,
   );
 
-  const makeSelectUserEmailConfigData = () =>
+const makeSelectUserEmailConfigData = () =>
   createSelector(
     selectEmailConfigDomain,
-    subState => subState.createNewPartyGroupData,
-  );
+    subState => subState.emailConfigData,
+);
 
-  const makeSelectUserEmailConfigPostData = () =>
+const makeSelectUserEmailConfigPostData = () =>
   createSelector(
     selectEmailConfigDomain,
     subState => subState.emailConfigPostData,
-  );
+);
+
+const makeSelectUserTestConnectionData = () =>
+  createSelector(
+    selectEmailConfigDomain,
+    subState => subState.testConnectionData,
+);
+
+const makeSelectSmsProviderData = () =>
+  createSelector(
+    selectEmailConfigDomain,
+    subState => subState.smsProviderData,
+);
+
+const makeSelectLoading = () =>
+  createSelector(
+    selectEmailConfigDomain,
+    subState => subState.loading,
+);
 
 export default makeSelectEmailConfig;
 export { 
   selectEmailConfigDomain,
   makeSelectUserEmailConfigData,
-  makeSelectUserEmailConfigPostData
+  makeSelectUserEmailConfigPostData,
+  makeSelectUserTestConnectionData,
+  makeSelectSmsProviderData,
+  makeSelectLoading
 };
 

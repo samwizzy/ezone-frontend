@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import * as AppSelectors from '../../App/selectors';
+
 import {
   makeStyles,
   Grid,
@@ -11,17 +12,17 @@ import {
   Button,
 } from '@material-ui/core';
 
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox'
 
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../actions';
+import * as Selectors from '../selectors';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -44,8 +45,14 @@ const useStyles = makeStyles(theme => ({
 
 const EmailConfigs = props => {
   const classes = useStyles();
+  const { currentUser } = props
+
+  console.log("currentUser: ", currentUser);
+  console.log(currentUser, 'currentUser.organisation.orgId')
+  // const orgId = currentUser.organisation.orgId
 
   const [values, setValues] = React.useState({
+    orgId: currentUser.organisation.orgId,
     host: '',
     port: '',
     username: '',
@@ -59,18 +66,38 @@ const EmailConfigs = props => {
     setValues({ ...values, [event.target.name]: event.target.type === 'checkbox'? event.target.checked : event.target.value });
   }
 
-  const canSubmitForm = () => {
-    const { host, port, username, password, tls, tlsRequired, authenticate } = values
-    return host.length > 0 && port.length > 0 && username.length > 0 && password.length > 0 && tls === true && tlsRequired === true && authenticate === true
-  } 
+  // const canSubmitForm = () => {
+  //   const { host, port, username, password, tls, tlsRequired, authenticate } = values
+    // return host.length > 0 && port.length > 0 && username.length > 0 && password.length > 0 && tls === true && tlsRequired === true && authenticate === true
+  // } 
 
-  const { dispatchUpdateEmailConfigAction, dispatchGetEmailConfigAction } = props;
+  const { 
+    dispatchUpdateEmailConfigAction, 
+    dispatchGetEmailConfigAction, 
+    dispatchTestEmailConfigConnectionAction,
+    emailConfigData,
+    testEmailConfigConnectionData,
+    loading,
+  } = props;
+
+  console.log('emailConfigData form view: ', emailConfigData);
+  console.log('testEmailConfigConnectionData : ', testEmailConfigConnectionData)
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     dispatchGetEmailConfigAction();
+    
+    setValues({
+      ...emailConfigData,
+      tls: emailConfigData.isTlsEnabled,
+      tlsRequired: emailConfigData.isTlsRequired,
+      authenticate: emailConfigData.isAuth
+    });
   }, []);
 
+  if (loading) {
+    return <LoadingIndicator />
+  }
 
   return (
     <React.Fragment>
@@ -162,7 +189,10 @@ const EmailConfigs = props => {
         </FormGroup>
 
           <Grid item xs={12} md={6} lg={6}>
-            <Button variant="contained" color="primary" className={classes.buttonStyle} onClick={() => dispatchUpdateEmailConfigAction(values)} disabled={!canSubmitForm()}>
+            <Button variant="outlined" color="primary" onClick={() => dispatchTestEmailConfigConnectionAction(values)}>
+              Test Connection
+            </Button>
+            <Button variant="contained" color="primary" className={classes.buttonStyle} onClick={() => dispatchUpdateEmailConfigAction(values)}>
               Save
             </Button>
             <Button variant="contained" color="primary" className={classes.buttonStyle}>
@@ -181,6 +211,10 @@ EmailConfigs.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   // loginPage: makeSelectLoginPage(),
+  currentUser: AppSelectors.makeSelectCurrentUser(),
+  emailConfigData: Selectors.makeSelectUserEmailConfigData(),
+  testEmailConfigConnectionData: Selectors.makeSelectUserTestConnectionData(),
+  loading: Selectors.makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -188,6 +222,7 @@ function mapDispatchToProps(dispatch) {
     // openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
     dispatchGetEmailConfigAction: evt => dispatch(Actions.getEmailConfigAction(evt)),
     dispatchUpdateEmailConfigAction: evt => dispatch(Actions.updateEmailConfigAction(evt)),
+    dispatchTestEmailConfigConnectionAction: evt => dispatch(Actions.testEmailConnectionAction(evt)),
   };
 }
 

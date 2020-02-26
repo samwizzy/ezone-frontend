@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
@@ -9,10 +9,16 @@ import {
   TextField,
   Divider,
   Button,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  Select,
+  InputLabel
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import * as Selectors from '../selectors';
 import * as Actions from '../actions';
 
 const useStyles = makeStyles(theme => ({
@@ -37,12 +43,50 @@ const useStyles = makeStyles(theme => ({
 const SMSConfigs = props => {
   const classes = useStyles();
 
-  const {} = props;
+  const { 
+    dispatchGetSmsProviderAction, 
+    smsProviderData
+  } = props;
+
+  console.log('smsProviderData:- ', smsProviderData);
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    dispatchGetSmsProviderAction();
+  }, []);
+
   return (
     <React.Fragment>
       SMS Configuration Settings
       <Card className={classes.card} variant="outlined">
         <CardContent>
+        <FormControl variant="outlined" className={classes.formControl}>
+          {/* <InputLabel id="demo-simple-select-outlined-label">
+            SMS
+          </InputLabel> */}
+          <FormHelperText><h3>Select SMS Provider</h3></FormHelperText>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            // value={age}
+            // onChange={handleChange}
+            // labelWidth={labelWidth}
+          >
+            <MenuItem value="oko">
+              <em>None</em>
+            </MenuItem>
+
+            {smsProviderData.map((item) => {
+              <MenuItem 
+                key={item.id}
+                value={item.id}
+              >
+                {item.providerName}
+              </MenuItem>
+            })}
+            
+          </Select>
+        </FormControl>
           <Grid container spacing={3} className={classes.formStyle}>
             <Grid item xs={12} md={6} lg={6}>
               <div>
@@ -133,11 +177,13 @@ SMSConfigs.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   // loginPage: makeSelectLoginPage(),
+  smsProviderData: Selectors.makeSelectSmsProviderData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     // openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    dispatchGetSmsProviderAction: evt => dispatch(Actions.getSmsProviderAction(evt)),
   };
 }
 

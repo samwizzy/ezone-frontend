@@ -14,14 +14,12 @@ import * as Constants from './constants';
 
 // Get email configuration details
 export function getEmailConfigAction() {
-  console.log('getEmailConfigAction');
   return {
     type: Constants.GET_EMAIL_CONFIG,
   };
 }
 
 export function getEmailConfigSuccessAction(data) {
-  console.log(data, 'getEmailConfigSuccessAction');
   return {
     type: Constants.GET_EMAIL_CONFIG_SUCCESS,
     payload: data,
@@ -29,7 +27,6 @@ export function getEmailConfigSuccessAction(data) {
 }
 
 export function getEmailConfigErrorAction(data) {
-  console.log(data, 'getEmailConfigErrorAction');
   return {
     type: Constants.GET_EMAIL_CONFIG_ERR,
     payload: data,
@@ -39,7 +36,6 @@ export function getEmailConfigErrorAction(data) {
 
 // Set email configuration details
 export function updateEmailConfigAction(data) {
-  console.log(data, 'updateEmailConfigAction');
   return {
     type: Constants.UPDATE_EMAIL_CONFIG,
     payload: data,
@@ -47,7 +43,6 @@ export function updateEmailConfigAction(data) {
 }
 
 export function updateEmailConfigSuccessAction(data) {
-  console.log(data, 'updateEmailConfigSuccessAction');
   return {
     type: Constants.UPDATE_EMAIL_CONFIG_SUCCESS,
     payload: data,
@@ -55,10 +50,74 @@ export function updateEmailConfigSuccessAction(data) {
 }
 
 export function updateEmailConfigErrorAction(data) {
-  console.log(data, 'updateEmailConfigErrorAction');
   return {
     type: Constants.UPDATE_EMAIL_CONFIG_ERR,
     payload: data,
   };
 }
 
+
+// Test connection details
+export function testEmailConnectionAction(data) {
+  return {
+    type: Constants.TEST_EMAIL_CONNECTION,
+    payload: data,
+  };
+}
+
+export function testEmailConnectionSuccessAction(data) {
+  return {
+    type: Constants.TEST_EMAIL_CONNECTION_SUCCESS,
+    payload: data,
+  };
+}
+
+export function testEmailConnectionErrorAction(data) {
+  return {
+    type: Constants.TEST_EMAIL_CONNECTION_ERR,
+    payload: data,
+  };
+}
+
+// Get sms provider 
+export function getSmsProviderAction() {
+  return {
+    type: Constants.GET_SMS_PROVIDER,
+  };
+}
+
+export function getSmsProviderSuccessAction(data) {
+  console.log('getSmsProviderSuccessAction: ', data);
+  return {
+    type: Constants.GET_SMS_PROVIDER_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getSmsProviderErrorAction(data) {
+  return {
+    type: Constants.GET_SMS_PROVIDER_ERR,
+    payload: data,
+  };
+}
+
+// Get sms configuration 
+export function getSmsConfigAction() {
+  return {
+    type: Constants.GET_SMS_CONFIG,
+  };
+}
+
+export function getSmsConfigSuccessAction(data) {
+  return {
+    type: Constants.GET_SMS_CONFIG_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getSmsConfigErrorAction(data) {
+  return {
+    type: Constants.GET_SMS_CONFIG_ERR,
+    payload: data,
+  };
+}

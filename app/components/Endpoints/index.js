@@ -37,3 +37,5 @@ export const GetUtilityChatsApi = '/utilityserv/api/v1/organisation/chats';
 export const GetOrgAppsApi = '/utilityserv/api/v1/organisation/orgApps';
 export const GetEmailConfigApi = '/messagingserv/api/v1/get_email_config_by_orgId';
 export const SaveEmailConfigApi = '/messagingserv/api/v1/emailConfig';
+export const TestConnectionApi = '/messagingserv/api/v1/test_email_config';
+export const GetSmsProviderApi = '/messagingserv/api/v1/get_all_sms_providers';
