@@ -188,7 +188,6 @@ DocWidget.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  // loginPage: makeSelectLoginPage(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -6,7 +6,6 @@
 import produce from 'immer';
 import {
   CREATE_UTILITY_TASKS,
-  GET_UTILITY_TASKS,
   CREATE_UTILITY_TASKS_SUCCESS,
   GET_UTILITY_TASKS_ERROR,
   GET_UTILITY_FILES,
@@ -31,6 +30,7 @@ import {
   CLOSE_NEW_DEPARTMENT_DIALOG,
   OPEN_EDIT_DEPARTMENT_DIALOG,
   CLOSE_EDIT_DEPARTMENT_DIALOG,
+  GET_UTILITY_TASKS_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -135,7 +135,7 @@ const utilityPageReducer = (state = initialState, action) =>
           task: action.payload,
         };
       }
-      case GET_UTILITY_TASKS: {
+      case GET_UTILITY_TASKS_SUCCESS: {
         return {
           ...state,
           tasks: action.payload,
