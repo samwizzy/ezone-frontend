@@ -1,13 +1,13 @@
 /*
  *
- * EmployeePage reducer
+ * UsersPage reducer
  *
  */
 import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
-  getAllEmployees: false,
+  getAllEmployees: [],
   createNewEmployeeData: false,
   loading: false,
   error: false,
@@ -21,9 +21,31 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const employeePageReducer = (state = initialState, action) =>
+const usersPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
+      case Constants.GET_ALL_EMPLOYEES: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_ALL_EMPLOYEES_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          getAllEmployees: action.payload,
+        };
+      }
+      case Constants.GET_ALL_EMPLOYEES_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
       case Constants.OPEN_NEW_EMPLOYEE_DIALOG: {
         return {
           ...state,
@@ -97,7 +119,6 @@ const employeePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.CREATE_NEW_EMPLOYEE: {
-        console.log(action.payload, 'action.payload')
         return {
           ...state,
           loading: true,
@@ -110,7 +131,6 @@ const employeePageReducer = (state = initialState, action) =>
           ...state,
           loading: false,
           error: false,
-          // getAllUsersData: action.payload,
         };
       }
       case Constants.CREATE_NEW_EMPLOYEE_ERROR: {
@@ -120,29 +140,7 @@ const employeePageReducer = (state = initialState, action) =>
           error: action.payload,
         };
       }
-      case Constants.GET_ALL_EMPLOYEES: {
-        return {
-          ...state,
-          loading: true,
-          error: false,
-        };
-      }
-      case Constants.GET_ALL_EMPLOYEES_SUCCESS: {
-        return {
-          ...state,
-          loading: false,
-          error: false,
-          getAllEmployees: action.payload,
-        };
-      }
-      case Constants.GET_ALL_EMPLOYEES_ERROR: {
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
-      }
     }
   });
 
-export default employeePageReducer;
+export default usersPageReducer;

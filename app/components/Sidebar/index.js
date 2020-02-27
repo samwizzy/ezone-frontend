@@ -35,12 +35,12 @@ const links = [
   'Employees',
   'Groups',
   'Security',
-  'Settings'
+  'Settings',
 ];
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     }),
   },
   list: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -174,7 +174,12 @@ export default function MiniDrawer(props) {
                 break;
               case 'Employees':
                 return (
-                  <ListItem button key={index} component="a" href="employee">
+                  <ListItem
+                    button
+                    key={index}
+                    component="a"
+                    href="/users/employees"
+                  >
                     <ListItemIcon>
                       <Person />
                     </ListItemIcon>
@@ -184,7 +189,7 @@ export default function MiniDrawer(props) {
                 break;
               case 'Applications':
                 return (
-                  <ListItem button key={index} component="a" href="utility">
+                  <ListItem button key={index} component="a" href="/utility">
                     <ListItemIcon>
                       <Apps />
                     </ListItemIcon>
@@ -193,7 +198,7 @@ export default function MiniDrawer(props) {
                 );
               case 'Security':
                 return (
-                  <ListItem button key={index} component="a" href="groups">
+                  <ListItem button key={index} component="a" href="/groups">
                     <ListItemIcon>
                       <Security />
                     </ListItemIcon>
@@ -210,9 +215,9 @@ export default function MiniDrawer(props) {
                     <ListItemText primary={text} />
                   </ListItem>
                 );
-                break;  
+                break;
               default:
-                return null
+                return null;
             }
           })}
         </List>

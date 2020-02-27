@@ -29,9 +29,9 @@ import {
   Divider,
   Slide,
 } from '@material-ui/core';
-import * as Selectors from '../selectors';
-import * as Actions from '../actions';
-import LoadingIndicator from '../../../components/LoadingIndicator';
+import * as Selectors from '../../selectors';
+import * as Actions from '../../actions';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -242,7 +242,7 @@ const EmployeeDialog = props => {
               variant="contained"
               disabled={!canBeSubmitted()}
             >
-              {employeeDialog.type === 'new' ? 'Save' : 'Update'}
+              Save
             </Button>
           )}
           <Button

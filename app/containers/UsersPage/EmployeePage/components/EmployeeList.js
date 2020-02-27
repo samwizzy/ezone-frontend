@@ -13,9 +13,9 @@ import MUIDataTable from 'mui-datatables';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../actions';
-import * as Selectors from '../selectors';
-import LoadingIndicator from '../../../components/LoadingIndicator';
+import * as Actions from '../../actions';
+import * as Selectors from '../../selectors';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 import { AddButton } from './AddButton';
 
 const useStyles = makeStyles(theme => ({
@@ -85,43 +85,13 @@ const EmployeeList = props => {
 
   const {
     loading,
+    getAllEmployees,
     openNewEmployeeDialogAction,
     openEditEmployeeDialogAction,
     openViewEmployeeDialogAction,
-    getAllEmployees,
   } = props;
 
-  const datas = [
-    {
-      id: '1',
-      name: 'Teslim Andulafeez',
-      company: 'Test Corp',
-      city: 'Ikeja',
-      state: 'Lagos State',
-    },
-    {
-      id: '2',
-      name: 'Christ okeme',
-      company: 'Test Corp',
-      city: 'Cross River',
-      state: 'Calabar',
-    },
-    {
-      id: '3',
-      name: 'Joel Johnson',
-      company: 'Test Corp',
-      city: 'Abuja',
-      state: 'FCT',
-    },
-    {
-      name: 'Kelechi Chinanka',
-      company: 'Test Corp',
-      city: 'Ikeja',
-      state: 'Lagos State',
-    },
-  ];
-
-  console.log(getAllEmployees, 'getAllEmployees');
+  // console.log(getAllEmployees, 'getAllEmployees');
 
   const columns = [
     {
@@ -199,48 +169,48 @@ const EmployeeList = props => {
         sort: false,
       },
     },
-    {
-      name: 'id',
-      label: '',
-      options: {
-        filter: true,
-        sort: false,
-        customBodyRender: value => {
-          const Post = datas.find(post => value === post.id);
-          if (value === '') {
-            return '';
-          }
-          return (
-            <div>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                Options
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Assign Role</MenuItem>
-                <MenuItem onClick={handleClose}>Assign Apps</MenuItem>
-                <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
-                  Edit
-                </MenuItem>
-                <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
-                  View Details
-                </MenuItem>
-                <MenuItem onClick={handleClose}>Deactivate</MenuItem>
-              </Menu>
-            </div>
-          );
-        },
-      },
-    },
+    // {
+    //   name: 'id',
+    //   label: '',
+    //   options: {
+    //     filter: true,
+    //     sort: false,
+    //     customBodyRender: value => {
+    //       const Post = datas.find(post => value === post.id);
+    //       if (value === '') {
+    //         return '';
+    //       }
+    //       return (
+    //         <div>
+    //           <Button
+    //             aria-controls="simple-menu"
+    //             aria-haspopup="true"
+    //             onClick={handleClick}
+    //           >
+    //             Options
+    //           </Button>
+    //           <Menu
+    //             id="simple-menu"
+    //             anchorEl={anchorEl}
+    //             keepMounted
+    //             open={Boolean(anchorEl)}
+    //             onClose={handleClose}
+    //           >
+    //             <MenuItem onClick={handleClose}>Assign Role</MenuItem>
+    //             <MenuItem onClick={handleClose}>Assign Apps</MenuItem>
+    //             <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
+    //               Edit
+    //             </MenuItem>
+    //             <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
+    //               View Details
+    //             </MenuItem>
+    //             <MenuItem onClick={handleClose}>Deactivate</MenuItem>
+    //           </Menu>
+    //         </div>
+    //       );
+    //     },
+    //   },
+    // },
   ];
 
   const options = {
@@ -253,19 +223,14 @@ const EmployeeList = props => {
   };
 
   if (loading) {
-    return <List component={LoadingIndicator} />;
+    return <LoadingIndicator />;
   }
-
-  // if (loading) {
-  //   return <LoadingIndicator />;
-  // }
 
   return (
     <React.Fragment>
       <MUIDataTable
         title="All Employees"
-        // data={getAllEmployees}
-        data={datas}
+        data={getAllEmployees}
         columns={columns}
         options={options}
       />
@@ -275,10 +240,10 @@ const EmployeeList = props => {
 
 EmployeeList.propTypes = {
   loading: PropTypes.bool,
+  getAllEmployees: PropTypes.array,
   openNewEmployeeDialogAction: PropTypes.func,
   openEditEmployeeDialogAction: PropTypes.func,
   openViewEmployeeDialogAction: PropTypes.func,
-  getAllEmployees: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 const mapStateToProps = createStructuredSelector({

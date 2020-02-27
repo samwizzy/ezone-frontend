@@ -23,7 +23,8 @@ import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable'
 import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
 import CompanyStructureParty from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
 import CompanyStructurePosition from '../CompanyStructurePage/CompanyStructure/components/PositionPage';
-import EmployeePage from '../EmployeePage/Loadable';
+import UsersPage from '../UsersPage/Loadable';
+import Employees from '../UsersPage/EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
 import EmailConfigs from '../EmailConfig/components/TabsPage';
@@ -74,6 +75,12 @@ const App = () => {
                   path="/organization"
                   component={organizationPage}
                 />
+                <PrivateRoute exact path="/users" component={UsersPage} />
+                <PrivateRoute
+                  exact
+                  path="/users/employees"
+                  component={Employees}
+                />
                 <PrivateRoute
                   exact
                   path="/organization/company/structure"
@@ -89,7 +96,6 @@ const App = () => {
                   path="/organization/company/structure/position/:partyGroupId/:partyId/:positionId"
                   component={CompanyStructurePosition}
                 />
-                {/* <PrivateRoute exact path="/employee" component={EmployeePage} /> */}
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute
