@@ -42,7 +42,7 @@ const makeSelectTasks = () =>
 const makeSelectFiles = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.tasks,
+    subState => subState.files,
   );    
 
 const makeSelectFileUploadDialog = () =>

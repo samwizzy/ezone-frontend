@@ -17,6 +17,7 @@ import _ from 'lodash';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, MenuItem, Slide, Typography, TextField } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,11 +60,28 @@ function AddTaskDialog(props) {
   const [form, setForm] = React.useState({
     title: '',
     description: '',
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: moment(new Date()).format('YYYY-MM-DD'),
+    endDate: moment(new Date()).format('YYYY-MM-DD'),
     status: "PENDING",
-    assignedTo: ""
+    assignedTo: "",
+    fileName: "",
+    file: "",
   });
+
+  React.useEffect(() => {
+    console.log(moment(new Date()).format('YYYY-MM-DD'), "Watch out");
+  }, [])
+
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        return cb(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -90,6 +108,10 @@ function AddTaskDialog(props) {
 
   const handleDateChange = (date, formatted, name) => { 
     setForm(_.set({...form}, name, reformattedDate(date)))
+  }
+  const handleImageChange = (ev) => { 
+    console.log(ev.target.files[0], "ev.target.files[0]")
+    getBase64(ev.target.files[0], (result) => setForm(_.set({...form}, 'file', result)))
   }
 
   const handleSubmit = () => {
@@ -204,7 +226,7 @@ function AddTaskDialog(props) {
               </TextField>
             </Grid>
 
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <Button
                 variant="outlined"
                 component="label"
@@ -213,9 +235,10 @@ function AddTaskDialog(props) {
                 <input
                   type="file"
                   style={{ display: "none" }}
+                  onChange={handleImageChange}
                 />
               </Button>
-            </Grid> */}
+            </Grid>
           </Grid>
           </form>
         </DialogContent>

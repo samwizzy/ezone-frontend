@@ -11,6 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import DropZone from './DropZone';
+import ReactDropZone from './ReactDropZone';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
 
@@ -35,7 +36,8 @@ function FileUploadDialog(props) {
       >
         {/* <DialogTitle id="alert-dialog-slide-title"></DialogTitle> */}
         <DialogContent>
-          <DropZone />
+          {/* <DropZone /> */}
+          <ReactDropZone />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeFileUploadDialog} color="primary">

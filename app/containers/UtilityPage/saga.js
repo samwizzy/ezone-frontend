@@ -54,7 +54,8 @@ export function* addUtilityTasks({type, payload}) {
 
     console.log(createdTasksResponse, "createdTasksResponse")
 
-    yield put(Actions.createUtilityFileSuccess(createdTasksResponse));
+    // yield put(Actions.createUtilityFileSuccess(createdTasksResponse));
+    yield put({type: Constants.GET_UTILITY_TASKS});
     yield put(
       AppActions.openSnackBar({
         open: true,

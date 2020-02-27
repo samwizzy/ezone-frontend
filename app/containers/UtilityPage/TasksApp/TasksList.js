@@ -6,6 +6,7 @@ import MUIDataTable from 'mui-datatables';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import LoadingIndicator from '../../../components/LoadingIndicator';
 import moment from 'moment'
 import Lens from '@material-ui/icons/Lens'
@@ -21,7 +22,13 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     textAlign: 'center',
-    color: console.log(theme, "Theme")
+  },
+  datatable: {
+    flexGrow: 1,
+    '& .MuiTableRow-root:hover': {
+      // backgroundColor: theme.palette.primary.main,
+      cursor: 'pointer'
+    }
   },
   button: {
     borderRadius: '20px',
@@ -134,6 +141,16 @@ const TasksList = props => {
     customToolbar: () => <AddTask openNewTaskDialog={openNewTaskDialog} />,
     rowsPerPage: 25,
     rowsPerPageOptions: [25,50,100],
+    onRowClick: (rowData, rowState) => {
+      console.log(rowData, rowState);
+    },
+    isRowSelectable: (dataIndex, selectedRows) => {
+      //prevents selection of any additional row after the third
+      if (selectedRows.data.length > 2 && selectedRows.data.filter(d => d.dataIndex === dataIndex).length === 0) return false;
+      //prevents selection of row with title "Attorney"
+      return tasks[dataIndex][1] != "Attorney";
+    },
+    selectableRowsHeader: false
   };
 
   if (loading) {
@@ -169,6 +186,7 @@ const TasksList = props => {
             data={tasks}
             columns={columns}
             options={options}
+            className={classes.datatable}
           />
         </Grid>
       </Grid>
