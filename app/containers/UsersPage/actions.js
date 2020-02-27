@@ -1,10 +1,31 @@
 /*
  *
- * EmployeePage actions
+ * UsersPage actions
  *
  */
 
 import * as Constants from './constants';
+
+export function getAllEmployees(data) {
+  return {
+    type: Constants.GET_ALL_EMPLOYEES,
+    payload: data,
+  };
+}
+
+export function getAllEmployeesSuccess(data) {
+  return {
+    type: Constants.GET_ALL_EMPLOYEES_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getAllEmployeesError(data) {
+  return {
+    type: Constants.GET_ALL_EMPLOYEES_ERROR,
+    payload: data,
+  };
+}
 
 export function openNewEmployeeDialog() {
   return {
@@ -45,44 +66,22 @@ export function closeViewEmployeeDialog() {
 }
 
 export function createNewEmployee(data) {
-  console.log(data, 'data');
   return {
     type: Constants.CREATE_NEW_EMPLOYEE,
     payload: data,
   };
 }
 
-export function createNewEmployeeSuccess(data) {
+export function createNewEmployeeSuccess() {
   return {
     type: Constants.CREATE_NEW_EMPLOYEE_SUCCESS,
-    payload: data,
+    // payload: data,
   };
 }
 
 export function createNewEmployeeError(data) {
   return {
     type: Constants.CREATE_NEW_EMPLOYEE_ERROR,
-    payload: data,
-  };
-}
-
-export function getAllEmployees(data) {
-  return {
-    type: Constants.GET_ALL_EMPLOYEES,
-    payload: data,
-  };
-}
-
-export function getAllEmployeesSuccess(data) {
-  return {
-    type: Constants.GET_ALL_EMPLOYEES_SUCCESS,
-    payload: data,
-  };
-}
-
-export function getAllEmployeesError(data) {
-  return {
-    type: Constants.GET_ALL_EMPLOYEES_ERROR,
     payload: data,
   };
 }

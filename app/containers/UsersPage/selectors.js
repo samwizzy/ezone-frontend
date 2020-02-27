@@ -2,61 +2,61 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the employeePage state domain
+ * Direct selector to the usersPage state domain
  */
 
-const selectEmployeePageDomain = state => state.employeePage || initialState;
+const selectUsersPageDomain = state => state.usersPage || initialState;
 
 /**
  * Other specific selectors
  */
 
 /**
- * Default selector used by EmployeePage
+ * Default selector used by UsersPage
  */
 
-const makeSelectEmployeePage = () =>
+const makeSelectUsersPage = () =>
   createSelector(
-    selectEmployeePageDomain,
+    selectUsersPageDomain,
     substate => substate,
   );
 
 const makeSelectLoading = () =>
   createSelector(
-    selectEmployeePageDomain,
+    selectUsersPageDomain,
     subState => subState.loading,
   );
 
 const makeSelectError = () =>
   createSelector(
-    selectEmployeePageDomain,
+    selectUsersPageDomain,
     subState => subState.error,
+  );
+
+const makeSelectGetAllEmployees = () =>
+  createSelector(
+    selectUsersPageDomain,
+    subState => subState.getAllEmployees,
   );
 
 const makeSelectEmployeeDialog = () =>
   createSelector(
-    selectEmployeePageDomain,
+    selectUsersPageDomain,
     subState => subState.employeeDialog,
   );
 
 const makeSelectCreateNewEmployeeData = () =>
   createSelector(
-    selectEmployeePageDomain,
+    selectUsersPageDomain,
     subState => subState.createNewEmployeeData,
   );
 
-const makeSelectGetAllEmployees = () =>
-  createSelector(
-    selectEmployeePageDomain,
-    subState => subState.getAllEmployees,
-  );
-
-export default makeSelectEmployeePage;
+export default makeSelectUsersPage;
 export {
-  selectEmployeePageDomain,
+  selectUsersPageDomain,
+  makeSelectGetAllEmployees,
   makeSelectLoading,
   makeSelectError,
   makeSelectEmployeeDialog,
   makeSelectCreateNewEmployeeData,
-  makeSelectGetAllEmployees,
 };
