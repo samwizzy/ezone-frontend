@@ -25,10 +25,15 @@ export const CreateNewEmployeeApi = '/authserv/api/v1/user';
 // Utility Apis -> File
 export const GetUtilityFilesApi = '/utilityserv/api/v1/get_document_by_orgid';
 export const CreateUtilityFilesApi = '/utilityserv/api/v1/share_document';
+
 // Task Api
 export const GetUtilityTasksApi = '/utilityserv/api/v1/get_tasks_by_orgid';
 export const CreateUtilityTasksApi = '/utilityserv/api/v1/task';
+
 // Chat Api
 export const GetUtilityChatsApi = '/utilityserv/api/v1/organisation/chats';
+
 // App Api
 export const GetOrgAppsApi = '/utilityserv/api/v1/organisation/orgApps';
+export const GetEmailConfigApi = '/messagingserv/api/v1/get_email_config_by_orgId';
+export const SaveEmailConfigApi = '/messagingserv/api/v1/emailConfig';

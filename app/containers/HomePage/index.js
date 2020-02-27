@@ -57,7 +57,7 @@ export function HomePage(props) {
   useInjectSaga({ key, saga });
 
   // const { snackBar, currentUser } = props;
-  const { dispatchLogoutAction } = props;
+  const { dispatchLogoutAction, token } = props;
 
   // useEffect(
   //   () =>
@@ -70,7 +70,9 @@ export function HomePage(props) {
   //   [],
   // );
   // console.log(user, 'user from home');
-  // console.log(token, 'token from home');
+
+  
+  console.log(token, 'token from home');
 
   return (
     <React.Fragment>
@@ -113,7 +115,7 @@ HomePage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   // currentUser: AppSelectors.makeSelectCurrentUser(),
-  // token: Selectors.makeSelectAccessToken(),
+  token: AppSelectors.makeSelectAccessToken(),
 });
 
 export function mapDispatchToProps(dispatch) {

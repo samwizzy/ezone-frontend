@@ -165,7 +165,7 @@ const PositionPage = props => {
       <div>
         <Grid container justify="space-between" className={classes.header}>
           <Grid item>
-            <Typography variant="h6">Company Information.</Typography>
+            <Typography variant="h6">Company Information</Typography>
           </Grid>
           <Grid item>
             <Button
@@ -216,7 +216,7 @@ const PositionPage = props => {
               >
                 <Divider />
                 <ListItem>
-                  <Typography variant="h6">Information.</Typography>
+                  <Typography variant="h6">Information</Typography>
                 </ListItem>
                 <ListItem>
                   <Table

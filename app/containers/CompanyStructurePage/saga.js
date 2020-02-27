@@ -33,7 +33,7 @@ export function* getPartyGroupSaga() {
 
 export function* createNewPartyGroupSaga() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  // const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
   const createNewPartyGroupParams = yield select(
     Selectors.createNewPartyGroupData(),
@@ -51,7 +51,7 @@ export function* createNewPartyGroupSaga() {
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
 
   try {
-    const userPartyGroupResponse = yield call(request, requestURL, {
+    const createPartyGroupResponse = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify(newData),
       headers: new Headers({
@@ -111,6 +111,7 @@ export function* getAllUsers() {
 export function* createNewParty() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
   const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  
   const createNewPartyData = yield select(
     Selectors.makeSelectCreateNewPartyData(),
   );
