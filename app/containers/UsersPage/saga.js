@@ -45,7 +45,6 @@ export function* createNewEmployee() {
     Selectors.makeSelectCreateNewEmployeeData(),
   );
 
-  console.log(createNewEmployeeData, 'createNewEmployeeData');
   const requestURL = `${BaseUrl}${Endpoints.CreateNewEmployeeApi}`;
 
   try {
@@ -57,8 +56,6 @@ export function* createNewEmployee() {
         'Content-Type': 'application/json',
       }),
     });
-
-    console.log(createNewEmployeeResponse, 'createNewEmployeeResponse');
 
     yield put(Actions.createNewEmployeeSuccess(createNewEmployeeResponse));
     yield put(Actions.getAllEmployees());
