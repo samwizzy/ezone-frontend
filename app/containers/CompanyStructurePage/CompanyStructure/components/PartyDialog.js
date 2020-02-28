@@ -41,6 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const PartyDialog = props => {
   const {
+    selectedPartyGroupData,
     loading,
     partyGroupData,
     newPartyDialog,
@@ -49,8 +50,11 @@ const PartyDialog = props => {
     dispatchCreateNewPartyAction,
   } = props;
 
+  console.log(selectedPartyGroupData, 'selectedPartyGroupData party');
+  console.log(selectedPartyGroupData.id, 'selectedPartyGroupData party');
   const classes = useStyles();
   const [values, setValues] = React.useState({
+    // partyGroupId: selectedPartyGroupData.id,
     partyGroupId: '',
     partyHead: { id: '' },
     assistantPartyHead: { id: '' },
@@ -69,23 +73,29 @@ const PartyDialog = props => {
     });
   };
 
+  const handleChangeForPartyGroupId = event => {
+    setValues({ ...values, partyGroupId: event.id });
+  };
+
   const canBeSubmitted = () => {
     const {
-      partyGroupId,
+      // partyGroupId,
       partyHead,
       assistantPartyHead,
       name,
       description,
     } = values;
     return (
-      partyGroupId !== '' &&
-      partyHead !== '' &&
-      assistantPartyHead !== '' &&
+      // partyGroupId !== '' &&
+      partyHead !== null &&
+      assistantPartyHead !== null &&
       name !== '' &&
       description !== ''
     );
   };
 
+  console.log(values, 'values');
+  console.log(partyGroupData, 'partyGroupData');
   return (
     <div>
       <Dialog
@@ -104,7 +114,7 @@ const PartyDialog = props => {
         <DialogContent>
           {newPartyDialog.type === 'new' ? (
             <div>
-              <TextField
+              {/* <TextField
                 id="select-group"
                 select
                 fullWidth
@@ -121,8 +131,17 @@ const PartyDialog = props => {
                       {option.name}
                     </MenuItem>
                   ))}
-              </TextField>
+              </TextField> */}
 
+              <TextField
+                id="outlined-read-only-input"
+                label="Read Only"
+                defaultValue={selectedPartyGroupData.id}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="outlined"
+              />
               <TextField
                 id="subgroup-name"
                 label="Name"
@@ -188,17 +207,18 @@ const PartyDialog = props => {
           {loading ? (
             <LoadingIndicator />
           ) : (
-            <Button
-              onClick={() => {
-                dispatchCreateNewPartyAction(values);
-              }}
-              color="primary"
-              variant="contained"
-              disabled={!canBeSubmitted()}
-            >
-              {newPartyDialog.type === 'new' ? 'Save' : 'Update'}
-            </Button>
-          )}
+              <Button
+                onClick={() => {
+                  dispatchCreateNewPartyAction(values);
+                  handleChangeForPartyGroupId(selectedPartyGroupData);
+                }}
+                color="primary"
+                variant="contained"
+                disabled={!canBeSubmitted()}
+              >
+                {newPartyDialog.type === 'new' ? 'Save' : 'Update'}
+              </Button>
+            )}
           <Button
             onClick={() => dispatchCloseNewPartyDialog()}
             color="primary"
@@ -215,10 +235,11 @@ const PartyDialog = props => {
 PartyDialog.propTypes = {
   dispatchCloseNewPartyDialog: PropTypes.func,
   newPartyDialog: PropTypes.object,
-  partyGroupData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  partyGroupData: PropTypes.array,
   AllUserData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   dispatchCreateNewPartyAction: PropTypes.func,
   loading: PropTypes.bool,
+  selectedPartyGroupData: PropTypes.oneOfType(PropTypes.object, PropTypes.bool),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -226,6 +247,7 @@ const mapStateToProps = createStructuredSelector({
   newPartyDialog: Selectors.makeSelectNewPartyDialog(),
   partyGroupData: Selectors.makeSelectPartyGroupData(),
   AllUserData: Selectors.makeSelectAllUsersData(),
+  selectedPartyGroupData: Selectors.makeSelectSelectedPartyGroupData(),
 });
 
 function mapDispatchToProps(dispatch) {

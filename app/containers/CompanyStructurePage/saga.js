@@ -60,7 +60,7 @@ export function* createNewPartyGroupSaga() {
       }),
     });
 
-    yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
+    yield put(Actions.createNewPartyGroupSuccessAction(userPartyGroupResponse));
     yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeNewPartyGroupDialog());
     yield put(
@@ -111,6 +111,7 @@ export function* createNewParty() {
     Selectors.makeSelectCreateNewPartyData(),
   );
 
+  console.log(createNewPartyData, 'createNewPartyData')
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyApi}`;
 
   try {
