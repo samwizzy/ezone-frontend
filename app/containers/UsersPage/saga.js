@@ -14,10 +14,7 @@ export function* getAllEmployees() {
 
   const requestURL = `${BaseUrl}${Endpoints.GetAllEmployeesApi}/${
     currentUser.organisation.orgId
-    }`;
-
-  console.log(currentUser, 'currentUser');
-  console.log(requestURL, 'requestURL');
+  }`;
 
   try {
     const getAllEmployeesResponse = yield call(request, requestURL, {
@@ -27,8 +24,6 @@ export function* getAllEmployees() {
         'Content-Type': 'application/json',
       }),
     });
-
-    console.log(getAllEmployeesResponse, 'getAllEmployeesResponse');
 
     yield put(Actions.getAllEmployeesSuccess(getAllEmployeesResponse));
   } catch (err) {
@@ -43,15 +38,13 @@ export function* getAllEmployees() {
   }
 }
 
-
 export function* createNewEmployee() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  // const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const createNewEmployeeData = yield select(
     Selectors.makeSelectCreateNewEmployeeData(),
   );
 
-  console.log(createNewEmployeeData, 'createNewEmployeeData');
   const requestURL = `${BaseUrl}${Endpoints.CreateNewEmployeeApi}`;
 
   try {
@@ -64,10 +57,10 @@ export function* createNewEmployee() {
       }),
     });
 
-    console.log(createNewEmployeeResponse, 'createNewPartyResponse');
-
     yield put(Actions.createNewEmployeeSuccess(createNewEmployeeResponse));
     yield put(Actions.getAllEmployees());
+    yield put(Actions.closeNewEmployeeDialog());
+
     if (createNewEmployeeResponse.success === true) {
       yield put(
         AppActions.openSnackBar({
@@ -97,7 +90,7 @@ export function* createNewEmployee() {
   }
 }
 // Individual exports for testing
-export default function* employeePageSaga() {
+export default function* usersPageSaga() {
   yield takeLatest(Constants.GET_ALL_EMPLOYEES, getAllEmployees);
   yield takeLatest(Constants.CREATE_NEW_EMPLOYEE, createNewEmployee);
 }

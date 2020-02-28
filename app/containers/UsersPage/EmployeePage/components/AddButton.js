@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { IconButton, Tooltip, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import { Add } from '@material-ui/icons';
-import * as Actions from '../actions';
+import * as Actions from '../../actions';
 
 const defaultToolbarStyles = {
   iconButton: {},
@@ -23,7 +23,7 @@ export function AddButton(props) {
         <Button
           variant="contained"
           color="primary"
-          onClick={openNewEmployeeDialogAction}
+          onClick={() => openNewEmployeeDialogAction()}
         >
           Add User
         </Button>
@@ -41,7 +41,7 @@ const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return {
-    // openNewBranchDialogAction: () => dispatch(Actions.openNewEmployeeDialog()),
+    openNewBranchDialogAction: () => dispatch(Actions.openNewEmployeeDialog()),
     dispatch,
   };
 }
