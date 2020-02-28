@@ -7,6 +7,7 @@ import produce from 'immer';
 import * as Constants from './constants';
 
 export const initialState = {
+  getAllEmployees: false,
   createNewEmployeeData: false,
   loading: false,
   error: false,
@@ -96,6 +97,7 @@ const employeePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.CREATE_NEW_EMPLOYEE: {
+        console.log(action.payload, 'action.payload')
         return {
           ...state,
           loading: true,
@@ -112,6 +114,28 @@ const employeePageReducer = (state = initialState, action) =>
         };
       }
       case Constants.CREATE_NEW_EMPLOYEE_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.GET_ALL_EMPLOYEES: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_ALL_EMPLOYEES_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          getAllEmployees: action.payload,
+        };
+      }
+      case Constants.GET_ALL_EMPLOYEES_ERROR: {
         return {
           ...state,
           loading: false,

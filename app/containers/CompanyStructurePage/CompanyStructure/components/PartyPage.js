@@ -19,6 +19,7 @@ import {
   TableContainer,
   TableRow,
   Link,
+  TableHead,
 } from '@material-ui/core';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -78,6 +79,9 @@ const useStyles = makeStyles(theme => ({
   header: {
     padding: theme.spacing(1.5, 0),
   },
+  head: {
+    textAlign: 'center',
+  },
 }));
 
 const NoPartyGroup = props => {
@@ -128,7 +132,7 @@ const PartyPage = props => {
 
   const { params } = match;
 
-  // console.log(params, 'params');
+  console.log(params, 'params');
 
   useEffect(() => {
     dispatchGetPartyGroups();
@@ -155,13 +159,13 @@ const PartyPage = props => {
     }
   }
 
-  if (!party || loading) {
+  if (!party) {
     return <LoadingIndicator />;
   }
 
-  console.log(allPositions, 'allPositions');
-  console.log(party, 'selectedPartyGroupData party');
-  console.log(selectedPartyGroupData, 'selectedPartyGroupData');
+  // console.log(allPositions, 'allPositions');
+  // console.log(party, 'selectedPartyGroupData party');
+  // console.log(selectedPartyGroupData, 'selectedPartyGroupData');
 
   if (!partyGroupData.length) {
     return (
@@ -171,7 +175,6 @@ const PartyPage = props => {
     );
   }
 
-  console.log(selectedPartyGroupData, 'selectedPartyGroupData');
   return (
     <React.Fragment>
       <PositionDialog params={params} />
@@ -272,56 +275,79 @@ const PartyPage = props => {
                   <Add /> Add New Parties
                 </Button>
               </Grid>
-              <Grid>
-                <Grid item>
-                <Table
-                className={classes.table}
-                aria-label="simple table"
-                size="small"
-              >
-                <TableBody>
-                  {party &&
-                    party.parties.map(paty => (
-                      <TableRow key={paty.id}>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          width="25%"
-                          onClick={() =>
-                            DispatchgetSelectedPartyGroupAction(paty)
-                          }
-                        >
-                          <div>{paty.name}</div>
+              <Grid container spacing={1}>
+                <Grid container item xs={6} md={6} lg={6}>
+                  <Table
+                    className={classes.table}
+                    aria-label="simple table"
+                    size="small"
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={classes.head}>
+                          All Parties
                         </TableCell>
                       </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
+                    </TableHead>
+                    <TableBody>
+                      {party &&
+                        party.parties.map(paty => (
+                          <TableRow key={paty.id}>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              width="25%"
+                              onClick={() =>
+                                DispatchgetSelectedPartyGroupAction(paty)
+                              }
+                            >
+                              <div>{paty.name}</div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </Grid>
+                <Grid container item xs={6} md={6} lg={6}>
+                  <Table
+                    className={classes.table}
+                    aria-label="simple table"
+                    size="small"
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={classes.head}>
+                          All Positions
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {party &&
+                        party.positions.map(position => (
+                          <TableRow key={position.id}>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              width="25%"
+                              onClick={() =>
+                                DispatchgetSelectedPartyGroupAction(position)
+                              }
+                            >
+                              <Link
+                                href={`/organization/company/structure/position/${
+                                  params.partyGroupId
+                                }/${selectedPartyGroupData.id}/${position.id}`}
+                              >
+                                {position.name}
+                                {/* <div>{party.name}</div> */}
+                              </Link>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
                 </Grid>
               </Grid>
-              <Table
-                className={classes.table}
-                aria-label="simple table"
-                size="small"
-              >
-                <TableBody>
-                  {party &&
-                    party.parties.map(paty => (
-                      <TableRow key={paty.id}>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          width="25%"
-                          onClick={() =>
-                            DispatchgetSelectedPartyGroupAction(paty)
-                          }
-                        >
-                          <div>{paty.name}</div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
             </Paper>
           </Grid>
         </Grid>
@@ -353,8 +379,10 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchOpenNewPositionAction: () => dispatch(Actions.openNewPositionDialog()),
-    dispatchOpenNewPartiesAction: () => dispatch(Actions.openNewPartiesDialog()),
+    dispatchOpenNewPositionAction: () =>
+      dispatch(Actions.openNewPositionDialog()),
+    dispatchOpenNewPartiesAction: () =>
+      dispatch(Actions.openNewPartiesDialog()),
     DispatchgetSelectedPartyGroupAction: evt =>
       dispatch(Actions.getSelectedPartyGroupAction(evt)),
     dispatchGetPartyGroups: () => dispatch(Actions.getPartyGroupAction()),

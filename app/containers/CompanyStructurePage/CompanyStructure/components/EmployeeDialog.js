@@ -40,29 +40,26 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const PartiesDialog = props => {
+const EmployeeDialog = props => {
   const {
     loading,
-    newPartiesDialog,
-    dispatchCloseNewPartiesDialog,
+    addEmployeeToPositionDialog,
+    dispatchCloseAddEmployeeToPositionDialogAction,
     AllUserData,
-    dispatchCreateNewPartiesAction,
+    dispatchAddEmployeeToPositionAction,
     params,
   } = props;
 
+  console.log(params, 'params');
+
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    partyId: params.partyId,
-    partyHead: { id: '' },
-    assistantPartyHead: { id: '' },
-    positions: null,
-    parties: null,
-    name: '',
-    description: '',
+    positionId: params.positionId,
+    userId: '',
   });
 
   const handleSelectChange = name => event => {
-    setValues({ ...values, [name]: { id: event.target.value } });
+    setValues({ ...values, [name]: event.target.value });
   };
 
   const handleChange = name => event => {
@@ -73,82 +70,39 @@ const PartiesDialog = props => {
   };
 
   const canBeSubmitted = () => {
-    const { partyHead, assistantPartyHead, name, description } = values;
-    return (
-      partyHead !== '' &&
-      assistantPartyHead !== '' &&
-      name !== '' &&
-      description !== ''
-    );
+    const { userId } = values;
+    return userId !== '';
   };
 
   return (
     <div>
       <Dialog
-        {...newPartiesDialog.props}
-        onClose={dispatchCloseNewPartiesDialog}
+        {...addEmployeeToPositionDialog.props}
+        onClose={dispatchCloseAddEmployeeToPositionDialogAction}
         keepMounted
         TransitionComponent={Transition}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {newPartiesDialog.type === 'new' ? 'New Parties' : 'Edit Parties'}
+          {addEmployeeToPositionDialog.type === 'new'
+            ? 'New Employee'
+            : 'Edit Employee'}
         </DialogTitle>
 
         <Divider />
 
         <DialogContent>
-          {newPartiesDialog.type === 'new' ? (
+          {addEmployeeToPositionDialog.type === 'new' ? (
             <div>
-              <TextField
-                id="name"
-                label="Name"
-                className={classes.textField}
-                value={values.name}
-                variant="outlined"
-                onChange={handleChange('name')}
-                margin="normal"
-                fullWidth
-              />
-              <TextField
-                id="description"
-                label="Description"
-                className={classes.textField}
-                value={values.description}
-                onChange={handleChange('description')}
-                margin="normal"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows="3"
-              />
-
               <TextField
                 id="select-head"
                 select
                 fullWidth
                 variant="outlined"
-                label="Select Head"
+                label="Select Employee"
                 className={classes.textField}
-                value={values.partyHead.id}
-                onChange={handleSelectChange('partyHead')}
-              >
-                {AllUserData &&
-                  AllUserData.map(option => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {option.emailAddress} {option.lastName}
-                    </MenuItem>
-                  ))}
-              </TextField>
-              <TextField
-                id="select-assistant"
-                select
-                fullWidth
-                variant="outlined"
-                className={classes.textField}
-                label="Select Assistant"
-                value={values.assistantPartyHead.id}
-                onChange={handleSelectChange('assistantPartyHead')}
+                value={values.userId}
+                onChange={handleSelectChange('userId')}
               >
                 {AllUserData &&
                   AllUserData.map(option => (
@@ -167,17 +121,17 @@ const PartiesDialog = props => {
           ) : (
             <Button
               onClick={() => {
-                dispatchCreateNewPartiesAction(values);
+                dispatchAddEmployeeToPositionAction(values);
               }}
               color="primary"
               variant="contained"
               disabled={!canBeSubmitted()}
             >
-              {newPartiesDialog.type === 'new' ? 'Save' : 'Update'}
+              {addEmployeeToPositionDialog.type === 'new' ? 'Save' : 'Update'}
             </Button>
           )}
           <Button
-            onClick={() => dispatchCloseNewPartiesDialog()}
+            onClick={() => dispatchCloseAddEmployeeToPositionDialogAction()}
             color="primary"
             variant="contained"
           >
@@ -189,29 +143,29 @@ const PartiesDialog = props => {
   );
 };
 
-PartiesDialog.propTypes = {
+EmployeeDialog.propTypes = {
   params: PropTypes.object,
-  dispatchCloseNewPartiesDialog: PropTypes.func,
-  newPartiesDialog: PropTypes.object,
+  dispatchCloseAddEmployeeToPositionDialogAction: PropTypes.func,
+  addEmployeeToPositionDialog: PropTypes.object,
   partyGroupData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   AllUserData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  dispatchCreateNewPartiesAction: PropTypes.func,
+  dispatchAddEmployeeToPositionAction: PropTypes.func,
   loading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: Selectors.makeSelectLoading(),
-  newPartiesDialog: Selectors.makeSelectNewPartiesDialog(),
+  addEmployeeToPositionDialog: Selectors.makeSelectAddEmployeeToPositionDialog(),
   partyGroupData: Selectors.makeSelectPartyGroupData(),
   AllUserData: Selectors.makeSelectAllUsersData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchCloseNewPartiesDialog: () =>
-      dispatch(Actions.closeNewPartiesDialog()),
-    dispatchCreateNewPartiesAction: evt =>
-      dispatch(Actions.createNewParties(evt)),
+    dispatchCloseAddEmployeeToPositionDialogAction: () =>
+      dispatch(Actions.closeAddEmployeeToPositionDialog()),
+    dispatchAddEmployeeToPositionAction: evt =>
+      dispatch(Actions.addEmployeeToPosition(evt)),
     dispatch,
   };
 }
@@ -224,4 +178,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(PartiesDialog);
+)(EmployeeDialog);

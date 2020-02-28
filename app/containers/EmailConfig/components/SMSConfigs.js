@@ -5,21 +5,21 @@ import {
   Grid,
   Card,
   CardContent,
-  Typography,
   TextField,
-  Divider,
   Button,
   FormControl,
   FormHelperText,
   MenuItem,
   Select,
-  InputLabel
 } from '@material-ui/core';
+
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Selectors from '../selectors';
 import * as Actions from '../actions';
+import LoadingIndicator from '../../../components/LoadingIndicator';
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -45,21 +45,37 @@ const SMSConfigs = props => {
 
   const { 
     dispatchGetSmsProviderAction, 
-    smsProviderData
+    smsProviderData,
+    dispatchGetSmsConfigAction,
+    smsConfigData,
+    loading,
   } = props;
 
-  console.log('smsProviderData:- ', smsProviderData);
+  console.log('smsProviderData from component: ', smsProviderData);
+  console.log('smsConfigData from component: ', smsConfigData);
+
+  const [values, setValues] = React.useState({
+    id: ''
+  });
+
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     dispatchGetSmsProviderAction();
+    dispatchGetSmsConfigAction();
   }, []);
+
+
+  if (loading) {
+    return <LoadingIndicator />
+  }
 
   return (
     <React.Fragment>
       SMS Configuration Settings
       <Card className={classes.card} variant="outlined">
         <CardContent>
+
         <FormControl variant="outlined" className={classes.formControl}>
           {/* <InputLabel id="demo-simple-select-outlined-label">
             SMS
@@ -72,21 +88,12 @@ const SMSConfigs = props => {
             // onChange={handleChange}
             // labelWidth={labelWidth}
           >
-            <MenuItem value="oko">
-              <em>None</em>
-            </MenuItem>
-
-            {smsProviderData.map((item) => {
-              <MenuItem 
-                key={item.id}
-                value={item.id}
-              >
-                {item.providerName}
-              </MenuItem>
-            })}
-            
+            {/* {smsProviderData.map((item) => {
+              return <MenuItem value={item.id}>{item.providerName}</MenuItem>
+            })} */}
           </Select>
         </FormControl>
+        
           <Grid container spacing={3} className={classes.formStyle}>
             <Grid item xs={12} md={6} lg={6}>
               <div>
@@ -178,12 +185,15 @@ SMSConfigs.propTypes = {
 const mapStateToProps = createStructuredSelector({
   // loginPage: makeSelectLoginPage(),
   smsProviderData: Selectors.makeSelectSmsProviderData(),
+  smsConfigData: Selectors.makeSelectSmsConfigData(),
+  loading: Selectors.makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     // openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
     dispatchGetSmsProviderAction: evt => dispatch(Actions.getSmsProviderAction(evt)),
+    dispatchGetSmsConfigAction: evt => dispatch(Actions.getSmsConfigAction(evt)),
   };
 }
 

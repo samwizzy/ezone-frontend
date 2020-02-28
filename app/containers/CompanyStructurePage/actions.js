@@ -63,6 +63,7 @@ export function getPartyGroupErrorAction(data) {
 }
 
 export function getSelectedPartyGroupAction(data) {
+  console.log(data, 'position data new');
   return {
     type: Constants.GET_SELECTED_PARTY_GROUP,
     payload: data,
@@ -70,7 +71,6 @@ export function getSelectedPartyGroupAction(data) {
 }
 
 export function createNewPartyGroupAction(data) {
-  console.log(data, 'data new')
   return {
     type: Constants.CREATE_NEW_PARTY_GROUP,
     payload: data,
@@ -198,7 +198,7 @@ export function createNewPositionSuccess(data) {
   };
 }
 
-export function createNewPositionAError(data) {
+export function createNewPositionError(data) {
   return {
     type: Constants.CREATE_NEW_POSITION_ERROR,
     payload: data,
@@ -224,6 +224,59 @@ export function getAllPositionsError(data) {
     payload: data,
   };
 }
+
+export function openAddEmployeeToPositionDialog() {
+  return {
+    type: Constants.OPEN_ADD_EMPLOYEE_TO_POSITION_DIALOG,
+  };
+}
+
+export function closeAddEmployeeToPositionDialog() {
+  return {
+    type: Constants.CLOSE_ADD_EMPLOYEE_TO_POSITION_DIALOG,
+  };
+}
+
+export function addEmployeeToPosition(data) {
+  return {
+    type: Constants.ADD_EMPLOYEE_TO_POSITION,
+    payload: data,
+  };
+}
+
+export function addEmployeeToPositionSuccess(data) {
+  return {
+    type: Constants.ADD_EMPLOYEE_TO_POSITION_SUCCESS,
+    payload: data,
+  };
+}
+
+export function addEmployeeToPositionError(data) {
+  return {
+    type: Constants.ADD_EMPLOYEE_TO_POSITION_ERROR,
+    payload: data,
+  };
+}
+
+// export function getAllEmployees() {
+//   return {
+//     type: Constants.GET_EMPLOYEES,
+//   };
+// }
+
+// export function getAllEmployeesSuccess(data) {
+//   return {
+//     type: Constants.GET_EMPLOYEES_SUCCESS,
+//     payload: data,
+//   };
+// }
+
+// export function getAllEmployeesError(data) {
+//   return {
+//     type: Constants.GET_EMPLOYEES_ERROR,
+//     payload: data,
+//   };
+// }
 
 /** *****************************************************************
  * Organization constants

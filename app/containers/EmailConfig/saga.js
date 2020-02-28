@@ -116,9 +116,7 @@ export function* testConnectionSaga() {
 
 export function* getSmsProviderSaga() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-
   const requestURL = `${BaseUrl}${Endpoints.GetSmsProviderApi}`;
-  console.log('requestURL --> ', requestURL);
 
   try {
     const smsProviderResponse = yield call(request, requestURL, {
@@ -129,12 +127,37 @@ export function* getSmsProviderSaga() {
       }),
     });
 
-    console.log('smsProviderResponse --> ', smsProviderResponse);
     yield put(Actions.getSmsProviderSuccessAction(smsProviderResponse));
 
   } catch (err) {
-    console.log(err, '---> getSMSConfigErrorAction');
     yield put(Actions.getSmsProviderErrorAction(err));
+  }
+}
+
+export function* getSmsConfigSaga() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+  
+  console.log(`currentUser.organisation.orgId-> ${currentUser.organisation.orgId}`)
+
+  const requestURL = `${BaseUrl}${Endpoints.GetSmsConfigApi}/${currentUser.organisation.orgId}`;
+  console.log('getSmsConfigSaga requestURL --> ', requestURL);
+
+  try {
+    const smsConfigResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log('smsConfigResponse --> ', smsConfigResponse);
+    yield put(Actions.getSmsConfigSuccessAction(smsConfigResponse));
+
+  } catch (err) {
+    console.log(err, '---> getSMSConfigErrorAction');
+    yield put(Actions.getSmsConfigErrorAction(err));
   }
 }
 
@@ -146,4 +169,5 @@ export default function* emailConfigSaga() {
   yield takeLatest(Constants.UPDATE_EMAIL_CONFIG, saveEmailConfigSaga);
   yield takeLatest(Constants.TEST_EMAIL_CONNECTION, testConnectionSaga);
   yield takeLatest(Constants.GET_SMS_PROVIDER, getSmsProviderSaga);
+  yield takeLatest(Constants.GET_SMS_CONFIG, getSmsConfigSaga);
 }

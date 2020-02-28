@@ -87,7 +87,6 @@ export function getSmsProviderAction() {
 }
 
 export function getSmsProviderSuccessAction(data) {
-  console.log('getSmsProviderSuccessAction: ', data);
   return {
     type: Constants.GET_SMS_PROVIDER_SUCCESS,
     payload: data,
@@ -103,12 +102,14 @@ export function getSmsProviderErrorAction(data) {
 
 // Get sms configuration 
 export function getSmsConfigAction() {
+  console.log(`getSmsConfigAction()`);
   return {
     type: Constants.GET_SMS_CONFIG,
   };
 }
 
 export function getSmsConfigSuccessAction(data) {
+  console.log(`getSmsConfigSuccessAction: ${data}`);
   return {
     type: Constants.GET_SMS_CONFIG_SUCCESS,
     payload: data,

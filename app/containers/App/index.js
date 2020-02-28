@@ -22,6 +22,7 @@ import ForgotPassword from '../AuthorizationPage/Login/components/ForgotPassword
 import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable';
 import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
 import CompanyStructureParty from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
+import CompanyStructurePosition from '../CompanyStructurePage/CompanyStructure/components/PositionPage';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
@@ -80,10 +81,15 @@ const App = () => {
                 />
                 <PrivateRoute
                   exact
-                  path="/organization/company/structure/:partyGroupId/:partyId"
+                  path="/organization/company/structure/party/:partyGroupId/:partyId"
                   component={CompanyStructureParty}
                 />
-                <PrivateRoute exact path="/employee" component={EmployeePage} />
+                <PrivateRoute
+                  exact
+                  path="/organization/company/structure/position/:partyGroupId/:partyId/:positionId"
+                  component={CompanyStructurePosition}
+                />
+                {/* <PrivateRoute exact path="/employee" component={EmployeePage} /> */}
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute

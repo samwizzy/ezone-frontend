@@ -24,3 +24,9 @@ export const CREATE_NEW_EMPLOYEE_SUCCESS =
   'app/EmployeePage/CREATE_NEW_EMPLOYEE';
 export const CREATE_NEW_EMPLOYEE_ERROR =
   'app/EmployeePage/CREATE_NEW_EMPLOYEE_ERROR';
+
+export const GET_ALL_EMPLOYEES = 'app/EmployeePage/GET_ALL_EMPLOYEES';
+export const GET_ALL_EMPLOYEES_SUCCESS =
+  'app/EmployeePage/GET_ALL_EMPLOYEES_EMPLOYEE';
+export const GET_ALL_EMPLOYEES_ERROR =
+  'app/EmployeePage/GET_ALL_EMPLOYEES_ERROR';

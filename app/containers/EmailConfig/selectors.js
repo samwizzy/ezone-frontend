@@ -45,6 +45,12 @@ const makeSelectSmsProviderData = () =>
     subState => subState.smsProviderData,
 );
 
+const makeSelectSmsConfigData = () =>
+  createSelector(
+    selectEmailConfigDomain,
+    subState => subState.smsConfigData,
+);
+
 const makeSelectLoading = () =>
   createSelector(
     selectEmailConfigDomain,
@@ -58,6 +64,7 @@ export {
   makeSelectUserEmailConfigPostData,
   makeSelectUserTestConnectionData,
   makeSelectSmsProviderData,
+  makeSelectSmsConfigData,
   makeSelectLoading
 };
 

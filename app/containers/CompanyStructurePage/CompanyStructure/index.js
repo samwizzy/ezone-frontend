@@ -28,7 +28,7 @@ import RoleDialog from './components/RoleDialog';
 import * as Actions from '../actions';
 
 export function CompanyStructurePage(props) {
-  const { dispatchGetAllUsersAction, dispatchGetPartyGroups } = props;
+  const { dispatchGetPartyGroups } = props;
 
   useInjectReducer({ key: 'companyStructurePage', reducer });
   useInjectSaga({ key: 'companyStructurePage', saga });

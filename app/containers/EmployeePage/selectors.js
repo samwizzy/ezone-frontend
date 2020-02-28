@@ -45,6 +45,12 @@ const makeSelectCreateNewEmployeeData = () =>
     subState => subState.createNewEmployeeData,
   );
 
+const makeSelectGetAllEmployees = () =>
+  createSelector(
+    selectEmployeePageDomain,
+    subState => subState.getAllEmployees,
+  );
+
 export default makeSelectEmployeePage;
 export {
   selectEmployeePageDomain,
@@ -52,4 +58,5 @@ export {
   makeSelectError,
   makeSelectEmployeeDialog,
   makeSelectCreateNewEmployeeData,
+  makeSelectGetAllEmployees,
 };

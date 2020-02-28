@@ -88,6 +88,7 @@ const EmployeeList = props => {
     openNewEmployeeDialogAction,
     openEditEmployeeDialogAction,
     openViewEmployeeDialogAction,
+    getAllEmployees,
   } = props;
 
   const datas = [
@@ -120,6 +121,8 @@ const EmployeeList = props => {
     },
   ];
 
+  console.log(getAllEmployees, 'getAllEmployees');
+
   const columns = [
     {
       name: 'Id',
@@ -140,32 +143,32 @@ const EmployeeList = props => {
       },
     },
     {
-      name: 'name',
-      label: 'Name',
+      name: 'firstName',
+      label: 'First Name',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'company',
-      label: 'Branch',
+      name: 'lastName',
+      label: 'Last Name',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'city',
-      label: 'Department',
+      name: 'emailAddress',
+      label: 'Email Address',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'state',
-      label: 'Role',
+      name: 'phoneNumber',
+      label: 'Phone Number',
       options: {
         filter: true,
         sort: false,
@@ -189,94 +192,11 @@ const EmployeeList = props => {
       },
     },
     {
-      name: 'desc',
-      label: 'E-mail',
+      name: 'gender',
+      label: 'Gender',
       options: {
         filter: true,
         sort: false,
-      },
-    },
-    {
-      name: 'desc',
-      label: 'Apps',
-      options: {
-        filter: true,
-        sort: false,
-      },
-    },
-    {
-      name: 'id',
-      label: 'Groups',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
-      },
-    },
-    {
-      name: 'id',
-      label: 'Last Login',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
-      },
-    },
-    {
-      name: 'id',
-      label: 'Status',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
       },
     },
     {
@@ -336,10 +256,15 @@ const EmployeeList = props => {
     return <List component={LoadingIndicator} />;
   }
 
+  // if (loading) {
+  //   return <LoadingIndicator />;
+  // }
+
   return (
     <React.Fragment>
       <MUIDataTable
         title="All Employees"
+        // data={getAllEmployees}
         data={datas}
         columns={columns}
         options={options}
@@ -353,10 +278,12 @@ EmployeeList.propTypes = {
   openNewEmployeeDialogAction: PropTypes.func,
   openEditEmployeeDialogAction: PropTypes.func,
   openViewEmployeeDialogAction: PropTypes.func,
+  getAllEmployees: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: Selectors.makeSelectLoading(),
+  getAllEmployees: Selectors.makeSelectGetAllEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {

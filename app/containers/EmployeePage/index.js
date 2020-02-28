@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -15,14 +15,21 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectEmployeePage from './selectors';
+import * as Actions from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import TabsPage from './components/TabsPage';
 import EmployeeDialog from './components/EmployeeDialog';
+import EmployeeList from './components/EmployeeList';
 
-export function EmployeePage() {
+export function EmployeePage(props) {
   useInjectReducer({ key: 'employeePage', reducer });
   useInjectSaga({ key: 'employeePage', saga });
+
+  const { dispatchGetAllEmployeesAction } = props;
+
+  useEffect(() => {
+    dispatchGetAllEmployeesAction();
+  }, []);
 
   return (
     <div>
@@ -30,13 +37,14 @@ export function EmployeePage() {
         <title>EmployeePage</title>
         <meta name="description" content="Description of EmployeePage" />
       </Helmet>
-      <TabsPage />
+      <EmployeeList />
       <EmployeeDialog />
     </div>
   );
 }
 
 EmployeePage.propTypes = {
+  dispatchGetAllEmployeesAction: PropTypes.func,
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -46,6 +54,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatchGetAllEmployeesAction: () => dispatch(Actions.getAllEmployees()),
     dispatch,
   };
 }
