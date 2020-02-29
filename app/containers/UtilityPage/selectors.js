@@ -27,22 +27,58 @@ const makeSelectLoading = () =>
     subState => subState.loading,
   );
 
+const makeSelectData = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.data,
+  );
+
+const makeSelectTasks = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.tasks,
+  );    
+
+const makeSelectFiles = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.tasks,
+  );    
+
+const makeSelectFileUploadDialog = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.fileUploadDialog,
+  );
+
 const makeSelectError = () =>
   createSelector(
     selectUtilityPageDomain,
     subState => subState.error,
   );
 
-const makeSelectEditColorDialog = () =>
+const makeSelectShareFileDialog = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.colorDialog,
+    subState => subState.shareFileDialog,
   );
 
-const makeSelectEditCompanyDialog = () =>
+const makeSelectNewFileDialog = () =>
   createSelector(
     selectUtilityPageDomain,
-    subState => subState.companyDialog,
+    subState => subState.fileDialog,
+  );
+
+const makeSelectNewTaskDialog = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.taskDialog,
+  );
+
+const makeSelectPreviewTaskDialog = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.previewTaskDialog,
   );
 
 const makeSelectBranchDialog = () =>
@@ -57,27 +93,19 @@ const makeSelectDepartmentDialog = () =>
     subState => subState.departmentDialog,
   );
 
-// const makeSelectNewBranchDialog = () =>
-//   createSelector(
-//     selectUtilityPageDomain,
-//     subState => subState.branchDialog,
-//   );
-
-// const makeSelectEditBranchDialog = () =>
-//   createSelector(
-//     selectUtilityPageDomain,
-//     subState => subState.branchDialog,
-//   );
-
 export default makeSelectUtilityPage;
 export {
   selectUtilityPageDomain,
   makeSelectLoading,
+  makeSelectData,
+  makeSelectTasks,
+  makeSelectFiles,
+  makeSelectFileUploadDialog,
+  makeSelectNewTaskDialog,
+  makeSelectPreviewTaskDialog,
+  makeSelectShareFileDialog,
   makeSelectError,
-  makeSelectEditColorDialog,
-  makeSelectEditCompanyDialog,
+  makeSelectNewFileDialog,
   makeSelectBranchDialog,
-  makeSelectDepartmentDialog,
-  // makeSelectNewBranchDialog,
-  // makeSelectEditBranchDialog,
+  makeSelectDepartmentDialog
 };

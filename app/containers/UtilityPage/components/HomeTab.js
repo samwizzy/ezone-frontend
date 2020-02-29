@@ -17,7 +17,7 @@ import AppIcon1 from '../../../images/app-2.svg';
 import AcctIcon from '../../../images/acctIcon.svg';
 import StoreIcon from '../../../images/storeIcon.svg';
 import CRMIcon from '../../../images/crmIcon.svg';
-import ChatBox from './ChatBox';
+import ChatBox from './../ChatApp/ChatBox';
 import Calendar from './Calendar';
 
 const useStyles = makeStyles(theme => ({
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   button: {
     padding: theme.spacing(1, 4),
     background: theme.palette.primary.main,
-    borderRadius: '8px'
+    borderRadius: '20px'
   },
   grid: {
     flexGrow: 1,
@@ -67,17 +67,15 @@ const useStyles = makeStyles(theme => ({
 
 const TopSection = props => {
   const classes = useStyles();
-
-  const { openEditColorDialog, openEditCompanyDialog } = props;
+  // const { } = props; 
+  
   return (
     <React.Fragment>
         <div>
-
           <Grid
             justify="space-between"
             container
             className={classes.grid}
-            spacing={2}
           >
 
             <Grid item xs={12} style={{border: '1px dotted #f8f8f8'}}>
@@ -95,7 +93,7 @@ const TopSection = props => {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} sm={8} style={{border: '1px dotted #f8f8f8'}}>
+            <Grid item xs={12} md={8}>
               <Grid container justify="space-between" className={classes.grid}>
                 <Grid item sm={6}>
                   <Typography variant="h6" component="h3">My Apps</Typography>
@@ -135,7 +133,7 @@ const TopSection = props => {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} md={4}>
               {/* <Calendar /> */}
               <ChatBox />
             </Grid>
@@ -147,18 +145,15 @@ const TopSection = props => {
 };
 
 TopSection.propTypes = {
-  openEditColorDialog: PropTypes.func,
-  openEditCompanyDialog: PropTypes.func,
+  // openEditCompanyDialog: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  // loginPage: makeSelectLoginPage(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
-    openEditColorDialog: evt => dispatch(Actions.openEditColorDialog(evt)),
+    // openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
   };
 }
 
