@@ -158,7 +158,7 @@ const CompanyStructure = props => {
                 aria-labelledby="nested-list-subheader"
                 className={classes.list}
               >
-                {partyGroupData.map((data, index) => (
+                {partyGroupData.map(data => (
                   <ListItem
                     button
                     key={data.id}

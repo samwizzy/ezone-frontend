@@ -50,11 +50,8 @@ const PartyDialog = props => {
     dispatchCreateNewPartyAction,
   } = props;
 
-  console.log(selectedPartyGroupData, 'selectedPartyGroupData party');
-  console.log(selectedPartyGroupData.id, 'selectedPartyGroupData party');
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    // partyGroupId: selectedPartyGroupData.id,
     partyGroupId: '',
     partyHead: { id: '' },
     assistantPartyHead: { id: '' },
@@ -73,20 +70,9 @@ const PartyDialog = props => {
     });
   };
 
-  const handleChangeForPartyGroupId = event => {
-    setValues({ ...values, partyGroupId: event.id });
-  };
-
   const canBeSubmitted = () => {
-    const {
-      // partyGroupId,
-      partyHead,
-      assistantPartyHead,
-      name,
-      description,
-    } = values;
+    const { partyHead, assistantPartyHead, name, description } = values;
     return (
-      // partyGroupId !== '' &&
       partyHead !== null &&
       assistantPartyHead !== null &&
       name !== '' &&
@@ -94,8 +80,6 @@ const PartyDialog = props => {
     );
   };
 
-  console.log(values, 'values');
-  console.log(partyGroupData, 'partyGroupData');
   return (
     <div>
       <Dialog
@@ -114,34 +98,6 @@ const PartyDialog = props => {
         <DialogContent>
           {newPartyDialog.type === 'new' ? (
             <div>
-              {/* <TextField
-                id="select-group"
-                select
-                fullWidth
-                className={classes.textField}
-                variant="outlined"
-                label="Select Group"
-                value={values.partyGroupId}
-                name="partyGroupId"
-                onChange={handleChange('partyGroupId')}
-              >
-                {partyGroupData &&
-                  partyGroupData.map(option => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {option.name}
-                    </MenuItem>
-                  ))}
-              </TextField> */}
-
-              <TextField
-                id="outlined-read-only-input"
-                label="Read Only"
-                defaultValue={selectedPartyGroupData.id}
-                InputProps={{
-                  readOnly: true,
-                }}
-                variant="outlined"
-              />
               <TextField
                 id="subgroup-name"
                 label="Name"
@@ -207,18 +163,17 @@ const PartyDialog = props => {
           {loading ? (
             <LoadingIndicator />
           ) : (
-              <Button
-                onClick={() => {
-                  dispatchCreateNewPartyAction(values);
-                  handleChangeForPartyGroupId(selectedPartyGroupData);
-                }}
-                color="primary"
-                variant="contained"
-                disabled={!canBeSubmitted()}
-              >
-                {newPartyDialog.type === 'new' ? 'Save' : 'Update'}
-              </Button>
-            )}
+            <Button
+              onClick={() => {
+                dispatchCreateNewPartyAction(values)
+              }}
+              color="primary"
+              variant="contained"
+              disabled={!canBeSubmitted()}
+            >
+              {newPartyDialog.type === 'new' ? 'Save' : 'Update'}
+            </Button>
+          )}
           <Button
             onClick={() => dispatchCloseNewPartyDialog()}
             color="primary"
