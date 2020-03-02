@@ -41,6 +41,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const PartyDialog = props => {
   const {
+    selectedPartyGroupData,
     loading,
     partyGroupData,
     newPartyDialog,
@@ -70,17 +71,10 @@ const PartyDialog = props => {
   };
 
   const canBeSubmitted = () => {
-    const {
-      partyGroupId,
-      partyHead,
-      assistantPartyHead,
-      name,
-      description,
-    } = values;
+    const { partyHead, assistantPartyHead, name, description } = values;
     return (
-      partyGroupId !== '' &&
-      partyHead !== '' &&
-      assistantPartyHead !== '' &&
+      partyHead !== null &&
+      assistantPartyHead !== null &&
       name !== '' &&
       description !== ''
     );
@@ -104,25 +98,6 @@ const PartyDialog = props => {
         <DialogContent>
           {newPartyDialog.type === 'new' ? (
             <div>
-              <TextField
-                id="select-group"
-                select
-                fullWidth
-                className={classes.textField}
-                variant="outlined"
-                label="Select Group"
-                value={values.partyGroupId}
-                name="partyGroupId"
-                onChange={handleChange('partyGroupId')}
-              >
-                {partyGroupData &&
-                  partyGroupData.map(option => (
-                    <MenuItem key={option.id} value={option.id}>
-                      {option.name}
-                    </MenuItem>
-                  ))}
-              </TextField>
-
               <TextField
                 id="subgroup-name"
                 label="Name"
@@ -190,7 +165,7 @@ const PartyDialog = props => {
           ) : (
             <Button
               onClick={() => {
-                dispatchCreateNewPartyAction(values);
+                dispatchCreateNewPartyAction(values)
               }}
               color="primary"
               variant="contained"
@@ -215,10 +190,11 @@ const PartyDialog = props => {
 PartyDialog.propTypes = {
   dispatchCloseNewPartyDialog: PropTypes.func,
   newPartyDialog: PropTypes.object,
-  partyGroupData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  partyGroupData: PropTypes.array,
   AllUserData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   dispatchCreateNewPartyAction: PropTypes.func,
   loading: PropTypes.bool,
+  selectedPartyGroupData: PropTypes.oneOfType(PropTypes.object, PropTypes.bool),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -226,6 +202,7 @@ const mapStateToProps = createStructuredSelector({
   newPartyDialog: Selectors.makeSelectNewPartyDialog(),
   partyGroupData: Selectors.makeSelectPartyGroupData(),
   AllUserData: Selectors.makeSelectAllUsersData(),
+  selectedPartyGroupData: Selectors.makeSelectSelectedPartyGroupData(),
 });
 
 function mapDispatchToProps(dispatch) {

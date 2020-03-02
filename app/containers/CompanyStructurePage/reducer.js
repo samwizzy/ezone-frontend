@@ -15,11 +15,11 @@ export const initialState = {
   createNewPartiesData: false,
   createNewPositionData: false,
   createNewPartyGroupData: false,
-  partyGroupData: false,
+  partyGroupData: [],
   loading: false,
   error: false,
   selectedPartyGroupData: false,
-  getAllUsersData: false,
+  getAllUsersData: [],
   newPartyGroupDialog: {
     type: 'new',
     props: {
@@ -256,7 +256,6 @@ const companyStructurePageReducer = (state = initialState, action) =>
           ...state,
           loading: false,
           error: false,
-          // getAllUsersData: action.payload,
         };
       }
       case Constants.CREATE_NEW_PARTY_ERROR: {

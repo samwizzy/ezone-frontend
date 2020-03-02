@@ -158,10 +158,10 @@ const CompanyStructure = props => {
                 aria-labelledby="nested-list-subheader"
                 className={classes.list}
               >
-                {partyGroupData.map((data, index) => (
+                {partyGroupData.map(data => (
                   <ListItem
                     button
-                    key={index}
+                    key={data.id}
                     // selected={selectedIndex === 0}
                     onClick={() => DispatchgetSelectedPartyGroupAction(data)}
                   >
@@ -214,14 +214,16 @@ const CompanyStructure = props => {
 
               <Divider />
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.partyButton}
-                  onClick={() => dispatchOpenNewPartyAction()}
-                >
-                  <Add /> Add New Party
-                </Button>
+                {selectedPartyGroupData && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.partyButton}
+                    onClick={() => dispatchOpenNewPartyAction()}
+                  >
+                    <Add /> Add New Party
+                  </Button>
+                )}
               </Grid>
               <Table
                 className={classes.table}
