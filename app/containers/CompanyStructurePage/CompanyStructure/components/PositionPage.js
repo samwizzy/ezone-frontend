@@ -143,14 +143,13 @@ const PositionPage = props => {
     for (let i = 0; i < partyGroupData.length; i++) {
       if (partyGroupData[i].id == params.partyGroupId) {
         for (let k = 0; k < partyGroupData[i].parties.length; k++) {
-          console.log(partyGroupData[i].parties[k].id, params.partyId, 'partyGroupData[i].parties', 'params.partyId')
-          // if (partyGroupData[i].parties[k].id == params.partyId) {
-          //   for ( let e = 0; e < partyGroupData[i].parties[k].positions.length; e++ ) {
-          //     if ( partyGroupData[i].parties[k].positions[e].id == params.positionId ) {
-          //       party = partyGroupData[i].parties[k].positions[e];
-          //     }
-          //   }
-          // }
+          if (partyGroupData[i].parties[k].id == params.partyId) {
+            for ( let e = 0; e < partyGroupData[i].parties[k].positions.length; e++ ) {
+              if ( partyGroupData[i].parties[k].positions[e].id == params.positionId ) {
+                party = partyGroupData[i].parties[k].positions[e];
+              }
+            }
+          }
         }
       }
     }
@@ -158,9 +157,9 @@ const PositionPage = props => {
 
   console.log(partyGroupData, 'partyGroupData');
 
-  // if (party === undefined) {
-  //   return <LoadingIndicator />;
-  // }
+  if (party === undefined) {
+    return <LoadingIndicator />;
+  }
 
   // console.log(allPositions, 'allPositions');
   console.log(party, 'selectedPartyGroupData party');
@@ -213,7 +212,7 @@ const PositionPage = props => {
               </Paper>
             </Grid>
           )}
-          <Grid item xs={12} md={12} lg={12}>
+          <Grid item xs={10} md={10} lg={10}>
             <Paper className={classes.paper}>
               <List
                 component="nav"

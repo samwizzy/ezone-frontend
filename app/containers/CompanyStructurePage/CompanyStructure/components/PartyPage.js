@@ -336,7 +336,7 @@ const PartyPage = props => {
                               <Link
                                 href={`/organization/company/structure/position/${
                                   params.partyGroupId
-                                }/${selectedPartyGroupData.id}/${position.id}`}
+                                }/${params.partyId}/${position.id}`}
                               >
                                 {position.name}
                                 {/* <div>{party.name}</div> */}

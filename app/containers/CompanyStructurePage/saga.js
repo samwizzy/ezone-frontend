@@ -210,7 +210,8 @@ export function* createNewPosition() {
     });
 
     yield put(Actions.createNewPositionSuccess(createNewPositionResponse));
-    yield put(Actions.getAllPositions());
+    yield put(Actions.getPartyGroupAction());
+    // yield put(Actions.getAllPositions());
     yield put(Actions.closeNewPositionDialog());
     yield put(
       AppActions.openSnackBar({
@@ -292,7 +293,7 @@ export function* AddEmployeeToPosition() {
     yield put(
       Actions.addEmployeeToPositionSuccess(AddEmployeeToPositionResponse),
     );
-    // yield put(Actions.getAllPositions());
+    yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeAddEmployeeToPositionDialog());
     yield put(
       AppActions.openSnackBar({
