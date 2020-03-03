@@ -37,13 +37,13 @@ const makeSelectTasks = () =>
   createSelector(
     selectUtilityPageDomain,
     subState => subState.tasks,
-  );    
+  );
 
 const makeSelectFiles = () =>
   createSelector(
     selectUtilityPageDomain,
     subState => subState.tasks,
-  );    
+  );
 
 const makeSelectFileUploadDialog = () =>
   createSelector(
@@ -93,6 +93,12 @@ const makeSelectDepartmentDialog = () =>
     subState => subState.departmentDialog,
   );
 
+const makeSelectAllEmployees = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.getAllEmployees,
+  );
+
 export default makeSelectUtilityPage;
 export {
   selectUtilityPageDomain,
@@ -107,5 +113,6 @@ export {
   makeSelectError,
   makeSelectNewFileDialog,
   makeSelectBranchDialog,
-  makeSelectDepartmentDialog
+  makeSelectDepartmentDialog,
+  makeSelectAllEmployees,
 };

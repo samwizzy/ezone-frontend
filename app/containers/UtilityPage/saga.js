@@ -3,17 +3,18 @@ import qs from 'query-string';
 import request from '../../utils/request';
 
 import { BaseUrl } from '../../components/BaseUrl';
-import {makeSelectAccessToken, makeSelectCurrentUser} from './../App/selectors';
+// import {AppSelectors.makeSelectAccessToken, AppSelectors.makeSelectCurrentUser} from "../App/selectors";
+import * as AppSelectors from '../App/selectors';
 // import * as Selectors from './selectors';
 import * as Actions from './actions';
 import * as AppActions from '../App/actions';
 import * as Constants from './constants';
 import * as Endpoints from '../../components/Endpoints';
 
-export function* addUtilityFile({type, payload}) {
-  console.log(payload, "checking data from saga")
-  const accessToken = yield select(makeSelectAccessToken());
-  const user = yield select(makeSelectCurrentUser());
+export function* addUtilityFile({ type, payload }) {
+  console.log(payload, 'checking data from saga');
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const user = yield select(AppSelectors.makeSelectCurrentUser());
   const requestURL = `${BaseUrl}${Endpoints.CreateUtilityFilesApi}`;
   payload.orgId = user.organisation.orgId;
 
@@ -27,21 +28,21 @@ export function* addUtilityFile({type, payload}) {
       }),
     });
 
-    console.log(createdFileResponse, "createdFileResponse")
+    console.log(createdFileResponse, 'createdFileResponse');
 
     yield put(Actions.createUtilityFileSuccess(createdFileResponse));
   } catch (err) {
     yield put(Actions.getUtilityFilesError(err));
-    console.error(err, "I got the error")
+    console.error(err, 'I got the error');
   }
 }
 
-export function* addUtilityTasks({type, payload}) {
-  const accessToken = yield select(makeSelectAccessToken());
-  const user = yield select(makeSelectCurrentUser());
+export function* addUtilityTasks({ type, payload }) {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const user = yield select(AppSelectors.makeSelectCurrentUser());
   const requestURL = `${BaseUrl}${Endpoints.CreateUtilityTasksApi}`;
   payload.orgId = user.organisation.orgId;
-  console.log(payload, "Task Payloader")
+  console.log(payload, 'Task Payloader');
   try {
     const createdTasksResponse = yield call(request, requestURL, {
       method: 'POST',
@@ -52,7 +53,7 @@ export function* addUtilityTasks({type, payload}) {
       }),
     });
 
-    console.log(createdTasksResponse, "createdTasksResponse")
+    console.log(createdTasksResponse, 'createdTasksResponse');
 
     yield put(Actions.createUtilityFileSuccess(createdTasksResponse));
     yield put(
@@ -64,17 +65,19 @@ export function* addUtilityTasks({type, payload}) {
     );
   } catch (err) {
     yield put(Actions.getUtilityTasksError(err));
-    console.error(err, "I got the error")
+    console.error(err, 'I got the error');
   }
 }
 
 export function* getUtilityTasks() {
-  const accessToken = yield select(makeSelectAccessToken());
-  const user = yield select(makeSelectCurrentUser());
-  const requestURL = `${BaseUrl}${Endpoints.GetUtilityTasksApi}/${user.organisation.orgId}`;
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const user = yield select(AppSelectors.makeSelectCurrentUser());
+  const requestURL = `${BaseUrl}${Endpoints.GetUtilityTasksApi}/${
+    user.organisation.orgId
+  }`;
 
-  console.log(accessToken, "accessToken")
-  console.log(user, "Current Users")
+  console.log(accessToken, 'accessToken');
+  console.log(user, 'Current Users');
 
   try {
     const utilityTasksResponse = yield call(request, requestURL, {
@@ -85,22 +88,24 @@ export function* getUtilityTasks() {
       }),
     });
 
-    console.log(utilityTasksResponse, "utilityTasksResponse")
+    console.log(utilityTasksResponse, 'utilityTasksResponse');
 
     yield put(Actions.getUtilityTasksSuccess(utilityTasksResponse));
   } catch (err) {
     // yield put(Actions.getUtilityTasksError(err));
-    console.error(err, "I got the error")
+    console.error(err, 'I got the error');
   }
 }
 
 export function* getUtilityFiles() {
-  const accessToken = yield select(makeSelectAccessToken());
-  const user = yield select(makeSelectCurrentUser());
-  const requestURL = `${BaseUrl}${Endpoints.GetUtilityFilesApi}/${user.organisation.id}`;
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const user = yield select(AppSelectors.makeSelectCurrentUser());
+  const requestURL = `${BaseUrl}${Endpoints.GetUtilityFilesApi}/${
+    user.organisation.id
+  }`;
 
-  console.log(accessToken, "accessToken")
-  console.log(user, "Current Users")
+  console.log(accessToken, 'accessToken');
+  console.log(user, 'Current Users');
 
   try {
     const utilityFilesResponse = yield call(request, requestURL, {
@@ -111,11 +116,34 @@ export function* getUtilityFiles() {
       }),
     });
 
-    console.log(utilityFilesResponse, "utilityFilesResponse")
+    console.log(utilityFilesResponse, 'utilityFilesResponse');
 
     yield put(Actions.getUtilityFiles(utilityFilesResponse));
   } catch (err) {
     yield put(Actions.getUtilityFilesError(err));
+  }
+}
+
+export function* getAllUsers() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+
+  const requestURL = `${BaseUrl}${Endpoints.GetAllUsersApi}/${
+    currentUser.organisation.orgId
+  }`;
+
+  try {
+    const getAllUsersResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    yield put(Actions.getAllUsersSuccess(getAllUsersResponse));
+  } catch (err) {
+    yield put(Actions.getAllUsersError(err));
   }
 }
 
@@ -126,4 +154,5 @@ export default function* UtilityPageSaga() {
   yield takeLatest(Constants.GET_UTILITY_FILES, getUtilityFiles);
   yield takeLatest(Constants.CREATE_UTILITY_TASKS, addUtilityTasks);
   yield takeLatest(Constants.CREATE_UTILITY_FILES, addUtilityFile);
+  yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
 }

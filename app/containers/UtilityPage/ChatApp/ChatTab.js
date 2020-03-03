@@ -11,20 +11,14 @@ import {
   Paper,
   TextField,
 } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames';
 import Add from '@material-ui/icons/Add';
 import * as Actions from '../actions';
-import * as EmployeeActions from '../../UsersPage/actions';
-import * as EmployeeSelectors from '../../UsersPage/selectors';
- '../../UsersPage/selectors';
-// import * as EmployeeSelectors from '../../UsersPage/selectors';
-import EmployeeReducer from '../../UsersPage/reducer'
-import EmployeeSaga from '../../UsersPage/saga'
+import * as Selectors from '../selectors';
 import UserChat from './components/UserChat';
 import NoAvailableChats from './components/NoAvailableChats';
 import ChatHeader from './components/ChatHeader';
@@ -146,15 +140,11 @@ function a11yProps(index) {
 }
 
 const ChatTab = props => {
-  useInjectReducer({ key: 'utilityPage', reducer });
-  useInjectSaga({ key: 'utilityPage', saga });
-
   const { dispatchGetAllEmployees, allEmployees } = props;
   useEffect(() => {
     dispatchGetAllEmployees();
   }, []);
 
-  console.log(allEmployees, 'allEmployees');
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
 
@@ -180,6 +170,11 @@ const ChatTab = props => {
     // return (i === props.chat.dialog.length - 1 || (props.chat.dialog[i + 1] && props.chat.dialog[i + 1].who !== item.who));
   };
 
+  const handleEmployeeChange = (event, vl) => {
+    console.log(event, 'event');
+    console.log(vl, 'value');
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -197,23 +192,39 @@ const ChatTab = props => {
                     padding: '3px 7px',
                   }}
                 >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="chat"
-                    label="Search Chat"
-                    placeholder="Is the work done?"
-                    name="chat"
-                    size="small"
-                    InputProps={{
-                      className: classes.input,
-                    }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
+                  <Autocomplete
+                    id="combo-box-demo"
+                    options={allEmployees}
+                    getOptionLabel={option => option.firstName}
+                    style={{ width: 800 }}
+                    onChange={(evt, ve) => handleEmployeeChange(evt, ve)}
+                    renderInput={params => (
+                      <TextField
+                        {...params}
+                        label="Search contacts"
+                        variant="outlined"
+                        placeholder="Search Contacts"
+                        fullWidth
+                      />
+                    )}
                   />
+                  {/* <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="chat"
+                      label="Search Chat"
+                      placeholder="Is the work done?"
+                      name="chat"
+                      size="small"
+                      InputProps={{
+                        className: classes.input,
+                      }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    /> */}
                   <IconButton>
                     <Add />
                   </IconButton>
@@ -302,12 +313,12 @@ ChatTab.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  allEmployees: EmployeeSelectors.makeSelectGetAllEmployees(),
+  allEmployees: Selectors.makeSelectAllEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
+    dispatchGetAllEmployees: () => dispatch(Actions.getAllUsers()),
   };
 }
 
