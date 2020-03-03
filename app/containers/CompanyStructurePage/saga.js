@@ -45,7 +45,7 @@ export function* createNewPartyGroupSaga() {
   const newData = {
     name,
     description,
-    organisation: { orgId: currentUser.organisation.orgId }, // TODO: user object clear from store
+    // organisation: { orgId: currentUser.organisation.orgId }, // TODO: user object clear from store
   };
 
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
@@ -60,7 +60,9 @@ export function* createNewPartyGroupSaga() {
       }),
     });
 
-    yield put(Actions.createNewPartyGroupSuccessAction(userPartyGroupResponse));
+    yield put(
+      Actions.createNewPartyGroupSuccessAction(createPartyGroupResponse),
+    );
     yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeNewPartyGroupDialog());
     yield put(
@@ -110,8 +112,11 @@ export function* createNewParty() {
   const createNewPartyData = yield select(
     Selectors.makeSelectCreateNewPartyData(),
   );
+  const selectedPartyGroupData = yield select(
+    Selectors.makeSelectSelectedPartyGroupData(),
+  );
 
-  console.log(createNewPartyData, 'createNewPartyData')
+  createNewPartyData.partyGroupId = selectedPartyGroupData.id;
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyApi}`;
 
   try {
@@ -148,7 +153,6 @@ export function* createNewParty() {
 
 export function* createNewParties() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const createNewPartiesData = yield select(
     Selectors.makeSelectCreateNewPartiesData(),
   );
@@ -166,7 +170,7 @@ export function* createNewParties() {
     });
 
     yield put(Actions.createNewPartiesSuccess(createNewPartiesResponse));
-    // yield put(Actions.getPartyGroupAction());
+    yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeNewPartiesDialog());
     yield put(
       AppActions.openSnackBar({
@@ -189,7 +193,6 @@ export function* createNewParties() {
 
 export function* createNewPosition() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const createNewPositionData = yield select(
     Selectors.makeSelectCreateNewPositionData(),
   );
@@ -207,7 +210,8 @@ export function* createNewPosition() {
     });
 
     yield put(Actions.createNewPositionSuccess(createNewPositionResponse));
-    yield put(Actions.getAllPositions());
+    yield put(Actions.getPartyGroupAction());
+    // yield put(Actions.getAllPositions());
     yield put(Actions.closeNewPositionDialog());
     yield put(
       AppActions.openSnackBar({
@@ -270,12 +274,10 @@ export function* getAllPosition() {
 
 export function* AddEmployeeToPosition() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const AddEmployeeToPositionData = yield select(
     Selectors.makeSelectAddEmployeeToPositionData(),
   );
 
-  console.log(AddEmployeeToPositionData, 'AddEmployeeToPositionData')
   const requestURL = `${BaseUrl}${Endpoints.AddNewEmployeeToPositionApi}`;
 
   try {
@@ -288,11 +290,10 @@ export function* AddEmployeeToPosition() {
       }),
     });
 
-    console.log(AddEmployeeToPositionResponse, 'AddEmployeeToPositionResponse')
     yield put(
       Actions.addEmployeeToPositionSuccess(AddEmployeeToPositionResponse),
     );
-    // yield put(Actions.getAllPositions());
+    yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeAddEmployeeToPositionDialog());
     yield put(
       AppActions.openSnackBar({

@@ -9,6 +9,7 @@ import * as Actions from './actions';
 import * as Constants from './constants';
 
 export function* getAllEmployees() {
+  console.log('saga called')
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
   const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
 
@@ -24,6 +25,8 @@ export function* getAllEmployees() {
         'Content-Type': 'application/json',
       }),
     });
+
+    console.log(getAllEmployeesResponse, 'getAllEmployeesResponse');
 
     yield put(Actions.getAllEmployeesSuccess(getAllEmployeesResponse));
   } catch (err) {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   IconButton,
@@ -14,6 +14,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import * as Actions from '../actions';
+import * as EmployeeActions from '../../UsersPage/actions';
 import HomeTab from './HomeTab';
 import ChatTab from './../ChatApp/ChatTab';
 import TasksList from './../TasksApp/TasksList';
@@ -78,6 +79,12 @@ function TabsPage(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  const { dispatchGetAllEmployees } = props;
+
+  useEffect(() => {
+    dispatchGetAllEmployees();
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -131,6 +138,7 @@ TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
+  dispatchGetAllEmployees: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -140,6 +148,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getUtilityTasks: evt => dispatch(Actions.getUtilityTasks(evt)),
+    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
   };
 }
 

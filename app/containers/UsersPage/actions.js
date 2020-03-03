@@ -6,10 +6,9 @@
 
 import * as Constants from './constants';
 
-export function getAllEmployees(data) {
+export function getAllEmployees() {
   return {
     type: Constants.GET_ALL_EMPLOYEES,
-    payload: data,
   };
 }
 

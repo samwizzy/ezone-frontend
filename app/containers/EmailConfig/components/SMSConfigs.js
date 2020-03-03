@@ -157,6 +157,12 @@ const SMSConfigs = props => {
             </Grid>
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
+            <Button 
+              variant="outlined" 
+              color="primary"
+            >
+              Test Sample Message
+            </Button>
             <Button
               variant="contained"
               color="primary"

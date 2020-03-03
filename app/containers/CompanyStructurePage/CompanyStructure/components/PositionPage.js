@@ -138,27 +138,14 @@ const PositionPage = props => {
   }, []);
   const classes = useStyles();
 
-  console.log(partyGroupData, 'partyGroupData');
-
-  // if (loading) {
-  //   return <LoadingIndicator />;
-  // }
-
   let party;
   if (partyGroupData) {
     for (let i = 0; i < partyGroupData.length; i++) {
       if (partyGroupData[i].id == params.partyGroupId) {
         for (let k = 0; k < partyGroupData[i].parties.length; k++) {
           if (partyGroupData[i].parties[k].id == params.partyId) {
-            for (
-              let e = 0;
-              e < partyGroupData[i].parties[k].positions.length;
-              e++
-            ) {
-              if (
-                partyGroupData[i].parties[k].positions[e].id ==
-                params.positionId
-              ) {
+            for ( let e = 0; e < partyGroupData[i].parties[k].positions.length; e++ ) {
+              if ( partyGroupData[i].parties[k].positions[e].id == params.positionId ) {
                 party = partyGroupData[i].parties[k].positions[e];
               }
             }
@@ -168,7 +155,9 @@ const PositionPage = props => {
     }
   }
 
-  if (!party) {
+  console.log(partyGroupData, 'partyGroupData');
+
+  if (party === undefined) {
     return <LoadingIndicator />;
   }
 
@@ -204,31 +193,32 @@ const PositionPage = props => {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={2} md={2}>
-            <Paper className={classes.paper}>
-              <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-                className={classes.list}
-              >
-                <ListItem
-                  button
-                  // key={index}
-                  onClick={() => DispatchgetSelectedPartyGroupAction(party)}
+          {party && (
+            <Grid item xs={2} md={2}>
+              <Paper className={classes.paper}>
+                <List
+                  component="nav"
+                  aria-labelledby="nested-list-subheader"
+                  className={classes.list}
                 >
-                  <ListItemText primary={party.name} />
-                </ListItem>
-              </List>
-            </Paper>
-          </Grid>
-          <Grid item xs={10} md={10}>
+                  <ListItem
+                    button
+                    // key={index}
+                    onClick={() => DispatchgetSelectedPartyGroupAction(party)}
+                  >
+                    <ListItemText primary={party.name} />
+                  </ListItem>
+                </List>
+              </Paper>
+            </Grid>
+          )}
+          <Grid item xs={10} md={10} lg={10}>
             <Paper className={classes.paper}>
               <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
                   <ListSubheader component="div" id="nested-list-subheader">
-                    {/* Region */}
                     <Typography variant="h6">
                       {selectedPartyGroupData.name}
                     </Typography>
@@ -297,9 +287,9 @@ const PositionPage = props => {
                               component="th"
                               scope="row"
                               width="25%"
-                              // onClick={() =>
-                              //   DispatchgetSelectedPartyGroupAction(paty)
-                              // }
+                            // onClick={() =>
+                            //   DispatchgetSelectedPartyGroupAction(paty)
+                            // }
                             >
                               <div>
                                 {employee.firstName} {employee.lastName}

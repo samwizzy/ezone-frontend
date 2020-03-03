@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   makeStyles,
@@ -9,29 +9,37 @@ import {
   Tab,
   Typography,
   Paper,
-  TextField
+  TextField,
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
-import classNames from 'classnames'
+import classNames from 'classnames';
 import Add from '@material-ui/icons/Add';
 import * as Actions from '../actions';
-import UserChat from './components/UserChat' 
-import NoAvailableChats from './components/NoAvailableChats' 
-import ChatHeader from './components/ChatHeader' 
-import ChatFooter from './components/ChatFooter'
+import * as EmployeeActions from '../../UsersPage/actions';
+import * as EmployeeSelectors from '../../UsersPage/selectors';
+ '../../UsersPage/selectors';
+// import * as EmployeeSelectors from '../../UsersPage/selectors';
+import EmployeeReducer from '../../UsersPage/reducer'
+import EmployeeSaga from '../../UsersPage/saga'
+import UserChat from './components/UserChat';
+import NoAvailableChats from './components/NoAvailableChats';
+import ChatHeader from './components/ChatHeader';
+import ChatFooter from './components/ChatFooter';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    color: console.log(theme, "Theme")
+    color: console.log(theme, 'Theme'),
   },
   messageRow: {
     '&.me': {},
     '&.contact': {},
-    '&.first-of-group': {}, 
-    '&.last-of-group': {}, 
+    '&.first-of-group': {},
+    '&.last-of-group': {},
   },
   avatar: {
     width: theme.spacing(12),
@@ -55,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   textField: {
-    width: '100%'
+    width: '100%',
   },
   button: {
     margin: theme.spacing(4),
@@ -64,7 +72,7 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     // height: 40,
-    borderRadius: theme.shape.borderRadius * 5
+    borderRadius: theme.shape.borderRadius * 5,
   },
   appBar: {
     flexGrow: 1,
@@ -74,7 +82,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   grow: {
     flexGrow: 1,
@@ -82,9 +90,9 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     '& .MuiTab-root': {
       [theme.breakpoints.up('sm')]: {
-        minWidth: 'inherit'
+        minWidth: 'inherit',
       },
-    }
+    },
   },
   chatPane: {
     display: 'flex',
@@ -95,7 +103,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, 12, 1, 2),
     borderRadius: '0 20px 20px 20px',
     whiteSpace: 'pre-wrap',
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   msgBody: {
     position: 'relative',
@@ -103,8 +111,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: '200px',
     height: '728px',
     overflow: 'auto',
-    padding: theme.spacing(3, 5)
-  }
+    padding: theme.spacing(3, 5),
+  },
 }));
 
 function TabPanel(props) {
@@ -138,7 +146,15 @@ function a11yProps(index) {
 }
 
 const ChatTab = props => {
-  // const { } = props;
+  useInjectReducer({ key: 'utilityPage', reducer });
+  useInjectSaga({ key: 'utilityPage', saga });
+
+  const { dispatchGetAllEmployees, allEmployees } = props;
+  useEffect(() => {
+    dispatchGetAllEmployees();
+  }, []);
+
+  console.log(allEmployees, 'allEmployees');
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
 
@@ -178,7 +194,7 @@ const ChatTab = props => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '3px 7px'
+                    padding: '3px 7px',
                   }}
                 >
                   <TextField
@@ -215,6 +231,7 @@ const ChatTab = props => {
                   <Tab label="Active" {...a11yProps(1)} />
                   <Tab label="Group" {...a11yProps(1)} />
                   <Tab label="Archive" {...a11yProps(1)} />
+                  <Tab label="Contact" {...a11yProps(1)} />
                 </Tabs>
               </Paper>
               <TabPanel value={value} index={0}>
@@ -226,6 +243,9 @@ const ChatTab = props => {
               <TabPanel value={value} index={2}>
                 <UserChat />
               </TabPanel>
+              <TabPanel value={value} index={3}>
+                <UserChat />
+              </TabPanel>
             </Grid>
             <Grid item xs={12} md={8} component={Paper}>
               <Grid container justify="center">
@@ -234,20 +254,33 @@ const ChatTab = props => {
                 </Grid>
                 <Grid item xs={12}>
                   <div className={classes.msgBody}>
-                    <div className={classNames(
-                      classes.messageRow,
-                      {'me': 'item.id' === 'user.id'},
-                      {'contact': 'item.id' !== 'user.id'},
-                      {'first-of-group': isFirstMessageOfGroup('item', 'i')},
-                      {'last-of-group': isLastMessageOfGroup('item', 'i')},
-                    )} 
-                    style={{border: '1px solid #efefef', display: 'flex', justifyContent: 'justify-end', alignItems: 'flex-start'}}
+                    <div
+                      className={classNames(
+                        classes.messageRow,
+                        { me: 'item.id' === 'user.id' },
+                        { contact: 'item.id' !== 'user.id' },
+                        {
+                          'first-of-group': isFirstMessageOfGroup('item', 'i'),
+                        },
+                        { 'last-of-group': isLastMessageOfGroup('item', 'i') },
+                      )}
+                      style={{
+                        border: '1px solid #efefef',
+                        display: 'flex',
+                        justifyContent: 'justify-end',
+                        alignItems: 'flex-start',
+                      }}
                     >
                       <Paper className={classes.chatPane}>
                         <Typography variant="subtitle1">
                           How you doing brother?
                         </Typography>
-                        <Typography variant="caption" style={{position: 'absolute', right: 12, bottom: 0}}>05:56 am</Typography>
+                        <Typography
+                          variant="caption"
+                          style={{ position: 'absolute', right: 12, bottom: 0 }}
+                        >
+                          05:56 am
+                        </Typography>
                       </Paper>
                     </div>
 
@@ -264,16 +297,17 @@ const ChatTab = props => {
 };
 
 ChatTab.propTypes = {
-  // openEditCompanyDialog: PropTypes.func,
+  dispatchGetAllEmployees: PropTypes.func,
+  allEmployees: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  // loginPage: makeSelectLoginPage(),
+  allEmployees: EmployeeSelectors.makeSelectGetAllEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    // openEditCompanyDialog: evt => dispatch(Actions.openEditCompanyDialog(evt)),
+    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
   };
 }
 
