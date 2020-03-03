@@ -37,6 +37,7 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 import PrivateRoute from '../AuthProvider/PrivateRoute';
 import Snackbar from './components/Snackbar';
 // import { AppContext } from '../context/AppContext';
+import WorkOrderPage from '../WorkOrder/components/WorkOrderPage';
 
 // import { makeSelectGetSaveToken } from './selectors';
 
@@ -111,6 +112,10 @@ const App = () => {
                   component={EmailPasswordTemplate}
                 />
                 <PrivateRoute exact path="/home" component={HomePage} />
+                <PrivateRoute
+                  path="/WorkOrder"
+                  component={WorkOrderPage}
+                />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>
