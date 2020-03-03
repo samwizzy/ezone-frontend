@@ -13,9 +13,9 @@ import MUIDataTable from 'mui-datatables';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import * as Actions from '../actions';
-import * as Selectors from '../selectors';
-import LoadingIndicator from '../../../components/LoadingIndicator';
+import * as Actions from '../../actions';
+import * as Selectors from '../../selectors';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 import { AddButton } from './AddButton';
 
 const useStyles = makeStyles(theme => ({
@@ -85,40 +85,13 @@ const EmployeeList = props => {
 
   const {
     loading,
+    getAllEmployees,
     openNewEmployeeDialogAction,
     openEditEmployeeDialogAction,
     openViewEmployeeDialogAction,
   } = props;
 
-  const datas = [
-    {
-      id: '1',
-      name: 'Teslim Andulafeez',
-      company: 'Test Corp',
-      city: 'Ikeja',
-      state: 'Lagos State',
-    },
-    {
-      id: '2',
-      name: 'Christ okeme',
-      company: 'Test Corp',
-      city: 'Cross River',
-      state: 'Calabar',
-    },
-    {
-      id: '3',
-      name: 'Joel Johnson',
-      company: 'Test Corp',
-      city: 'Abuja',
-      state: 'FCT',
-    },
-    {
-      name: 'Kelechi Chinanka',
-      company: 'Test Corp',
-      city: 'Ikeja',
-      state: 'Lagos State',
-    },
-  ];
+  // console.log(getAllEmployees, 'getAllEmployees');
 
   const columns = [
     {
@@ -140,32 +113,32 @@ const EmployeeList = props => {
       },
     },
     {
-      name: 'name',
-      label: 'Name',
+      name: 'firstName',
+      label: 'First Name',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'company',
-      label: 'Branch',
+      name: 'lastName',
+      label: 'Last Name',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'city',
-      label: 'Department',
+      name: 'emailAddress',
+      label: 'Email Address',
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: 'state',
-      label: 'Role',
+      name: 'phoneNumber',
+      label: 'Phone Number',
       options: {
         filter: true,
         sort: false,
@@ -189,138 +162,55 @@ const EmployeeList = props => {
       },
     },
     {
-      name: 'desc',
-      label: 'E-mail',
+      name: 'gender',
+      label: 'Gender',
       options: {
         filter: true,
         sort: false,
       },
     },
-    {
-      name: 'desc',
-      label: 'Apps',
-      options: {
-        filter: true,
-        sort: false,
-      },
-    },
-    {
-      name: 'id',
-      label: 'Groups',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
-      },
-    },
-    {
-      name: 'id',
-      label: 'Last Login',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
-      },
-    },
-    {
-      name: 'id',
-      label: 'Status',
-      options: {
-        filter: true,
-        sort: false,
-        // customBodyRender: value => {
-        //   const Post = getAllPosts.find(post => value === post.id);
-
-        //   if (value === '') {
-        //     return '';
-        //   }
-        //   return (
-        //     <FormControlLabel
-        //       label="Delete"
-        //       control={<Icon>delete</Icon>}
-        //       onClick={evt => {
-        //         evt.stopPropagation();
-        //         dispatchDeletePostAction(Post);
-        //       }}
-        //     />
-        //   );
-        // },
-      },
-    },
-    {
-      name: 'id',
-      label: '',
-      options: {
-        filter: true,
-        sort: false,
-        customBodyRender: value => {
-          const Post = datas.find(post => value === post.id);
-          if (value === '') {
-            return '';
-          }
-          return (
-            <div>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                Options
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Assign Role</MenuItem>
-                <MenuItem onClick={handleClose}>Assign Apps</MenuItem>
-                <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
-                  Edit
-                </MenuItem>
-                <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
-                  View Details
-                </MenuItem>
-                <MenuItem onClick={handleClose}>Deactivate</MenuItem>
-              </Menu>
-            </div>
-          );
-        },
-      },
-    },
+    // {
+    //   name: 'id',
+    //   label: '',
+    //   options: {
+    //     filter: true,
+    //     sort: false,
+    //     customBodyRender: value => {
+    //       const Post = datas.find(post => value === post.id);
+    //       if (value === '') {
+    //         return '';
+    //       }
+    //       return (
+    //         <div>
+    //           <Button
+    //             aria-controls="simple-menu"
+    //             aria-haspopup="true"
+    //             onClick={handleClick}
+    //           >
+    //             Options
+    //           </Button>
+    //           <Menu
+    //             id="simple-menu"
+    //             anchorEl={anchorEl}
+    //             keepMounted
+    //             open={Boolean(anchorEl)}
+    //             onClose={handleClose}
+    //           >
+    //             <MenuItem onClick={handleClose}>Assign Role</MenuItem>
+    //             <MenuItem onClick={handleClose}>Assign Apps</MenuItem>
+    //             <MenuItem onClick={() => openEditEmployeeDialogAction(Post)}>
+    //               Edit
+    //             </MenuItem>
+    //             <MenuItem onClick={() => openViewEmployeeDialogAction(Post)}>
+    //               View Details
+    //             </MenuItem>
+    //             <MenuItem onClick={handleClose}>Deactivate</MenuItem>
+    //           </Menu>
+    //         </div>
+    //       );
+    //     },
+    //   },
+    // },
   ];
 
   const options = {
@@ -333,14 +223,14 @@ const EmployeeList = props => {
   };
 
   if (loading) {
-    return <List component={LoadingIndicator} />;
+    return <LoadingIndicator />;
   }
 
   return (
     <React.Fragment>
       <MUIDataTable
         title="All Employees"
-        data={datas}
+        data={getAllEmployees}
         columns={columns}
         options={options}
       />
@@ -350,6 +240,7 @@ const EmployeeList = props => {
 
 EmployeeList.propTypes = {
   loading: PropTypes.bool,
+  getAllEmployees: PropTypes.array,
   openNewEmployeeDialogAction: PropTypes.func,
   openEditEmployeeDialogAction: PropTypes.func,
   openViewEmployeeDialogAction: PropTypes.func,
@@ -357,6 +248,7 @@ EmployeeList.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   loading: Selectors.makeSelectLoading(),
+  getAllEmployees: Selectors.makeSelectGetAllEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -22,7 +22,9 @@ import ForgotPassword from '../AuthorizationPage/Login/components/ForgotPassword
 import organizationPage from '../CompanyStructurePage/OrganizationInfo/Loadable';
 import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable';
 import CompanyStructureParty from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
-import EmployeePage from '../EmployeePage/Loadable';
+import CompanyStructurePosition from '../CompanyStructurePage/CompanyStructure/components/PositionPage';
+import UsersPage from '../UsersPage/Loadable';
+import Employees from '../UsersPage/EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
 import TasksPage from '../UtilityPage/TasksApp/Loadable';
 import FilesApp from '../UtilityPage/FilesApp/Loadable';
@@ -37,6 +39,7 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 import PrivateRoute from '../AuthProvider/PrivateRoute';
 import Snackbar from './components/Snackbar';
 // import { AppContext } from '../context/AppContext';
+import WorkOrderPage from '../WorkOrder/components/WorkOrderPage';
 
 // import { makeSelectGetSaveToken } from './selectors';
 
@@ -75,6 +78,12 @@ const App = () => {
                   path="/organization"
                   component={organizationPage}
                 />
+                <PrivateRoute exact path="/users" component={UsersPage} />
+                <PrivateRoute
+                  exact
+                  path="/users/employees"
+                  component={Employees}
+                />
                 <PrivateRoute
                   exact
                   path="/organization/company/structure"
@@ -82,10 +91,14 @@ const App = () => {
                 />
                 <PrivateRoute
                   exact
-                  path="/organization/company/structure/:partyGroupId/:partyId"
+                  path="/organization/company/structure/party/:partyGroupId/:partyId"
                   component={CompanyStructureParty}
                 />
-                <PrivateRoute exact path="/employee" component={EmployeePage} />
+                <PrivateRoute
+                  exact
+                  path="/organization/company/structure/position/:partyGroupId/:partyId/:positionId"
+                  component={CompanyStructurePosition}
+                />
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />
                 <PrivateRoute exact path="/dashboard/tasks" component={TasksPage} />
                 <PrivateRoute exact path="/dashboard/task/:id" component={TasksPage} />
@@ -105,6 +118,10 @@ const App = () => {
                   component={EmailPasswordTemplate}
                 />
                 <PrivateRoute exact path="/home" component={HomePage} />
+                <PrivateRoute
+                  path="/WorkOrder"
+                  component={WorkOrderPage}
+                />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>

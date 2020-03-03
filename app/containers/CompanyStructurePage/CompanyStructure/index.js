@@ -28,14 +28,14 @@ import RoleDialog from './components/RoleDialog';
 import * as Actions from '../actions';
 
 export function CompanyStructurePage(props) {
-  const { dispatchGetAllUsersAction, dispatchGetPartyGroups } = props;
+  const { dispatchGetPartyGroups, dispatchGetAllUsersAction } = props;
 
   useInjectReducer({ key: 'companyStructurePage', reducer });
   useInjectSaga({ key: 'companyStructurePage', saga });
 
   useEffect(() => {
     dispatchGetPartyGroups();
-    // dispatchGetAllUsersAction();
+    dispatchGetAllUsersAction();
   }, []);
 
   return (
@@ -68,7 +68,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchGetPartyGroups: () => dispatch(Actions.getPartyGroupAction()),
-    // dispatchGetAllUsersAction: () => dispatch(Actions.getAllUsers()),
+    dispatchGetAllUsersAction: () => dispatch(Actions.getAllUsers()),
   };
 }
 

@@ -45,7 +45,7 @@ export function* createNewPartyGroupSaga() {
   const newData = {
     name,
     description,
-    organisation: { orgId: currentUser.organisation.orgId }, // TODO: user object clear from store
+    // organisation: { orgId: currentUser.organisation.orgId }, // TODO: user object clear from store
   };
 
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyGroup}`;
@@ -60,7 +60,9 @@ export function* createNewPartyGroupSaga() {
       }),
     });
 
-    yield put(Actions.getPartyGroupSuccessAction(userPartyGroupResponse));
+    yield put(
+      Actions.createNewPartyGroupSuccessAction(createPartyGroupResponse),
+    );
     yield put(Actions.getPartyGroupAction());
     yield put(Actions.closeNewPartyGroupDialog());
     yield put(
@@ -99,24 +101,22 @@ export function* getAllUsers() {
       }),
     });
 
-    console.log(getAllUsersResponse, 'getAllUsersResponse');
-
     yield put(Actions.getAllUsersSuccess(getAllUsersResponse));
   } catch (err) {
-    console.log(err, 'getAllUsersResponse');
     yield put(Actions.getAllUsersError(err));
   }
 }
 
 export function* createNewParty() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
-  
   const createNewPartyData = yield select(
     Selectors.makeSelectCreateNewPartyData(),
   );
+  const selectedPartyGroupData = yield select(
+    Selectors.makeSelectSelectedPartyGroupData(),
+  );
 
-  console.log(createNewPartyData, 'createNewPartyData');
+  createNewPartyData.partyGroupId = selectedPartyGroupData.id;
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartyApi}`;
 
   try {
@@ -128,8 +128,6 @@ export function* createNewParty() {
         'Content-Type': 'application/json',
       }),
     });
-
-    console.log(createNewPartyResponse, 'createNewPartyResponse');
 
     yield put(Actions.createNewPartySuccess(createNewPartyResponse));
     yield put(Actions.getPartyGroupAction());
@@ -155,16 +153,14 @@ export function* createNewParty() {
 
 export function* createNewParties() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const createNewPartiesData = yield select(
     Selectors.makeSelectCreateNewPartiesData(),
   );
 
-  console.log(createNewPartiesData, 'createNewPartiesData');
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPartiesApi}`;
 
   try {
-    const createNewPartyResponse = yield call(request, requestURL, {
+    const createNewPartiesResponse = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify(createNewPartiesData),
       headers: new Headers({
@@ -173,11 +169,9 @@ export function* createNewParties() {
       }),
     });
 
-    console.log(createNewPartyResponse, 'createNewPartyResponse');
-
-    yield put(Actions.createNewPartySuccess(createNewPartyResponse));
+    yield put(Actions.createNewPartiesSuccess(createNewPartiesResponse));
     yield put(Actions.getPartyGroupAction());
-    yield put(Actions.closeNewPartyDialog());
+    yield put(Actions.closeNewPartiesDialog());
     yield put(
       AppActions.openSnackBar({
         open: true,
@@ -186,12 +180,11 @@ export function* createNewParties() {
       }),
     );
   } catch (err) {
-    console.log(err, 'ik is bug');
-    yield put(Actions.createNewPartyError(err));
+    yield put(Actions.createNewPartiesError(err));
     yield put(
       AppActions.openSnackBar({
         open: true,
-        message: `${err} Party Failed`,
+        message: `${err}`,
         status: 'error',
       }),
     );
@@ -200,12 +193,10 @@ export function* createNewParties() {
 
 export function* createNewPosition() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
-  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
   const createNewPositionData = yield select(
     Selectors.makeSelectCreateNewPositionData(),
   );
 
-  console.log(createNewPositionData, 'createNewPositionData');
   const requestURL = `${BaseUrl}${Endpoints.CreateNewPositionApi}`;
 
   try {
@@ -218,10 +209,9 @@ export function* createNewPosition() {
       }),
     });
 
-    console.log(createNewPositionResponse, 'createNewPositionResponse');
-
     yield put(Actions.createNewPositionSuccess(createNewPositionResponse));
-    yield put(Actions.getAllPositions());
+    yield put(Actions.getPartyGroupAction());
+    // yield put(Actions.getAllPositions());
     yield put(Actions.closeNewPositionDialog());
     yield put(
       AppActions.openSnackBar({
@@ -249,7 +239,6 @@ export function* getAllPosition() {
     Selectors.makeSelectCreateNewPositionData(),
   );
 
-  console.log(createNewPositionData, 'createNewPositionData');
   const requestURL = `${BaseUrl}${Endpoints.GetAllPositionsApi}/${
     currentUser.organisation.orgId
   }`;
@@ -263,8 +252,6 @@ export function* getAllPosition() {
       }),
     });
 
-    console.log(getPositionsResponse, 'getPositionsResponse');
-
     yield put(Actions.getAllPositionsSuccess(getPositionsResponse));
     // yield put(
     //   AppActions.openSnackBar({
@@ -274,7 +261,7 @@ export function* getAllPosition() {
     //   }),
     // );
   } catch (err) {
-    yield put(Actions.createNewPositionError(err));
+    yield put(Actions.getAllPositionsError(err));
     // yield put(
     //   AppActions.openSnackBar({
     //     open: true,
@@ -282,6 +269,48 @@ export function* getAllPosition() {
     //     status: 'error',
     //   }),
     // );
+  }
+}
+
+export function* AddEmployeeToPosition() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const AddEmployeeToPositionData = yield select(
+    Selectors.makeSelectAddEmployeeToPositionData(),
+  );
+
+  const requestURL = `${BaseUrl}${Endpoints.AddNewEmployeeToPositionApi}`;
+
+  try {
+    const AddEmployeeToPositionResponse = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(AddEmployeeToPositionData),
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    yield put(
+      Actions.addEmployeeToPositionSuccess(AddEmployeeToPositionResponse),
+    );
+    yield put(Actions.getPartyGroupAction());
+    yield put(Actions.closeAddEmployeeToPositionDialog());
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: 'Employee Add Successfully',
+        status: 'success',
+      }),
+    );
+  } catch (err) {
+    yield put(Actions.addEmployeeToPositionError(err));
+    yield put(
+      AppActions.openSnackBar({
+        open: true,
+        message: `${err}`,
+        status: 'error',
+      }),
+    );
   }
 }
 
@@ -361,6 +390,7 @@ export default function* companyStructureSaga() {
   yield takeLatest(Constants.CREATE_NEW_PARTIES, createNewParties);
   yield takeLatest(Constants.CREATE_NEW_POSITION, createNewPosition);
   yield takeLatest(Constants.GET_POSITIONS, getAllPosition);
+  yield takeLatest(Constants.ADD_EMPLOYEE_TO_POSITION, AddEmployeeToPosition);
 
   /** *****************************************************************
    * Organization constants

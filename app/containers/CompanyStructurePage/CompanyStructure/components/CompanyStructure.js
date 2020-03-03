@@ -104,18 +104,15 @@ NoPartyGroup.propTypes = {
 const CompanyStructure = props => {
   const {
     dispatchGetAllUsersAction,
-    // dispatchGetPartyGroups,
     selectedPartyGroupData,
     DispatchgetSelectedPartyGroupAction,
     partyGroupData,
     dispatchOpenNewPartyGroupAction,
     dispatchOpenNewPartyAction,
-    openNewRoleDialog,
     loading,
   } = props;
 
   useEffect(() => {
-    // dispatchGetPartyGroups();
     dispatchGetAllUsersAction();
   }, []);
   const classes = useStyles();
@@ -161,10 +158,10 @@ const CompanyStructure = props => {
                 aria-labelledby="nested-list-subheader"
                 className={classes.list}
               >
-                {partyGroupData.map((data, index) => (
+                {partyGroupData.map(data => (
                   <ListItem
                     button
-                    key={index}
+                    key={data.id}
                     // selected={selectedIndex === 0}
                     onClick={() => DispatchgetSelectedPartyGroupAction(data)}
                   >
@@ -217,24 +214,16 @@ const CompanyStructure = props => {
 
               <Divider />
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.partyButton}
-                  onClick={() => dispatchOpenNewPartyGroupAction()}
-                >
-                  <Add /> Add New Position
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.partyButton}
-                  onClick={() => dispatchOpenNewPartyAction()}
-                >
-                  <Add /> Add New Party
-                </Button>
+                {selectedPartyGroupData && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.partyButton}
+                    onClick={() => dispatchOpenNewPartyAction()}
+                  >
+                    <Add /> Add New Party
+                  </Button>
+                )}
               </Grid>
               <Table
                 className={classes.table}
@@ -254,7 +243,7 @@ const CompanyStructure = props => {
                           // }
                         >
                           <Link
-                            href={`/organization/company/structure/${
+                            href={`/organization/company/structure/party/${
                               selectedPartyGroupData.id
                             }/${party.id}`}
                           >
@@ -280,7 +269,6 @@ CompanyStructure.propTypes = {
   loading: PropTypes.bool,
   dispatchOpenNewPartyGroupAction: PropTypes.func,
   dispatchOpenNewPartyAction: PropTypes.func,
-  openNewRoleDialog: PropTypes.func,
   partyGroupData: PropTypes.oneOfType(PropTypes.array),
   DispatchgetSelectedPartyGroupAction: PropTypes.func,
   selectedPartyGroupData: PropTypes.oneOfType(PropTypes.object, PropTypes.bool),
