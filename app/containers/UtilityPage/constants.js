@@ -46,6 +46,9 @@ export const CREATE_UTILITY_FILES = 'app/UtilityPage/CREATE UTILITY FILES';
 export const CREATE_UTILITY_FILES_SUCCESS = 'app/UtilityPage/CREATE UTILITY FILES SUCCESS';
 export const GET_UTILITY_FILES_ERROR = 'app/UtilityPage/GET UTILITY FILES ERROR';
 
+export const GET_EMPLOYEES = 'app/UtilityPage/GET EMPLOYEES';
+export const GET_EMPLOYEES_SUCCESS = 'app/UtilityPage/GET EMPLOYEES SUCCESS';
+
 export const GET_UTILITY_CHATS = 'app/UtilityPage/GET UTILITY CHATS ';
 export const CREATE_UTILITY_CHATS_SUCCESS = 'app/UtilityPage/CREATE UTILITY CHATS SUCCESS';
 export const GET_UTILITY_CHATS_ERROR = 'app/UtilityPage/GET UTILITY CHATS ERROR';

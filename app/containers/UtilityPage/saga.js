@@ -120,9 +120,30 @@ export function* getUtilityFiles() {
   }
 }
 
+export function* getEmployees() {
+  const accessToken = yield select(makeSelectAccessToken());
+  const requestURL = `${BaseUrl}${Endpoints.GetEmployeesApi}`;
+
+  try {
+    const employeesResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    yield put(Actions.getEmployeesSuccess(employeesResponse));
+  } catch (err) {
+    // yield put(Actions.getUtilityTasksError(err));
+    console.error(err, "I got the error")
+  }
+}
+
 // Individual exports for testing
 export default function* UtilityPageSaga() {
   // yield all([getUtilityTasks()])
+  yield takeLatest(Constants.GET_EMPLOYEES, getEmployees);
   yield takeLatest(Constants.GET_UTILITY_TASKS, getUtilityTasks);
   yield takeLatest(Constants.GET_UTILITY_FILES, getUtilityFiles);
   yield takeLatest(Constants.CREATE_UTILITY_TASKS, addUtilityTasks);

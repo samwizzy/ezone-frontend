@@ -56,7 +56,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddTaskDialog(props) {
   const classes = useStyles();
-  const { openTaskPreviewDialog, closeNewTaskDialog, createUtilityTask, data } = props;
+  const { openTaskPreviewDialog, closeNewTaskDialog, createUtilityTask, data, users } = props;
   const [form, setForm] = React.useState({
     title: '',
     description: '',
@@ -64,27 +64,34 @@ function AddTaskDialog(props) {
     endDate: moment(new Date()).format('YYYY-MM-DD'),
     status: "PENDING",
     assignedTo: "",
-    fileName: "",
-    file: "",
+    attachments: []
   });
 
   React.useEffect(() => {
-    console.log(moment(new Date()).format('YYYY-MM-DD'), "Watch out");
   }, [])
 
   const getBase64 = (file, cb) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-        return cb(reader.result)
+      return cb(reader.result)
     };
     reader.onerror = function (error) {
-        console.log('Error: ', error);
+      console.log('Error: ', error);
     };
   }
 
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+
   const handleChange = (event) => {
     const { name, value } = event.target
+    console.log(name, "name")
+    console.log(value, "value")
     setForm({...form, [name]: value});
     // setForm(_.set({...form}, event.target.name, event.target.value))
   }
@@ -110,13 +117,22 @@ function AddTaskDialog(props) {
     setForm(_.set({...form}, name, reformattedDate(date)))
   }
   const handleImageChange = (ev) => { 
-    console.log(ev.target.files[0], "ev.target.files[0]")
-    getBase64(ev.target.files[0], (result) => setForm(_.set({...form}, 'file', result)))
+    let fileNode = []
+    Object.keys(ev.target.files).map(index => {
+      const { name, size, type } = ev.target.files[index]
+
+      const result = toBase64(ev.target.files[index]);
+      result.then(rs => {
+        const file = Object.assign({}, { fileName: name, size, format: type, file: rs })
+        fileNode.push(file)
+      })     
+
+    })
+    setForm(_.set({...form}, 'attachments', fileNode))
   }
 
   const handleSubmit = () => {
     createUtilityTask(form)
-    closeNewTaskDialog()
   }
 
   console.log(form, 'checking form task...')
@@ -218,9 +234,9 @@ function AddTaskDialog(props) {
                 value={form.assignedTo}
                 onChange={handleChange}
               >
-                {heads.map(option => (
-                  <MenuItem key={option.uuid} value={option.uuid}>
-                    {option.label}
+                {users && users.map(user => (
+                  <MenuItem key={user.uuId} value={user.uuId}>
+                    {user.emailAddress}
                   </MenuItem>
                 ))}
               </TextField>
@@ -233,9 +249,11 @@ function AddTaskDialog(props) {
               >
                 Upload File
                 <input
+                  name="attachments"
                   type="file"
                   style={{ display: "none" }}
                   onChange={handleImageChange}
+                  multiple
                 />
               </Button>
             </Grid>
@@ -263,7 +281,8 @@ AddTaskDialog.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: Selectors.makeSelectNewTaskDialog()
+  data: Selectors.makeSelectNewTaskDialog(),
+  users: Selectors.makeSelectEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {

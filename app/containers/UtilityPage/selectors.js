@@ -45,6 +45,12 @@ const makeSelectFiles = () =>
     subState => subState.files,
   );    
 
+const makeSelectEmployees = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.users,
+  );    
+
 const makeSelectFileUploadDialog = () =>
   createSelector(
     selectUtilityPageDomain,
@@ -100,6 +106,7 @@ export {
   makeSelectData,
   makeSelectTasks,
   makeSelectFiles,
+  makeSelectEmployees,
   makeSelectFileUploadDialog,
   makeSelectNewTaskDialog,
   makeSelectPreviewTaskDialog,

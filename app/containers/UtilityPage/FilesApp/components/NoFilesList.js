@@ -20,7 +20,8 @@ const ITEM_HEIGHT = 48;
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    height: '100vh',
   },
   button: {
     borderRadius: '20px',

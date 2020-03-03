@@ -5,6 +5,7 @@
  */
 import produce from 'immer';
 import {
+  GET_EMPLOYEES_SUCCESS,
   CREATE_UTILITY_TASKS,
   CREATE_UTILITY_TASKS_SUCCESS,
   GET_UTILITY_TASKS_ERROR,
@@ -106,6 +107,7 @@ export const initialState = {
     },
     data: null,
   },
+  users: [],
   tasks: [],
   task: {},
   files: [],
@@ -127,6 +129,12 @@ const utilityPageReducer = (state = initialState, action) =>
             },
             data: action.payload,
           },
+        };
+      }
+      case GET_EMPLOYEES_SUCCESS: {
+        return {
+          ...state,
+          users: action.payload,
         };
       }
       case CREATE_UTILITY_TASKS: {

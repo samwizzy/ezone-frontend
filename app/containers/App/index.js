@@ -24,6 +24,8 @@ import CompanyStructure from '../CompanyStructurePage/CompanyStructure/Loadable'
 import CompanyStructureParty from '../CompanyStructurePage/CompanyStructure/components/PartyPage';
 import EmployeePage from '../EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
+import TasksPage from '../UtilityPage/TasksApp/Loadable';
+import FilesApp from '../UtilityPage/FilesApp/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
 import EmailConfigs from '../EmailConfig/components/TabsPage';
 import EmailTemplate from '../EmailConfig/components/EmailTemplate';
@@ -85,6 +87,10 @@ const App = () => {
                 />
                 <PrivateRoute exact path="/employee" component={EmployeePage} />
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />
+                <PrivateRoute exact path="/dashboard/tasks" component={TasksPage} />
+                <PrivateRoute exact path="/dashboard/task/:id" component={TasksPage} />
+                <PrivateRoute exact path="/dashboard/files" component={FilesApp} />
+                <PrivateRoute exact path="/dashboard/file/:id" component={TasksPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute
                   path="/email/configuration"
