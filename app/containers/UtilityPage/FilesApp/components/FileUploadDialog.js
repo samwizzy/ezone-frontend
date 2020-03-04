@@ -20,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function FileUploadDialog(props) {
-  const { closeFileUploadDialog, data } = props
+  const { closeFileUploadDialog, createUtilityFile, data } = props
 
   console.log(data, 'checking...')
 
