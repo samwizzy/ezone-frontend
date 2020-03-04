@@ -68,7 +68,6 @@ export function createUtilityFile(data) {
 }
 
 export function createUtilityFileSuccess(data) {
-  console.log("I just hit task action")
   return {
     type: CREATE_UTILITY_FILES_SUCCESS,
     payload: data

@@ -24,6 +24,10 @@ function FileUploadDialog(props) {
 
   console.log(data, 'checking...')
 
+  const handleUpload = (file) => {
+    createUtilityFile(file)
+  }
+
   return (
     <div>
       <Dialog
@@ -34,10 +38,8 @@ function FileUploadDialog(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle id="alert-dialog-slide-title"></DialogTitle> */}
         <DialogContent>
-          {/* <DropZone /> */}
-          <ReactDropZone />
+          <ReactDropZone uploadFileAction={createUtilityFile} />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeFileUploadDialog} color="primary">
@@ -56,6 +58,7 @@ function FileUploadDialog(props) {
 FileUploadDialog.propTypes = {
   openFileUploadDialog: PropTypes.func,
   closeFileUploadDialog: PropTypes.func,
+  createUtilityFile: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -66,6 +69,7 @@ function mapDispatchToProps(dispatch) {
   return {
     openFileUploadDialog: ev => dispatch(Actions.openFileUploadDialog(ev)),
     closeFileUploadDialog: () => dispatch(Actions.closeFileUploadDialog()),
+    createUtilityFile: (ev) => dispatch(Actions.createUtilityFile(ev)),
     dispatch,
   };
 }

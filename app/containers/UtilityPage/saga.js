@@ -14,7 +14,7 @@ export function* addUtilityFile({type, payload}) {
   console.log(payload, "checking data from saga")
   const accessToken = yield select(makeSelectAccessToken());
   const user = yield select(makeSelectCurrentUser());
-  const requestURL = `${BaseUrl}${Endpoints.CreateUtilityFilesApi}`;
+  const requestURL = `${BaseUrl}${Endpoints.CreateUtilityFileApi}`;
   payload.orgId = user.organisation.orgId;
 
   try {

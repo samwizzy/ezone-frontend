@@ -134,10 +134,6 @@ function PaperDropzone(props) {
     files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
 
-  const handleUpload = () => {
-    
-  }
-
   console.log(acceptedFiles, "References library")
   // console.log(inputRef, "inputRef library")
   console.log(files[0], "files state library")
