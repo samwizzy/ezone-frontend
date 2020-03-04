@@ -7,7 +7,9 @@
 import {
   GET_EMPLOYEES,
   GET_EMPLOYEES_SUCCESS,
+  CREATE_UTILITY_TASK_SUCCESS,
   CREATE_UTILITY_TASKS_SUCCESS,
+  GET_UTILITY_TASK,
   GET_UTILITY_TASKS,
   GET_UTILITY_TASKS_SUCCESS,
   CREATE_UTILITY_TASKS,
@@ -87,6 +89,12 @@ export function createUtilityTaskSuccess(data) {
   };
 }
 
+export function getUtilityTask() {
+  return {
+    type: GET_UTILITY_TASKS
+  };
+}
+
 export function getUtilityTasks() {
   return {
     type: GET_UTILITY_TASKS
@@ -102,6 +110,13 @@ export function getEmployees() {
 export function getEmployeesSuccess(data) {
   return {
     type: GET_EMPLOYEES_SUCCESS,
+    payload: data
+  };
+}
+
+export function getUtilityTaskSuccess(data) {
+  return {
+    type: GET_UTILITY_TASK_SUCCESS,
     payload: data
   };
 }

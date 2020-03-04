@@ -31,6 +31,7 @@ import {
   CLOSE_NEW_DEPARTMENT_DIALOG,
   OPEN_EDIT_DEPARTMENT_DIALOG,
   CLOSE_EDIT_DEPARTMENT_DIALOG,
+  GET_UTILITY_TASK_SUCCESS,
   GET_UTILITY_TASKS_SUCCESS,
 } from './constants';
 
@@ -138,6 +139,12 @@ const utilityPageReducer = (state = initialState, action) =>
         };
       }
       case CREATE_UTILITY_TASKS: {
+        return {
+          ...state,
+          task: action.payload,
+        };
+      }
+      case GET_UTILITY_TASK_SUCCESS: {
         return {
           ...state,
           task: action.payload,

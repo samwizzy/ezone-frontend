@@ -34,6 +34,7 @@ export const GET_UTILITY_APPS = 'app/UtilityPage/GET UTILITY APPS';
 export const GET_UTILITY_APPS_SUCCESS = 'app/UtilityPage/GET UTILITY APPS SUCCESS';
 export const GET_UTILITY_APPS_ERROR = 'app/UtilityPage/GET UTILITY APPS ERROR';
 
+export const GET_UTILITY_TASK = 'app/UtilityPage/GET UTILITY TASK';
 export const GET_UTILITY_TASKS = 'app/UtilityPage/GET UTILITY TASKS';
 export const GET_UTILITY_TASKS_SUCCESS = 'app/UtilityPage/GET ALL UTILITY TASKS SUCCESS';
 export const CREATE_UTILITY_TASKS = 'app/UtilityPage/CREATE UTILITY TASKS';

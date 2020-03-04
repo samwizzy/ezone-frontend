@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -19,7 +19,6 @@ import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import * as Actions from '../actions';
-import * as EmployeeActions from '../../UsersPage/actions';
 import HomeTab from './HomeTab';
 import ChatTab from '../ChatApp/ChatTab';
 import TasksList from '../TasksApp/TasksList';
@@ -60,15 +59,19 @@ const useStyles = makeStyles(theme => ({
       '& button': {
         color: theme.palette.common.white,
         marginLeft: '50px',
+        borderRadius: 0,
         textDecoration: 'none',
-        '& :hover, :active': {
+        '& :hover': {
           color: fade(theme.palette.common.white, 0.5)
         }
       }
     },
   },
   navList: {
-    '&.me': { backgroundColor: 'red', color: 'red'}
+    '&.active': { 
+      backgroundColor: fade(theme.palette.common.white, 0.5), 
+      color: fade(theme.palette.common.white, 0.5)
+    }
   },
 }));
 
@@ -99,22 +102,9 @@ function a11yProps(index) {
 function TabsPage(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-<<<<<<< HEAD:app/containers/UtilityPage/components/DashboardLayout.js
   const { match, history, location } = props
   const { pathname } = location
   console.log(pathname, "props.pathname")
-=======
-
-  const { dispatchGetAllEmployees } = props;
-
-  useEffect(() => {
-    dispatchGetAllEmployees();
-  }, []);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
->>>>>>> c8a8caa2b667ed42db4ca7311c7bd2f384b90daa:app/containers/UtilityPage/components/TabsPage.js
 
   return (
     <div className={classes.root}>
@@ -146,7 +136,7 @@ function TabsPage(props) {
               Chats
             </Button>
             <Button
-              className={classNames(classes.navList, {'me': true})}
+              className={classNames(classes.navList, {'active': pathname === '/dashboard/tasks'})}
               component="button"
               onClick={() => {
                 history.push('/dashboard/tasks')
@@ -178,7 +168,6 @@ TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
-  dispatchGetAllEmployees: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -188,7 +177,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getUtilityTasks: evt => dispatch(Actions.getUtilityTasks(evt)),
-    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
   };
 }
 

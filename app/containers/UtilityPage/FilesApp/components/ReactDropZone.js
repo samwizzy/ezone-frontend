@@ -76,7 +76,7 @@ function PaperDropzone(props) {
     fileUrl: "",
     format: "",
     size: "",
-    base64: ""
+    file: ""
   });
 
   const {
@@ -101,7 +101,7 @@ function PaperDropzone(props) {
       setForm(_.set(form, "docName", acceptedFiles[0].name))
       setForm(_.set(form, "format", acceptedFiles[0].type))
       setForm(_.set(form, "size", acceptedFiles[0].size))
-      getBase64(acceptedFiles[0], (result) => setForm(_.set(form, "base64", result)))
+      getBase64(acceptedFiles[0], (result) => setForm(_.set(form, "file", result)))
     },
   });
 
@@ -134,6 +134,10 @@ function PaperDropzone(props) {
     files.forEach(file => URL.revokeObjectURL(file.preview));
   }, [files]);
 
+  const handleUpload = () => {
+    
+  }
+
   console.log(acceptedFiles, "References library")
   // console.log(inputRef, "inputRef library")
   console.log(files[0], "files state library")
@@ -144,7 +148,7 @@ function PaperDropzone(props) {
     <RootRef rootRef={ref}>
       <div {...rootProps}>
         <Container {...getRootProps({ className: 'dropzone', isDragActive, isDragAccept, isDragReject})}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} multiple={false} />
           <p>Drag 'n' drop some files here, or click to select files</p>
           <button type="button" onClick={open}>
             Open File Dialog

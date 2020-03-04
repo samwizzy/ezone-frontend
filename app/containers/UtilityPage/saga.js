@@ -95,6 +95,29 @@ export function* getUtilityTasks() {
   }
 }
 
+export function* getUtilityTask() {
+  const accessToken = yield select(makeSelectAccessToken());
+  const user = yield select(makeSelectCurrentUser());
+  const requestURL = `${BaseUrl}${Endpoints.GetUtilityTasksApi}/${user.organisation.orgId}`;
+
+  try {
+    const utilityTaskResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(utilityTaskResponse, "utilityTaskResponse")
+
+    yield put(Actions.getUtilityTaskSuccess(utilityTaskResponse));
+  } catch (err) {
+    // yield put(Actions.getUtilityTasksError(err));
+    console.error(err, "I got the error")
+  }
+}
+
 export function* getUtilityFiles() {
   const accessToken = yield select(makeSelectAccessToken());
   const user = yield select(makeSelectCurrentUser());
