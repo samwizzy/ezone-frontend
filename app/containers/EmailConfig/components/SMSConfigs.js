@@ -55,7 +55,12 @@ const SMSConfigs = props => {
   console.log('smsConfigData from component: ', smsConfigData);
 
   const [values, setValues] = React.useState({
-    id: ''
+    orgId: currentUser.organisation.orgId,
+    gatewayUrl: '',
+    password: '',
+    username: '',
+    subject: '',
+    password: ''
   });
 
 
