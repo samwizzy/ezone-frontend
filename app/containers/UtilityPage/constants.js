@@ -10,8 +10,10 @@ export const CLOSE_FILE_UPLOAD_DIALOG =
   'app/UtilityPage/CLOSE_FILE_UPLOAD_DIALOG';
 
 export const OPEN_SHARE_FILE_DIALOG = 'app/UtilityPage/OPEN_SHARE_FILE_DIALOG';
-export const CLOSE_SHARE_FILE_DIALOG =
-  'app/UtilityPage/CLOSE_SHARE_FILE_DIALOG';
+export const CLOSE_SHARE_FILE_DIALOG = 'app/UtilityPage/CLOSE_SHARE_FILE_DIALOG';
+
+export const OPEN_PREVIEW_FILE_DIALOG = 'app/UtilityPage/OPEN_PREVIEW_FILE_DIALOG';
+export const CLOSE_PREVIEW_FILE_DIALOG = 'app/UtilityPage/CLOSE_PREVIEW_FILE_DIALOG';
 
 export const OPEN_NEW_TASK_DIALOG = 'app/UtilityPage/OPEN_NEW_TASK_DIALOG';
 export const CLOSE_NEW_TASK_DIALOG = 'app/UtilityPage/CLOSE_NEW_TASK_DIALOG';
@@ -58,7 +60,7 @@ export const GET_UTILITY_TASKS_ERROR =
   'app/UtilityPage/GET UTILITY TASKS ERROR';
 
 export const GET_UTILITY_FILES = 'app/UtilityPage/GET UTILITY FILES';
-export const GET_ALL_UTILITY_FILES = 'app/UtilityPage/GET ALL UTILITY FILES';
+export const GET_UTILITY_FILES_SUCCESS = 'app/UtilityPage/GET UTILITY FILES SUCCESS';
 export const CREATE_UTILITY_FILES = 'app/UtilityPage/CREATE UTILITY FILES';
 export const CREATE_UTILITY_FILES_SUCCESS =
   'app/UtilityPage/CREATE UTILITY FILES SUCCESS';

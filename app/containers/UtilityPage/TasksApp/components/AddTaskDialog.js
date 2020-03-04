@@ -27,29 +27,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const heads = [
-  {
-    uuid: 1,
-    label: 'Joel Johnson',
-    value: 'joel johnson',
-  },
-  {
-    uuid: 2,
-    label: 'Fela Brown',
-    value: 'fela brown',
-  },
-  {
-    uuid: 3,
-    label: 'Charles Brooks',
-    value: 'charles brooks',
-  },
-  {
-    uuid: 4,
-    label: 'Tom Cruise',
-    value: 'tom cruise',
-  },
-];
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -69,17 +46,6 @@ function AddTaskDialog(props) {
 
   React.useEffect(() => {
   }, [])
-
-  const getBase64 = (file, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      return cb(reader.result)
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-  }
 
   const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();

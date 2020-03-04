@@ -8,8 +8,6 @@ import {
   Link,
   makeStyles,
   AppBar,
-  Tabs,
-  Tab,
   Toolbar
 } from '@material-ui/core';
 import { compose } from 'redux';
@@ -19,11 +17,6 @@ import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import * as Actions from '../actions';
-import HomeTab from './HomeTab';
-import ChatTab from '../ChatApp/ChatTab';
-import TasksList from '../TasksApp/TasksList';
-import TaskList from '../TasksApp/TaskList';
-import FilesList from '../FilesApp/FilesList';
 import Autorenew from '@material-ui/icons/Autorenew'
 import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
@@ -104,7 +97,10 @@ function TabsPage(props) {
   const [value, setValue] = React.useState(0);
   const { match, history, location } = props
   const { pathname } = location
-  console.log(pathname, "props.pathname")
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  }
 
   return (
     <div className={classes.root}>
@@ -112,7 +108,7 @@ function TabsPage(props) {
         <Toolbar variant="dense" className={classes.toolbar}>
 
           <div>
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" onClick={refreshPage}>
               <Autorenew />
             </IconButton>
 
@@ -128,6 +124,9 @@ function TabsPage(props) {
               Project
             </Button>
             <Button
+              className={classNames(
+                {'active': pathname == '/dashboard/chats/'}
+              )}
               component="button"
               onClick={() => {
                 history.push('/dashboard/chats')

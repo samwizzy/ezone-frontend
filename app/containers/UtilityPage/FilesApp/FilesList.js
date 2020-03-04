@@ -18,6 +18,7 @@ import AddFileDialog from './components/AddFileDialog'
 import AddSignature from './components/AddSignature'
 import DocWidget from './components/DocWidget'
 import NoFilesList from './components/NoFilesList'
+import moment from 'moment' 
 
 const ITEM_HEIGHT = 48;
 
@@ -28,7 +29,6 @@ const useStyles = makeStyles(theme => ({
   },
   sideMenu: {
     width: '100%',
-    // backgroundColor: theme.palette.background.paper,
     position: 'relative',
     overflow: 'auto',
     maxHeight: 300,
@@ -38,7 +38,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(5, 0),
     padding: theme.spacing(1, 15),
   }
-
 }));
 
 function ListItemLink(props) {
@@ -53,10 +52,6 @@ const FilesList = props => {
 
   console.log(files, "Files")
 
-  // React.useEffect(() => {
-  //   getUtilityFiles()
-  // }, []);
-
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -67,9 +62,17 @@ const FilesList = props => {
 
   const columns = [
     {
-      name: 'name',
+      name: 'docName',
       label: 'Name',
       options: {
+        filter: true,
+      },
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      options: {
+        display: 'excluded',
         filter: true,
       },
     },
@@ -90,9 +93,10 @@ const FilesList = props => {
       },
     },
     {
-      name: 'owner',
+      name: 'createdBy',
       label: 'Owner',
       options: {
+        display: 'excluded',
         filter: true,
         sort: false,
       },
@@ -106,11 +110,29 @@ const FilesList = props => {
       },
     },
     {
-      name: 'date_uploaded',
+      name: 'fileUrl',
+      label: 'File',
+      options: {
+        filter: true,
+        sort: false,
+        customBodyRender: file => {
+          return <img src={file} height="50px" />
+        }
+      },
+    },
+    {
+      name: 'dateCreated',
       label: 'Date Uploaded',
       options: {
         filter: true,
         sort: false,
+        customBodyRender: day => {
+          return (
+            <Typography variant="inherit" color="textSecondary">
+                {moment(day).format('lll')}
+            </Typography>
+          )
+        }
       },
     },
     {

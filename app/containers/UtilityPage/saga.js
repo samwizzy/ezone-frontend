@@ -13,10 +13,12 @@ import * as Endpoints from '../../components/Endpoints';
 
 export function* addUtilityFile({type, payload}) {
   console.log(payload, "checking data from saga")
-  const accessToken = yield select(makeSelectAccessToken());
-  const user = yield select(makeSelectCurrentUser());
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const user = yield select(AppSelectors.makeSelectCurrentUser());
   const requestURL = `${BaseUrl}${Endpoints.CreateUtilityFileApi}`;
   payload.orgId = user.organisation.orgId;
+
+  console.log(payload, "Payload")
 
   try {
     const createdFileResponse = yield call(request, requestURL, {
@@ -124,12 +126,7 @@ export function* getUtilityTask() {
 export function* getUtilityFiles() {
   const accessToken = yield select(AppSelectors.makeSelectAccessToken());
   const user = yield select(AppSelectors.makeSelectCurrentUser());
-  const requestURL = `${BaseUrl}${Endpoints.GetUtilityFilesApi}/${
-    user.organisation.id
-  }`;
-
-  console.log(accessToken, 'accessToken');
-  console.log(user, 'Current Users');
+  const requestURL = `${BaseUrl}${Endpoints.GetUtilityFilesApi}/${user.organisation.orgId}`;
 
   try {
     const utilityFilesResponse = yield call(request, requestURL, {
@@ -142,7 +139,7 @@ export function* getUtilityFiles() {
 
     console.log(utilityFilesResponse, 'utilityFilesResponse');
 
-    yield put(Actions.getUtilityFiles(utilityFilesResponse));
+    yield put(Actions.getUtilityFilesSuccess(utilityFilesResponse));
   } catch (err) {
     yield put(Actions.getUtilityFilesError(err));
   }
