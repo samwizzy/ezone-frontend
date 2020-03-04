@@ -74,3 +74,9 @@ export const GET_UTILITY_CHATS_ERROR =
 export const GET_ALL_USERS = 'app/UtilityPage/GET_ALL_USERS';
 export const GET_ALL_USERS_SUCCESS = 'app/UtilityPage/GET_ALL_USERS_SUCCESS';
 export const GET_ALL_USERS_ERROR = 'app/UtilityPage/GET_ALL_USERS_ERROR';
+
+export const GET_ALL_USERS_CHAT = 'app/UtilityPage/GET_ALL_USERS_CHAT';
+export const GET_ALL_USERS_CHAT_SUCCESS =
+  'app/UtilityPage/GET_ALL_USERS_CHAT_SUCCESS';
+export const GET_ALL_USERS_CHAT_ERROR =
+  'app/UtilityPage/GET_ALL_USERS_CHAT_ERROR';

@@ -147,6 +147,31 @@ export function* getAllUsers() {
   }
 }
 
+export function* getAllUsersChat() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const currentUser = yield select(AppSelectors.makeSelectCurrentUser());
+
+  console.log(currentUser, 'currentUser');
+  const requestURL = `${BaseUrl}${Endpoints.GetUsersChatApi}/${
+    currentUser.uuId
+  }`;
+
+  try {
+    const getAllUsersChatResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(getAllUsersChatResponse, 'getAllUsersChatResponse');
+    yield put(Actions.getAllUsersChatSuccess(getAllUsersChatResponse));
+  } catch (err) {
+    yield put(Actions.getAllUsersChatError(err));
+  }
+}
+
 // Individual exports for testing
 export default function* UtilityPageSaga() {
   // yield all([getUtilityTasks()])
@@ -155,4 +180,5 @@ export default function* UtilityPageSaga() {
   yield takeLatest(Constants.CREATE_UTILITY_TASKS, addUtilityTasks);
   yield takeLatest(Constants.CREATE_UTILITY_FILES, addUtilityFile);
   yield takeLatest(Constants.GET_ALL_USERS, getAllUsers);
+  yield takeLatest(Constants.GET_ALL_USERS_CHAT, getAllUsersChat);
 }

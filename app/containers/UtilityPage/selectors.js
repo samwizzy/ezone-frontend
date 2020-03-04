@@ -99,6 +99,12 @@ const makeSelectAllEmployees = () =>
     subState => subState.getAllEmployees,
   );
 
+const makeSelectAllUsersChat = () =>
+  createSelector(
+    selectUtilityPageDomain,
+    subState => subState.getAllUsersChat,
+  );
+
 export default makeSelectUtilityPage;
 export {
   selectUtilityPageDomain,
@@ -115,4 +121,5 @@ export {
   makeSelectBranchDialog,
   makeSelectDepartmentDialog,
   makeSelectAllEmployees,
+  makeSelectAllUsersChat,
 };

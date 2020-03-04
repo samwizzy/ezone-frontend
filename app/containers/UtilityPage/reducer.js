@@ -6,6 +6,7 @@
 import produce from 'immer';
 import * as Constants from './constants';
 export const initialState = {
+  getAllUsersChat: [],
   getAllEmployees: [],
   loading: false,
   error: false,
@@ -370,6 +371,28 @@ const utilityPageReducer = (state = initialState, action) =>
         };
       }
       case Constants.GET_ALL_USERS_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          getAllUsersChat: action.payload,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT_ERROR: {
         return {
           ...state,
           loading: false,

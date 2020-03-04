@@ -211,3 +211,24 @@ export function getAllUsersError(data) {
     payload: data,
   };
 }
+
+export function getAllUsersChat() {
+  return {
+    type: Constants.GET_ALL_USERS_CHAT,
+    // payload: data,
+  };
+}
+
+export function getAllUsersChatSuccess(data) {
+  return {
+    type: Constants.GET_ALL_USERS_CHAT_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getAllUsersChatError(data) {
+  return {
+    type: Constants.GET_ALL_USERS_CHAT_ERROR,
+    payload: data,
+  };
+}
