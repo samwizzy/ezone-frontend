@@ -18,6 +18,8 @@ import makeSelectWorkOrderPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import WorkOrderList from './components/WorkOrderList';
+import WorkOrderDialog from './components/WorkOrderDialog';
 
 export function WorkOrderPage() {
   useInjectReducer({ key: 'workOrderPage', reducer });
@@ -29,7 +31,8 @@ export function WorkOrderPage() {
         <title>WorkOrderPage</title>
         <meta name="description" content="Description of WorkOrderPage" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
+      <WorkOrderList />
+      <WorkOrderDialog />
     </div>
   );
 }

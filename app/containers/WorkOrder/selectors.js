@@ -21,5 +21,22 @@ const makeSelectWorkOrderPage = () =>
     substate => substate,
   );
 
+const makeSelectWorkOrderDialog = () =>
+  createSelector(
+    selectWorkOrderPageDomain,
+    substate => substate.workOrderDialog
+  );
+
+const makeSelectVendorDialog = () =>
+  createSelector(
+    selectWorkOrderPageDomain,
+    substate => substate.vendorDialog
+  );
+
 export default makeSelectWorkOrderPage;
-export { selectWorkOrderPageDomain };
+
+export { 
+  selectWorkOrderPageDomain,
+  makeSelectWorkOrderDialog,
+  makeSelectVendorDialog
+};

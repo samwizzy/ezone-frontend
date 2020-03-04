@@ -39,7 +39,7 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 import PrivateRoute from '../AuthProvider/PrivateRoute';
 import Snackbar from './components/Snackbar';
 // import { AppContext } from '../context/AppContext';
-import WorkOrderPage from '../WorkOrder/components/WorkOrderPage';
+import WorkOrderPage from '../WorkOrder/Loadable';
 
 // import { makeSelectGetSaveToken } from './selectors';
 
