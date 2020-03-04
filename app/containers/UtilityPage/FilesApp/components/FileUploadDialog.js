@@ -11,6 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import DropZone from './DropZone';
+import ReactDropZone from './ReactDropZone';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
 
@@ -19,9 +20,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function FileUploadDialog(props) {
-  const { closeFileUploadDialog, data } = props
+  const { closeFileUploadDialog, createUtilityFile, data } = props
 
   console.log(data, 'checking...')
+
+  const handleUpload = (file) => {
+    createUtilityFile(file)
+  }
 
   return (
     <div>
@@ -33,9 +38,8 @@ function FileUploadDialog(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle id="alert-dialog-slide-title"></DialogTitle> */}
         <DialogContent>
-          <DropZone />
+          <ReactDropZone uploadFileAction={createUtilityFile} />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeFileUploadDialog} color="primary">
@@ -54,6 +58,7 @@ function FileUploadDialog(props) {
 FileUploadDialog.propTypes = {
   openFileUploadDialog: PropTypes.func,
   closeFileUploadDialog: PropTypes.func,
+  createUtilityFile: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -64,6 +69,7 @@ function mapDispatchToProps(dispatch) {
   return {
     openFileUploadDialog: ev => dispatch(Actions.openFileUploadDialog(ev)),
     closeFileUploadDialog: () => dispatch(Actions.closeFileUploadDialog()),
+    createUtilityFile: (ev) => dispatch(Actions.createUtilityFile(ev)),
     dispatch,
   };
 }

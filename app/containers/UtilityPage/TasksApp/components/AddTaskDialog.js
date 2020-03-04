@@ -17,6 +17,7 @@ import _ from 'lodash';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, MenuItem, Slide, Typography, TextField } from '@material-ui/core';
 import * as Selectors from '../../selectors';
 import * as Actions from '../../actions';
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,18 +56,42 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function AddTaskDialog(props) {
   const classes = useStyles();
-  const { openTaskPreviewDialog, closeNewTaskDialog, createUtilityTask, data } = props;
+  const { openTaskPreviewDialog, closeNewTaskDialog, createUtilityTask, data, users } = props;
   const [form, setForm] = React.useState({
     title: '',
     description: '',
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: moment(new Date()).format('YYYY-MM-DD'),
+    endDate: moment(new Date()).format('YYYY-MM-DD'),
     status: "PENDING",
-    assignedTo: ""
+    assignedTo: "",
+    attachments: []
+  });
+
+  React.useEffect(() => {
+  }, [])
+
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      return cb(reader.result)
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target
+    console.log(name, "name")
+    console.log(value, "value")
     setForm({...form, [name]: value});
     // setForm(_.set({...form}, event.target.name, event.target.value))
   }
@@ -91,10 +116,23 @@ function AddTaskDialog(props) {
   const handleDateChange = (date, formatted, name) => { 
     setForm(_.set({...form}, name, reformattedDate(date)))
   }
+  const handleImageChange = (ev) => { 
+    let fileNode = []
+    Object.keys(ev.target.files).map(index => {
+      const { name, size, type } = ev.target.files[index]
+
+      const result = toBase64(ev.target.files[index]);
+      result.then(rs => {
+        const file = Object.assign({}, { fileName: name, size, format: type, file: rs })
+        fileNode.push(file)
+      })     
+
+    })
+    setForm(_.set({...form}, 'attachments', fileNode))
+  }
 
   const handleSubmit = () => {
     createUtilityTask(form)
-    closeNewTaskDialog()
   }
 
   console.log(form, 'checking form task...')
@@ -196,26 +234,29 @@ function AddTaskDialog(props) {
                 value={form.assignedTo}
                 onChange={handleChange}
               >
-                {heads.map(option => (
-                  <MenuItem key={option.uuid} value={option.uuid}>
-                    {option.label}
+                {users && users.map(user => (
+                  <MenuItem key={user.uuId} value={user.uuId}>
+                    {user.emailAddress}
                   </MenuItem>
                 ))}
               </TextField>
             </Grid>
 
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <Button
                 variant="outlined"
                 component="label"
               >
                 Upload File
                 <input
+                  name="attachments"
                   type="file"
                   style={{ display: "none" }}
+                  onChange={handleImageChange}
+                  multiple
                 />
               </Button>
-            </Grid> */}
+            </Grid>
           </Grid>
           </form>
         </DialogContent>
@@ -240,7 +281,8 @@ AddTaskDialog.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: Selectors.makeSelectNewTaskDialog()
+  data: Selectors.makeSelectNewTaskDialog(),
+  users: Selectors.makeSelectEmployees(),
 });
 
 function mapDispatchToProps(dispatch) {
