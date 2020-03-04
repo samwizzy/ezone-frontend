@@ -11,20 +11,14 @@ import {
   Paper,
   TextField,
 } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import classNames from 'classnames';
 import Add from '@material-ui/icons/Add';
 import * as Actions from '../actions';
-import * as EmployeeActions from '../../UsersPage/actions';
-import * as EmployeeSelectors from '../../UsersPage/selectors';
- '../../UsersPage/selectors';
-// import * as EmployeeSelectors from '../../UsersPage/selectors';
-import EmployeeReducer from '../../UsersPage/reducer'
-import EmployeeSaga from '../../UsersPage/saga'
+import * as Selectors from '../selectors';
 import UserChat from './components/UserChat';
 import NoAvailableChats from './components/NoAvailableChats';
 import ChatHeader from './components/ChatHeader';
@@ -146,15 +140,18 @@ function a11yProps(index) {
 }
 
 const ChatTab = props => {
-  useInjectReducer({ key: 'utilityPage', reducer });
-  useInjectSaga({ key: 'utilityPage', saga });
-
-  const { dispatchGetAllEmployees, allEmployees } = props;
+  const {
+    dispatchGetAllEmployees,
+    dispatchGetAllUsersChat,
+    allEmployees,
+    allUsersChat,
+  } = props;
   useEffect(() => {
     dispatchGetAllEmployees();
+    dispatchGetAllUsersChat();
   }, []);
 
-  console.log(allEmployees, 'allEmployees');
+  console.log(allUsersChat, 'allUsersChat');
   const classes = useStyles();
   const [status, setStatus] = React.useState(false);
 
@@ -180,117 +177,144 @@ const ChatTab = props => {
     // return (i === props.chat.dialog.length - 1 || (props.chat.dialog[i + 1] && props.chat.dialog[i + 1].who !== item.who));
   };
 
+  const handleEmployeeChange = (event, vl) => {
+    console.log(vl, 'value');
+    const newChat = {
+      initiator: '',
+      initiatorName: '',
+      ipAddress: '',
+      responder: '',
+      responderName: '',
+    };
+  };
+
   return (
     <React.Fragment>
       <div>
         {!status === false ? (
           <NoAvailableChats />
         ) : (
-          <Grid justify="center" container>
-            <Grid item xs={12} md={4} style={{ backgroundColor: '#efefef' }}>
-              <Paper square>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    padding: '3px 7px',
-                  }}
-                >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="chat"
-                    label="Search Chat"
-                    placeholder="Is the work done?"
-                    name="chat"
-                    size="small"
-                    InputProps={{
-                      className: classes.input,
+            <Grid justify="center" container>
+              <Grid item xs={12} md={4} style={{ backgroundColor: '#efefef' }}>
+                <Paper square>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      padding: '3px 7px',
                     }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                  <IconButton>
-                    <Add />
-                  </IconButton>
-                </div>
-
-                <Tabs
-                  variant="fullWidth"
-                  value={value}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  onChange={handleChange}
-                  aria-label="disabled tabs example"
-                  className={classes.tabs}
-                >
-                  <Tab label="Active" {...a11yProps(1)} />
-                  <Tab label="Group" {...a11yProps(1)} />
-                  <Tab label="Archive" {...a11yProps(1)} />
-                  <Tab label="Contact" {...a11yProps(1)} />
-                </Tabs>
-              </Paper>
-              <TabPanel value={value} index={0}>
-                <UserChat />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <UserChat />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <UserChat />
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                <UserChat />
-              </TabPanel>
-            </Grid>
-            <Grid item xs={12} md={8} component={Paper}>
-              <Grid container justify="center">
-                <Grid item xs={12}>
-                  <ChatHeader />
-                </Grid>
-                <Grid item xs={12}>
-                  <div className={classes.msgBody}>
-                    <div
-                      className={classNames(
-                        classes.messageRow,
-                        { me: 'item.id' === 'user.id' },
-                        { contact: 'item.id' !== 'user.id' },
-                        {
-                          'first-of-group': isFirstMessageOfGroup('item', 'i'),
-                        },
-                        { 'last-of-group': isLastMessageOfGroup('item', 'i') },
+                  >
+                    <Autocomplete
+                      id="combo-box-demo"
+                      options={allEmployees}
+                      getOptionLabel={option => option.firstName}
+                      style={{ width: 800 }}
+                      onChange={(evt, ve) => handleEmployeeChange(evt, ve)}
+                      renderInput={params => (
+                        <TextField
+                          {...params}
+                          label="Search contacts"
+                          variant="outlined"
+                          placeholder="Search Contacts"
+                          fullWidth
+                        />
                       )}
-                      style={{
-                        border: '1px solid #efefef',
-                        display: 'flex',
-                        justifyContent: 'justify-end',
-                        alignItems: 'flex-start',
+                    />
+                    {/* <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="chat"
+                      label="Search Chat"
+                      placeholder="Is the work done?"
+                      name="chat"
+                      size="small"
+                      InputProps={{
+                        className: classes.input,
                       }}
-                    >
-                      <Paper className={classes.chatPane}>
-                        <Typography variant="subtitle1">
-                          How you doing brother?
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          style={{ position: 'absolute', right: 12, bottom: 0 }}
-                        >
-                          05:56 am
-                        </Typography>
-                      </Paper>
-                    </div>
-
-                    <ChatFooter />
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    /> */}
+                    <IconButton>
+                      <Add />
+                    </IconButton>
                   </div>
+
+                  <Tabs
+                    variant="fullWidth"
+                    value={value}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={handleChange}
+                    aria-label="disabled tabs example"
+                    className={classes.tabs}
+                  >
+                    <Tab label="Active" {...a11yProps(1)} />
+                    <Tab label="Group" {...a11yProps(1)} />
+                    <Tab label="Archive" {...a11yProps(1)} />
+                    <Tab label="Contact" {...a11yProps(1)} />
+                  </Tabs>
+                </Paper>
+                <TabPanel value={value} index={0}>
+                  <UserChat allUsersChat={allUsersChat} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <UserChat />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <UserChat />
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                  <UserChat />
+                </TabPanel>
+              </Grid>
+              <Grid item xs={12} md={8} component={Paper}>
+                <Grid container justify="center">
+                  <Grid item xs={12}>
+                    <ChatHeader />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <div className={classes.msgBody}>
+                      <div
+                        className={classNames(
+                          classes.messageRow,
+                          { me: 'item.id' === 'user.id' },
+                          { contact: 'item.id' !== 'user.id' },
+                          {
+                            'first-of-group': isFirstMessageOfGroup('item', 'i'),
+                          },
+                          { 'last-of-group': isLastMessageOfGroup('item', 'i') },
+                        )}
+                        style={{
+                          border: '1px solid #efefef',
+                          display: 'flex',
+                          justifyContent: 'justify-end',
+                          alignItems: 'flex-start',
+                        }}
+                      >
+                        <Paper className={classes.chatPane}>
+                          <Typography variant="subtitle1">
+                            How you doing brother?
+                        </Typography>
+                          <Typography
+                            variant="caption"
+                            style={{ position: 'absolute', right: 12, bottom: 0 }}
+                          >
+                            05:56 am
+                        </Typography>
+                        </Paper>
+                      </div>
+
+                      <ChatFooter />
+                    </div>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        )}
+          )}
       </div>
     </React.Fragment>
   );
@@ -298,16 +322,20 @@ const ChatTab = props => {
 
 ChatTab.propTypes = {
   dispatchGetAllEmployees: PropTypes.func,
+  dispatchGetAllUsersChat: PropTypes.func,
   allEmployees: PropTypes.array,
+  allUsersChat: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  allEmployees: EmployeeSelectors.makeSelectGetAllEmployees(),
+  allEmployees: Selectors.makeSelectAllEmployees(),
+  allUsersChat: Selectors.makeSelectAllUsersChat(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
+    dispatchGetAllEmployees: () => dispatch(Actions.getAllUsers()),
+    dispatchGetAllUsersChat: () => dispatch(Actions.getAllUsersChat()),
   };
 }
 

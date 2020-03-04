@@ -4,38 +4,10 @@
  *
  */
 import produce from 'immer';
-import {
-  GET_EMPLOYEES_SUCCESS,
-  CREATE_UTILITY_TASKS,
-  CREATE_UTILITY_TASKS_SUCCESS,
-  GET_UTILITY_TASKS_ERROR,
-  GET_UTILITY_FILES,
-  CREATE_UTILITY_FILES,
-  CREATE_UTILITY_FILES_SUCCESS,
-  GET_UTILITY_FILES_ERROR,
-  OPEN_FILE_UPLOAD_DIALOG,
-  CLOSE_FILE_UPLOAD_DIALOG,
-  OPEN_SHARE_FILE_DIALOG,
-  CLOSE_SHARE_FILE_DIALOG,
-  OPEN_NEW_TASK_DIALOG,
-  CLOSE_NEW_TASK_DIALOG,
-  OPEN_NEW_FILE_DIALOG,
-  CLOSE_NEW_FILE_DIALOG,
-  OPEN_TASK_PREVIEW_DIALOG,
-  CLOSE_TASK_PREVIEW_DIALOG,
-  OPEN_NEW_BRANCH_DIALOG,
-  CLOSE_NEW_BRANCH_DIALOG,
-  OPEN_EDIT_BRANCH_DIALOG,
-  CLOSE_EDIT_BRANCH_DIALOG,
-  OPEN_NEW_DEPARTMENT_DIALOG,
-  CLOSE_NEW_DEPARTMENT_DIALOG,
-  OPEN_EDIT_DEPARTMENT_DIALOG,
-  CLOSE_EDIT_DEPARTMENT_DIALOG,
-  GET_UTILITY_TASK_SUCCESS,
-  GET_UTILITY_TASKS_SUCCESS,
-} from './constants';
-
+import * as Constants from './constants';
 export const initialState = {
+  getAllUsersChat: [],
+  getAllEmployees: [],
   loading: false,
   error: false,
   data: [
@@ -120,7 +92,7 @@ export const initialState = {
 const utilityPageReducer = (state = initialState, action) =>
   produce(state, (/* draft */) => {
     switch (action.type) {
-      case OPEN_FILE_UPLOAD_DIALOG: {
+      case Constants.OPEN_FILE_UPLOAD_DIALOG: {
         return {
           ...state,
           fileUploadDialog: {
@@ -132,67 +104,67 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case GET_EMPLOYEES_SUCCESS: {
+      case Constants.GET_EMPLOYEES_SUCCESS: {
         return {
           ...state,
           users: action.payload,
         };
       }
-      case CREATE_UTILITY_TASKS: {
+      case Constants.CREATE_UTILITY_TASKS: {
         return {
           ...state,
           task: action.payload,
         };
       }
-      case GET_UTILITY_TASK_SUCCESS: {
+      case Constants.GET_UTILITY_TASK_SUCCESS: {
         return {
           ...state,
           task: action.payload,
         };
       }
-      case GET_UTILITY_TASKS_SUCCESS: {
+      case Constants.GET_UTILITY_TASKS_SUCCESS: {
         return {
           ...state,
           tasks: action.payload,
         };
       }
-      case CREATE_UTILITY_TASKS_SUCCESS: {
+      case Constants.CREATE_UTILITY_TASKS_SUCCESS: {
         return {
           ...state,
           task: action.payload,
         };
       }
-      case GET_UTILITY_TASKS_ERROR: {
+      case Constants.GET_UTILITY_TASKS_ERROR: {
         return {
           ...state,
           error: action.payload,
         };
       }
-      case CREATE_UTILITY_FILES: {
+      case Constants.CREATE_UTILITY_FILES: {
         return {
           ...state,
           task: action.payload,
         };
       }
-      case CREATE_UTILITY_FILES_SUCCESS: {
+      case Constants.CREATE_UTILITY_FILES_SUCCESS: {
         return {
           ...state,
           file: action.payload,
         };
       }
-      case GET_UTILITY_FILES: {
+      case Constants.GET_UTILITY_FILES: {
         return {
           ...state,
           files: action.payload,
         };
       }
-      case GET_UTILITY_FILES_ERROR: {
+      case Constants.GET_UTILITY_FILES_ERROR: {
         return {
           ...state,
           error: action.payload,
         };
       }
-      case CLOSE_FILE_UPLOAD_DIALOG: {
+      case Constants.CLOSE_FILE_UPLOAD_DIALOG: {
         return {
           ...state,
           fileUploadDialog: {
@@ -204,7 +176,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_SHARE_FILE_DIALOG: {
+      case Constants.OPEN_SHARE_FILE_DIALOG: {
         return {
           ...state,
           shareFileDialog: {
@@ -216,7 +188,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_SHARE_FILE_DIALOG: {
+      case Constants.CLOSE_SHARE_FILE_DIALOG: {
         return {
           ...state,
           shareFileDialog: {
@@ -228,7 +200,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_NEW_TASK_DIALOG: {
+      case Constants.OPEN_NEW_TASK_DIALOG: {
         return {
           ...state,
           taskDialog: {
@@ -240,7 +212,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_NEW_TASK_DIALOG: {
+      case Constants.CLOSE_NEW_TASK_DIALOG: {
         return {
           ...state,
           taskDialog: {
@@ -252,7 +224,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_TASK_PREVIEW_DIALOG: {
+      case Constants.OPEN_TASK_PREVIEW_DIALOG: {
         return {
           ...state,
           previewTaskDialog: {
@@ -264,7 +236,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_TASK_PREVIEW_DIALOG: {
+      case Constants.CLOSE_TASK_PREVIEW_DIALOG: {
         return {
           ...state,
           previewTaskDialog: {
@@ -276,7 +248,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_NEW_FILE_DIALOG: {
+      case Constants.OPEN_NEW_FILE_DIALOG: {
         return {
           ...state,
           fileDialog: {
@@ -288,7 +260,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_NEW_FILE_DIALOG: {
+      case Constants.CLOSE_NEW_FILE_DIALOG: {
         return {
           ...state,
           fileDialog: {
@@ -300,7 +272,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_NEW_BRANCH_DIALOG: {
+      case Constants.OPEN_NEW_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -312,7 +284,7 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_NEW_BRANCH_DIALOG: {
+      case Constants.CLOSE_NEW_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
@@ -324,58 +296,10 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case OPEN_EDIT_BRANCH_DIALOG: {
+      case Constants.OPEN_EDIT_BRANCH_DIALOG: {
         return {
           ...state,
           branchDialog: {
-            type: 'edit',
-            props: {
-              open: true,
-            },
-            data: action.payload,
-          },
-        };
-      }
-      case CLOSE_EDIT_BRANCH_DIALOG: {
-        return {
-          ...state,
-          branchDialog: {
-            type: 'edit',
-            props: {
-              open: false,
-            },
-            data: null,
-          },
-        };
-      }
-      case OPEN_NEW_DEPARTMENT_DIALOG: {
-        return {
-          ...state,
-          departmentDialog: {
-            type: 'new',
-            props: {
-              open: true,
-            },
-            data: null,
-          },
-        };
-      }
-      case CLOSE_NEW_DEPARTMENT_DIALOG: {
-        return {
-          ...state,
-          departmentDialog: {
-            type: 'new',
-            props: {
-              open: false,
-            },
-            data: null,
-          },
-        };
-      }
-      case OPEN_EDIT_DEPARTMENT_DIALOG: {
-        return {
-          ...state,
-          departmentDialog: {
             type: 'edit',
             props: {
               open: true,
@@ -384,7 +308,55 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
-      case CLOSE_EDIT_DEPARTMENT_DIALOG: {
+      case Constants.CLOSE_EDIT_BRANCH_DIALOG: {
+        return {
+          ...state,
+          branchDialog: {
+            type: 'edit',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.OPEN_NEW_DEPARTMENT_DIALOG: {
+        return {
+          ...state,
+          departmentDialog: {
+            type: 'new',
+            props: {
+              open: true,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.CLOSE_NEW_DEPARTMENT_DIALOG: {
+        return {
+          ...state,
+          departmentDialog: {
+            type: 'new',
+            props: {
+              open: false,
+            },
+            data: null,
+          },
+        };
+      }
+      case Constants.OPEN_EDIT_DEPARTMENT_DIALOG: {
+        return {
+          ...state,
+          departmentDialog: {
+            type: 'edit',
+            props: {
+              open: true,
+            },
+            data: action.payload,
+          },
+        };
+      }
+      case Constants.CLOSE_EDIT_DEPARTMENT_DIALOG: {
         return {
           ...state,
           departmentDialog: {
@@ -394,6 +366,50 @@ const utilityPageReducer = (state = initialState, action) =>
             },
             data: null,
           },
+        };
+      }
+      case Constants.GET_ALL_USERS: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_ALL_USERS_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          getAllEmployees: action.payload,
+        };
+      }
+      case Constants.GET_ALL_USERS_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT: {
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT_SUCCESS: {
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          getAllUsersChat: action.payload,
+        };
+      }
+      case Constants.GET_ALL_USERS_CHAT_ERROR: {
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
         };
       }
     }
