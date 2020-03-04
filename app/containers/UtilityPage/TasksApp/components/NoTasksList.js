@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     textAlign: 'center',
+    height: '100vh',
     color: console.log(theme, "Theme")
   },
   button: {
@@ -34,7 +35,7 @@ const NoTasksList = props => {
                     <img src={tasksIcon} />
                 </Box>
                 <Box>
-                    <Typography variant='h6'>No file yet</Typography>
+                    <Typography variant='h6'>No task yet</Typography>
 
                     <Button variant="contained" color="primary" onClick={props.openNewTaskDialog} className={classes.button} disableElevation>
                         Upload a task

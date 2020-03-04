@@ -56,9 +56,35 @@ export function createUtilityTaskSuccess(data) {
   };
 }
 
-export function getUtilityTasks(data) {
+export function getUtilityTask() {
   return {
     type: Constants.GET_UTILITY_TASKS,
+  };
+}
+
+export function getUtilityTasks() {
+  return {
+    type: Constants.GET_UTILITY_TASKS,
+  };
+}
+
+export function getEmployees() {
+  return {
+    type: Constants.GET_EMPLOYEES,
+  };
+}
+
+export function getEmployeesSuccess(data) {
+  return {
+    type: Constants.GET_EMPLOYEES_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getUtilityTaskSuccess(data) {
+  return {
+    type: Constants.GET_UTILITY_TASK_SUCCESS,
+    payload: data,
   };
 }
 

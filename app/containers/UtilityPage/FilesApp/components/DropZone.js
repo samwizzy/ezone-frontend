@@ -17,10 +17,9 @@ class DropzoneAreaExample extends Component {
   }
 
   handleChange(files) {
-    console.log(files, "Files upload")
-    // this.setState({
-    //   files,
-    // });
+    this.setState({
+      files,
+    });
   }
 
   handleOpen() {
@@ -29,8 +28,9 @@ class DropzoneAreaExample extends Component {
     });
   }
 
-  handleSave(files) {
+  handleSave = (files) => {
     //Saving files to state for further use and closing Modal.
+    console.log(files, "Files upload")
     this.setState({
       files: files,
       open: false
@@ -38,11 +38,13 @@ class DropzoneAreaExample extends Component {
   }
 
   render() {
+    console.log(this.state.files, "this.state.files")
+
     return (
       <DropzoneArea
         onChange={this.handleChange.bind(this)} 
         open={this.state.open}
-        onSave={this.handleSave.bind(this)}
+        onSave={this.handleSave}
         // acceptedFiles={["image/png"]}
         showPreviews={true}
         cancelButtonText={"cancel"}

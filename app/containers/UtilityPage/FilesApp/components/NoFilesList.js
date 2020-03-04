@@ -13,13 +13,15 @@ import * as Actions from '../../actions';
 import * as Selectors from './../../selectors';
 import AddFileDialog from './AddFileDialog'
 import FileUploadDialog from './FileUploadDialog'
+// import ReactDropZone from './ReactDropZone'
 
 const ITEM_HEIGHT = 48;
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    height: '100vh',
   },
   button: {
     borderRadius: '20px',
@@ -31,11 +33,15 @@ const useStyles = makeStyles(theme => ({
 
 const NoFilesList = props => {
   const classes = useStyles();
+  const { files } = props
+
+  console.log(files, "Files")
 
   return (
     <React.Fragment>
       <Grid container justify='center' alignItems='center' className={classes.root}>
         <Grid item>
+          {/* <ReactDropZone /> */}
           <Box my={4}>
             <img src={tasksIcon} />
           </Box>

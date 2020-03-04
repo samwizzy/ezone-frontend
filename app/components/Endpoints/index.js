@@ -40,6 +40,9 @@ export const CreateUtilityTasksApi = '/utilityserv/api/v1/task';
 // Chat Api
 export const GetUsersChatApi = '/utilityserv/api/v1/chat/get_user_chat';
 
+// User 
+export const GetEmployeesApi = '/authserv/api/v1/users';
+
 // App Api
 export const GetOrgAppsApi = '/utilityserv/api/v1/organisation/orgApps';
 export const GetEmailConfigApi = '/messagingserv/api/v1/get_email_config_by_orgId';

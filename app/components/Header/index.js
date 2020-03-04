@@ -7,15 +7,13 @@ import {
   Grid,
   Typography,
   Toolbar,
-  Button,
   IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Divider,
-  Link,
-  Box,
+  Link
 } from '@material-ui/core';
 import Menu from '@material-ui/icons/Menu';
 import Apps from '@material-ui/icons/Apps';
@@ -25,10 +23,11 @@ import Group from '@material-ui/icons/Group';
 import BusinessCenter from '@material-ui/icons/BusinessCenter';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Banner from './banner.jpg';
-import SideBanner from '../../images/side-banner.png';
 import Logo from '../../images/logo.svg';
 import OctivierLogo from '../../images/octivier-logo.svg';
 import UserMenu from '../layouts/shared-components/UserMenu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const links = [
   'Dashboard',
@@ -78,9 +77,12 @@ const styles = theme => ({
     },
   },
   list: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 250,
     height: '100%',
-    marginTop: '80px',
     // backgroundImage: `url(${SideBanner})`,
     backgroundSize: 'cover',
     backgroundPosition: 'top center',
@@ -173,6 +175,9 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  SwipeableDrawer: {
+    
+  }
 });
 
 function Header(props) {
@@ -199,6 +204,20 @@ function Header(props) {
       onClick={toggleDrawer(open, false)}
       onKeyDown={toggleDrawer(open, false)}
     >
+      <IconButton
+        onClick={toggleDrawer('open', true)}
+        edge="start"
+        className={classes.SwipeableDrawer}
+        color="inherit"
+        aria-label="open drawer"
+      >
+        {state.open? (
+          <ChevronLeftIcon />
+        ) : (
+          <ChevronRightIcon />
+        )}
+      </IconButton>
+
       <List>
         {links.map(
           (text, index) => {

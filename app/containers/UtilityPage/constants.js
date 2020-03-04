@@ -47,6 +47,7 @@ export const GET_UTILITY_APPS_SUCCESS =
   'app/UtilityPage/GET UTILITY APPS SUCCESS';
 export const GET_UTILITY_APPS_ERROR = 'app/UtilityPage/GET UTILITY APPS ERROR';
 
+export const GET_UTILITY_TASK = 'app/UtilityPage/GET UTILITY TASK';
 export const GET_UTILITY_TASKS = 'app/UtilityPage/GET UTILITY TASKS';
 export const GET_UTILITY_TASKS_SUCCESS =
   'app/UtilityPage/GET ALL UTILITY TASKS SUCCESS';
@@ -63,6 +64,9 @@ export const CREATE_UTILITY_FILES_SUCCESS =
   'app/UtilityPage/CREATE UTILITY FILES SUCCESS';
 export const GET_UTILITY_FILES_ERROR =
   'app/UtilityPage/GET UTILITY FILES ERROR';
+
+export const GET_EMPLOYEES = 'app/UtilityPage/GET EMPLOYEES';
+export const GET_EMPLOYEES_SUCCESS = 'app/UtilityPage/GET EMPLOYEES SUCCESS';
 
 export const GET_UTILITY_CHATS = 'app/UtilityPage/GET UTILITY CHATS ';
 export const CREATE_UTILITY_CHATS_SUCCESS =

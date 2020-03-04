@@ -55,7 +55,8 @@ export function* addUtilityTasks({ type, payload }) {
 
     console.log(createdTasksResponse, 'createdTasksResponse');
 
-    yield put(Actions.createUtilityFileSuccess(createdTasksResponse));
+    // yield put(Actions.createUtilityFileSuccess(createdTasksResponse));
+    yield put({type: Constants.GET_UTILITY_TASKS});
     yield put(
       AppActions.openSnackBar({
         open: true,
@@ -94,6 +95,29 @@ export function* getUtilityTasks() {
   } catch (err) {
     // yield put(Actions.getUtilityTasksError(err));
     console.error(err, 'I got the error');
+  }
+}
+
+export function* getUtilityTask() {
+  const accessToken = yield select(makeSelectAccessToken());
+  const user = yield select(makeSelectCurrentUser());
+  const requestURL = `${BaseUrl}${Endpoints.GetUtilityTasksApi}/${user.organisation.orgId}`;
+
+  try {
+    const utilityTaskResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    console.log(utilityTaskResponse, "utilityTaskResponse")
+
+    yield put(Actions.getUtilityTaskSuccess(utilityTaskResponse));
+  } catch (err) {
+    // yield put(Actions.getUtilityTasksError(err));
+    console.error(err, "I got the error")
   }
 }
 
@@ -172,9 +196,30 @@ export function* getAllUsersChat() {
   }
 }
 
+export function* getEmployees() {
+  const accessToken = yield select(AppSelectors.makeSelectAccessToken());
+  const requestURL = `${BaseUrl}${Endpoints.GetEmployeesApi}`;
+
+  try {
+    const employeesResponse = yield call(request, requestURL, {
+      method: 'GET',
+      headers: new Headers({
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+
+    yield put(Actions.getEmployeesSuccess(employeesResponse));
+  } catch (err) {
+    // yield put(Actions.getUtilityTasksError(err));
+    console.error(err, "I got the error")
+  }
+}
+
 // Individual exports for testing
 export default function* UtilityPageSaga() {
   // yield all([getUtilityTasks()])
+  yield takeLatest(Constants.GET_EMPLOYEES, getEmployees);
   yield takeLatest(Constants.GET_UTILITY_TASKS, getUtilityTasks);
   yield takeLatest(Constants.GET_UTILITY_FILES, getUtilityFiles);
   yield takeLatest(Constants.CREATE_UTILITY_TASKS, addUtilityTasks);

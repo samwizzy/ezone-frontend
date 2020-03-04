@@ -80,6 +80,7 @@ export const initialState = {
     },
     data: null,
   },
+  users: [],
   tasks: [],
   task: {},
   files: [],
@@ -103,7 +104,19 @@ const utilityPageReducer = (state = initialState, action) =>
           },
         };
       }
+      case Constants.GET_EMPLOYEES_SUCCESS: {
+        return {
+          ...state,
+          users: action.payload,
+        };
+      }
       case Constants.CREATE_UTILITY_TASKS: {
+        return {
+          ...state,
+          task: action.payload,
+        };
+      }
+      case Constants.GET_UTILITY_TASK_SUCCESS: {
         return {
           ...state,
           task: action.payload,

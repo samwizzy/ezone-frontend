@@ -1,6 +1,6 @@
 /**
  *
- * OrgPage
+ * WorkOrderPage
  *
  */
 
@@ -8,37 +8,38 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectUtilityPage from './selectors';
+import makeSelectWorkOrderPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import ProjectsApp from './ProjectsApp'
+import messages from './messages';
 
-export function UtilityPage() {
-  useInjectReducer({ key: 'utilityPage', reducer });
-  useInjectSaga({ key: 'utilityPage', saga });
+export function WorkOrderPage() {
+  useInjectReducer({ key: 'workOrderPage', reducer });
+  useInjectSaga({ key: 'workOrderPage', saga });
 
   return (
     <div>
       <Helmet>
-        <title>Utility Page</title>
-        <meta name="description" content="Utility Page" />
+        <title>WorkOrderPage</title>
+        <meta name="description" content="Description of WorkOrderPage" />
       </Helmet>
-      <ProjectsApp />
+      <FormattedMessage {...messages.header} />
     </div>
   );
 }
 
-UtilityPage.propTypes = {
+WorkOrderPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  utilityPage: makeSelectUtilityPage(),
+  workOrderPage: makeSelectWorkOrderPage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -55,4 +56,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(UtilityPage);
+)(WorkOrderPage);

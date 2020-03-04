@@ -26,6 +26,8 @@ import CompanyStructurePosition from '../CompanyStructurePage/CompanyStructure/c
 import UsersPage from '../UsersPage/Loadable';
 import Employees from '../UsersPage/EmployeePage/Loadable';
 import UtilityPage from '../UtilityPage/Loadable';
+import TasksPage from '../UtilityPage/TasksApp/Loadable';
+import FilesApp from '../UtilityPage/FilesApp/Loadable';
 import EmailConfig from '../EmailConfig/Loadable';
 import EmailConfigs from '../EmailConfig/components/TabsPage';
 import EmailTemplate from '../EmailConfig/components/EmailTemplate';
@@ -37,6 +39,7 @@ import Layout3 from '../../components/layouts/layout3/Layout3';
 import PrivateRoute from '../AuthProvider/PrivateRoute';
 import Snackbar from './components/Snackbar';
 // import { AppContext } from '../context/AppContext';
+import WorkOrderPage from '../WorkOrder/components/WorkOrderPage';
 
 // import { makeSelectGetSaveToken } from './selectors';
 
@@ -97,6 +100,10 @@ const App = () => {
                   component={CompanyStructurePosition}
                 />
                 <PrivateRoute exact path="/dashboard" component={UtilityPage} />
+                <PrivateRoute exact path="/dashboard/tasks" component={TasksPage} />
+                <PrivateRoute exact path="/dashboard/task/:id" component={TasksPage} />
+                <PrivateRoute exact path="/dashboard/files" component={FilesApp} />
+                <PrivateRoute exact path="/dashboard/file/:id" component={TasksPage} />
                 <PrivateRoute exact path="/email" component={EmailConfig} />
                 <PrivateRoute
                   path="/email/configuration"
@@ -111,6 +118,10 @@ const App = () => {
                   component={EmailPasswordTemplate}
                 />
                 <PrivateRoute exact path="/home" component={HomePage} />
+                <PrivateRoute
+                  path="/WorkOrder"
+                  component={WorkOrderPage}
+                />
               </Layout3>
               <Route path="" component={NotFoundPage} />
             </Switch>

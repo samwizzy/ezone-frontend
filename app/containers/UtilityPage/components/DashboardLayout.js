@@ -1,9 +1,11 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
+  Button,
   IconButton,
   Typography,
   Box, 
+  Link,
   makeStyles,
   AppBar,
   Tabs,
@@ -11,14 +13,17 @@ import {
   Toolbar
 } from '@material-ui/core';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import { createStructuredSelector } from 'reselect';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import * as Actions from '../actions';
-import * as EmployeeActions from '../../UsersPage/actions';
 import HomeTab from './HomeTab';
-import ChatTab from './../ChatApp/ChatTab';
-import TasksList from './../TasksApp/TasksList';
-import FilesList from './../FilesApp/FilesList';
+import ChatTab from '../ChatApp/ChatTab';
+import TasksList from '../TasksApp/TasksList';
+import TaskList from '../TasksApp/TaskList';
+import FilesList from '../FilesApp/FilesList';
 import Autorenew from '@material-ui/icons/Autorenew'
 import UserMenu from '../../../components/layouts/shared-components/UserMenu'
 
@@ -46,9 +51,28 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     '& > div': {
-      display: 'flex'
+      display: 'flex',
+    },
+    '& > div:first-child': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      '& button': {
+        color: theme.palette.common.white,
+        marginLeft: '50px',
+        borderRadius: 0,
+        textDecoration: 'none',
+        '& :hover': {
+          color: fade(theme.palette.common.white, 0.5)
+        }
+      }
+    },
+  },
+  navList: {
+    '&.active': { 
+      backgroundColor: fade(theme.palette.common.white, 0.5), 
+      color: fade(theme.palette.common.white, 0.5)
     }
-  }
+  },
 }));
 
 function TabPanel(props) {
@@ -78,16 +102,9 @@ function a11yProps(index) {
 function TabsPage(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
-  const { dispatchGetAllEmployees } = props;
-
-  useEffect(() => {
-    dispatchGetAllEmployees();
-  }, []);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const { match, history, location } = props
+  const { pathname } = location
+  console.log(pathname, "props.pathname")
 
   return (
     <div className={classes.root}>
@@ -99,37 +116,50 @@ function TabsPage(props) {
               <Autorenew />
             </IconButton>
 
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-              indicatorColor="primary"
-              centered
+            <Button
+              className={classNames(
+                {'active': pathname == '/dashboard/projects/'}
+              )}
+              component="button"
+              onClick={() => {
+                history.push('/dashboard')
+              }}
             >
-              <Tab label="Project" {...a11yProps(1)} />
-              <Tab label="Chats" {...a11yProps(2)} />
-              <Tab label="Tasks" {...a11yProps(2)} />
-              <Tab label="File" {...a11yProps(2)} />
-            </Tabs>
+              Project
+            </Button>
+            <Button
+              component="button"
+              onClick={() => {
+                history.push('/dashboard/chats')
+              }}
+            >
+              Chats
+            </Button>
+            <Button
+              className={classNames(classes.navList, {'active': pathname === '/dashboard/tasks'})}
+              component="button"
+              onClick={() => {
+                history.push('/dashboard/tasks')
+              }}
+            >
+              Tasks
+            </Button>
+            <Button
+              component="button"
+              onClick={() => {
+                history.push('/dashboard/files')
+              }}
+            >
+              Files
+            </Button>
           </div>
 
           <UserMenu />
-
         </Toolbar>
       </AppBar>
-
-      <TabPanel value={value} index={0}>
-        <HomeTab />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ChatTab />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <TasksList />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <FilesList />
-      </TabPanel>
+      <main>
+        {props.children}
+      </main>
     </div>
   );
 }
@@ -138,7 +168,6 @@ TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
-  dispatchGetAllEmployees: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -148,7 +177,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getUtilityTasks: evt => dispatch(Actions.getUtilityTasks(evt)),
-    dispatchGetAllEmployees: () => dispatch(EmployeeActions.getAllEmployees()),
   };
 }
 
@@ -157,7 +185,9 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(
-  withConnect,
-  memo,
-)(TabsPage);
+export default withRouter(
+  compose(
+    withConnect,
+    memo,
+  )(TabsPage));
+
