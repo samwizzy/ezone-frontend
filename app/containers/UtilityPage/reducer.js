@@ -152,7 +152,7 @@ const utilityPageReducer = (state = initialState, action) =>
           file: action.payload,
         };
       }
-      case Constants.GET_UTILITY_FILES: {
+      case Constants.GET_UTILITY_FILES_SUCCESS: {
         return {
           ...state,
           files: action.payload,

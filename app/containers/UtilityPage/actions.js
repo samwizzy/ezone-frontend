@@ -6,16 +6,15 @@
 
 import * as Constants from './constants';
 
-export function getUtilityFiles(data) {
+export function getUtilityFiles() {
   return {
-    type: Constants.GET_UTILITY_FILES,
-    payload: data,
+    type: Constants.GET_UTILITY_FILES
   };
 }
 
-export function getAllUtilityFiles(data) {
+export function getUtilityFilesSuccess(data) {
   return {
-    type: Constants.GET_ALL_UTILITY_FILES,
+    type: Constants.GET_UTILITY_FILES_SUCCESS,
     payload: data,
   };
 }

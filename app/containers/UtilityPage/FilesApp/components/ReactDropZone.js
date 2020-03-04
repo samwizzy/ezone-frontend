@@ -17,10 +17,6 @@ const getColor = (props) => {
   return '#eeeeee';
 }
 
-const dropzone = {
-  backgroundColor: '#000 !important'
-}
-
 const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -70,9 +66,10 @@ const Container = styled.div`
 
 function PaperDropzone(props) {
   const [files, setFiles] = useState([]);
+  const { uploadFileAction } = props
   const [form, setForm] = useState({
     description: "",
-    docName: "",
+    fileName: "",
     fileUrl: "",
     format: "",
     size: "",
@@ -98,10 +95,12 @@ function PaperDropzone(props) {
         preview: URL.createObjectURL(file)
       })));
       
-      setForm(_.set(form, "docName", acceptedFiles[0].name))
+      setForm(_.set(form, "fileName", acceptedFiles[0].name))
       setForm(_.set(form, "format", acceptedFiles[0].type))
       setForm(_.set(form, "size", acceptedFiles[0].size))
       getBase64(acceptedFiles[0], (result) => setForm(_.set(form, "file", result)))
+      uploadFileAction(form)
+      console.log(form, "Set Form inside onDrop")
     },
   });
 
@@ -109,7 +108,7 @@ function PaperDropzone(props) {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-        return cb(reader.result)
+        return cb(reader.result.split(',')[1])
     };
     reader.onerror = function (error) {
         console.log('Error: ', error);

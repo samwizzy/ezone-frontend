@@ -13,7 +13,6 @@ import * as Actions from '../../actions';
 import * as Selectors from './../../selectors';
 import AddFileDialog from './AddFileDialog'
 import FileUploadDialog from './FileUploadDialog'
-// import ReactDropZone from './ReactDropZone'
 
 const ITEM_HEIGHT = 48;
 
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     textAlign: 'center',
-    height: '100vh',
+    height: '100vh'
   },
   button: {
     borderRadius: '20px',

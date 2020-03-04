@@ -50,7 +50,6 @@ function SharedFileDialog(props) {
               label="Enter email address or usernames"
               id="outlined-size-small"
               fullWidth
-              defaultValue="Small"
               variant="outlined"
               size="small"
               value={form.email}
@@ -65,7 +64,6 @@ function SharedFileDialog(props) {
               rowsMax="4"
               value={form.comment}
               onChange={handleChange}
-              defaultValue="Default Value"
               variant="outlined"
             />
           </form>
